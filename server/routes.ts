@@ -4,6 +4,7 @@ import { storage } from "./storage";
 import { insertAnalysisResultSchema, quizAnswersSchema, type QuizAnswers } from "@shared/schema";
 import { z } from "zod";
 import multer from "multer";
+import { kpopGroupsData, type KpopMember } from "./kpop-data";
 
 interface MulterRequest extends Request {
   file?: Express.Multer.File;
@@ -22,6 +23,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const sessionId = req.body.sessionId || `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
       
       // Validate quiz answers
+      console.log('Raw quiz answers:', req.body.quizAnswers);
+      
+      if (!req.body.quizAnswers || req.body.quizAnswers === 'undefined') {
+        throw new Error('Quiz answers are missing or undefined');
+      }
+      
       const quizAnswers = quizAnswersSchema.parse(JSON.parse(req.body.quizAnswers));
       
       // Convert uploaded photo to base64 if exists
@@ -69,8 +76,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
 // Generate analysis result based on quiz answers
 function generateAnalysisResult(answers: QuizAnswers) {
-  const groupNames = ['STELLAR NOVA', 'COSMIC DREAM', 'RAINBOW STAR', 'NEON LIGHT', 'CRYSTAL WAVE'];
-  
   // 점수 기반 분석 시스템
   let leaderScore = 0;
   let vocalScore = 0; 
@@ -137,55 +142,103 @@ function generateAnalysisResult(answers: QuizAnswers) {
   if (answers.makeupStyle === 'natural') visualScore += 1;
   if (answers.makeupStyle === 'retro') vocalScore += 1;
 
-  // 최고 점수 포지션 결정
+  // 최고 점수 포지션 결정 및 실제 KPOP 그룹 멤버 매칭
   const scores = { leaderScore, vocalScore, danceScore, rapScore, visualScore };
   const maxScore = Math.max(...Object.values(scores));
-  let mainPosition = '';
-  let subPosition = '';
-  let characterType = '';
-  let characterDesc = '';
-  let styleTags: string[] = [];
+  
+  let matchedMember: KpopMember | null = null;
+  let matchedGroup = '';
+  let positionType = '';
 
   if (scores.leaderScore === maxScore) {
-    mainPosition = '리더';
-    subPosition = '서브보컬';
-    characterType = '카리스마 넘치는 팀 리더';
-    characterDesc = '강한 리더십과 책임감으로 팀을 이끄는 든든한 존재';
-    styleTags = ['#카리스마리더', '#책임감', '#시크모던'];
+    positionType = 'Leader';
+    // 리더 포지션 멤버들 중에서 선택
+    const leaderMembers = [
+      { member: kpopGroupsData.groups[0].members[0], group: 'BTS' }, // RM
+      { member: kpopGroupsData.groups[2].members[0], group: 'IVE' }, // Yujin
+      { member: kpopGroupsData.groups[3].members[0], group: 'aespa' }, // Karina
+      { member: kpopGroupsData.groups[4].members[0], group: '(G)I-DLE' }, // Soyeon
+    ];
+    const selected = leaderMembers[Math.floor(Math.random() * leaderMembers.length)];
+    matchedMember = selected.member;
+    matchedGroup = selected.group;
   } else if (scores.vocalScore === maxScore) {
-    mainPosition = '메인보컬';
-    subPosition = '서브댄서';
-    characterType = '감성적인 보컬 전문가';
-    characterDesc = '깊은 감정과 완벽한 음정으로 청중의 마음을 사로잡는 타입';
-    styleTags = ['#감성보컬', '#완벽음정', '#아티스트'];
+    positionType = 'Main Vocalist';
+    // 메인보컬 멤버들 중에서 선택
+    const vocalMembers = [
+      { member: kpopGroupsData.groups[0].members[6], group: 'BTS' }, // Jungkook
+      { member: kpopGroupsData.groups[1].members[2], group: 'BLACKPINK' }, // Rosé
+      { member: kpopGroupsData.groups[2].members[4], group: 'IVE' }, // Liz
+      { member: kpopGroupsData.groups[3].members[3], group: 'aespa' }, // Ningning
+      { member: kpopGroupsData.groups[4].members[1], group: '(G)I-DLE' }, // Minnie
+    ];
+    const selected = vocalMembers[Math.floor(Math.random() * vocalMembers.length)];
+    matchedMember = selected.member;
+    matchedGroup = selected.group;
   } else if (scores.danceScore === maxScore) {
-    mainPosition = '메인댄서';
-    subPosition = '서브래퍼';
-    characterType = '에너지 폭발 퍼포머';
-    characterDesc = '무대 위에서 폭발적인 에너지와 완벽한 퍼포먼스를 선보이는 타입';
-    styleTags = ['#폭발적댄스', '#퍼포먼스킹', '#에너지넘침'];
+    positionType = 'Main Dancer';
+    // 메인댄서 멤버들 중에서 선택
+    const danceMembers = [
+      { member: kpopGroupsData.groups[0].members[3], group: 'BTS' }, // j-hope
+      { member: kpopGroupsData.groups[0].members[4], group: 'BTS' }, // Jimin
+      { member: kpopGroupsData.groups[1].members[3], group: 'BLACKPINK' }, // Lisa
+      { member: kpopGroupsData.groups[3].members[0], group: 'aespa' }, // Karina
+    ];
+    const selected = danceMembers[Math.floor(Math.random() * danceMembers.length)];
+    matchedMember = selected.member;
+    matchedGroup = selected.group;
   } else if (scores.rapScore === maxScore) {
-    mainPosition = '메인래퍼';
-    subPosition = '서브댄서';
-    characterType = '힙합 아티스트';
-    characterDesc = '강렬한 랩과 카리스마로 무대를 완전히 장악하는 타입';
-    styleTags = ['#힙합퀸', '#강렬카리스마', '#도시적매력'];
+    positionType = 'Main Rapper';
+    // 메인래퍼 멤버들 중에서 선택
+    const rapMembers = [
+      { member: kpopGroupsData.groups[0].members[0], group: 'BTS' }, // RM
+      { member: kpopGroupsData.groups[1].members[1], group: 'BLACKPINK' }, // Jennie
+      { member: kpopGroupsData.groups[2].members[1], group: 'IVE' }, // Gaeul
+      { member: kpopGroupsData.groups[3].members[1], group: 'aespa' }, // Giselle
+      { member: kpopGroupsData.groups[4].members[0], group: '(G)I-DLE' }, // Soyeon
+    ];
+    const selected = rapMembers[Math.floor(Math.random() * rapMembers.length)];
+    matchedMember = selected.member;
+    matchedGroup = selected.group;
   } else {
-    mainPosition = '센터/비주얼';
-    subPosition = '서브보컬';
-    characterType = '완벽한 비주얼 센터';
-    characterDesc = '뛰어난 외모와 독특한 매력으로 모든 시선을 집중시키는 타입';
-    styleTags = ['#완벽비주얼', '#센터포스', '#매력발산'];
+    positionType = 'Visual';
+    // 비주얼 멤버들 중에서 선택
+    const visualMembers = [
+      { member: kpopGroupsData.groups[0].members[1], group: 'BTS' }, // Jin
+      { member: kpopGroupsData.groups[0].members[5], group: 'BTS' }, // V
+      { member: kpopGroupsData.groups[1].members[0], group: 'BLACKPINK' }, // Jisoo
+      { member: kpopGroupsData.groups[2].members[3], group: 'IVE' }, // Wonyoung
+      { member: kpopGroupsData.groups[3].members[2], group: 'aespa' }, // Winter
+      { member: kpopGroupsData.groups[4].members[3], group: '(G)I-DLE' }, // Shuhua
+    ];
+    const selected = visualMembers[Math.floor(Math.random() * visualMembers.length)];
+    matchedMember = selected.member;
+    matchedGroup = selected.group;
   }
 
-  const groupName = groupNames[Math.floor(Math.random() * groupNames.length)];
+  // 캐릭터 설명 생성
+  const characterDescriptions = {
+    'Leader': `${matchedMember?.name}처럼 팀을 이끄는 카리스마와 리더십을 가진 타입`,
+    'Main Vocalist': `${matchedMember?.name}처럼 완벽한 음정과 감정 전달로 청중을 사로잡는 타입`,
+    'Main Dancer': `${matchedMember?.name}처럼 뛰어난 댄스 실력과 무대 장악력을 가진 타입`,
+    'Main Rapper': `${matchedMember?.name}처럼 강렬한 랩과 카리스마로 무대를 지배하는 타입`,
+    'Visual': `${matchedMember?.name}처럼 뛰어난 외모와 독특한 매력을 가진 타입`
+  };
+
+  const styleTags = [
+    `#${matchedGroup}스타일`,
+    `#${positionType.replace(' ', '')}`,
+    `#${matchedMember?.name}형`
+  ];
 
   return {
-    groupName,
-    position: mainPosition,
-    subPosition,
-    character: characterType,
-    characterDesc,
-    styleTags
+    groupName: matchedGroup,
+    position: matchedMember?.position[0] || positionType,
+    subPosition: matchedMember?.position[1] || '',
+    character: `${matchedGroup} ${matchedMember?.name} 스타일`,
+    characterDesc: characterDescriptions[positionType as keyof typeof characterDescriptions] || '',
+    styleTags,
+    memberName: matchedMember?.name,
+    agency: kpopGroupsData.groups.find(g => g.name === matchedGroup)?.agency || ''
   };
 }

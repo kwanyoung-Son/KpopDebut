@@ -1,0 +1,63 @@
+export const kpopGroupsData = {
+  "groups": [
+    {
+      "name": "BTS",
+      "agency": "BigHit Music",
+      "members": [
+        { "name": "RM", "position": ["Leader", "Main Rapper"] },
+        { "name": "Jin", "position": ["Sub Vocalist", "Visual"] },
+        { "name": "SUGA", "position": ["Lead Rapper"] },
+        { "name": "j-hope", "position": ["Main Dancer", "Sub Rapper", "Sub Vocalist"] },
+        { "name": "Jimin", "position": ["Main Dancer", "Lead Vocalist"] },
+        { "name": "V", "position": ["Lead Dancer", "Sub Vocalist", "Visual"] },
+        { "name": "Jungkook", "position": ["Main Vocalist", "Lead Dancer", "Sub Rapper", "Center", "Maknae"] }
+      ]
+    },
+    {
+      "name": "BLACKPINK",
+      "agency": "YG Entertainment",
+      "members": [
+        { "name": "Jisoo", "position": ["Lead Vocalist", "Visual"] },
+        { "name": "Jennie", "position": ["Main Rapper", "Lead Vocalist"] },
+        { "name": "Rosé", "position": ["Main Vocalist", "Lead Dancer"] },
+        { "name": "Lisa", "position": ["Main Dancer", "Lead Rapper", "Sub Vocalist", "Maknae"] }
+      ]
+    },
+    {
+      "name": "IVE",
+      "agency": "Starship Entertainment",
+      "members": [
+        { "name": "Yujin", "position": ["Leader", "Lead Vocalist"] },
+        { "name": "Gaeul", "position": ["Main Rapper", "Sub Vocalist"] },
+        { "name": "Rei", "position": ["Rapper", "Sub Vocalist"] },
+        { "name": "Wonyoung", "position": ["Lead Dancer", "Sub Vocalist", "Visual", "Center"] },
+        { "name": "Liz", "position": ["Main Vocalist"] },
+        { "name": "Leeseo", "position": ["Sub Vocalist", "Maknae"] }
+      ]
+    },
+    {
+      "name": "aespa",
+      "agency": "SM Entertainment",
+      "members": [
+        { "name": "Karina", "position": ["Leader", "Main Dancer", "Lead Rapper", "Sub Vocalist", "Visual", "Center"] },
+        { "name": "Giselle", "position": ["Main Rapper", "Sub Vocalist"] },
+        { "name": "Winter", "position": ["Lead Vocalist", "Lead Dancer", "Visual"] },
+        { "name": "Ningning", "position": ["Main Vocalist", "Maknae"] }
+      ]
+    },
+    {
+      "name": "(G)I-DLE",
+      "agency": "CUBE Entertainment",
+      "members": [
+        { "name": "Soyeon", "position": ["Leader", "Main Rapper", "Center", "Sub Vocalist"] },
+        { "name": "Minnie", "position": ["Main Vocalist"] },
+        { "name": "Yuqi", "position": ["Lead Dancer", "Sub Vocalist", "Sub Rapper"] },
+        { "name": "Shuhua", "position": ["Sub Vocalist", "Visual", "Maknae"] },
+        { "name": "Miyeon", "position": ["Main Vocalist", "Visual"] }
+      ]
+    }
+  ]
+};
+
+export type KpopGroup = typeof kpopGroupsData.groups[0];
+export type KpopMember = KpopGroup['members'][0];

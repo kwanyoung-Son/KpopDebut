@@ -20,6 +20,8 @@ export const analysisResults = pgTable("analysis_results", {
   character: text("character").notNull(),
   characterDesc: text("character_desc").notNull(),
   styleTags: jsonb("style_tags").notNull(),
+  memberName: text("member_name"),
+  agency: text("agency"),
   createdAt: text("created_at").default(sql`CURRENT_TIMESTAMP`),
 });
 
