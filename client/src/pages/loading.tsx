@@ -23,13 +23,28 @@ export default function LoadingPage() {
       const quizAnswers = sessionStorage.getItem('quizAnswers');
       const photoData = sessionStorage.getItem('uploadedPhoto');
       
+      console.log('Sending quiz answers:', quizAnswers);
+      
       if (!quizAnswers) {
         throw new Error('Quiz answers not found');
       }
 
+      // JSON 파싱 테스트
+      let parsedAnswers;
+      try {
+        parsedAnswers = JSON.parse(quizAnswers);
+        console.log('Parsed answers:', parsedAnswers);
+      } catch (e) {
+        console.error('JSON parse error:', e);
+        throw new Error('Invalid quiz answers format');
+      }
+
+      const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      
+      // FormData로 전송
       const formData = new FormData();
       formData.append('quizAnswers', quizAnswers);
-      formData.append('sessionId', `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`);
+      formData.append('sessionId', sessionId);
       
       if (photoData) {
         // Convert base64 to blob
@@ -38,7 +53,17 @@ export default function LoadingPage() {
         formData.append('photo', blob, 'photo.jpg');
       }
 
-      const res = await apiRequest('POST', '/api/analyze', formData);
+      const res = await fetch('/api/analyze', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (!res.ok) {
+        const errorText = await res.text();
+        console.error('Server error:', errorText);
+        throw new Error(`Server error: ${res.status}`);
+      }
+
       return res.json();
     },
     onSuccess: (data) => {

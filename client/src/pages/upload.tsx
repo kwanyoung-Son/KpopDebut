@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
-import { Camera, CheckCircle, Upload, ArrowRight } from "lucide-react";
+import { Camera, CheckCircle, Upload, ArrowRight, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -8,6 +8,7 @@ export default function UploadPage() {
   const [, setLocation] = useLocation();
   const [selectedPhoto, setSelectedPhoto] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
 
   const handlePhotoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -27,7 +28,11 @@ export default function UploadPage() {
 
   const handleNext = () => {
     if (selectedPhoto) {
-      setLocation("/quiz");
+      setIsProcessing(true);
+      // 짧은 딜레이로 처리 중임을 보여주고 다음 페이지로
+      setTimeout(() => {
+        setLocation("/quiz");
+      }, 800);
     }
   };
 
@@ -95,12 +100,21 @@ export default function UploadPage() {
 
         <Button
           onClick={handleNext}
-          disabled={!selectedPhoto}
+          disabled={!selectedPhoto || isProcessing}
           size="lg"
-          className="bg-[hsl(var(--primary-pink))] hover:bg-[hsl(var(--primary-pink))]/90 text-white px-8 py-4 rounded-full text-lg font-bold disabled:opacity-50"
+          className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-4 rounded-full text-lg font-bold disabled:opacity-50"
         >
-          다음 단계로
-          <ArrowRight className="ml-2" size={20} />
+          {isProcessing ? (
+            <>
+              <Loader2 className="mr-2 animate-spin" size={20} />
+              처리 중...
+            </>
+          ) : (
+            <>
+              다음 단계로
+              <ArrowRight className="ml-2" size={20} />
+            </>
+          )}
         </Button>
       </div>
     </div>

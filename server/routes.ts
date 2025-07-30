@@ -8,6 +8,7 @@ import { kpopGroupsData, type KpopMember } from "./kpop-data";
 
 interface MulterRequest extends Request {
   file?: Express.Multer.File;
+  files?: { [fieldname: string]: Express.Multer.File[] } | Express.Multer.File[];
 }
 
 const upload = multer({ 
@@ -18,7 +19,7 @@ const upload = multer({
 export async function registerRoutes(app: Express): Promise<Server> {
   
   // Analyze user input and generate KPOP group position
-  app.post("/api/analyze", upload.single('photo'), async (req: MulterRequest, res) => {
+  app.post("/api/analyze", upload.fields([{ name: 'photo', maxCount: 1 }]), async (req: MulterRequest, res) => {
     try {
       const sessionId = req.body.sessionId || `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
       
@@ -33,8 +34,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       // Convert uploaded photo to base64 if exists
       let photoData = null;
-      if (req.file) {
-        photoData = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+      if (req.files && !Array.isArray(req.files) && req.files['photo'] && req.files['photo'][0]) {
+        const file = req.files['photo'][0];
+        photoData = `data:${file.mimetype};base64,${file.buffer.toString('base64')}`;
       }
 
       // Generate analysis result based on quiz answers

@@ -37,7 +37,7 @@ export default function Home() {
             나만의 데뷔 포지션과 스타일
           </p>
           <Link href="/upload">
-            <Button size="lg" className="bg-white text-[hsl(var(--primary-pink))] hover:bg-gray-100 text-lg font-bold px-8 py-4 rounded-full transform hover:scale-105 transition-all shadow-lg">
+            <Button size="lg" className="bg-white text-pink-600 hover:bg-gray-100 text-lg font-bold px-8 py-4 rounded-full transform hover:scale-105 transition-all shadow-lg">
               <Camera className="mr-2" size={20} />
               지금 시작하기
             </Button>
