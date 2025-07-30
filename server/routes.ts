@@ -1,9 +1,13 @@
-import type { Express } from "express";
+import type { Express, Request } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertAnalysisResultSchema, quizAnswersSchema } from "@shared/schema";
+import { insertAnalysisResultSchema, quizAnswersSchema, type QuizAnswers } from "@shared/schema";
 import { z } from "zod";
 import multer from "multer";
+
+interface MulterRequest extends Request {
+  file?: Express.Multer.File;
+}
 
 const upload = multer({ 
   storage: multer.memoryStorage(),
@@ -13,7 +17,7 @@ const upload = multer({
 export async function registerRoutes(app: Express): Promise<Server> {
   
   // Analyze user input and generate KPOP group position
-  app.post("/api/analyze", upload.single('photo'), async (req, res) => {
+  app.post("/api/analyze", upload.single('photo'), async (req: MulterRequest, res) => {
     try {
       const sessionId = req.body.sessionId || `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
       
@@ -64,43 +68,124 @@ export async function registerRoutes(app: Express): Promise<Server> {
 }
 
 // Generate analysis result based on quiz answers
-function generateAnalysisResult(answers: any) {
+function generateAnalysisResult(answers: QuizAnswers) {
   const groupNames = ['STELLAR NOVA', 'COSMIC DREAM', 'RAINBOW STAR', 'NEON LIGHT', 'CRYSTAL WAVE'];
   
-  const positionMap = {
-    leader: { main: '리더', sub: '메인보컬' },
-    entertainer: { main: '메인댄서', sub: '서브보컬' },
-    charisma: { main: '래퍼', sub: '서브댄서' },
-    cute: { main: '비주얼', sub: '서브보컬' }
-  };
+  // 점수 기반 분석 시스템
+  let leaderScore = 0;
+  let vocalScore = 0; 
+  let danceScore = 0;
+  let rapScore = 0;
+  let visualScore = 0;
 
-  const characterMap = {
-    leader: { type: '따뜻한 카리스마의 리더형', desc: '강한 리더십과 따뜻한 인간미를 동시에 갖춘 완벽한 리더 타입' },
-    entertainer: { type: '에너지 넘치는 댄스머신', desc: '무대 위에서 폭발적인 에너지로 관객을 사로잡는 타입' },
-    charisma: { type: '쿨한 힙합 아티스트', desc: '강렬한 랩과 카리스마로 무대를 지배하는 타입' },
-    cute: { type: '사랑스러운 비주얼 센터', desc: '완벽한 외모와 매력으로 시선을 집중시키는 타입' }
-  };
+  // 무대 존재감 분석
+  switch (answers.stagePresence) {
+    case 'center': visualScore += 3; break;
+    case 'leader': leaderScore += 3; break;
+    case 'performer': danceScore += 3; break;
+    case 'charisma': rapScore += 3; break;
+  }
 
-  const styleTagsMap = {
-    leader: ['#강인한리더', '#카리스마보컬', '#시크모던'],
-    entertainer: ['#폭발적댄스', '#에너지넘침', '#스트릿감성'],
-    charisma: ['#힙합퀸', '#강렬카리스마', '#도시적매력'],
-    cute: ['#완벽비주얼', '#사랑스러움', '#러블리매력']
-  };
+  // 성격 분석
+  switch (answers.friendsDescribe) {
+    case 'mood_maker': danceScore += 2; break;
+    case 'serious': leaderScore += 2; break;
+    case 'creative': vocalScore += 2; break;
+    case 'responsible': leaderScore += 2; break;
+  }
 
-  // Select result based on personality type
-  const personality = answers.personality;
+  // 프로젝트 스타일 분석
+  switch (answers.newProject) {
+    case 'execute': danceScore += 2; break;
+    case 'plan': leaderScore += 2; break;
+    case 'discuss': vocalScore += 2; break;
+    case 'think': visualScore += 2; break;
+  }
+
+  // 무대 중요도 분석
+  switch (answers.stageImportant) {
+    case 'expression': visualScore += 3; break;
+    case 'accuracy': danceScore += 3; break;
+    case 'vocal': vocalScore += 3; break;
+    case 'teamwork': leaderScore += 3; break;
+  }
+
+  // 연습 스타일 분석
+  switch (answers.practiceStyle) {
+    case 'vocal': vocalScore += 3; break;
+    case 'dance': danceScore += 3; break;
+    case 'direction': leaderScore += 3; break;
+    case 'care': leaderScore += 2; visualScore += 1; break;
+  }
+
+  // 춤 스타일 분석
+  switch (answers.danceStyle) {
+    case 'hiphop': rapScore += 3; break;
+    case 'contemporary': vocalScore += 2; break;
+    case 'powerful': danceScore += 3; break;
+    case 'cute': visualScore += 3; break;
+  }
+
+  // 패션/메이크업 보너스 점수
+  if (answers.fashionStyle === 'street') rapScore += 1;
+  if (answers.fashionStyle === 'chic') leaderScore += 1;
+  if (answers.fashionStyle === 'lovely') visualScore += 1;
+  if (answers.fashionStyle === 'trendy') danceScore += 1;
+
+  if (answers.makeupStyle === 'bold') rapScore += 1;
+  if (answers.makeupStyle === 'elegant') leaderScore += 1;
+  if (answers.makeupStyle === 'natural') visualScore += 1;
+  if (answers.makeupStyle === 'retro') vocalScore += 1;
+
+  // 최고 점수 포지션 결정
+  const scores = { leaderScore, vocalScore, danceScore, rapScore, visualScore };
+  const maxScore = Math.max(...Object.values(scores));
+  let mainPosition = '';
+  let subPosition = '';
+  let characterType = '';
+  let characterDesc = '';
+  let styleTags: string[] = [];
+
+  if (scores.leaderScore === maxScore) {
+    mainPosition = '리더';
+    subPosition = '서브보컬';
+    characterType = '카리스마 넘치는 팀 리더';
+    characterDesc = '강한 리더십과 책임감으로 팀을 이끄는 든든한 존재';
+    styleTags = ['#카리스마리더', '#책임감', '#시크모던'];
+  } else if (scores.vocalScore === maxScore) {
+    mainPosition = '메인보컬';
+    subPosition = '서브댄서';
+    characterType = '감성적인 보컬 전문가';
+    characterDesc = '깊은 감정과 완벽한 음정으로 청중의 마음을 사로잡는 타입';
+    styleTags = ['#감성보컬', '#완벽음정', '#아티스트'];
+  } else if (scores.danceScore === maxScore) {
+    mainPosition = '메인댄서';
+    subPosition = '서브래퍼';
+    characterType = '에너지 폭발 퍼포머';
+    characterDesc = '무대 위에서 폭발적인 에너지와 완벽한 퍼포먼스를 선보이는 타입';
+    styleTags = ['#폭발적댄스', '#퍼포먼스킹', '#에너지넘침'];
+  } else if (scores.rapScore === maxScore) {
+    mainPosition = '메인래퍼';
+    subPosition = '서브댄서';
+    characterType = '힙합 아티스트';
+    characterDesc = '강렬한 랩과 카리스마로 무대를 완전히 장악하는 타입';
+    styleTags = ['#힙합퀸', '#강렬카리스마', '#도시적매력'];
+  } else {
+    mainPosition = '센터/비주얼';
+    subPosition = '서브보컬';
+    characterType = '완벽한 비주얼 센터';
+    characterDesc = '뛰어난 외모와 독특한 매력으로 모든 시선을 집중시키는 타입';
+    styleTags = ['#완벽비주얼', '#센터포스', '#매력발산'];
+  }
+
   const groupName = groupNames[Math.floor(Math.random() * groupNames.length)];
-  const position = positionMap[personality];
-  const character = characterMap[personality];
-  const styleTags = styleTagsMap[personality];
 
   return {
     groupName,
-    position: position.main,
-    subPosition: position.sub,
-    character: character.type,
-    characterDesc: character.desc,
+    position: mainPosition,
+    subPosition,
+    character: characterType,
+    characterDesc,
     styleTags
   };
 }

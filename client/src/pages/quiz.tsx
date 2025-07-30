@@ -9,38 +9,98 @@ import { QuizAnswers } from "@shared/schema";
 const questions = [
   {
     id: 1,
-    title: "성격 유형 분석",
-    question: "그룹에서 나의 역할은?",
-    field: "personality" as keyof QuizAnswers,
+    title: "성격/성향 분석",
+    question: "무대 위에서의 나는?",
+    field: "stagePresence" as keyof QuizAnswers,
     options: [
-      { value: "leader", icon: Crown, color: "text-yellow-500", title: "리더형", desc: "앞장서서 팀을 이끌어가는 타입" },
-      { value: "entertainer", icon: Laugh, color: "text-orange-500", title: "예능형", desc: "분위기를 밝게 만드는 무드메이커" },
-      { value: "charisma", icon: Flame, color: "text-red-500", title: "카리스마형", desc: "강렬한 존재감으로 시선을 사로잡는 타입" },
-      { value: "cute", icon: Heart, color: "text-pink-500", title: "러블리형", desc: "사랑스러운 매력으로 어필하는 타입" }
+      { value: "center", icon: Crown, color: "text-yellow-500", title: "주목받는 걸 좋아하는 중심 인물", desc: "" },
+      { value: "leader", icon: Crown, color: "text-blue-500", title: "팀을 조율하고 책임지는 리더형", desc: "" },
+      { value: "performer", icon: Flame, color: "text-red-500", title: "누구보다 열심히 춤추고 표현하는 퍼포머", desc: "" },
+      { value: "charisma", icon: Heart, color: "text-purple-500", title: "조용히도 강하게 존재감을 드러내는 스타일", desc: "" }
     ]
   },
   {
     id: 2,
-    title: "음악 취향 분석",
-    question: "좋아하는 음악 장르는?",
-    field: "musicGenre" as keyof QuizAnswers,
+    title: "성격/성향 분석",
+    question: "친구들이 말하는 내 성격은?",
+    field: "friendsDescribe" as keyof QuizAnswers,
     options: [
-      { value: "dance", icon: Music, color: "text-[hsl(var(--primary-teal))]", title: "댄스/EDM", desc: "" },
-      { value: "ballad", icon: Mic, color: "text-[hsl(var(--primary-teal))]", title: "발라드", desc: "" },
-      { value: "hiphop", icon: Headphones, color: "text-[hsl(var(--primary-teal))]", title: "힙합/랩", desc: "" },
-      { value: "trot", icon: Guitar, color: "text-[hsl(var(--primary-teal))]", title: "트로트", desc: "" }
+      { value: "mood_maker", icon: Laugh, color: "text-orange-500", title: "장난기 많고 분위기 메이커", desc: "" },
+      { value: "serious", icon: Brain, color: "text-blue-600", title: "진지하고 신중함", desc: "" },
+      { value: "creative", icon: Disc, color: "text-purple-500", title: "창의적이고 예술적", desc: "" },
+      { value: "responsible", icon: Crown, color: "text-green-600", title: "계획적이고 책임감 있음", desc: "" }
     ]
   },
   {
     id: 3,
-    title: "패션 스타일 분석",
-    question: "나의 패션 스타일은?",
+    title: "성격/성향 분석", 
+    question: "새로운 프로젝트가 주어졌을 때 나는?",
+    field: "newProject" as keyof QuizAnswers,
+    options: [
+      { value: "execute", icon: Flame, color: "text-red-500", title: "바로 실행해본다", desc: "" },
+      { value: "plan", icon: Brain, color: "text-blue-500", title: "일단 계획부터 세운다", desc: "" },
+      { value: "discuss", icon: Music, color: "text-green-500", title: "주변 사람들과 먼저 얘기해본다", desc: "" },
+      { value: "think", icon: Heart, color: "text-purple-500", title: "혼자 조용히 생각 정리한다", desc: "" }
+    ]
+  },
+  {
+    id: 4,
+    title: "무대/표현 스타일 분석",
+    question: "무대에서 가장 중요하게 생각하는 건?",
+    field: "stageImportant" as keyof QuizAnswers,
+    options: [
+      { value: "expression", icon: Heart, color: "text-pink-500", title: "표정과 눈빛", desc: "" },
+      { value: "accuracy", icon: Music, color: "text-blue-500", title: "안무 정확도", desc: "" },
+      { value: "vocal", icon: Mic, color: "text-purple-500", title: "음정과 감정 전달", desc: "" },
+      { value: "teamwork", icon: Crown, color: "text-green-500", title: "전체적인 팀워크", desc: "" }
+    ]
+  },
+  {
+    id: 5,
+    title: "무대/표현 스타일 분석",
+    question: "연습 중 가장 열중하는 건?",
+    field: "practiceStyle" as keyof QuizAnswers,
+    options: [
+      { value: "vocal", icon: Mic, color: "text-purple-500", title: "고음 처리나 감정 전달", desc: "" },
+      { value: "dance", icon: Music, color: "text-blue-500", title: "칼군무와 동작 정리", desc: "" },
+      { value: "direction", icon: Brain, color: "text-orange-500", title: "무대 연출/구성 아이디어", desc: "" },
+      { value: "care", icon: Heart, color: "text-green-500", title: "멤버들 케어 및 소통", desc: "" }
+    ]
+  },
+  {
+    id: 6,
+    title: "무대/표현 스타일 분석",
+    question: "춤 스타일을 고르자면?",
+    field: "danceStyle" as keyof QuizAnswers,
+    options: [
+      { value: "hiphop", icon: Headphones, color: "text-gray-700", title: "리듬감 넘치는 힙합", desc: "" },
+      { value: "contemporary", icon: Disc, color: "text-purple-500", title: "부드러운 컨템포러리", desc: "" },
+      { value: "powerful", icon: Flame, color: "text-red-500", title: "파워풀한 퍼포먼스", desc: "" },
+      { value: "cute", icon: Heart, color: "text-pink-500", title: "키치하고 귀여운 안무", desc: "" }
+    ]
+  },
+  {
+    id: 7,
+    title: "스타일/패션 감각 분석",
+    question: "평소 내 패션 스타일은?",
     field: "fashionStyle" as keyof QuizAnswers,
     options: [
-      { value: "street", icon: Shirt, color: "text-gray-700", title: "스트릿", desc: "편안하고 캐주얼한 스타일" },
-      { value: "lovely", icon: Gem, color: "text-pink-500", title: "러블리", desc: "귀엽고 사랑스러운 스타일" },
-      { value: "chic", icon: Bus, color: "text-gray-800", title: "시크", desc: "세련되고 도시적인 스타일" },
-      { value: "vintage", icon: Disc, color: "text-amber-600", title: "빈티지", desc: "레트로하고 클래식한 스타일" }
+      { value: "street", icon: Shirt, color: "text-gray-700", title: "스트릿, 캐주얼", desc: "" },
+      { value: "chic", icon: Gem, color: "text-gray-800", title: "시크하고 모던", desc: "" },
+      { value: "lovely", icon: Heart, color: "text-pink-500", title: "러블리하고 컬러풀", desc: "" },
+      { value: "trendy", icon: Disc, color: "text-purple-500", title: "트렌디하고 유니크", desc: "" }
+    ]
+  },
+  {
+    id: 8,
+    title: "스타일/패션 감각 분석",
+    question: "가장 선호하는 헤어/메이크업 스타일은?",
+    field: "makeupStyle" as keyof QuizAnswers,
+    options: [
+      { value: "natural", icon: Heart, color: "text-green-500", title: "자연스러운 내추럴", desc: "" },
+      { value: "bold", icon: Flame, color: "text-red-500", title: "강렬한 포인트 컬러", desc: "" },
+      { value: "retro", icon: Disc, color: "text-amber-600", title: "레트로 감성", desc: "" },
+      { value: "elegant", icon: Gem, color: "text-purple-500", title: "깔끔하고 고급진 스타일", desc: "" }
     ]
   }
 ];

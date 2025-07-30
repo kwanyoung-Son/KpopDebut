@@ -9,7 +9,7 @@ export default function ProgressBar({ current, total }: ProgressBarProps) {
   return (
     <div className="mb-8">
       <div className="flex justify-between text-sm text-gray-600 mb-2">
-        <span>성격 분석</span>
+        <span>KPOP 포지션 분석</span>
         <span>{current} / {total}</span>
       </div>
       <div className="w-full bg-gray-200 rounded-full h-2">

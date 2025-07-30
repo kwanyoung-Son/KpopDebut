@@ -34,9 +34,19 @@ export const insertAnalysisResultSchema = createInsertSchema(analysisResults).om
 });
 
 export const quizAnswersSchema = z.object({
-  personality: z.enum(["leader", "entertainer", "charisma", "cute"]),
-  musicGenre: z.enum(["dance", "ballad", "hiphop", "trot"]),
-  fashionStyle: z.enum(["street", "lovely", "chic", "vintage"]),
+  // 성격/성향 관련 질문
+  stagePresence: z.enum(["center", "leader", "performer", "charisma"]),
+  friendsDescribe: z.enum(["mood_maker", "serious", "creative", "responsible"]),
+  newProject: z.enum(["execute", "plan", "discuss", "think"]),
+  
+  // 무대/표현 스타일 관련 질문
+  stageImportant: z.enum(["expression", "accuracy", "vocal", "teamwork"]),
+  practiceStyle: z.enum(["vocal", "dance", "direction", "care"]),
+  danceStyle: z.enum(["hiphop", "contemporary", "powerful", "cute"]),
+  
+  // 스타일/패션 감각 관련 질문
+  fashionStyle: z.enum(["street", "chic", "lovely", "trendy"]),
+  makeupStyle: z.enum(["natural", "bold", "retro", "elegant"]),
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
