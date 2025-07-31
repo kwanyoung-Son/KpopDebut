@@ -30,10 +30,15 @@ The application follows a modern full-stack architecture with clear separation b
 ## Key Components
 
 ### Database Layer
-- **ORM**: Drizzle ORM with PostgreSQL dialect
+- **ORM**: Drizzle ORM with dual dialect support (PostgreSQL/SQLite)
 - **Schema**: Shared TypeScript schema definitions for type safety
-- **Storage**: Dual implementation with in-memory storage for development and PostgreSQL for production
-- **Migrations**: Drizzle Kit for database schema management
+- **Storage**: Environment-based storage selection:
+  - **Development**: MemStorage (in-memory, fast iteration)
+  - **Production**: Cloudflare D1 (SQLite-based, globally distributed)
+- **Database Management**: 
+  - Cloudflare Wrangler CLI for D1 operations
+  - Automatic table initialization
+  - Real-time analytics counting
 
 ### Authentication & Session Management
 - **Session Storage**: Basic session-based tracking using generated session IDs
@@ -93,12 +98,14 @@ The application follows a modern full-stack architecture with clear separation b
 - **Build**: Vite development server with proxy setup
 
 ### Production Environment
-- **Server**: Express serving static files and API routes
-- **Database**: PostgreSQL via Neon Database with connection pooling
+- **Platform**: Cloudflare Workers for serverless deployment
+- **Database**: Cloudflare D1 (SQLite) with global replication
+- **Storage**: Dual-layer implementation (MemStorage for dev, D1Storage for production)
 - **Build Process**: 
   1. Vite builds client assets to `dist/public`
   2. esbuild bundles server code to `dist/index.js`
-  3. Static file serving from Express
+  3. Wrangler deploys to Cloudflare Workers
+- **Real-time Stats**: Live analysis count via D1 database queries
 
 ### Configuration Management
 - **Environment Variables**: DATABASE_URL for production database connection

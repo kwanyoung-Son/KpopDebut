@@ -1,0 +1,24 @@
+name = "kpop-debut-analyzer"
+main = "dist/index.js"
+compatibility_date = "2024-01-01"
+
+# D1 Database bindings
+[[d1_databases]]
+binding = "DB"
+database_name = "kpopdebut"
+database_id = "your-database-id-here"  # Cloudflare에서 제공하는 실제 ID로 교체 필요
+
+# Environment variables
+[env.development.d1_databases]
+[[env.development.d1_databases]]
+binding = "DB"
+database_name = "kpopdebut-dev"
+database_id = "your-dev-database-id-here"  # 개발용 DB ID
+
+# Workers 설정
+[build]
+command = "npm run build"
+
+# 로컬 개발 설정
+[dev]
+local = true
