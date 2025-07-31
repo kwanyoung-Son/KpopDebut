@@ -48,24 +48,10 @@ export default function Home() {
             </Button>
           </Link>
           
-          {/* Stats and Features */}
-          <div className="grid grid-cols-4 gap-6 mt-16 text-center">
-            <div>
-              <div className="text-3xl font-bold">{stats?.totalAnalyses || 0}</div>
-              <div className="text-white/80">분석 완료</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold mb-2">📸</div>
-              <div className="text-white/80">얼굴 분석</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold mb-2">🧠</div>
-              <div className="text-white/80">성격 테스트</div>
-            </div>
-            <div>
-              <div className="text-3xl font-bold mb-2">⭐</div>
-              <div className="text-white/80">실제 아이돌 매칭</div>
-            </div>
+          {/* Stats */}
+          <div className="mt-16 text-center">
+            <div className="text-4xl font-bold">{stats?.totalAnalyses || 0}</div>
+            <div className="text-white/80 text-lg">분석 완료</div>
           </div>
         </div>
       </section>
