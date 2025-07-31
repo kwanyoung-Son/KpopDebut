@@ -1,8 +1,13 @@
 import { Link } from "wouter";
 import { Music, Star, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Home() {
+  const { data: stats } = useQuery({
+    queryKey: ['/api/stats'],
+    queryFn: () => fetch('/api/stats').then(res => res.json()),
+  });
   return (
     <div className="min-h-screen">
       {/* Navigation */}
@@ -43,19 +48,23 @@ export default function Home() {
             </Button>
           </Link>
           
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-16 text-center">
+          {/* Stats and Features */}
+          <div className="grid grid-cols-4 gap-6 mt-16 text-center">
             <div>
-              <div className="text-3xl font-bold">50K+</div>
+              <div className="text-3xl font-bold">{stats?.totalAnalyses || 0}</div>
               <div className="text-white/80">분석 완료</div>
             </div>
             <div>
-              <div className="text-3xl font-bold">12</div>
-              <div className="text-white/80">가상 그룹</div>
+              <div className="text-3xl font-bold mb-2">📸</div>
+              <div className="text-white/80">얼굴 분석</div>
             </div>
             <div>
-              <div className="text-3xl font-bold">98%</div>
-              <div className="text-white/80">만족도</div>
+              <div className="text-3xl font-bold mb-2">🧠</div>
+              <div className="text-white/80">성격 테스트</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold mb-2">⭐</div>
+              <div className="text-white/80">실제 아이돌 매칭</div>
             </div>
           </div>
         </div>

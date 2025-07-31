@@ -72,6 +72,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Get analysis count for stats
+  app.get("/api/stats", async (req, res) => {
+    try {
+      const count = await storage.getAnalysisCount();
+      res.json({ totalAnalyses: count });
+    } catch (error) {
+      console.error('Stats fetch error:', error);
+      res.status(500).json({ error: "Failed to fetch stats" });
+    }
+  });
+
   const httpServer = createServer(app);
   return httpServer;
 }

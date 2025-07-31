@@ -7,6 +7,7 @@ export interface IStorage {
   createUser(user: InsertUser): Promise<User>;
   createAnalysisResult(result: InsertAnalysisResult): Promise<AnalysisResult>;
   getAnalysisResult(sessionId: string): Promise<AnalysisResult | undefined>;
+  getAnalysisCount(): Promise<number>;
 }
 
 export class MemStorage implements IStorage {
@@ -48,6 +49,10 @@ export class MemStorage implements IStorage {
 
   async getAnalysisResult(sessionId: string): Promise<AnalysisResult | undefined> {
     return this.analysisResults.get(sessionId);
+  }
+
+  async getAnalysisCount(): Promise<number> {
+    return this.analysisResults.size;
   }
 }
 
