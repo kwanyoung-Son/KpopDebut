@@ -83,6 +83,11 @@ npx wrangler deploy
 
 ## 현재 상태
 - ✅ D1Storage 클래스 구현 완료
+- ✅ 운영 DB ID 설정 완료 (512310fc-a085-480c-83e2-baa483dd3929)
+- ✅ 로컬 D1 테이블 생성 완료
+- ✅ 환경별 스토리지 자동 선택 구현
+
+D1 설정이 완료되었습니다! 배포 시 자동으로 운영 DB 테이블이 생성됩니다.
 - ✅ 환경별 storage 자동 선택 로직 추가
 - ✅ SQLite 호환 스키마 생성
 - ⏳ wrangler.toml에 실제 DB ID 입력 필요
