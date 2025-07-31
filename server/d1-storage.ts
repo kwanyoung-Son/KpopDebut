@@ -77,6 +77,10 @@ export class D1Storage implements IStorage {
       ...insertResult,
       id,
       createdAt,
+      photoData: insertResult.photoData || null,
+      subPosition: insertResult.subPosition || null,
+      memberName: (insertResult as any).memberName || null,
+      agency: (insertResult as any).agency || null,
     };
 
     await this.db
