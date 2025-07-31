@@ -2,9 +2,14 @@
 
 ## 환경 구성
 
+### 환경별 구분 방식
+- **NODE_ENV** 환경변수로 구분
+- **Cloudflare Workers 환경** 감지로 스토리지 선택
+
 ### 현재 설정
-- **개발 환경**: 메모리 저장소 (서버 재시작 시 초기화)
-- **운영 환경**: Cloudflare D1 (영구 저장)
+- **로컬 개발** (`npm run dev`): MemStorage (메모리)
+- **Cloudflare 개발** (`npx wrangler dev`): D1 개발 DB
+- **Cloudflare 운영** (`npx wrangler deploy`): D1 운영 DB
 
 ### 환경별 데이터베이스
 
@@ -48,21 +53,33 @@ npx wrangler d1 execute kpopdebut-dev --file=migrations/schema.sql
 npx wrangler d1 execute kpopdebut --file=migrations/schema.sql
 ```
 
-### 4. 로컬 테스트
+### 4. 개발/테스트 명령어
 ```bash
-# 로컬에서 D1 모드로 실행
-npx wrangler dev
-
-# 일반 개발 모드 (메모리 저장소)
+# 로컬 개발 (메모리 저장소) - 빠른 개발용
 npm run dev
+
+# Cloudflare 개발 환경 (D1 개발 DB)
+npx wrangler dev --env development
+
+# Cloudflare 로컬 테스트 (로컬 D1)
+npx wrangler dev --local
 ```
 
 ## 배포
 
-### Cloudflare Workers 배포
+### 환경별 배포
 ```bash
+# 개발 환경 배포
+npx wrangler deploy --env development
+
+# 운영 환경 배포 
 npx wrangler deploy
 ```
+
+## 환경 구분 로직
+1. **Cloudflare Workers 환경**: `globalThis.DB` 존재 → D1Storage 사용
+2. **Node.js 환경**: `globalThis.DB` 없음 → MemStorage 사용
+3. **NODE_ENV**: development/production 구분
 
 ## 현재 상태
 - ✅ D1Storage 클래스 구현 완료
