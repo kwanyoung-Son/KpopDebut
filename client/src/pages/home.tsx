@@ -38,8 +38,7 @@ export default function Home() {
             일까?
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-white/90 font-light">
-            얼굴 분석 + 성격 테스트로 알아보는<br />
-            나만의 데뷔 포지션과 스타일
+            AI로 알아보는 나의 KPOP 포지션
           </p>
           <Link href="/upload">
             <Button size="lg" className="bg-white text-pink-600 hover:bg-gray-100 text-lg font-bold px-8 py-4 rounded-full transform hover:scale-105 transition-all shadow-lg">
