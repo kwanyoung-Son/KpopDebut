@@ -1,0 +1,66 @@
+2025-09-19T05:53:39.932Z	Initializing build environment...
+2025-09-19T05:53:49.356Z	Success: Finished initializing build environment
+2025-09-19T05:53:50.042Z	Cloning repository...
+2025-09-19T05:53:50.887Z	Detected the following tools from environment: npm@10.9.2, nodejs@22.16.0
+2025-09-19T05:53:50.889Z	Restoring from dependencies cache
+2025-09-19T05:53:50.891Z	Restoring from build output cache
+2025-09-19T05:53:51.273Z	Installing project dependencies: npm clean-install --progress=false
+2025-09-19T05:53:56.739Z	npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+2025-09-19T05:53:56.783Z	npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+2025-09-19T05:54:11.055Z	
+2025-09-19T05:54:11.057Z	added 538 packages, and audited 539 packages in 19s
+2025-09-19T05:54:11.057Z	
+2025-09-19T05:54:11.061Z	76 packages are looking for funding
+2025-09-19T05:54:11.061Z	  run `npm fund` for details
+2025-09-19T05:54:11.104Z	
+2025-09-19T05:54:11.104Z	10 vulnerabilities (3 low, 7 moderate)
+2025-09-19T05:54:11.104Z	
+2025-09-19T05:54:11.105Z	To address issues that do not require attention, run:
+2025-09-19T05:54:11.105Z	  npm audit fix
+2025-09-19T05:54:11.105Z	
+2025-09-19T05:54:11.105Z	To address all issues (including breaking changes), run:
+2025-09-19T05:54:11.106Z	  npm audit fix --force
+2025-09-19T05:54:11.106Z	
+2025-09-19T05:54:11.106Z	Run `npm audit` for details.
+2025-09-19T05:54:11.255Z	Executing user build command: npm run build
+2025-09-19T05:54:18.674Z	
+2025-09-19T05:54:18.675Z	> rest-express@1.0.0 build
+2025-09-19T05:54:18.675Z	> vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-09-19T05:54:18.675Z	
+2025-09-19T05:54:20.017Z	vite v5.4.19 building for production...
+2025-09-19T05:54:20.104Z	transforming...
+2025-09-19T05:54:20.510Z	Browserslist: browsers data (caniuse-lite) is 11 months old. Please run:
+2025-09-19T05:54:20.510Z	  npx update-browserslist-db@latest
+2025-09-19T05:54:20.511Z	  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+2025-09-19T05:54:23.862Z	✓ 1669 modules transformed.
+2025-09-19T05:54:24.057Z	rendering chunks...
+2025-09-19T05:54:24.062Z	computing gzip size...
+2025-09-19T05:54:25.492Z	../dist/public/index.html                   0.63 kB │ gzip:  0.38 kB
+2025-09-19T05:54:25.492Z	../dist/public/assets/index-D-n5eW-1.css   65.45 kB │ gzip: 11.62 kB
+2025-09-19T05:54:25.492Z	../dist/public/assets/index-cqaxr1iG.js   302.45 kB │ gzip: 97.00 kB
+2025-09-19T05:54:25.492Z	✓ built in 5.44s
+2025-09-19T05:54:25.569Z	
+2025-09-19T05:54:25.569Z	  dist/index.js  25.3kb
+2025-09-19T05:54:25.569Z	
+2025-09-19T05:54:25.569Z	⚡ Done in 6ms
+2025-09-19T05:54:25.578Z	Success: Build command completed
+2025-09-19T05:54:25.579Z	Executing user deploy command: npx wrangler deploy
+2025-09-19T05:54:26.802Z	
+2025-09-19T05:54:26.803Z	 ⛅️ wrangler 4.26.1 (update available 4.38.0)
+2025-09-19T05:54:26.803Z	─────────────────────────────────────────────
+2025-09-19T05:54:26.862Z	▲ [WARNING] Multiple environments are defined in the Wrangler configuration file, but no target environment was specified for the deploy command.
+2025-09-19T05:54:26.862Z	
+2025-09-19T05:54:26.862Z	  To avoid unintentional changes to the wrong environment, it is recommended to explicitly specify the target environment using the `-e|--env` flag.
+2025-09-19T05:54:26.862Z	  If your intention is to use the top-level environment of your configuration simply pass an empty string to the flag to target such environment. For example `--env=""`.
+2025-09-19T05:54:26.862Z	
+2025-09-19T05:54:26.862Z	
+2025-09-19T05:54:26.863Z	
+2025-09-19T05:54:26.864Z	✘ [ERROR] It looks like you've run a Workers-specific command in a Pages project.
+2025-09-19T05:54:26.864Z	
+2025-09-19T05:54:26.864Z	  For Pages, please run `wrangler pages deploy` instead.
+2025-09-19T05:54:26.864Z	
+2025-09-19T05:54:26.864Z	
+2025-09-19T05:54:26.875Z	
+2025-09-19T05:54:26.875Z	Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
+2025-09-19T05:54:26.892Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2025-09-19_05-54-26_324.log"
+2025-09-19T05:54:26.989Z	Failed: error occurred while running deploy command

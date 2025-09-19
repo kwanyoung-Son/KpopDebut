@@ -1,6 +1,5 @@
 name = "kpopdebut"
 compatibility_date = "2024-09-23"
-pages_build_output_dir = "dist/public"
 
 # 운영 환경 D1 Database bindings
 [[d1_databases]]
@@ -25,5 +24,6 @@ database_id = "512310fc-a085-480c-83e2-baa483dd3929"  # 프로덕션 DB 사용
 # Cloudflare Pages 빌드 설정 (프론트엔드만)
 [build]
 command = "npx vite build"
+publish = "dist/public"
 
 # 로컬 개발 설정 (Node.js 환경 - 메모리 스토리지 사용)
