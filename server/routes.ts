@@ -6,9 +6,18 @@ import { z } from "zod";
 import multer from "multer";
 import { kpopGroupsData, type KpopMember } from "./kpop-data";
 
+interface MulterFile {
+  fieldname: string;
+  originalname: string;
+  encoding: string;
+  mimetype: string;
+  size: number;
+  buffer: Buffer;
+}
+
 interface MulterRequest extends Request {
-  file?: Express.Multer.File;
-  files?: { [fieldname: string]: Express.Multer.File[] } | Express.Multer.File[];
+  file?: MulterFile;
+  files?: { [fieldname: string]: MulterFile[] } | MulterFile[];
 }
 
 const upload = multer({ 

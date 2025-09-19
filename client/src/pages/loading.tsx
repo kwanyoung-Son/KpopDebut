@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "wouter";
 import { Brain } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest, queryClient } from "@/lib/queryClient";
 
 const loadingMessages = [
   '얼굴 특징을 분석하고 있어요...',
@@ -70,6 +70,8 @@ export default function LoadingPage() {
       // Store session ID and redirect to results
       sessionStorage.setItem('sessionId', data.sessionId);
       setLocation(`/results/${data.sessionId}`);
+      // Invalidate the stats query to update the count on the home page
+      queryClient.invalidateQueries({ queryKey: ['/api/stats'] });
     },
     onError: (error) => {
       console.error('Analysis failed:', error);
