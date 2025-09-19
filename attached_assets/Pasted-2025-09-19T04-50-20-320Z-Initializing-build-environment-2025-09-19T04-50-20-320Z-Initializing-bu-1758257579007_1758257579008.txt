@@ -1,0 +1,1527 @@
+2025-09-19T04:50:20.320Z	Initializing build environment...
+2025-09-19T04:50:20.320Z	Initializing build environment...
+2025-09-19T04:50:36.833Z	Success: Finished initializing build environment
+2025-09-19T04:50:37.685Z	Cloning repository...
+2025-09-19T04:50:38.488Z	Detected the following tools from environment: npm@10.9.2, nodejs@22.16.0
+2025-09-19T04:50:38.491Z	Restoring from dependencies cache
+2025-09-19T04:50:38.492Z	Restoring from build output cache
+2025-09-19T04:50:38.978Z	Installing project dependencies: npm clean-install --progress=false
+2025-09-19T04:50:43.362Z	npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+2025-09-19T04:50:43.377Z	npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+2025-09-19T04:50:49.504Z	
+2025-09-19T04:50:49.504Z	added 538 packages, and audited 539 packages in 10s
+2025-09-19T04:50:49.504Z	
+2025-09-19T04:50:49.504Z	76 packages are looking for funding
+2025-09-19T04:50:49.504Z	  run `npm fund` for details
+2025-09-19T04:50:49.527Z	
+2025-09-19T04:50:49.527Z	10 vulnerabilities (3 low, 7 moderate)
+2025-09-19T04:50:49.527Z	
+2025-09-19T04:50:49.528Z	To address issues that do not require attention, run:
+2025-09-19T04:50:49.528Z	  npm audit fix
+2025-09-19T04:50:49.528Z	
+2025-09-19T04:50:49.528Z	To address all issues (including breaking changes), run:
+2025-09-19T04:50:49.528Z	  npm audit fix --force
+2025-09-19T04:50:49.528Z	
+2025-09-19T04:50:49.528Z	Run `npm audit` for details.
+2025-09-19T04:50:49.604Z	Executing user build command: npm run build
+2025-09-19T04:50:49.822Z	
+2025-09-19T04:50:49.823Z	> rest-express@1.0.0 build
+2025-09-19T04:50:49.823Z	> vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-09-19T04:50:49.823Z	
+2025-09-19T04:50:50.032Z	vite v5.4.19 building for production...
+2025-09-19T04:50:50.081Z	transforming...
+2025-09-19T04:50:50.311Z	Browserslist: browsers data (caniuse-lite) is 11 months old. Please run:
+2025-09-19T04:50:50.311Z	  npx update-browserslist-db@latest
+2025-09-19T04:50:50.311Z	  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+2025-09-19T04:50:53.071Z	✓ 1669 modules transformed.
+2025-09-19T04:50:53.271Z	rendering chunks...
+2025-09-19T04:50:53.281Z	computing gzip size...
+2025-09-19T04:50:57.443Z	../dist/public/index.html                   0.63 kB │ gzip:  0.38 kB
+2025-09-19T04:50:57.444Z	../dist/public/assets/index-D-n5eW-1.css   65.45 kB │ gzip: 11.62 kB
+2025-09-19T04:50:57.444Z	../dist/public/assets/index-cqaxr1iG.js   302.45 kB │ gzip: 97.00 kB
+2025-09-19T04:50:57.444Z	✓ built in 7.38s
+2025-09-19T04:50:57.508Z	
+2025-09-19T04:50:57.509Z	  dist/index.js  25.3kb
+2025-09-19T04:50:57.509Z	
+2025-09-19T04:50:57.509Z	⚡ Done in 10ms
+2025-09-19T04:50:57.527Z	Success: Build command completed
+2025-09-19T04:50:57.528Z	Executing user deploy command: npx wrangler deploy
+2025-09-19T04:50:59.218Z	
+2025-09-19T04:50:59.218Z	 ⛅️ wrangler 4.26.1 (update available 4.38.0)
+2025-09-19T04:50:59.219Z	─────────────────────────────────────────────
+2025-09-19T04:50:59.270Z	▲ [WARNING] Multiple environments are defined in the Wrangler configuration file, but no target environment was specified for the deploy command.
+2025-09-19T04:50:59.270Z	
+2025-09-19T04:50:59.270Z	  To avoid unintentional changes to the wrong environment, it is recommended to explicitly specify the target environment using the `-e|--env` flag.
+2025-09-19T04:50:59.270Z	  If your intention is to use the top-level environment of your configuration simply pass an empty string to the flag to target such environment. For example `--env=""`.
+2025-09-19T04:50:59.270Z	
+2025-09-19T04:50:59.270Z	
+2025-09-19T04:50:59.270Z	[custom build] Running: npm run build
+2025-09-19T04:50:59.396Z	[custom build] 
+2025-09-19T04:50:59.396Z	[custom build] > rest-express@1.0.0 build
+2025-09-19T04:50:59.397Z	[custom build] > vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-09-19T04:50:59.397Z	[custom build] 
+2025-09-19T04:50:59.397Z	[custom build] 
+2025-09-19T04:50:59.566Z	[custom build] vite v5.4.19 building for production...
+2025-09-19T04:50:59.567Z	[custom build] 
+2025-09-19T04:50:59.618Z	[custom build] transforming...
+2025-09-19T04:50:59.620Z	[custom build] 
+2025-09-19T04:50:59.872Z	[custom build] Browserslist: browsers data (caniuse-lite) is 11 months old. Please run:
+2025-09-19T04:50:59.873Z	[custom build]   npx update-browserslist-db@latest
+2025-09-19T04:50:59.873Z	[custom build]   Why you should do it regularly: https://github.com/browserslist/update-db#readme
+2025-09-19T04:50:59.873Z	[custom build] 
+2025-09-19T04:51:02.581Z	[custom build] ✓ 1669 modules transformed.
+2025-09-19T04:51:02.581Z	[custom build] 
+2025-09-19T04:51:02.892Z	[custom build] rendering chunks...
+2025-09-19T04:51:02.892Z	[custom build] 
+2025-09-19T04:51:02.895Z	[custom build] computing gzip size...
+2025-09-19T04:51:02.895Z	[custom build] 
+2025-09-19T04:51:02.906Z	[custom build] ../dist/public/index.html                   0.63 kB │ gzip:  0.38 kB
+2025-09-19T04:51:02.906Z	[custom build] 
+2025-09-19T04:51:02.907Z	[custom build] ../dist/public/assets/index-D-n5eW-1.css   65.45 kB │ gzip: 11.62 kB
+2025-09-19T04:51:02.907Z	[custom build] ../dist/public/assets/index-cqaxr1iG.js   302.45 kB │ gzip: 97.00 kB
+2025-09-19T04:51:02.907Z	[custom build] 
+2025-09-19T04:51:02.910Z	[custom build] ✓ built in 3.31s
+2025-09-19T04:51:02.910Z	[custom build] 
+2025-09-19T04:51:02.950Z	[custom build] 
+2025-09-19T04:51:02.950Z	[custom build]   dist/index.js  25.3kb
+2025-09-19T04:51:02.951Z	[custom build] 
+2025-09-19T04:51:02.951Z	[custom build] ⚡ Done in 4ms
+2025-09-19T04:51:02.951Z	[custom build] 
+2025-09-19T04:51:08.712Z	▲ [WARNING] The glob pattern require("../lightningcss.*.node") did not match any files [empty-glob]
+2025-09-19T04:51:08.712Z	
+2025-09-19T04:51:08.712Z	    node_modules/lightningcss/node/index.js:22:29:
+2025-09-19T04:51:08.712Z	      22 │ ...dule.exports = require(`../lightningcss.${parts.join('-')}.node`);
+2025-09-19T04:51:08.713Z	         ╵                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2025-09-19T04:51:08.713Z	
+2025-09-19T04:51:08.713Z	
+2025-09-19T04:51:08.713Z	
+2025-09-19T04:51:08.738Z	✘ [ERROR] Build failed with 129 errors:
+2025-09-19T04:51:08.738Z	
+2025-09-19T04:51:08.739Z	  ✘ [ERROR] Could not resolve "crypto"
+2025-09-19T04:51:08.740Z	  
+2025-09-19T04:51:08.740Z	      dist/index.js:27:27:
+2025-09-19T04:51:08.740Z	        27 │ import { randomUUID } from "crypto";
+2025-09-19T04:51:08.740Z	           ╵                            ~~~~~~~~
+2025-09-19T04:51:08.740Z	  
+2025-09-19T04:51:08.740Z	    The package "crypto" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.740Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.740Z	    
+2025-09-19T04:51:08.740Z	  
+2025-09-19T04:51:08.740Z	  
+2025-09-19T04:51:08.740Z	  ✘ [ERROR] Could not resolve "http"
+2025-09-19T04:51:08.741Z	  
+2025-09-19T04:51:08.741Z	      dist/index.js:141:29:
+2025-09-19T04:51:08.741Z	        141 │ import { createServer } from "http";
+2025-09-19T04:51:08.741Z	            ╵                              ~~~~~~
+2025-09-19T04:51:08.741Z	  
+2025-09-19T04:51:08.741Z	    The package "http" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.741Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.741Z	    
+2025-09-19T04:51:08.741Z	  
+2025-09-19T04:51:08.741Z	  
+2025-09-19T04:51:08.742Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.742Z	  
+2025-09-19T04:51:08.742Z	      dist/index.js:587:15:
+2025-09-19T04:51:08.742Z	        587 │ import fs from "fs";
+2025-09-19T04:51:08.742Z	            ╵                ~~~~
+2025-09-19T04:51:08.742Z	  
+2025-09-19T04:51:08.742Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.742Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.742Z	    
+2025-09-19T04:51:08.742Z	  
+2025-09-19T04:51:08.742Z	  
+2025-09-19T04:51:08.742Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.742Z	  
+2025-09-19T04:51:08.742Z	      dist/index.js:588:18:
+2025-09-19T04:51:08.742Z	        588 │ import path2 from "path";
+2025-09-19T04:51:08.742Z	            ╵                   ~~~~~~
+2025-09-19T04:51:08.742Z	  
+2025-09-19T04:51:08.742Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.742Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.742Z	    
+2025-09-19T04:51:08.742Z	  
+2025-09-19T04:51:08.742Z	  
+2025-09-19T04:51:08.742Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.742Z	  
+2025-09-19T04:51:08.742Z	      node_modules/@babel/core/lib/config/config-chain.js:10:23:
+2025-09-19T04:51:08.742Z	        10 │   const data = require("path");
+2025-09-19T04:51:08.742Z	           ╵                        ~~~~~~
+2025-09-19T04:51:08.743Z	  
+2025-09-19T04:51:08.743Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.743Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.743Z	    
+2025-09-19T04:51:08.743Z	  
+2025-09-19T04:51:08.743Z	  
+2025-09-19T04:51:08.743Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.743Z	  
+2025-09-19T04:51:08.743Z	      node_modules/@babel/core/lib/config/item.js:10:23:
+2025-09-19T04:51:08.743Z	        10 │   const data = require("path");
+2025-09-19T04:51:08.743Z	           ╵                        ~~~~~~
+2025-09-19T04:51:08.743Z	  
+2025-09-19T04:51:08.743Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.743Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.743Z	    
+2025-09-19T04:51:08.743Z	  
+2025-09-19T04:51:08.743Z	  
+2025-09-19T04:51:08.743Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.743Z	  
+2025-09-19T04:51:08.744Z	      node_modules/@babel/core/lib/config/partial.js:9:23:
+2025-09-19T04:51:08.744Z	        9 │   const data = require("path");
+2025-09-19T04:51:08.744Z	          ╵                        ~~~~~~
+2025-09-19T04:51:08.744Z	  
+2025-09-19T04:51:08.744Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.744Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.744Z	    
+2025-09-19T04:51:08.744Z	  
+2025-09-19T04:51:08.744Z	  
+2025-09-19T04:51:08.744Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.744Z	  
+2025-09-19T04:51:08.744Z	      node_modules/@babel/core/lib/config/pattern-to-regex.js:8:23:
+2025-09-19T04:51:08.744Z	        8 │   const data = require("path");
+2025-09-19T04:51:08.744Z	          ╵                        ~~~~~~
+2025-09-19T04:51:08.744Z	  
+2025-09-19T04:51:08.745Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.747Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.747Z	    
+2025-09-19T04:51:08.747Z	  
+2025-09-19T04:51:08.747Z	  
+2025-09-19T04:51:08.747Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.747Z	  
+2025-09-19T04:51:08.747Z	      node_modules/@babel/core/lib/transformation/normalize-file.js:8:23:
+2025-09-19T04:51:08.747Z	        8 │   const data = require("fs");
+2025-09-19T04:51:08.747Z	          ╵                        ~~~~
+2025-09-19T04:51:08.747Z	  
+2025-09-19T04:51:08.748Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.748Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.748Z	    
+2025-09-19T04:51:08.748Z	  
+2025-09-19T04:51:08.748Z	  
+2025-09-19T04:51:08.748Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.748Z	  
+2025-09-19T04:51:08.748Z	      node_modules/@babel/core/lib/transformation/normalize-file.js:15:23:
+2025-09-19T04:51:08.748Z	        15 │   const data = require("path");
+2025-09-19T04:51:08.748Z	           ╵                        ~~~~~~
+2025-09-19T04:51:08.748Z	  
+2025-09-19T04:51:08.748Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.748Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.748Z	    
+2025-09-19T04:51:08.748Z	  
+2025-09-19T04:51:08.748Z	  
+2025-09-19T04:51:08.748Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.748Z	  
+2025-09-19T04:51:08.748Z	      node_modules/@babel/core/lib/transformation/normalize-opts.js:8:23:
+2025-09-19T04:51:08.748Z	        8 │   const data = require("path");
+2025-09-19T04:51:08.749Z	          ╵                        ~~~~~~
+2025-09-19T04:51:08.749Z	  
+2025-09-19T04:51:08.749Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.749Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.749Z	    
+2025-09-19T04:51:08.749Z	  
+2025-09-19T04:51:08.749Z	  
+2025-09-19T04:51:08.749Z	  ✘ [ERROR] Could not resolve "assert"
+2025-09-19T04:51:08.749Z	  
+2025-09-19T04:51:08.749Z	      node_modules/@babel/helper-module-imports/lib/import-builder.js:7:22:
+2025-09-19T04:51:08.749Z	        7 │ var _assert = require("assert");
+2025-09-19T04:51:08.749Z	          ╵                       ~~~~~~~~
+2025-09-19T04:51:08.749Z	  
+2025-09-19T04:51:08.749Z	    The package "assert" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.749Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.749Z	    
+2025-09-19T04:51:08.749Z	  
+2025-09-19T04:51:08.749Z	  
+2025-09-19T04:51:08.749Z	  ✘ [ERROR] Could not resolve "assert"
+2025-09-19T04:51:08.749Z	  
+2025-09-19T04:51:08.749Z	      node_modules/@babel/helper-module-imports/lib/import-injector.js:7:22:
+2025-09-19T04:51:08.749Z	        7 │ var _assert = require("assert");
+2025-09-19T04:51:08.749Z	          ╵                       ~~~~~~~~
+2025-09-19T04:51:08.749Z	  
+2025-09-19T04:51:08.749Z	    The package "assert" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.749Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.749Z	    
+2025-09-19T04:51:08.749Z	  
+2025-09-19T04:51:08.749Z	  
+2025-09-19T04:51:08.749Z	  ✘ [ERROR] Could not resolve "assert"
+2025-09-19T04:51:08.750Z	  
+2025-09-19T04:51:08.750Z	      node_modules/@babel/helper-module-transforms/lib/index.js:46:22:
+2025-09-19T04:51:08.750Z	        46 │ var _assert = require("assert");
+2025-09-19T04:51:08.750Z	           ╵                       ~~~~~~~~
+2025-09-19T04:51:08.750Z	  
+2025-09-19T04:51:08.750Z	    The package "assert" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.750Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.750Z	    
+2025-09-19T04:51:08.750Z	  
+2025-09-19T04:51:08.750Z	  
+2025-09-19T04:51:08.750Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.750Z	  
+2025-09-19T04:51:08.750Z	      node_modules/@babel/helper-module-transforms/lib/normalize-and-load-metadata.js:10:20:
+2025-09-19T04:51:08.750Z	        10 │ var _path = require("path");
+2025-09-19T04:51:08.750Z	           ╵                     ~~~~~~
+2025-09-19T04:51:08.750Z	  
+2025-09-19T04:51:08.750Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.750Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.750Z	    
+2025-09-19T04:51:08.750Z	  
+2025-09-19T04:51:08.750Z	  
+2025-09-19T04:51:08.750Z	  ✘ [ERROR] Could not resolve "fs/promises"
+2025-09-19T04:51:08.750Z	  
+2025-09-19T04:51:08.751Z	      node_modules/@replit/vite-plugin-cartographer/dist/index.mjs:2:15:
+2025-09-19T04:51:08.756Z	        2 │ import fs from "fs/promises";
+2025-09-19T04:51:08.756Z	          ╵                ~~~~~~~~~~~~~
+2025-09-19T04:51:08.756Z	  
+2025-09-19T04:51:08.756Z	    The package "fs/promises" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.756Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.756Z	    
+2025-09-19T04:51:08.756Z	  
+2025-09-19T04:51:08.756Z	  
+2025-09-19T04:51:08.756Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.756Z	  
+2025-09-19T04:51:08.756Z	      node_modules/@replit/vite-plugin-cartographer/dist/index.mjs:3:17:
+2025-09-19T04:51:08.756Z	        3 │ import path from "path";
+2025-09-19T04:51:08.756Z	          ╵                  ~~~~~~
+2025-09-19T04:51:08.756Z	  
+2025-09-19T04:51:08.756Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.756Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.756Z	    
+2025-09-19T04:51:08.756Z	  
+2025-09-19T04:51:08.756Z	  
+2025-09-19T04:51:08.756Z	  ✘ [ERROR] Could not resolve "url"
+2025-09-19T04:51:08.756Z	  
+2025-09-19T04:51:08.756Z	      node_modules/@replit/vite-plugin-cartographer/dist/index.mjs:4:30:
+2025-09-19T04:51:08.756Z	        4 │ import { fileURLToPath } from "url";
+2025-09-19T04:51:08.757Z	          ╵                               ~~~~~
+2025-09-19T04:51:08.757Z	  
+2025-09-19T04:51:08.757Z	    The package "url" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.757Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.757Z	    
+2025-09-19T04:51:08.757Z	  
+2025-09-19T04:51:08.757Z	  
+2025-09-19T04:51:08.757Z	  ✘ [ERROR] Could not resolve "zlib"
+2025-09-19T04:51:08.757Z	  
+2025-09-19T04:51:08.757Z	      node_modules/body-parser/lib/read.js:20:19:
+2025-09-19T04:51:08.757Z	        20 │ var zlib = require('zlib')
+2025-09-19T04:51:08.757Z	           ╵                    ~~~~~~
+2025-09-19T04:51:08.757Z	  
+2025-09-19T04:51:08.757Z	    The package "zlib" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.757Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.757Z	    
+2025-09-19T04:51:08.757Z	  
+2025-09-19T04:51:08.757Z	  
+2025-09-19T04:51:08.757Z	  ✘ [ERROR] Could not resolve "querystring"
+2025-09-19T04:51:08.757Z	  
+2025-09-19T04:51:08.757Z	      node_modules/body-parser/lib/types/urlencoded.js:251:20:
+2025-09-19T04:51:08.757Z	        251 │       mod = require('querystring')
+2025-09-19T04:51:08.757Z	            ╵                     ~~~~~~~~~~~~~
+2025-09-19T04:51:08.757Z	  
+2025-09-19T04:51:08.757Z	    The package "querystring" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.757Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.757Z	    
+2025-09-19T04:51:08.758Z	  
+2025-09-19T04:51:08.758Z	  
+2025-09-19T04:51:08.758Z	  ✘ [ERROR] Could not resolve "stream"
+2025-09-19T04:51:08.758Z	  
+2025-09-19T04:51:08.758Z	      node_modules/busboy/lib/types/multipart.js:3:39:
+2025-09-19T04:51:08.758Z	        3 │ const { Readable, Writable } = require('stream');
+2025-09-19T04:51:08.758Z	          ╵                                        ~~~~~~~~
+2025-09-19T04:51:08.758Z	  
+2025-09-19T04:51:08.758Z	    The package "stream" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.758Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.758Z	    
+2025-09-19T04:51:08.758Z	  
+2025-09-19T04:51:08.758Z	  
+2025-09-19T04:51:08.758Z	  ✘ [ERROR] Could not resolve "stream"
+2025-09-19T04:51:08.758Z	  
+2025-09-19T04:51:08.758Z	      node_modules/busboy/lib/types/urlencoded.js:3:29:
+2025-09-19T04:51:08.758Z	        3 │ const { Writable } = require('stream');
+2025-09-19T04:51:08.758Z	          ╵                              ~~~~~~~~
+2025-09-19T04:51:08.758Z	  
+2025-09-19T04:51:08.758Z	    The package "stream" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.758Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.758Z	    
+2025-09-19T04:51:08.758Z	  
+2025-09-19T04:51:08.758Z	  
+2025-09-19T04:51:08.758Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.758Z	  
+2025-09-19T04:51:08.758Z	      node_modules/content-disposition/index.js:22:23:
+2025-09-19T04:51:08.758Z	        22 │ var basename = require('path').basename
+2025-09-19T04:51:08.759Z	           ╵                        ~~~~~~
+2025-09-19T04:51:08.759Z	  
+2025-09-19T04:51:08.759Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.759Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.759Z	    
+2025-09-19T04:51:08.759Z	  
+2025-09-19T04:51:08.759Z	  
+2025-09-19T04:51:08.759Z	  ✘ [ERROR] Could not resolve "crypto"
+2025-09-19T04:51:08.759Z	  
+2025-09-19T04:51:08.759Z	      node_modules/cookie-signature/index.js:5:21:
+2025-09-19T04:51:08.759Z	        5 │ var crypto = require('crypto');
+2025-09-19T04:51:08.759Z	          ╵                      ~~~~~~~~
+2025-09-19T04:51:08.759Z	  
+2025-09-19T04:51:08.759Z	    The package "crypto" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.759Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.759Z	    
+2025-09-19T04:51:08.759Z	  
+2025-09-19T04:51:08.759Z	  
+2025-09-19T04:51:08.759Z	  ✘ [ERROR] Could not resolve "events"
+2025-09-19T04:51:08.759Z	  
+2025-09-19T04:51:08.759Z	      node_modules/destroy/index.js:15:27:
+2025-09-19T04:51:08.759Z	        15 │ var EventEmitter = require('events').EventEmitter
+2025-09-19T04:51:08.759Z	           ╵                            ~~~~~~~~
+2025-09-19T04:51:08.759Z	  
+2025-09-19T04:51:08.759Z	    The package "events" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.760Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.760Z	    
+2025-09-19T04:51:08.760Z	  
+2025-09-19T04:51:08.760Z	  
+2025-09-19T04:51:08.760Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.760Z	  
+2025-09-19T04:51:08.760Z	      node_modules/destroy/index.js:16:25:
+2025-09-19T04:51:08.760Z	        16 │ var ReadStream = require('fs').ReadStream
+2025-09-19T04:51:08.760Z	           ╵                          ~~~~
+2025-09-19T04:51:08.760Z	  
+2025-09-19T04:51:08.760Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.760Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.760Z	    
+2025-09-19T04:51:08.760Z	  
+2025-09-19T04:51:08.760Z	  
+2025-09-19T04:51:08.760Z	  ✘ [ERROR] Could not resolve "stream"
+2025-09-19T04:51:08.760Z	  
+2025-09-19T04:51:08.761Z	      node_modules/destroy/index.js:17:21:
+2025-09-19T04:51:08.761Z	        17 │ var Stream = require('stream')
+2025-09-19T04:51:08.761Z	           ╵                      ~~~~~~~~
+2025-09-19T04:51:08.761Z	  
+2025-09-19T04:51:08.761Z	    The package "stream" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.761Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.761Z	    
+2025-09-19T04:51:08.761Z	  
+2025-09-19T04:51:08.761Z	  
+2025-09-19T04:51:08.761Z	  ✘ [ERROR] Could not resolve "zlib"
+2025-09-19T04:51:08.761Z	  
+2025-09-19T04:51:08.761Z	      node_modules/destroy/index.js:18:19:
+2025-09-19T04:51:08.761Z	        18 │ var Zlib = require('zlib')
+2025-09-19T04:51:08.761Z	           ╵                    ~~~~~~
+2025-09-19T04:51:08.761Z	  
+2025-09-19T04:51:08.762Z	    The package "zlib" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.762Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.762Z	    
+2025-09-19T04:51:08.762Z	  
+2025-09-19T04:51:08.762Z	  
+2025-09-19T04:51:08.762Z	  ✘ [ERROR] Could not resolve "child_process"
+2025-09-19T04:51:08.762Z	  
+2025-09-19T04:51:08.762Z	      node_modules/detect-libc/lib/detect-libc.js:6:29:
+2025-09-19T04:51:08.763Z	        6 │ const childProcess = require('child_process');
+2025-09-19T04:51:08.763Z	          ╵                              ~~~~~~~~~~~~~~~
+2025-09-19T04:51:08.763Z	  
+2025-09-19T04:51:08.763Z	    The package "child_process" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.763Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.763Z	    
+2025-09-19T04:51:08.763Z	  
+2025-09-19T04:51:08.763Z	  
+2025-09-19T04:51:08.763Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.763Z	  
+2025-09-19T04:51:08.763Z	      node_modules/detect-libc/lib/filesystem.js:6:19:
+2025-09-19T04:51:08.763Z	        6 │ const fs = require('fs');
+2025-09-19T04:51:08.764Z	          ╵                    ~~~~
+2025-09-19T04:51:08.764Z	  
+2025-09-19T04:51:08.764Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.764Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.764Z	    
+2025-09-19T04:51:08.764Z	  
+2025-09-19T04:51:08.764Z	  
+2025-09-19T04:51:08.764Z	  ✘ [ERROR] Could not resolve "crypto"
+2025-09-19T04:51:08.764Z	  
+2025-09-19T04:51:08.764Z	      node_modules/etag/index.js:21:21:
+2025-09-19T04:51:08.764Z	        21 │ var crypto = require('crypto')
+2025-09-19T04:51:08.764Z	           ╵                      ~~~~~~~~
+2025-09-19T04:51:08.764Z	  
+2025-09-19T04:51:08.764Z	    The package "crypto" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.764Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.764Z	    
+2025-09-19T04:51:08.764Z	  
+2025-09-19T04:51:08.764Z	  
+2025-09-19T04:51:08.764Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.764Z	  
+2025-09-19T04:51:08.765Z	      node_modules/etag/index.js:22:20:
+2025-09-19T04:51:08.765Z	        22 │ var Stats = require('fs').Stats
+2025-09-19T04:51:08.765Z	           ╵                     ~~~~
+2025-09-19T04:51:08.765Z	  
+2025-09-19T04:51:08.765Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.765Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.765Z	    
+2025-09-19T04:51:08.765Z	  
+2025-09-19T04:51:08.770Z	  
+2025-09-19T04:51:08.770Z	  ✘ [ERROR] Could not resolve "http"
+2025-09-19T04:51:08.770Z	  
+2025-09-19T04:51:08.770Z	      node_modules/express/lib/application.js:23:19:
+2025-09-19T04:51:08.770Z	        23 │ var http = require('http');
+2025-09-19T04:51:08.770Z	           ╵                    ~~~~~~
+2025-09-19T04:51:08.770Z	  
+2025-09-19T04:51:08.770Z	    The package "http" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.770Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.770Z	    
+2025-09-19T04:51:08.770Z	  
+2025-09-19T04:51:08.770Z	  
+2025-09-19T04:51:08.770Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.770Z	  
+2025-09-19T04:51:08.770Z	      node_modules/express/lib/application.js:30:22:
+2025-09-19T04:51:08.770Z	        30 │ var resolve = require('path').resolve;
+2025-09-19T04:51:08.770Z	           ╵                       ~~~~~~
+2025-09-19T04:51:08.770Z	  
+2025-09-19T04:51:08.770Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.770Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.770Z	    
+2025-09-19T04:51:08.770Z	  
+2025-09-19T04:51:08.770Z	  
+2025-09-19T04:51:08.770Z	  ✘ [ERROR] Could not resolve "events"
+2025-09-19T04:51:08.770Z	  
+2025-09-19T04:51:08.770Z	      node_modules/express/lib/express.js:16:27:
+2025-09-19T04:51:08.770Z	        16 │ var EventEmitter = require('events').EventEmitter;
+2025-09-19T04:51:08.770Z	           ╵                            ~~~~~~~~
+2025-09-19T04:51:08.771Z	  
+2025-09-19T04:51:08.771Z	    The package "events" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.771Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.771Z	    
+2025-09-19T04:51:08.771Z	  
+2025-09-19T04:51:08.771Z	  
+2025-09-19T04:51:08.771Z	  ✘ [ERROR] Could not resolve "net"
+2025-09-19T04:51:08.771Z	  
+2025-09-19T04:51:08.771Z	      node_modules/express/lib/request.js:18:19:
+2025-09-19T04:51:08.771Z	        18 │ var isIP = require('net').isIP;
+2025-09-19T04:51:08.771Z	           ╵                    ~~~~~
+2025-09-19T04:51:08.771Z	  
+2025-09-19T04:51:08.771Z	    The package "net" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.771Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.771Z	    
+2025-09-19T04:51:08.771Z	  
+2025-09-19T04:51:08.771Z	  
+2025-09-19T04:51:08.771Z	  ✘ [ERROR] Could not resolve "http"
+2025-09-19T04:51:08.771Z	  
+2025-09-19T04:51:08.771Z	      node_modules/express/lib/request.js:20:19:
+2025-09-19T04:51:08.771Z	        20 │ var http = require('http');
+2025-09-19T04:51:08.771Z	           ╵                    ~~~~~~
+2025-09-19T04:51:08.771Z	  
+2025-09-19T04:51:08.771Z	    The package "http" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.771Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.771Z	    
+2025-09-19T04:51:08.771Z	  
+2025-09-19T04:51:08.771Z	  
+2025-09-19T04:51:08.771Z	  ✘ [ERROR] Could not resolve "http"
+2025-09-19T04:51:08.771Z	  
+2025-09-19T04:51:08.771Z	      node_modules/express/lib/response.js:21:19:
+2025-09-19T04:51:08.771Z	        21 │ var http = require('http');
+2025-09-19T04:51:08.772Z	           ╵                    ~~~~~~
+2025-09-19T04:51:08.772Z	  
+2025-09-19T04:51:08.772Z	    The package "http" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.772Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.772Z	    
+2025-09-19T04:51:08.772Z	  
+2025-09-19T04:51:08.772Z	  
+2025-09-19T04:51:08.772Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.772Z	  
+2025-09-19T04:51:08.772Z	      node_modules/express/lib/response.js:24:19:
+2025-09-19T04:51:08.772Z	        24 │ var path = require('path');
+2025-09-19T04:51:08.772Z	           ╵                    ~~~~~~
+2025-09-19T04:51:08.772Z	  
+2025-09-19T04:51:08.772Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.772Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.772Z	    
+2025-09-19T04:51:08.772Z	  
+2025-09-19T04:51:08.772Z	  
+2025-09-19T04:51:08.772Z	  ✘ [ERROR] Could not resolve "querystring"
+2025-09-19T04:51:08.772Z	  
+2025-09-19T04:51:08.772Z	      node_modules/express/lib/utils.js:24:26:
+2025-09-19T04:51:08.772Z	        24 │ var querystring = require('querystring');
+2025-09-19T04:51:08.772Z	           ╵                           ~~~~~~~~~~~~~
+2025-09-19T04:51:08.772Z	  
+2025-09-19T04:51:08.772Z	    The package "querystring" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.772Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.772Z	    
+2025-09-19T04:51:08.772Z	  
+2025-09-19T04:51:08.772Z	  
+2025-09-19T04:51:08.772Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.772Z	  
+2025-09-19T04:51:08.772Z	      node_modules/express/lib/view.js:17:19:
+2025-09-19T04:51:08.772Z	        17 │ var path = require('path');
+2025-09-19T04:51:08.772Z	           ╵                    ~~~~~~
+2025-09-19T04:51:08.772Z	  
+2025-09-19T04:51:08.772Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.772Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.772Z	    
+2025-09-19T04:51:08.772Z	  
+2025-09-19T04:51:08.772Z	  
+2025-09-19T04:51:08.773Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.773Z	  
+2025-09-19T04:51:08.773Z	      node_modules/express/lib/view.js:18:17:
+2025-09-19T04:51:08.773Z	        18 │ var fs = require('fs');
+2025-09-19T04:51:08.773Z	           ╵                  ~~~~
+2025-09-19T04:51:08.773Z	  
+2025-09-19T04:51:08.773Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.773Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.773Z	    
+2025-09-19T04:51:08.773Z	  
+2025-09-19T04:51:08.773Z	  
+2025-09-19T04:51:08.773Z	  ✘ [ERROR] Could not resolve "../pkg"
+2025-09-19T04:51:08.773Z	  
+2025-09-19T04:51:08.773Z	      node_modules/lightningcss/node/index.js:17:27:
+2025-09-19T04:51:08.773Z	        17 │   module.exports = require(`../pkg`);
+2025-09-19T04:51:08.773Z	           ╵                            ~~~~~~~~
+2025-09-19T04:51:08.773Z	  
+2025-09-19T04:51:08.773Z	  
+2025-09-19T04:51:08.773Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.773Z	  
+2025-09-19T04:51:08.773Z	      node_modules/mime-types/index.js:16:22:
+2025-09-19T04:51:08.773Z	        16 │ var extname = require('path').extname
+2025-09-19T04:51:08.773Z	           ╵                       ~~~~~~
+2025-09-19T04:51:08.773Z	  
+2025-09-19T04:51:08.773Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.773Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.773Z	    
+2025-09-19T04:51:08.773Z	  
+2025-09-19T04:51:08.773Z	  
+2025-09-19T04:51:08.774Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.774Z	  
+2025-09-19T04:51:08.774Z	      node_modules/mime/mime.js:1:19:
+2025-09-19T04:51:08.774Z	        1 │ var path = require('path');
+2025-09-19T04:51:08.774Z	          ╵                    ~~~~~~
+2025-09-19T04:51:08.774Z	  
+2025-09-19T04:51:08.774Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.774Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.774Z	    
+2025-09-19T04:51:08.774Z	  
+2025-09-19T04:51:08.774Z	  
+2025-09-19T04:51:08.774Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.774Z	  
+2025-09-19T04:51:08.774Z	      node_modules/mime/mime.js:2:17:
+2025-09-19T04:51:08.774Z	        2 │ var fs = require('fs');
+2025-09-19T04:51:08.774Z	          ╵                  ~~~~
+2025-09-19T04:51:08.774Z	  
+2025-09-19T04:51:08.774Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.774Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.774Z	    
+2025-09-19T04:51:08.774Z	  
+2025-09-19T04:51:08.774Z	  
+2025-09-19T04:51:08.774Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.774Z	  
+2025-09-19T04:51:08.774Z	      node_modules/mkdirp/index.js:1:19:
+2025-09-19T04:51:08.774Z	        1 │ var path = require('path');
+2025-09-19T04:51:08.774Z	          ╵                    ~~~~~~
+2025-09-19T04:51:08.774Z	  
+2025-09-19T04:51:08.774Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.774Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.774Z	    
+2025-09-19T04:51:08.774Z	  
+2025-09-19T04:51:08.775Z	  
+2025-09-19T04:51:08.775Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.775Z	  
+2025-09-19T04:51:08.775Z	      node_modules/mkdirp/index.js:2:17:
+2025-09-19T04:51:08.775Z	        2 │ var fs = require('fs');
+2025-09-19T04:51:08.775Z	          ╵                  ~~~~
+2025-09-19T04:51:08.775Z	  
+2025-09-19T04:51:08.775Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.775Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.775Z	    
+2025-09-19T04:51:08.775Z	  
+2025-09-19T04:51:08.775Z	  
+2025-09-19T04:51:08.775Z	  ✘ [ERROR] Could not resolve "events"
+2025-09-19T04:51:08.775Z	  
+2025-09-19T04:51:08.775Z	      node_modules/multer/lib/counter.js:1:27:
+2025-09-19T04:51:08.775Z	        1 │ var EventEmitter = require('events').EventEmitter
+2025-09-19T04:51:08.775Z	          ╵                            ~~~~~~~~
+2025-09-19T04:51:08.775Z	  
+2025-09-19T04:51:08.775Z	    The package "events" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.775Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.775Z	    
+2025-09-19T04:51:08.775Z	  
+2025-09-19T04:51:08.775Z	  
+2025-09-19T04:51:08.775Z	  ✘ [ERROR] Could not resolve "util"
+2025-09-19T04:51:08.775Z	  
+2025-09-19T04:51:08.775Z	      node_modules/multer/lib/multer-error.js:1:19:
+2025-09-19T04:51:08.775Z	        1 │ var util = require('util')
+2025-09-19T04:51:08.775Z	          ╵                    ~~~~~~
+2025-09-19T04:51:08.775Z	  
+2025-09-19T04:51:08.775Z	    The package "util" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.775Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.775Z	    
+2025-09-19T04:51:08.775Z	  
+2025-09-19T04:51:08.775Z	  
+2025-09-19T04:51:08.775Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.776Z	  
+2025-09-19T04:51:08.776Z	      node_modules/multer/storage/disk.js:1:17:
+2025-09-19T04:51:08.776Z	        1 │ var fs = require('fs')
+2025-09-19T04:51:08.776Z	          ╵                  ~~~~
+2025-09-19T04:51:08.776Z	  
+2025-09-19T04:51:08.776Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.776Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.776Z	    
+2025-09-19T04:51:08.776Z	  
+2025-09-19T04:51:08.776Z	  
+2025-09-19T04:51:08.776Z	  ✘ [ERROR] Could not resolve "os"
+2025-09-19T04:51:08.776Z	  
+2025-09-19T04:51:08.776Z	      node_modules/multer/storage/disk.js:2:17:
+2025-09-19T04:51:08.776Z	        2 │ var os = require('os')
+2025-09-19T04:51:08.776Z	          ╵                  ~~~~
+2025-09-19T04:51:08.776Z	  
+2025-09-19T04:51:08.776Z	    The package "os" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.776Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.776Z	    
+2025-09-19T04:51:08.776Z	  
+2025-09-19T04:51:08.776Z	  
+2025-09-19T04:51:08.776Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.776Z	  
+2025-09-19T04:51:08.776Z	      node_modules/multer/storage/disk.js:3:19:
+2025-09-19T04:51:08.776Z	        3 │ var path = require('path')
+2025-09-19T04:51:08.776Z	          ╵                    ~~~~~~
+2025-09-19T04:51:08.776Z	  
+2025-09-19T04:51:08.776Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.776Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.776Z	    
+2025-09-19T04:51:08.776Z	  
+2025-09-19T04:51:08.776Z	  
+2025-09-19T04:51:08.776Z	  ✘ [ERROR] Could not resolve "crypto"
+2025-09-19T04:51:08.776Z	  
+2025-09-19T04:51:08.777Z	      node_modules/multer/storage/disk.js:4:21:
+2025-09-19T04:51:08.777Z	        4 │ var crypto = require('crypto')
+2025-09-19T04:51:08.777Z	          ╵                      ~~~~~~~~
+2025-09-19T04:51:08.777Z	  
+2025-09-19T04:51:08.777Z	    The package "crypto" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.777Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.777Z	    
+2025-09-19T04:51:08.777Z	  
+2025-09-19T04:51:08.777Z	  
+2025-09-19T04:51:08.777Z	  ✘ [ERROR] Could not resolve "url"
+2025-09-19T04:51:08.777Z	  
+2025-09-19T04:51:08.777Z	      node_modules/parseurl/index.js:15:18:
+2025-09-19T04:51:08.777Z	        15 │ var url = require('url')
+2025-09-19T04:51:08.777Z	           ╵                   ~~~~~
+2025-09-19T04:51:08.777Z	  
+2025-09-19T04:51:08.777Z	    The package "url" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.777Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.777Z	    
+2025-09-19T04:51:08.777Z	  
+2025-09-19T04:51:08.777Z	  
+2025-09-19T04:51:08.780Z	  ✘ [ERROR] Could not resolve "events"
+2025-09-19T04:51:08.780Z	  
+2025-09-19T04:51:08.780Z	      node_modules/readable-stream/lib/_stream_readable.js:33:17:
+2025-09-19T04:51:08.780Z	        33 │ var EE = require('events').EventEmitter;
+2025-09-19T04:51:08.780Z	           ╵                  ~~~~~~~~
+2025-09-19T04:51:08.780Z	  
+2025-09-19T04:51:08.780Z	    The package "events" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.780Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.780Z	    
+2025-09-19T04:51:08.780Z	  
+2025-09-19T04:51:08.780Z	  
+2025-09-19T04:51:08.780Z	  ✘ [ERROR] Could not resolve "buffer"
+2025-09-19T04:51:08.780Z	  
+2025-09-19T04:51:08.780Z	      node_modules/readable-stream/lib/_stream_readable.js:43:21:
+2025-09-19T04:51:08.780Z	        43 │ var Buffer = require('buffer').Buffer;
+2025-09-19T04:51:08.780Z	           ╵                      ~~~~~~~~
+2025-09-19T04:51:08.780Z	  
+2025-09-19T04:51:08.780Z	    The package "buffer" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.780Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.780Z	    
+2025-09-19T04:51:08.780Z	  
+2025-09-19T04:51:08.780Z	  
+2025-09-19T04:51:08.780Z	  ✘ [ERROR] Could not resolve "buffer"
+2025-09-19T04:51:08.780Z	  
+2025-09-19T04:51:08.780Z	      node_modules/readable-stream/lib/_stream_writable.js:66:21:
+2025-09-19T04:51:08.780Z	        66 │ var Buffer = require('buffer').Buffer;
+2025-09-19T04:51:08.780Z	           ╵                      ~~~~~~~~
+2025-09-19T04:51:08.780Z	  
+2025-09-19T04:51:08.780Z	    The package "buffer" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.780Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.780Z	    
+2025-09-19T04:51:08.780Z	  
+2025-09-19T04:51:08.781Z	  
+2025-09-19T04:51:08.781Z	  ✘ [ERROR] Could not resolve "buffer"
+2025-09-19T04:51:08.781Z	  
+2025-09-19T04:51:08.781Z	      node_modules/readable-stream/lib/internal/streams/buffer_list.js:11:23:
+2025-09-19T04:51:08.781Z	        11 │ var _require = require('buffer'),
+2025-09-19T04:51:08.781Z	           ╵                        ~~~~~~~~
+2025-09-19T04:51:08.781Z	  
+2025-09-19T04:51:08.781Z	    The package "buffer" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.781Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.781Z	    
+2025-09-19T04:51:08.781Z	  
+2025-09-19T04:51:08.781Z	  
+2025-09-19T04:51:08.781Z	  ✘ [ERROR] Could not resolve "events"
+2025-09-19T04:51:08.781Z	  
+2025-09-19T04:51:08.781Z	      node_modules/readable-stream/lib/internal/streams/stream-browser.js:1:25:
+2025-09-19T04:51:08.781Z	        1 │ module.exports = require('events').EventEmitter;
+2025-09-19T04:51:08.781Z	          ╵                          ~~~~~~~~
+2025-09-19T04:51:08.781Z	  
+2025-09-19T04:51:08.781Z	    The package "events" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.781Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.781Z	    
+2025-09-19T04:51:08.781Z	  
+2025-09-19T04:51:08.781Z	  
+2025-09-19T04:51:08.781Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.781Z	  
+2025-09-19T04:51:08.781Z	      node_modules/rollup/dist/es/rollup.js:14:7:
+2025-09-19T04:51:08.781Z	        14 │ import 'path';
+2025-09-19T04:51:08.781Z	           ╵        ~~~~~~
+2025-09-19T04:51:08.781Z	  
+2025-09-19T04:51:08.781Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.781Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.781Z	    
+2025-09-19T04:51:08.781Z	  
+2025-09-19T04:51:08.781Z	  
+2025-09-19T04:51:08.781Z	  ✘ [ERROR] Could not resolve "tty"
+2025-09-19T04:51:08.781Z	  
+2025-09-19T04:51:08.781Z	      node_modules/rollup/dist/es/rollup.js:18:7:
+2025-09-19T04:51:08.782Z	        18 │ import 'tty';
+2025-09-19T04:51:08.782Z	           ╵        ~~~~~
+2025-09-19T04:51:08.782Z	  
+2025-09-19T04:51:08.782Z	    The package "tty" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.782Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.782Z	    
+2025-09-19T04:51:08.782Z	  
+2025-09-19T04:51:08.782Z	  
+2025-09-19T04:51:08.782Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.782Z	  
+2025-09-19T04:51:08.782Z	      node_modules/rollup/dist/es/shared/node-entry.js:12:50:
+2025-09-19T04:51:08.782Z	        12 │ import { posix, win32, isAbsolute, resolve } from 'path';
+2025-09-19T04:51:08.782Z	           ╵                                                   ~~~~~~
+2025-09-19T04:51:08.782Z	  
+2025-09-19T04:51:08.782Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.782Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.782Z	    
+2025-09-19T04:51:08.782Z	  
+2025-09-19T04:51:08.782Z	  
+2025-09-19T04:51:08.782Z	  ✘ [ERROR] Could not resolve "tty"
+2025-09-19T04:51:08.782Z	  
+2025-09-19T04:51:08.782Z	      node_modules/rollup/dist/es/shared/node-entry.js:17:21:
+2025-09-19T04:51:08.782Z	        17 │ import * as tty from 'tty';
+2025-09-19T04:51:08.782Z	           ╵                      ~~~~~
+2025-09-19T04:51:08.782Z	  
+2025-09-19T04:51:08.782Z	    The package "tty" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.782Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.782Z	    
+2025-09-19T04:51:08.782Z	  
+2025-09-19T04:51:08.783Z	  
+2025-09-19T04:51:08.783Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.783Z	  
+2025-09-19T04:51:08.783Z	      node_modules/rollup/dist/es/shared/watch.js:13:25:
+2025-09-19T04:51:08.783Z	        13 │ import require$$0$1 from 'path';
+2025-09-19T04:51:08.783Z	           ╵                          ~~~~~~
+2025-09-19T04:51:08.783Z	  
+2025-09-19T04:51:08.783Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.783Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.783Z	    
+2025-09-19T04:51:08.783Z	  
+2025-09-19T04:51:08.783Z	  
+2025-09-19T04:51:08.783Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.783Z	  
+2025-09-19T04:51:08.783Z	      node_modules/rollup/dist/es/shared/watch.js:14:25:
+2025-09-19T04:51:08.783Z	        14 │ import require$$0$2 from 'fs';
+2025-09-19T04:51:08.783Z	           ╵                          ~~~~
+2025-09-19T04:51:08.783Z	  
+2025-09-19T04:51:08.783Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.783Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.783Z	    
+2025-09-19T04:51:08.784Z	  
+2025-09-19T04:51:08.784Z	  
+2025-09-19T04:51:08.784Z	  ✘ [ERROR] Could not resolve "util"
+2025-09-19T04:51:08.784Z	  
+2025-09-19T04:51:08.784Z	      node_modules/rollup/dist/es/shared/watch.js:15:23:
+2025-09-19T04:51:08.784Z	        15 │ import require$$2 from 'util';
+2025-09-19T04:51:08.784Z	           ╵                        ~~~~~~
+2025-09-19T04:51:08.784Z	  
+2025-09-19T04:51:08.784Z	    The package "util" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.784Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.784Z	    
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.785Z	  ✘ [ERROR] Could not resolve "stream"
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.785Z	      node_modules/rollup/dist/es/shared/watch.js:16:23:
+2025-09-19T04:51:08.785Z	        16 │ import require$$1 from 'stream';
+2025-09-19T04:51:08.785Z	           ╵                        ~~~~~~~~
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.785Z	    The package "stream" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.785Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.785Z	    
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.785Z	  ✘ [ERROR] Could not resolve "os"
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.785Z	      node_modules/rollup/dist/es/shared/watch.js:17:25:
+2025-09-19T04:51:08.785Z	        17 │ import require$$2$1 from 'os';
+2025-09-19T04:51:08.785Z	           ╵                          ~~~~
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.785Z	    The package "os" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.785Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.785Z	    
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.785Z	  ✘ [ERROR] Could not resolve "events"
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.785Z	      node_modules/rollup/dist/es/shared/watch.js:18:25:
+2025-09-19T04:51:08.785Z	        18 │ import require$$0$3 from 'events';
+2025-09-19T04:51:08.785Z	           ╵                          ~~~~~~~~
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.785Z	    The package "events" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.785Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.785Z	    
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.785Z	  ✘ [ERROR] Could not resolve "tty"
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.785Z	      node_modules/rollup/dist/es/shared/watch.js:24:7:
+2025-09-19T04:51:08.785Z	        24 │ import 'tty';
+2025-09-19T04:51:08.785Z	           ╵        ~~~~~
+2025-09-19T04:51:08.785Z	  
+2025-09-19T04:51:08.786Z	    The package "tty" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.786Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.786Z	    
+2025-09-19T04:51:08.786Z	  
+2025-09-19T04:51:08.786Z	  
+2025-09-19T04:51:08.786Z	  ✘ [ERROR] Could not resolve "buffer"
+2025-09-19T04:51:08.786Z	  
+2025-09-19T04:51:08.786Z	      node_modules/safe-buffer/index.js:3:21:
+2025-09-19T04:51:08.786Z	        3 │ var buffer = require('buffer')
+2025-09-19T04:51:08.786Z	          ╵                      ~~~~~~~~
+2025-09-19T04:51:08.786Z	  
+2025-09-19T04:51:08.786Z	    The package "buffer" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.786Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.786Z	    
+2025-09-19T04:51:08.786Z	  
+2025-09-19T04:51:08.786Z	  
+2025-09-19T04:51:08.786Z	  ✘ [ERROR] Could not resolve "buffer"
+2025-09-19T04:51:08.786Z	  
+2025-09-19T04:51:08.786Z	      node_modules/safer-buffer/safer.js:5:21:
+2025-09-19T04:51:08.786Z	        5 │ var buffer = require('buffer')
+2025-09-19T04:51:08.786Z	          ╵                      ~~~~~~~~
+2025-09-19T04:51:08.786Z	  
+2025-09-19T04:51:08.786Z	    The package "buffer" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.786Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.786Z	    
+2025-09-19T04:51:08.786Z	  
+2025-09-19T04:51:08.786Z	  
+2025-09-19T04:51:08.786Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.787Z	  
+2025-09-19T04:51:08.787Z	      node_modules/send/index.js:23:17:
+2025-09-19T04:51:08.787Z	        23 │ var fs = require('fs')
+2025-09-19T04:51:08.787Z	           ╵                  ~~~~
+2025-09-19T04:51:08.787Z	  
+2025-09-19T04:51:08.787Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.787Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.787Z	    
+2025-09-19T04:51:08.787Z	  
+2025-09-19T04:51:08.787Z	  
+2025-09-19T04:51:08.787Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.787Z	  
+2025-09-19T04:51:08.787Z	      node_modules/send/index.js:28:19:
+2025-09-19T04:51:08.787Z	        28 │ var path = require('path')
+2025-09-19T04:51:08.787Z	           ╵                    ~~~~~~
+2025-09-19T04:51:08.787Z	  
+2025-09-19T04:51:08.787Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.787Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.787Z	    
+2025-09-19T04:51:08.787Z	  
+2025-09-19T04:51:08.787Z	  
+2025-09-19T04:51:08.790Z	  ✘ [ERROR] Could not resolve "stream"
+2025-09-19T04:51:08.790Z	  
+2025-09-19T04:51:08.790Z	      node_modules/send/index.js:30:21:
+2025-09-19T04:51:08.790Z	        30 │ var Stream = require('stream')
+2025-09-19T04:51:08.790Z	           ╵                      ~~~~~~~~
+2025-09-19T04:51:08.790Z	  
+2025-09-19T04:51:08.791Z	    The package "stream" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.791Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.791Z	    
+2025-09-19T04:51:08.791Z	  
+2025-09-19T04:51:08.791Z	  
+2025-09-19T04:51:08.791Z	  ✘ [ERROR] Could not resolve "util"
+2025-09-19T04:51:08.791Z	  
+2025-09-19T04:51:08.791Z	      node_modules/send/index.js:31:19:
+2025-09-19T04:51:08.791Z	        31 │ var util = require('util')
+2025-09-19T04:51:08.792Z	           ╵                    ~~~~~~
+2025-09-19T04:51:08.792Z	  
+2025-09-19T04:51:08.792Z	    The package "util" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.792Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.792Z	    
+2025-09-19T04:51:08.792Z	  
+2025-09-19T04:51:08.792Z	  
+2025-09-19T04:51:08.792Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.792Z	  
+2025-09-19T04:51:08.792Z	      node_modules/serve-static/index.js:19:22:
+2025-09-19T04:51:08.792Z	        19 │ var resolve = require('path').resolve
+2025-09-19T04:51:08.792Z	           ╵                       ~~~~~~
+2025-09-19T04:51:08.793Z	  
+2025-09-19T04:51:08.793Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.793Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.793Z	    
+2025-09-19T04:51:08.793Z	  
+2025-09-19T04:51:08.793Z	  
+2025-09-19T04:51:08.793Z	  ✘ [ERROR] Could not resolve "url"
+2025-09-19T04:51:08.793Z	  
+2025-09-19T04:51:08.793Z	      node_modules/serve-static/index.js:21:18:
+2025-09-19T04:51:08.793Z	        21 │ var url = require('url')
+2025-09-19T04:51:08.794Z	           ╵                   ~~~~~
+2025-09-19T04:51:08.794Z	  
+2025-09-19T04:51:08.794Z	    The package "url" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.794Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.794Z	    
+2025-09-19T04:51:08.794Z	  
+2025-09-19T04:51:08.794Z	  
+2025-09-19T04:51:08.794Z	  ✘ [ERROR] Could not resolve "tty"
+2025-09-19T04:51:08.794Z	  
+2025-09-19T04:51:08.794Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:10:25:
+2025-09-19T04:51:08.794Z	        10 │ import require$$0$3 from 'tty';
+2025-09-19T04:51:08.794Z	           ╵                          ~~~~~
+2025-09-19T04:51:08.795Z	  
+2025-09-19T04:51:08.795Z	    The package "tty" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.795Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.795Z	    
+2025-09-19T04:51:08.795Z	  
+2025-09-19T04:51:08.795Z	  
+2025-09-19T04:51:08.795Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.795Z	  
+2025-09-19T04:51:08.795Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:11:212:
+2025-09-19T04:51:08.796Z	        11 │ ...n as join$1, sep as sep$1, normalize as normalize$1 } from 'path';
+2025-09-19T04:51:08.796Z	           ╵                                                               ~~~~~~
+2025-09-19T04:51:08.796Z	  
+2025-09-19T04:51:08.796Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.796Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.796Z	    
+2025-09-19T04:51:08.796Z	  
+2025-09-19T04:51:08.797Z	  
+2025-09-19T04:51:08.797Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.797Z	  
+2025-09-19T04:51:08.797Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:14:30:
+2025-09-19T04:51:08.797Z	        14 │ import * as require$$0$2 from 'fs';
+2025-09-19T04:51:08.797Z	           ╵                               ~~~~
+2025-09-19T04:51:08.797Z	  
+2025-09-19T04:51:08.797Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.797Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.797Z	    
+2025-09-19T04:51:08.798Z	  
+2025-09-19T04:51:08.800Z	  
+2025-09-19T04:51:08.800Z	  ✘ [ERROR] Could not resolve "util"
+2025-09-19T04:51:08.800Z	  
+2025-09-19T04:51:08.800Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:22:25:
+2025-09-19T04:51:08.800Z	        22 │ import require$$0$5 from 'util';
+2025-09-19T04:51:08.800Z	           ╵                          ~~~~~~
+2025-09-19T04:51:08.800Z	  
+2025-09-19T04:51:08.800Z	    The package "util" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.800Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.800Z	    
+2025-09-19T04:51:08.800Z	  
+2025-09-19T04:51:08.800Z	  
+2025-09-19T04:51:08.800Z	  ✘ [ERROR] Could not resolve "net"
+2025-09-19T04:51:08.800Z	  
+2025-09-19T04:51:08.800Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:23:25:
+2025-09-19T04:51:08.800Z	        23 │ import require$$4$1 from 'net';
+2025-09-19T04:51:08.800Z	           ╵                          ~~~~~
+2025-09-19T04:51:08.801Z	  
+2025-09-19T04:51:08.801Z	    The package "net" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.801Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.801Z	    
+2025-09-19T04:51:08.801Z	  
+2025-09-19T04:51:08.801Z	  
+2025-09-19T04:51:08.801Z	  ✘ [ERROR] Could not resolve "events"
+2025-09-19T04:51:08.801Z	  
+2025-09-19T04:51:08.801Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:24:25:
+2025-09-19T04:51:08.801Z	        24 │ import require$$0$7 from 'events';
+2025-09-19T04:51:08.801Z	           ╵                          ~~~~~~~~
+2025-09-19T04:51:08.801Z	  
+2025-09-19T04:51:08.801Z	    The package "events" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.801Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.801Z	    
+2025-09-19T04:51:08.801Z	  
+2025-09-19T04:51:08.801Z	  
+2025-09-19T04:51:08.801Z	  ✘ [ERROR] Could not resolve "url"
+2025-09-19T04:51:08.801Z	  
+2025-09-19T04:51:08.801Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:25:25:
+2025-09-19T04:51:08.801Z	        25 │ import require$$0$9 from 'url';
+2025-09-19T04:51:08.801Z	           ╵                          ~~~~~
+2025-09-19T04:51:08.801Z	  
+2025-09-19T04:51:08.801Z	    The package "url" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.801Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.801Z	    
+2025-09-19T04:51:08.801Z	  
+2025-09-19T04:51:08.801Z	  
+2025-09-19T04:51:08.801Z	  ✘ [ERROR] Could not resolve "http"
+2025-09-19T04:51:08.801Z	  
+2025-09-19T04:51:08.801Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:26:23:
+2025-09-19T04:51:08.801Z	        26 │ import require$$1 from 'http';
+2025-09-19T04:51:08.801Z	           ╵                        ~~~~~~
+2025-09-19T04:51:08.801Z	  
+2025-09-19T04:51:08.801Z	    The package "http" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.801Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.801Z	    
+2025-09-19T04:51:08.802Z	  
+2025-09-19T04:51:08.802Z	  
+2025-09-19T04:51:08.802Z	  ✘ [ERROR] Could not resolve "stream"
+2025-09-19T04:51:08.802Z	  
+2025-09-19T04:51:08.802Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:27:25:
+2025-09-19T04:51:08.802Z	        27 │ import require$$0$6 from 'stream';
+2025-09-19T04:51:08.802Z	           ╵                          ~~~~~~~~
+2025-09-19T04:51:08.802Z	  
+2025-09-19T04:51:08.802Z	    The package "stream" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.802Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.802Z	    
+2025-09-19T04:51:08.802Z	  
+2025-09-19T04:51:08.802Z	  
+2025-09-19T04:51:08.802Z	  ✘ [ERROR] Could not resolve "os"
+2025-09-19T04:51:08.802Z	  
+2025-09-19T04:51:08.802Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:28:23:
+2025-09-19T04:51:08.802Z	        28 │ import require$$2 from 'os';
+2025-09-19T04:51:08.802Z	           ╵                        ~~~~
+2025-09-19T04:51:08.802Z	  
+2025-09-19T04:51:08.802Z	    The package "os" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.802Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.802Z	    
+2025-09-19T04:51:08.802Z	  
+2025-09-19T04:51:08.802Z	  
+2025-09-19T04:51:08.802Z	  ✘ [ERROR] Could not resolve "child_process"
+2025-09-19T04:51:08.802Z	  
+2025-09-19T04:51:08.802Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:29:25:
+2025-09-19T04:51:08.802Z	        29 │ import require$$2$1 from 'child_process';
+2025-09-19T04:51:08.802Z	           ╵                          ~~~~~~~~~~~~~~~
+2025-09-19T04:51:08.802Z	  
+2025-09-19T04:51:08.802Z	    The package "child_process" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.802Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.802Z	    
+2025-09-19T04:51:08.802Z	  
+2025-09-19T04:51:08.802Z	  
+2025-09-19T04:51:08.802Z	  ✘ [ERROR] Could not resolve "crypto"
+2025-09-19T04:51:08.802Z	  
+2025-09-19T04:51:08.802Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:32:25:
+2025-09-19T04:51:08.802Z	        32 │ import require$$3$1 from 'crypto';
+2025-09-19T04:51:08.803Z	           ╵                          ~~~~~~~~
+2025-09-19T04:51:08.803Z	  
+2025-09-19T04:51:08.803Z	    The package "crypto" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.803Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.803Z	    
+2025-09-19T04:51:08.803Z	  
+2025-09-19T04:51:08.803Z	  
+2025-09-19T04:51:08.803Z	  ✘ [ERROR] Could not resolve "module"
+2025-09-19T04:51:08.803Z	  
+2025-09-19T04:51:08.803Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:33:63:
+2025-09-19T04:51:08.803Z	        33 │ ... require$$0$8, { createRequire as createRequire$2 } from 'module';
+2025-09-19T04:51:08.803Z	           ╵                                                             ~~~~~~~~
+2025-09-19T04:51:08.803Z	  
+2025-09-19T04:51:08.803Z	    The package "module" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.803Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.803Z	    
+2025-09-19T04:51:08.803Z	  
+2025-09-19T04:51:08.803Z	  
+2025-09-19T04:51:08.803Z	  ✘ [ERROR] Could not resolve "querystring"
+2025-09-19T04:51:08.803Z	  
+2025-09-19T04:51:08.803Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:39:20:
+2025-09-19T04:51:08.803Z	        39 │ import * as qs from 'querystring';
+2025-09-19T04:51:08.803Z	           ╵                     ~~~~~~~~~~~~~
+2025-09-19T04:51:08.803Z	  
+2025-09-19T04:51:08.803Z	    The package "querystring" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.803Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.803Z	    
+2025-09-19T04:51:08.803Z	  
+2025-09-19T04:51:08.803Z	  
+2025-09-19T04:51:08.803Z	  ✘ [ERROR] Could not resolve "zlib"
+2025-09-19T04:51:08.803Z	  
+2025-09-19T04:51:08.803Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:41:19:
+2025-09-19T04:51:08.803Z	        41 │ import zlib$1 from 'zlib';
+2025-09-19T04:51:08.803Z	           ╵                    ~~~~~~
+2025-09-19T04:51:08.803Z	  
+2025-09-19T04:51:08.803Z	    The package "zlib" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.803Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.803Z	    
+2025-09-19T04:51:08.803Z	  
+2025-09-19T04:51:08.808Z	  
+2025-09-19T04:51:08.808Z	  ✘ [ERROR] Could not resolve "buffer"
+2025-09-19T04:51:08.808Z	  
+2025-09-19T04:51:08.808Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:42:25:
+2025-09-19T04:51:08.808Z	        42 │ import require$$0$a from 'buffer';
+2025-09-19T04:51:08.808Z	           ╵                          ~~~~~~~~
+2025-09-19T04:51:08.808Z	  
+2025-09-19T04:51:08.808Z	    The package "buffer" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.808Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.808Z	    
+2025-09-19T04:51:08.808Z	  
+2025-09-19T04:51:08.808Z	  
+2025-09-19T04:51:08.808Z	  ✘ [ERROR] Could not resolve "https"
+2025-09-19T04:51:08.808Z	  
+2025-09-19T04:51:08.808Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:43:25:
+2025-09-19T04:51:08.808Z	        43 │ import require$$1$1 from 'https';
+2025-09-19T04:51:08.808Z	           ╵                          ~~~~~~~
+2025-09-19T04:51:08.808Z	  
+2025-09-19T04:51:08.808Z	    The package "https" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.808Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.808Z	    
+2025-09-19T04:51:08.808Z	  
+2025-09-19T04:51:08.808Z	  
+2025-09-19T04:51:08.808Z	  ✘ [ERROR] Could not resolve "tls"
+2025-09-19T04:51:08.808Z	  
+2025-09-19T04:51:08.808Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:44:25:
+2025-09-19T04:51:08.808Z	        44 │ import require$$4$2 from 'tls';
+2025-09-19T04:51:08.808Z	           ╵                          ~~~~~
+2025-09-19T04:51:08.808Z	  
+2025-09-19T04:51:08.808Z	    The package "tls" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.808Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.808Z	    
+2025-09-19T04:51:08.808Z	  
+2025-09-19T04:51:08.808Z	  
+2025-09-19T04:51:08.808Z	  ✘ [ERROR] Could not resolve "assert"
+2025-09-19T04:51:08.809Z	  
+2025-09-19T04:51:08.809Z	      node_modules/vite/dist/node/chunks/dep-C6uTJdX2.js:46:25:
+2025-09-19T04:51:08.809Z	        46 │ import require$$4$3 from 'assert';
+2025-09-19T04:51:08.809Z	           ╵                          ~~~~~~~~
+2025-09-19T04:51:08.809Z	  
+2025-09-19T04:51:08.809Z	    The package "assert" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.809Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.809Z	    
+2025-09-19T04:51:08.809Z	  
+2025-09-19T04:51:08.809Z	  
+2025-09-19T04:51:08.809Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.809Z	  
+2025-09-19T04:51:08.809Z	      node_modules/vite/dist/node/chunks/dep-CEGXe0Sr.js:2:32:
+2025-09-19T04:51:08.809Z	        2 │ import require$$0__default from 'fs';
+2025-09-19T04:51:08.809Z	          ╵                                 ~~~~
+2025-09-19T04:51:08.809Z	  
+2025-09-19T04:51:08.809Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.809Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.811Z	    
+2025-09-19T04:51:08.811Z	  
+2025-09-19T04:51:08.811Z	  
+2025-09-19T04:51:08.811Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.814Z	  
+2025-09-19T04:51:08.814Z	      node_modules/vite/dist/node/chunks/dep-CEGXe0Sr.js:4:25:
+2025-09-19T04:51:08.814Z	        4 │ import require$$0$1 from 'path';
+2025-09-19T04:51:08.814Z	          ╵                          ~~~~~~
+2025-09-19T04:51:08.814Z	  
+2025-09-19T04:51:08.814Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.814Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.814Z	    
+2025-09-19T04:51:08.814Z	  
+2025-09-19T04:51:08.814Z	  
+2025-09-19T04:51:08.814Z	  ✘ [ERROR] Could not resolve "crypto"
+2025-09-19T04:51:08.814Z	  
+2025-09-19T04:51:08.814Z	      node_modules/vite/dist/node/chunks/dep-CEGXe0Sr.js:5:23:
+2025-09-19T04:51:08.814Z	        5 │ import require$$3 from 'crypto';
+2025-09-19T04:51:08.814Z	          ╵                        ~~~~~~~~
+2025-09-19T04:51:08.814Z	  
+2025-09-19T04:51:08.814Z	    The package "crypto" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.814Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.814Z	    
+2025-09-19T04:51:08.814Z	  
+2025-09-19T04:51:08.814Z	  
+2025-09-19T04:51:08.815Z	  ✘ [ERROR] Could not resolve "util"
+2025-09-19T04:51:08.815Z	  
+2025-09-19T04:51:08.815Z	      node_modules/vite/dist/node/chunks/dep-CEGXe0Sr.js:6:25:
+2025-09-19T04:51:08.815Z	        6 │ import require$$0$2 from 'util';
+2025-09-19T04:51:08.815Z	          ╵                          ~~~~~~
+2025-09-19T04:51:08.815Z	  
+2025-09-19T04:51:08.815Z	    The package "util" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.815Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.815Z	    
+2025-09-19T04:51:08.815Z	  
+2025-09-19T04:51:08.815Z	  
+2025-09-19T04:51:08.815Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.815Z	  
+2025-09-19T04:51:08.815Z	      node_modules/vite/dist/node/chunks/dep-COdkJwUb.js:2:23:
+2025-09-19T04:51:08.815Z	        2 │ import require$$0 from 'path';
+2025-09-19T04:51:08.815Z	          ╵                        ~~~~~~
+2025-09-19T04:51:08.815Z	  
+2025-09-19T04:51:08.815Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.815Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.815Z	    
+2025-09-19T04:51:08.815Z	  
+2025-09-19T04:51:08.815Z	  
+2025-09-19T04:51:08.815Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.815Z	  
+2025-09-19T04:51:08.815Z	      node_modules/vite/dist/node/chunks/dep-COdkJwUb.js:3:32:
+2025-09-19T04:51:08.815Z	        3 │ import require$$0__default from 'fs';
+2025-09-19T04:51:08.815Z	          ╵                                 ~~~~
+2025-09-19T04:51:08.815Z	  
+2025-09-19T04:51:08.815Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.820Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.820Z	    
+2025-09-19T04:51:08.820Z	  
+2025-09-19T04:51:08.820Z	  
+2025-09-19T04:51:08.820Z	  ✘ [ERROR] Could not resolve "tty"
+2025-09-19T04:51:08.820Z	  
+2025-09-19T04:51:08.820Z	      node_modules/vite/dist/node/index.js:15:7:
+2025-09-19T04:51:08.820Z	        15 │ import 'tty';
+2025-09-19T04:51:08.820Z	           ╵        ~~~~~
+2025-09-19T04:51:08.821Z	  
+2025-09-19T04:51:08.821Z	    The package "tty" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.821Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.821Z	    
+2025-09-19T04:51:08.821Z	  
+2025-09-19T04:51:08.822Z	  
+2025-09-19T04:51:08.822Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.822Z	  
+2025-09-19T04:51:08.822Z	      node_modules/vite/dist/node/index.js:16:7:
+2025-09-19T04:51:08.823Z	        16 │ import 'path';
+2025-09-19T04:51:08.823Z	           ╵        ~~~~~~
+2025-09-19T04:51:08.823Z	  
+2025-09-19T04:51:08.823Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.823Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.823Z	    
+2025-09-19T04:51:08.823Z	  
+2025-09-19T04:51:08.823Z	  
+2025-09-19T04:51:08.823Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.823Z	  
+2025-09-19T04:51:08.823Z	      node_modules/vite/dist/node/index.js:17:7:
+2025-09-19T04:51:08.823Z	        17 │ import 'fs';
+2025-09-19T04:51:08.823Z	           ╵        ~~~~
+2025-09-19T04:51:08.823Z	  
+2025-09-19T04:51:08.823Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.824Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.824Z	    
+2025-09-19T04:51:08.824Z	  
+2025-09-19T04:51:08.824Z	  
+2025-09-19T04:51:08.824Z	  ✘ [ERROR] Could not resolve "util"
+2025-09-19T04:51:08.824Z	  
+2025-09-19T04:51:08.824Z	      node_modules/vite/dist/node/index.js:24:7:
+2025-09-19T04:51:08.824Z	        24 │ import 'util';
+2025-09-19T04:51:08.824Z	           ╵        ~~~~~~
+2025-09-19T04:51:08.824Z	  
+2025-09-19T04:51:08.824Z	    The package "util" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.824Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.824Z	    
+2025-09-19T04:51:08.824Z	  
+2025-09-19T04:51:08.824Z	  
+2025-09-19T04:51:08.824Z	  ✘ [ERROR] Could not resolve "net"
+2025-09-19T04:51:08.824Z	  
+2025-09-19T04:51:08.824Z	      node_modules/vite/dist/node/index.js:25:7:
+2025-09-19T04:51:08.825Z	        25 │ import 'net';
+2025-09-19T04:51:08.825Z	           ╵        ~~~~~
+2025-09-19T04:51:08.825Z	  
+2025-09-19T04:51:08.825Z	    The package "net" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.825Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.825Z	    
+2025-09-19T04:51:08.825Z	  
+2025-09-19T04:51:08.825Z	  
+2025-09-19T04:51:08.825Z	  ✘ [ERROR] Could not resolve "events"
+2025-09-19T04:51:08.825Z	  
+2025-09-19T04:51:08.825Z	      node_modules/vite/dist/node/index.js:26:7:
+2025-09-19T04:51:08.825Z	        26 │ import 'events';
+2025-09-19T04:51:08.825Z	           ╵        ~~~~~~~~
+2025-09-19T04:51:08.825Z	  
+2025-09-19T04:51:08.825Z	    The package "events" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.825Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.825Z	    
+2025-09-19T04:51:08.825Z	  
+2025-09-19T04:51:08.826Z	  
+2025-09-19T04:51:08.826Z	  ✘ [ERROR] Could not resolve "url"
+2025-09-19T04:51:08.826Z	  
+2025-09-19T04:51:08.827Z	      node_modules/vite/dist/node/index.js:27:7:
+2025-09-19T04:51:08.827Z	        27 │ import 'url';
+2025-09-19T04:51:08.828Z	           ╵        ~~~~~
+2025-09-19T04:51:08.828Z	  
+2025-09-19T04:51:08.828Z	    The package "url" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.828Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.828Z	    
+2025-09-19T04:51:08.828Z	  
+2025-09-19T04:51:08.828Z	  
+2025-09-19T04:51:08.828Z	  ✘ [ERROR] Could not resolve "http"
+2025-09-19T04:51:08.828Z	  
+2025-09-19T04:51:08.828Z	      node_modules/vite/dist/node/index.js:28:7:
+2025-09-19T04:51:08.828Z	        28 │ import 'http';
+2025-09-19T04:51:08.828Z	           ╵        ~~~~~~
+2025-09-19T04:51:08.828Z	  
+2025-09-19T04:51:08.828Z	    The package "http" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.828Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.828Z	    
+2025-09-19T04:51:08.828Z	  
+2025-09-19T04:51:08.828Z	  
+2025-09-19T04:51:08.828Z	  ✘ [ERROR] Could not resolve "stream"
+2025-09-19T04:51:08.828Z	  
+2025-09-19T04:51:08.828Z	      node_modules/vite/dist/node/index.js:29:7:
+2025-09-19T04:51:08.828Z	        29 │ import 'stream';
+2025-09-19T04:51:08.828Z	           ╵        ~~~~~~~~
+2025-09-19T04:51:08.829Z	  
+2025-09-19T04:51:08.829Z	    The package "stream" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.829Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.829Z	    
+2025-09-19T04:51:08.829Z	  
+2025-09-19T04:51:08.829Z	  
+2025-09-19T04:51:08.829Z	  ✘ [ERROR] Could not resolve "os"
+2025-09-19T04:51:08.829Z	  
+2025-09-19T04:51:08.829Z	      node_modules/vite/dist/node/index.js:30:7:
+2025-09-19T04:51:08.829Z	        30 │ import 'os';
+2025-09-19T04:51:08.829Z	           ╵        ~~~~
+2025-09-19T04:51:08.829Z	  
+2025-09-19T04:51:08.829Z	    The package "os" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.829Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.829Z	    
+2025-09-19T04:51:08.829Z	  
+2025-09-19T04:51:08.829Z	  
+2025-09-19T04:51:08.829Z	  ✘ [ERROR] Could not resolve "child_process"
+2025-09-19T04:51:08.829Z	  
+2025-09-19T04:51:08.829Z	      node_modules/vite/dist/node/index.js:31:7:
+2025-09-19T04:51:08.829Z	        31 │ import 'child_process';
+2025-09-19T04:51:08.829Z	           ╵        ~~~~~~~~~~~~~~~
+2025-09-19T04:51:08.829Z	  
+2025-09-19T04:51:08.829Z	    The package "child_process" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.829Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.829Z	    
+2025-09-19T04:51:08.829Z	  
+2025-09-19T04:51:08.829Z	  
+2025-09-19T04:51:08.829Z	  ✘ [ERROR] Could not resolve "crypto"
+2025-09-19T04:51:08.829Z	  
+2025-09-19T04:51:08.829Z	      node_modules/vite/dist/node/index.js:34:7:
+2025-09-19T04:51:08.829Z	        34 │ import 'crypto';
+2025-09-19T04:51:08.829Z	           ╵        ~~~~~~~~
+2025-09-19T04:51:08.830Z	  
+2025-09-19T04:51:08.830Z	    The package "crypto" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.830Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.830Z	    
+2025-09-19T04:51:08.830Z	  
+2025-09-19T04:51:08.830Z	  
+2025-09-19T04:51:08.830Z	  ✘ [ERROR] Could not resolve "module"
+2025-09-19T04:51:08.831Z	  
+2025-09-19T04:51:08.831Z	      node_modules/vite/dist/node/index.js:35:7:
+2025-09-19T04:51:08.831Z	        35 │ import 'module';
+2025-09-19T04:51:08.831Z	           ╵        ~~~~~~~~
+2025-09-19T04:51:08.831Z	  
+2025-09-19T04:51:08.831Z	    The package "module" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.831Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.831Z	    
+2025-09-19T04:51:08.831Z	  
+2025-09-19T04:51:08.831Z	  
+2025-09-19T04:51:08.831Z	  ✘ [ERROR] Could not resolve "querystring"
+2025-09-19T04:51:08.831Z	  
+2025-09-19T04:51:08.831Z	      node_modules/vite/dist/node/index.js:40:7:
+2025-09-19T04:51:08.831Z	        40 │ import 'querystring';
+2025-09-19T04:51:08.831Z	           ╵        ~~~~~~~~~~~~~
+2025-09-19T04:51:08.831Z	  
+2025-09-19T04:51:08.832Z	    The package "querystring" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.832Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.832Z	    
+2025-09-19T04:51:08.832Z	  
+2025-09-19T04:51:08.832Z	  
+2025-09-19T04:51:08.832Z	  ✘ [ERROR] Could not resolve "zlib"
+2025-09-19T04:51:08.832Z	  
+2025-09-19T04:51:08.832Z	      node_modules/vite/dist/node/index.js:42:7:
+2025-09-19T04:51:08.832Z	        42 │ import 'zlib';
+2025-09-19T04:51:08.834Z	           ╵        ~~~~~~
+2025-09-19T04:51:08.834Z	  
+2025-09-19T04:51:08.834Z	    The package "zlib" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.834Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.834Z	    
+2025-09-19T04:51:08.834Z	  
+2025-09-19T04:51:08.834Z	  
+2025-09-19T04:51:08.834Z	  ✘ [ERROR] Could not resolve "buffer"
+2025-09-19T04:51:08.834Z	  
+2025-09-19T04:51:08.835Z	      node_modules/vite/dist/node/index.js:43:7:
+2025-09-19T04:51:08.835Z	        43 │ import 'buffer';
+2025-09-19T04:51:08.835Z	           ╵        ~~~~~~~~
+2025-09-19T04:51:08.835Z	  
+2025-09-19T04:51:08.835Z	    The package "buffer" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.835Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.835Z	    
+2025-09-19T04:51:08.835Z	  
+2025-09-19T04:51:08.835Z	  
+2025-09-19T04:51:08.835Z	  ✘ [ERROR] Could not resolve "https"
+2025-09-19T04:51:08.835Z	  
+2025-09-19T04:51:08.835Z	      node_modules/vite/dist/node/index.js:44:7:
+2025-09-19T04:51:08.835Z	        44 │ import 'https';
+2025-09-19T04:51:08.835Z	           ╵        ~~~~~~~
+2025-09-19T04:51:08.835Z	  
+2025-09-19T04:51:08.835Z	    The package "https" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.836Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.836Z	    
+2025-09-19T04:51:08.836Z	  
+2025-09-19T04:51:08.836Z	  
+2025-09-19T04:51:08.836Z	  ✘ [ERROR] Could not resolve "tls"
+2025-09-19T04:51:08.836Z	  
+2025-09-19T04:51:08.836Z	      node_modules/vite/dist/node/index.js:45:7:
+2025-09-19T04:51:08.836Z	        45 │ import 'tls';
+2025-09-19T04:51:08.836Z	           ╵        ~~~~~
+2025-09-19T04:51:08.836Z	  
+2025-09-19T04:51:08.836Z	    The package "tls" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.837Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.837Z	    
+2025-09-19T04:51:08.837Z	  
+2025-09-19T04:51:08.837Z	  
+2025-09-19T04:51:08.837Z	  ✘ [ERROR] Could not resolve "assert"
+2025-09-19T04:51:08.837Z	  
+2025-09-19T04:51:08.837Z	      node_modules/vite/dist/node/index.js:47:7:
+2025-09-19T04:51:08.837Z	        47 │ import 'assert';
+2025-09-19T04:51:08.837Z	           ╵        ~~~~~~~~
+2025-09-19T04:51:08.837Z	  
+2025-09-19T04:51:08.837Z	    The package "assert" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.837Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.837Z	    
+2025-09-19T04:51:08.837Z	  
+2025-09-19T04:51:08.837Z	  
+2025-09-19T04:51:08.838Z	  ✘ [ERROR] Could not resolve "fs"
+2025-09-19T04:51:08.838Z	  
+2025-09-19T04:51:08.838Z	      node_modules/vite/node_modules/esbuild/lib/main.js:1596:17:
+2025-09-19T04:51:08.838Z	        1596 │ var fs = require("fs");
+2025-09-19T04:51:08.838Z	             ╵                  ~~~~
+2025-09-19T04:51:08.838Z	  
+2025-09-19T04:51:08.838Z	    The package "fs" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.838Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.838Z	    
+2025-09-19T04:51:08.838Z	  
+2025-09-19T04:51:08.838Z	  
+2025-09-19T04:51:08.838Z	  ✘ [ERROR] Could not resolve "os"
+2025-09-19T04:51:08.838Z	  
+2025-09-19T04:51:08.838Z	      node_modules/vite/node_modules/esbuild/lib/main.js:1597:17:
+2025-09-19T04:51:08.839Z	        1597 │ var os = require("os");
+2025-09-19T04:51:08.839Z	             ╵                  ~~~~
+2025-09-19T04:51:08.839Z	  
+2025-09-19T04:51:08.839Z	    The package "os" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.839Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.839Z	    
+2025-09-19T04:51:08.839Z	  
+2025-09-19T04:51:08.839Z	  
+2025-09-19T04:51:08.839Z	  ✘ [ERROR] Could not resolve "path"
+2025-09-19T04:51:08.841Z	  
+2025-09-19T04:51:08.841Z	      node_modules/vite/node_modules/esbuild/lib/main.js:1598:19:
+2025-09-19T04:51:08.841Z	        1598 │ var path = require("path");
+2025-09-19T04:51:08.841Z	             ╵                    ~~~~~~
+2025-09-19T04:51:08.841Z	  
+2025-09-19T04:51:08.841Z	    The package "path" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.841Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.842Z	    
+2025-09-19T04:51:08.842Z	  
+2025-09-19T04:51:08.842Z	  
+2025-09-19T04:51:08.842Z	  ✘ [ERROR] Could not resolve "child_process"
+2025-09-19T04:51:08.842Z	  
+2025-09-19T04:51:08.842Z	      node_modules/vite/node_modules/esbuild/lib/main.js:1784:28:
+2025-09-19T04:51:08.842Z	        1784 │ var child_process = require("child_process");
+2025-09-19T04:51:08.842Z	             ╵                             ~~~~~~~~~~~~~~~
+2025-09-19T04:51:08.842Z	  
+2025-09-19T04:51:08.842Z	    The package "child_process" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.842Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.842Z	    
+2025-09-19T04:51:08.842Z	  
+2025-09-19T04:51:08.842Z	  
+2025-09-19T04:51:08.842Z	  ✘ [ERROR] Could not resolve "crypto"
+2025-09-19T04:51:08.842Z	  
+2025-09-19T04:51:08.842Z	      node_modules/vite/node_modules/esbuild/lib/main.js:1785:21:
+2025-09-19T04:51:08.843Z	        1785 │ var crypto = require("crypto");
+2025-09-19T04:51:08.843Z	             ╵                      ~~~~~~~~
+2025-09-19T04:51:08.843Z	  
+2025-09-19T04:51:08.843Z	    The package "crypto" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.843Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.843Z	    
+2025-09-19T04:51:08.843Z	  
+2025-09-19T04:51:08.843Z	  
+2025-09-19T04:51:08.843Z	  ✘ [ERROR] Could not resolve "tty"
+2025-09-19T04:51:08.843Z	  
+2025-09-19T04:51:08.843Z	      node_modules/vite/node_modules/esbuild/lib/main.js:1789:18:
+2025-09-19T04:51:08.843Z	        1789 │ var tty = require("tty");
+2025-09-19T04:51:08.843Z	             ╵                   ~~~~~
+2025-09-19T04:51:08.843Z	  
+2025-09-19T04:51:08.843Z	    The package "tty" wasn't found on the file system but is built into node.
+2025-09-19T04:51:08.843Z	    - Make sure to prefix the module name with "node:" or update your compatibility_date to 2024-09-23 or later.
+2025-09-19T04:51:08.843Z	    
+2025-09-19T04:51:08.843Z	  
+2025-09-19T04:51:08.844Z	  
+2025-09-19T04:51:08.844Z	
+2025-09-19T04:51:08.844Z	
+2025-09-19T04:51:08.844Z	▲ [WARNING] The glob pattern require("../lightningcss.*.node") did not match any files [empty-glob]
+2025-09-19T04:51:08.844Z	
+2025-09-19T04:51:08.844Z	    node_modules/lightningcss/node/index.js:22:29:
+2025-09-19T04:51:08.844Z	      22 │ ...dule.exports = require(`../lightningcss.${parts.join('-')}.node`);
+2025-09-19T04:51:08.844Z	         ╵                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2025-09-19T04:51:08.844Z	
+2025-09-19T04:51:08.844Z	
+2025-09-19T04:51:08.844Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2025-09-19_04-50-58_835.log"
+2025-09-19T04:51:08.845Z	
+2025-09-19T04:51:08.845Z	Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
+2025-09-19T04:51:08.848Z	Failed: error occurred while running deploy command

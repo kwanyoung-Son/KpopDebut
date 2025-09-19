@@ -1,6 +1,6 @@
 name = "kpopdebut"
 main = "dist/index.js"
-compatibility_date = "2024-01-01"
+compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
 
 # 운영 환경 D1 Database bindings
