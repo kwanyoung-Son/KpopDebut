@@ -1,6 +1,7 @@
-name = "kpop-debut-analyzer"
+name = "kpopdebut"
 main = "dist/index.js"
 compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
 
 # 운영 환경 D1 Database bindings
 [[d1_databases]]
