@@ -25,10 +25,10 @@ const questions = [
     question: "친구들이 말하는 내 성격은?",
     field: "friendsDescribe" as keyof QuizAnswers,
     options: [
-      { value: "mood_maker", icon: Laugh, color: "text-orange-500", title: "장난기 많고 분위기 메이커", desc: "" },
+      { value: "mood_maker", icon: Laugh, color: "text-orange-500", title: "분위기 메이커", desc: "" },
       { value: "serious", icon: Brain, color: "text-blue-600", title: "진지하고 신중함", desc: "" },
       { value: "creative", icon: Disc, color: "text-purple-500", title: "창의적이고 예술적", desc: "" },
-      { value: "responsible", icon: Crown, color: "text-green-600", title: "계획적이고 책임감 있음", desc: "" }
+      { value: "responsible", icon: Crown, color: "text-green-600", title: "계획적이고 책임감", desc: "" }
     ]
   },
   {
