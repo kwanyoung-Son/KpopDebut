@@ -13,10 +13,10 @@ const questions = [
     question: "무대 위에서의 나는?",
     field: "stagePresence" as keyof QuizAnswers,
     options: [
-      { value: "center", icon: Crown, color: "text-yellow-500", title: "주목받는 걸 좋아하는 중심 인물", desc: "" },
-      { value: "leader", icon: Crown, color: "text-blue-500", title: "팀을 조율하고 책임지는 리더형", desc: "" },
-      { value: "performer", icon: Flame, color: "text-red-500", title: "누구보다 열심히 춤추고 표현하는 퍼포머", desc: "" },
-      { value: "charisma", icon: Heart, color: "text-purple-500", title: "조용히도 강하게 존재감을 드러내는 스타일", desc: "" }
+      { value: "center", icon: Crown, color: "text-yellow-500", title: "중심에서 빛나는 타입", desc: "" },
+      { value: "leader", icon: Crown, color: "text-blue-500", title: "팀을 이끄는 리더형", desc: "" },
+      { value: "performer", icon: Flame, color: "text-red-500", title: "열정적인 퍼포머", desc: "" },
+      { value: "charisma", icon: Heart, color: "text-purple-500", title: "조용한 카리스마", desc: "" }
     ]
   },
   {
