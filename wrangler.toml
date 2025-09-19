@@ -1,6 +1,6 @@
 name = "kpopdebut"
 compatibility_date = "2024-09-23"
-pages_build_output_dir = "dist"
+pages_build_output_dir = "dist/public"
 
 # 운영 환경 D1 Database bindings
 [[d1_databases]]
