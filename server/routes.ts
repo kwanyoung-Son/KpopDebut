@@ -6,18 +6,9 @@ import { z } from "zod";
 import multer from "multer";
 import { kpopGroupsData, type KpopMember } from "./kpop-data";
 
-interface MulterFile {
-  fieldname: string;
-  originalname: string;
-  encoding: string;
-  mimetype: string;
-  size: number;
-  buffer: Buffer;
-}
-
 interface MulterRequest extends Request {
-  file?: MulterFile;
-  files?: { [fieldname: string]: MulterFile[] } | MulterFile[];
+  file?: Express.Multer.File;
+  files?: { [fieldname: string]: Express.Multer.File[] } | Express.Multer.File[];
 }
 
 const upload = multer({ 
@@ -44,7 +35,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       // Convert uploaded photo to base64 if exists
       let photoData = null;
       if (req.files && !Array.isArray(req.files) && req.files['photo'] && req.files['photo'][0]) {
-        const file = req.files['photo'][0];
+        const file = req.files['photo'][0] as Express.Multer.File;
         photoData = `data:${file.mimetype};base64,${file.buffer.toString('base64')}`;
       }
 

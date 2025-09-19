@@ -45,15 +45,29 @@ export const analysisConfig: AnalysisConfig = {
 };
 
 export function generateAnalysisResult(answers: QuizAnswers) {
-  const personality = answers.personality;
+  // 답변을 기반으로 성격 유형 결정
+  const personalityType = determinePersonalityType(answers);
   const groupName = analysisConfig.groupNames[Math.floor(Math.random() * analysisConfig.groupNames.length)];
   
   return {
     groupName,
-    position: analysisConfig.positions[personality].main,
-    subPosition: analysisConfig.positions[personality].sub,
-    character: analysisConfig.characters[personality].type,
-    characterDesc: analysisConfig.characters[personality].desc,
-    styleTags: analysisConfig.styleTags[personality]
+    position: analysisConfig.positions[personalityType].main,
+    subPosition: analysisConfig.positions[personalityType].sub,
+    character: analysisConfig.characters[personalityType].type,
+    characterDesc: analysisConfig.characters[personalityType].desc,
+    styleTags: analysisConfig.styleTags[personalityType]
   };
+}
+
+function determinePersonalityType(answers: QuizAnswers): 'leader' | 'entertainer' | 'charisma' | 'cute' {
+  // 무대 적응력과 성격을 기반으로 유형 결정
+  if (answers.stagePresence === 'leader' || answers.friendsDescribe === 'responsible') {
+    return 'leader';
+  } else if (answers.stagePresence === 'performer' || answers.friendsDescribe === 'mood_maker') {
+    return 'entertainer';
+  } else if (answers.stagePresence === 'charisma' || answers.danceStyle === 'hiphop') {
+    return 'charisma';
+  } else {
+    return 'cute';
+  }
 }

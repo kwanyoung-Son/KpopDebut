@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { LucideIcon } from "lucide-react";
+import { QuizAnswers } from "@shared/schema";
 
 interface QuestionOption {
   value: string;
@@ -13,13 +14,13 @@ interface Question {
   id: number;
   title: string;
   question: string;
-  field: string;
+  field: keyof QuizAnswers;
   options: QuestionOption[];
 }
 
 interface QuizQuestionProps {
   question: Question;
-  onAnswer: (field: string, value: string) => void;
+  onAnswer: (field: keyof QuizAnswers, value: string) => void;
   selectedValue?: string;
 }
 
