@@ -30,7 +30,7 @@ export async function onRequestGet(context: EventContext<Env, any, any>): Promis
     
     // Get analysis result from D1
     const result = await context.env.DB.prepare(
-      `SELECT * FROM analysisResults WHERE sessionId = ?`
+      `SELECT * FROM analysis_results WHERE session_id = ?`
     ).bind(sessionId).first();
     
     if (!result) {
@@ -46,8 +46,8 @@ export async function onRequestGet(context: EventContext<Env, any, any>): Promis
     // Parse JSON fields
     const parsedResult = {
       ...result,
-      quizAnswers: result.quizAnswers ? JSON.parse(result.quizAnswers as string) : null,
-      styleTags: result.styleTags ? JSON.parse(result.styleTags as string) : []
+      quizAnswers: result.quiz_answers ? JSON.parse(result.quiz_answers as string) : null,
+      styleTags: result.style_tags ? JSON.parse(result.style_tags as string) : []
     };
     
     return new Response(JSON.stringify(parsedResult), {

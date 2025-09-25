@@ -138,7 +138,7 @@ export async function onRequestPost(context: EventContext<Env, any, any>): Promi
     
     // Save to D1 database
     const stmt = context.env.DB.prepare(`
-      INSERT INTO analysisResults (sessionId, photoData, quizAnswers, groupName, position, subPosition, character, characterDesc, styleTags, memberName, agency, createdAt)
+      INSERT INTO analysis_results (session_id, photo_data, quiz_answers, group_name, position, sub_position, character, character_desc, style_tags, member_name, agency, created_at)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
     `);
     

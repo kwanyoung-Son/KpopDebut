@@ -18,7 +18,7 @@ export async function onRequestGet(context: EventContext<Env, any, any>): Promis
   try {
     // Use D1Storage to get analysis count
     const result = await context.env.DB.prepare(
-      "SELECT COUNT(*) as count FROM analysisResults"
+      "SELECT COUNT(*) as count FROM analysis_results"
     ).first();
     
     const count = result?.count || 0;
