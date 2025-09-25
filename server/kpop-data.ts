@@ -1,63 +1,1130 @@
 export const kpopGroupsData = {
-  "groups": [
+  groups: [
     {
-      "name": "BTS",
-      "agency": "BigHit Music",
-      "members": [
-        { "name": "RM", "position": ["Leader", "Main Rapper"] },
-        { "name": "Jin", "position": ["Sub Vocalist", "Visual"] },
-        { "name": "SUGA", "position": ["Lead Rapper"] },
-        { "name": "j-hope", "position": ["Main Dancer", "Sub Rapper", "Sub Vocalist"] },
-        { "name": "Jimin", "position": ["Main Dancer", "Lead Vocalist"] },
-        { "name": "V", "position": ["Lead Dancer", "Sub Vocalist", "Visual"] },
-        { "name": "Jungkook", "position": ["Main Vocalist", "Lead Dancer", "Sub Rapper", "Center", "Maknae"] }
-      ]
+      name: "BTS",
+      agency: "BigHit Music",
+      members: [
+        { name: "RM", position: ["Leader", "Main Rapper"] },
+        { name: "Jin", position: ["Sub Vocalist", "Visual"] },
+        { name: "SUGA", position: ["Lead Rapper"] },
+        {
+          name: "j-hope",
+          position: ["Main Dancer", "Sub Rapper", "Sub Vocalist"],
+        },
+        { name: "Jimin", position: ["Main Dancer", "Lead Vocalist"] },
+        { name: "V", position: ["Lead Dancer", "Sub Vocalist", "Visual"] },
+        {
+          name: "Jungkook",
+          position: [
+            "Main Vocalist",
+            "Lead Dancer",
+            "Sub Rapper",
+            "Center",
+            "Maknae",
+          ],
+        },
+      ],
     },
     {
-      "name": "BLACKPINK",
-      "agency": "YG Entertainment",
-      "members": [
-        { "name": "Jisoo", "position": ["Lead Vocalist", "Visual"] },
-        { "name": "Jennie", "position": ["Main Rapper", "Lead Vocalist"] },
-        { "name": "Rosé", "position": ["Main Vocalist", "Lead Dancer"] },
-        { "name": "Lisa", "position": ["Main Dancer", "Lead Rapper", "Sub Vocalist", "Maknae"] }
-      ]
+      name: "BLACKPINK",
+      agency: "YG Entertainment",
+      members: [
+        { name: "Jisoo", position: ["Lead Vocalist", "Visual"] },
+        { name: "Jennie", position: ["Main Rapper", "Lead Vocalist"] },
+        { name: "Rosé", position: ["Main Vocalist", "Lead Dancer"] },
+        {
+          name: "Lisa",
+          position: ["Main Dancer", "Lead Rapper", "Sub Vocalist", "Maknae"],
+        },
+      ],
     },
     {
-      "name": "IVE",
-      "agency": "Starship Entertainment",
-      "members": [
-        { "name": "Yujin", "position": ["Leader", "Lead Vocalist"] },
-        { "name": "Gaeul", "position": ["Main Rapper", "Sub Vocalist"] },
-        { "name": "Rei", "position": ["Rapper", "Sub Vocalist"] },
-        { "name": "Wonyoung", "position": ["Lead Dancer", "Sub Vocalist", "Visual", "Center"] },
-        { "name": "Liz", "position": ["Main Vocalist"] },
-        { "name": "Leeseo", "position": ["Sub Vocalist", "Maknae"] }
-      ]
+      name: "IVE",
+      agency: "Starship Entertainment",
+      members: [
+        { name: "Yujin", position: ["Leader", "Lead Vocalist"] },
+        { name: "Gaeul", position: ["Main Rapper", "Sub Vocalist"] },
+        { name: "Rei", position: ["Rapper", "Sub Vocalist"] },
+        {
+          name: "Wonyoung",
+          position: ["Lead Dancer", "Sub Vocalist", "Visual", "Center"],
+        },
+        { name: "Liz", position: ["Main Vocalist"] },
+        { name: "Leeseo", position: ["Sub Vocalist", "Maknae"] },
+      ],
     },
     {
-      "name": "aespa",
-      "agency": "SM Entertainment",
-      "members": [
-        { "name": "Karina", "position": ["Leader", "Main Dancer", "Lead Rapper", "Sub Vocalist", "Visual", "Center"] },
-        { "name": "Giselle", "position": ["Main Rapper", "Sub Vocalist"] },
-        { "name": "Winter", "position": ["Lead Vocalist", "Lead Dancer", "Visual"] },
-        { "name": "Ningning", "position": ["Main Vocalist", "Maknae"] }
-      ]
+      name: "aespa",
+      agency: "SM Entertainment",
+      members: [
+        {
+          name: "Karina",
+          position: [
+            "Leader",
+            "Main Dancer",
+            "Lead Rapper",
+            "Sub Vocalist",
+            "Visual",
+            "Center",
+          ],
+        },
+        { name: "Giselle", position: ["Main Rapper", "Sub Vocalist"] },
+        {
+          name: "Winter",
+          position: ["Lead Vocalist", "Lead Dancer", "Visual"],
+        },
+        { name: "Ningning", position: ["Main Vocalist", "Maknae"] },
+      ],
     },
     {
-      "name": "(G)I-DLE",
-      "agency": "CUBE Entertainment",
-      "members": [
-        { "name": "Soyeon", "position": ["Leader", "Main Rapper", "Center", "Sub Vocalist"] },
-        { "name": "Minnie", "position": ["Main Vocalist"] },
-        { "name": "Yuqi", "position": ["Lead Dancer", "Sub Vocalist", "Sub Rapper"] },
-        { "name": "Shuhua", "position": ["Sub Vocalist", "Visual", "Maknae"] },
-        { "name": "Miyeon", "position": ["Main Vocalist", "Visual"] }
-      ]
-    }
-  ]
+      name: "(G)I-DLE",
+      agency: "CUBE Entertainment",
+      members: [
+        {
+          name: "Soyeon",
+          position: ["Leader", "Main Rapper", "Center", "Sub Vocalist"],
+        },
+        { name: "Minnie", position: ["Main Vocalist"] },
+        {
+          name: "Yuqi",
+          position: ["Lead Dancer", "Sub Vocalist", "Sub Rapper"],
+        },
+        { name: "Shuhua", position: ["Sub Vocalist", "Visual", "Maknae"] },
+        { name: "Miyeon", position: ["Main Vocalist", "Visual"] },
+      ],
+    },
+    {
+      name: "KIIRAS",
+      agency: "LeanBranding",
+      members: [
+        {
+          name: "Lingling",
+          position: ["Leader", "Main Rapper", "Sub Vocalist"],
+        },
+        { name: "Kurumi", position: ["Main Vocalist"] },
+        { name: "Harin", position: ["Center"] },
+        { name: "Kylie", position: ["Main Rapper"] },
+        { name: "Doyeon", position: ["Sub Vocalist"] },
+        { name: "Roah", position: ["Main Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "KickFlip",
+      agency: "JYP Entertainment",
+      members: [
+        { name: "Kyehoon", position: ["Leader", "Ace"] },
+        { name: "Amaru", position: ["Vocal", "Rap"] },
+        { name: "Donghwa", position: ["Dance"] },
+        { name: "Juwang", position: ["Vocal"] },
+        { name: "Minje", position: ["Visual", "Rap"] },
+        { name: "Keiju", position: ["Dance"] },
+        { name: "Donghyeon", position: ["Maknae", "Vocal"] },
+      ],
+    },
+    {
+      name: "Hearts2Hearts",
+      agency: "SM Entertainment",
+      members: [
+        { name: "Jiwoo", position: ["Leader", "Main Dancer", "Visual"] },
+        { name: "Carmen", position: ["Main Vocalist"] },
+        { name: "Yuha", position: ["Lead Vocalist", "Lead Dancer"] },
+        { name: "Stella", position: ["Lead Vocalist"] },
+        {
+          name: "Juun",
+          position: ["Main Dancer", "Main Rapper", "Sub Vocalist"],
+        },
+        { name: "A-na", position: ["Lead Vocalist", "Visual"] },
+        {
+          name: "Ian",
+          position: ["Center", "Visual", "Lead Dancer", "Sub Vocalist"],
+        },
+        { name: "Ye-on", position: ["Lead Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "ifeye",
+      agency: "Hi-Hat Entertainment",
+      members: [
+        { name: "Kasia", position: ["Leader", "Rapper"] },
+        { name: "Won Hwayeon", position: ["Vocalist", "Center"] },
+        { name: "Taerin", position: ["Main Dancer"] },
+        { name: "Rahee", position: ["All-Rounder"] },
+        { name: "Meu", position: ["Lead Vocalist", "Dancer"] },
+        { name: "Sasha", position: ["Main Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "Stray Kids",
+      agency: "JYP Entertainment",
+      members: [
+        {
+          name: "Bang Chan",
+          position: [
+            "Leader",
+            "Producer",
+            "Lead Vocalist",
+            "Lead Dancer",
+            "Rapper",
+          ],
+        },
+        {
+          name: "Lee Know",
+          position: ["Main Dancer", "Vocalist", "Sub Rapper"],
+        },
+        { name: "Changbin", position: ["Main Rapper", "Producer", "Vocalist"] },
+        {
+          name: "Hyunjin",
+          position: ["Main Dancer", "Lead Rapper", "Sub Vocalist", "Visual"],
+        },
+        { name: "Han", position: ["Main Rapper", "Lead Vocalist", "Producer"] },
+        {
+          name: "Felix",
+          position: ["Lead Dancer", "Lead Rapper", "Sub Vocalist"],
+        },
+        { name: "Seungmin", position: ["Main Vocalist"] },
+        { name: "I.N", position: ["Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "ATEEZ",
+      agency: "KQ Entertainment",
+      members: [
+        { name: "Hongjoong", position: ["Leader", "Rapper", "Composer"] },
+        { name: "Seonghwa", position: ["Vocalist", "Visual"] },
+        { name: "Yunho", position: ["Main Dancer", "Vocalist"] },
+        { name: "Yeosang", position: ["Lead Dancer", "Vocalist", "Visual"] },
+        { name: "San", position: ["Lead Vocalist", "Main Dancer"] },
+        { name: "Mingi", position: ["Main Rapper", "Performer"] },
+        {
+          name: "Wooyoung",
+          position: ["Main Dancer", "Vocalist", "Performer"],
+        },
+        { name: "Jongho", position: ["Main Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "LOONA",
+      agency: "BlockBerry Creative",
+      members: [
+        { name: "HeeJin", position: ["Dancer", "Vocalist", "Visual"] },
+        { name: "HyunJin", position: ["Dancer", "Vocalist"] },
+        { name: "HaSeul", position: ["Leader", "Vocalist"] },
+        { name: "YeoJin", position: ["Vocalist", "Maknae"] },
+        { name: "ViVi", position: ["Vocalist"] },
+        { name: "Kim Lip", position: ["Main Vocalist", "Dancer"] },
+        { name: "JinSoul", position: ["Main Rapper", "Vocalist"] },
+        { name: "Choerry", position: ["Rapper", "Dancer", "Vocalist"] },
+        { name: "Yves", position: ["Vocalist", "Dancer"] },
+        { name: "Chuu", position: ["Main Vocalist", "Face of the Group"] },
+        { name: "Go Won", position: ["Rapper", "Dancer", "Vocalist"] },
+        { name: "Olivia Hye", position: ["Lead Rapper", "Dancer", "Vocalist"] },
+      ],
+    },
+    {
+      name: "THE BOYZ",
+      agency: "IST Entertainment",
+      members: [
+        { name: "Sangyeon", position: ["Leader", "Main Vocalist"] },
+        { name: "Jacob", position: ["Lead Vocalist"] },
+        { name: "Younghoon", position: ["Vocalist", "Visual"] },
+        {
+          name: "Hyunjae",
+          position: ["Lead Vocalist", "Lead Dancer", "Visual"],
+        },
+        { name: "Juyeon", position: ["Main Dancer", "Vocalist", "Visual"] },
+        { name: "Kevin", position: ["Main Vocalist"] },
+        { name: "New", position: ["Main Vocalist"] },
+        { name: "Q", position: ["Main Dancer", "Vocalist"] },
+        { name: "Juhaknyeon", position: ["Lead Dancer", "Rapper", "Vocalist"] },
+        { name: "Sunwoo", position: ["Main Rapper"] },
+        { name: "Eric", position: ["Lead Dancer", "Lead Rapper", "Maknae"] },
+        { name: "Hwall", position: ["Lead Dancer", "Vocalist", "Rapper"] },
+      ],
+    },
+    {
+      name: "Golden Child",
+      agency: "Woollim Entertainment",
+      members: [
+        { name: "Dae-yeol", position: ["Leader", "Lead Dancer", "Vocalist"] },
+        { name: "Y", position: ["Main Vocalist", "Lead Dancer"] },
+        { name: "Jangjun", position: ["Main Rapper", "Lead Dancer"] },
+        { name: "TAG", position: ["Main Rapper", "Vocalist"] },
+        { name: "Seungmin", position: ["Lead Vocalist"] },
+        { name: "Jaehyun", position: ["Sub Vocalist"] },
+        { name: "Donghyun", position: ["Lead Dancer", "Sub Vocalist"] },
+        { name: "Joochan", position: ["Main Vocalist"] },
+        { name: "Jibeom", position: ["Lead Vocalist"] },
+        {
+          name: "Bomin",
+          position: ["Lead Dancer", "Sub Vocalist", "Maknae", "Visual"],
+        },
+      ],
+    },
+    {
+      name: "Weki Meki",
+      agency: "Fantagio",
+      members: [
+        { name: "Suyeon", position: ["Leader", "Main Vocalist"] },
+        { name: "Elly", position: ["Main Vocalist"] },
+        {
+          name: "Yoojung",
+          position: ["Main Rapper", "Main Dancer", "Lead Vocalist"],
+        },
+        {
+          name: "Doyeon",
+          position: ["Lead Vocalist", "Lead Dancer", "Visual", "Center"],
+        },
+        { name: "Sei", position: ["Lead Vocalist"] },
+        { name: "Lua", position: ["Main Dancer", "Sub Vocalist", "Rapper"] },
+        { name: "Rina", position: ["Lead Rapper", "Sub Vocalist", "Visual"] },
+        { name: "Lucy", position: ["Lead Rapper", "Lead Dancer", "Maknae"] },
+      ],
+    },
+    {
+      name: "ONF",
+      agency: "WM Entertainment",
+      members: [
+        { name: "Hyojin", position: ["Leader (ON Team)", "Main Vocalist"] },
+        { name: "E-Tion", position: ["Lead Vocalist"] },
+        {
+          name: "J-Us",
+          position: ["Leader (OFF Team)", "Main Dancer", "Lead Vocalist"],
+        },
+        { name: "Wyatt", position: ["Main Rapper", "Lead Dancer"] },
+        { name: "MK", position: ["Main Vocalist"] },
+        { name: "U", position: ["Main Dancer", "Vocalist", "Maknae"] },
+        { name: "Laun", position: ["Lead Dancer", "Vocalist"] },
+      ],
+    },
+    {
+      name: "Dreamcatcher",
+      agency: "Dreamcatcher Company",
+      members: [
+        {
+          name: "JiU",
+          position: ["Leader", "Lead Dancer", "Vocalist", "Visual"],
+        },
+        { name: "SuA", position: ["Main Dancer", "Lead Rapper", "Vocalist"] },
+        { name: "Siyeon", position: ["Main Vocalist"] },
+        { name: "Handong", position: ["Vocalist"] },
+        { name: "Yoohyeon", position: ["Lead Vocalist"] },
+        { name: "Dami", position: ["Main Rapper", "Lead Dancer"] },
+        {
+          name: "Gahyeon",
+          position: ["Lead Rapper", "Sub Vocalist", "Maknae"],
+        },
+      ],
+    },
+    {
+      name: "fromis_9",
+      agency: "Off The Record Entertainment",
+      members: [
+        {
+          name: "Saerom",
+          position: ["Leader", "Lead Dancer", "Vocalist", "Visual"],
+        },
+        { name: "Hayoung", position: ["Lead Vocalist", "Lead Dancer"] },
+        { name: "Gyuri", position: ["Lead Vocalist", "Visual"] },
+        { name: "Jiwon", position: ["Main Vocalist"] },
+        { name: "Jisun", position: ["Lead Vocalist", "Lead Dancer", "Center"] },
+        {
+          name: "Seoyeon",
+          position: ["Main Rapper", "Vocalist", "Main Dancer"],
+        },
+        {
+          name: "Chaeyoung",
+          position: ["Main Rapper", "Main Dancer", "Vocalist"],
+        },
+        {
+          name: "Nagyung",
+          position: ["Lead Rapper", "Sub Vocalist", "Visual"],
+        },
+        { name: "Jiheon", position: ["Lead Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "NATURE",
+      agency: "n.CH Entertainment",
+      members: [
+        { name: "Lu", position: ["Leader", "Main Vocalist"] },
+        { name: "Saebom", position: ["Lead Rapper", "Vocalist"] },
+        { name: "Aurora", position: ["Main Dancer", "Vocalist"] },
+        { name: "Chaebin", position: ["Main Vocalist"] },
+        { name: "Haru", position: ["Main Dancer", "Vocalist"] },
+        { name: "Loha", position: ["Main Vocalist"] },
+        { name: "Uchae", position: ["Lead Dancer", "Vocalist", "Visual"] },
+        { name: "Sunshine", position: ["Lead Vocalist"] },
+        { name: "Sohee", position: ["Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "D-CRUNCH",
+      agency: "All-S Company",
+      members: [
+        { name: "O.V", position: ["Leader", "Main Rapper"] },
+        { name: "Hyunwook", position: ["Main Vocalist"] },
+        { name: "Hyunho", position: ["Lead Vocalist"] },
+        { name: "Hyunoh", position: ["Vocalist"] },
+        { name: "Hyunwoo", position: ["Sub Vocalist"] },
+        { name: "Minhyuk", position: ["Sub Rapper"] },
+        { name: "Chanyoung", position: ["Main Dancer", "Lead Rapper"] },
+        { name: "Jungseung", position: ["Lead Vocalist"] },
+        { name: "Dylan", position: ["Rapper", "Maknae"] },
+      ],
+    },
+    {
+      name: "DreamNote",
+      agency: "iMe Korea",
+      members: [
+        { name: "Sumin", position: ["Leader", "Lead Vocalist"] },
+        { name: "Eunjo", position: ["Lead Dancer", "Vocalist"] },
+        { name: "Lara", position: ["Main Vocalist"] },
+        { name: "Miso", position: ["Main Dancer", "Lead Rapper"] },
+        { name: "Youi", position: ["Lead Vocalist", "Visual"] },
+        { name: "Boni", position: ["Lead Vocalist"] },
+        { name: "Habin", position: ["Main Dancer", "Rapper"] },
+        { name: "Hanbyeol", position: ["Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "IZ*ONE",
+      agency: "Off The Record Entertainment",
+      members: [
+        { name: "Eunbi", position: ["Leader", "Lead Vocalist", "Lead Dancer"] },
+        { name: "Sakura", position: ["Sub Vocalist", "Visual"] },
+        { name: "Hyewon", position: ["Lead Rapper", "Sub Vocalist"] },
+        { name: "Yuri", position: ["Main Vocalist"] },
+        { name: "Yena", position: ["Main Rapper", "Lead Dancer", "Vocalist"] },
+        {
+          name: "Chaeyeon",
+          position: ["Main Dancer", "Lead Vocalist", "Lead Rapper"],
+        },
+        { name: "Minju", position: ["Lead Rapper", "Sub Vocalist", "Visual"] },
+        { name: "Nako", position: ["Sub Vocalist"] },
+        { name: "Hitomi", position: ["Sub Vocalist", "Lead Dancer"] },
+        { name: "Yujin", position: ["Lead Vocalist", "Lead Dancer", "Center"] },
+        {
+          name: "Wonyoung",
+          position: ["Lead Dancer", "Sub Vocalist", "Visual", "Maknae"],
+        },
+        { name: "Chaewon", position: ["Lead Vocalist"] },
+      ],
+    },
+    {
+      name: "PRISTIN",
+      agency: "Pledis Entertainment",
+      members: [
+        { name: "Nayoung", position: ["Leader", "Main Rapper", "Lead Dancer"] },
+        { name: "Roa", position: ["Lead Vocalist"] },
+        { name: "Yuha", position: ["Lead Vocalist"] },
+        { name: "Eunwoo", position: ["Lead Vocalist"] },
+        { name: "Rena", position: ["Main Rapper", "Lead Vocalist"] },
+        {
+          name: "Kyulkyung",
+          position: ["Main Dancer", "Sub Vocalist", "Visual"],
+        },
+        { name: "Yehana", position: ["Main Vocalist"] },
+        { name: "Sungyeon", position: ["Main Vocalist", "Main Producer"] },
+        { name: "Xiyeon", position: ["Lead Rapper", "Lead Vocalist"] },
+        { name: "Kyla", position: ["Lead Rapper", "Sub Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "ELRIS",
+      agency: "Hunus Entertainment",
+      members: [
+        { name: "Bella", position: ["Leader", "Main Rapper", "Sub Vocalist"] },
+        { name: "Hyeseong", position: ["Lead Vocalist", "Main Dancer"] },
+        { name: "Yukyung", position: ["Main Dancer", "Sub Vocalist"] },
+        { name: "Sohee", position: ["Main Vocalist", "Face of the Group"] },
+        { name: "Karin", position: ["Sub Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "IN2IT",
+      agency: "MMO Entertainment",
+      members: [
+        { name: "Jiahn", position: ["Leader", "Main Vocalist"] },
+        { name: "Yeontae", position: ["Main Vocalist"] },
+        { name: "Inpyo", position: ["Lead Dancer", "Vocalist"] },
+        { name: "Isaac", position: ["Vocalist"] },
+        { name: "Inho", position: ["Lead Vocalist"] },
+        { name: "Hyunuk", position: ["Main Dancer", "Rapper"] },
+        { name: "Jinsub", position: ["Main Vocalist"] },
+        { name: "Sunghyun", position: ["Main Dancer", "Maknae"] },
+      ],
+    },
+    {
+      name: "The Rose",
+      agency: "J&Star Company",
+      members: [
+        {
+          name: "Woosung",
+          position: ["Leader", "Main Vocalist", "Electric Guitar"],
+        },
+        {
+          name: "Dojoon",
+          position: ["Keyboard", "Acoustic Guitar", "Main Vocalist"],
+        },
+        { name: "Hajoon", position: ["Drummer", "Sub Vocalist", "Rapper"] },
+        {
+          name: "Jaehyeong",
+          position: ["Bassist", "Sub Vocalist", "Visual", "Maknae"],
+        },
+      ],
+    },
+    {
+      name: "ITZY",
+      agency: "JYP Entertainment",
+      members: [
+        {
+          name: "Yeji",
+          position: ["Leader", "Main Dancer", "Lead Vocalist", "Sub Rapper"],
+        },
+        { name: "Lia", position: ["Main Vocalist"] },
+        {
+          name: "Ryujin",
+          position: ["Main Rapper", "Lead Dancer", "Center", "Sub Vocalist"],
+        },
+        {
+          name: "Chaeryeong",
+          position: ["Main Dancer", "Sub Vocalist", "Sub Rapper"],
+        },
+        {
+          name: "Yuna",
+          position: ["Lead Rapper", "Lead Dancer", "Visual", "Maknae"],
+        },
+      ],
+    },
+    {
+      name: "TXT (Tomorrow X Together)",
+      agency: "BigHit Music",
+      members: [
+        { name: "Soobin", position: ["Leader", "Vocalist", "Rapper"] },
+        { name: "Yeonjun", position: ["Rapper", "Dancer", "Vocalist"] },
+        {
+          name: "Beomgyu",
+          position: ["Vocalist", "Dancer", "Rapper", "Center", "Visual"],
+        },
+        { name: "Taehyun", position: ["Main Vocalist", "Dancer"] },
+        {
+          name: "Huening Kai",
+          position: ["Lead Vocalist", "Dancer", "Maknae"],
+        },
+      ],
+    },
+    {
+      name: "TREASURE",
+      agency: "YG Entertainment",
+      members: [
+        {
+          name: "Choi Hyunsuk",
+          position: ["Leader", "Main Rapper", "Main Dancer"],
+        },
+        {
+          name: "Jihoon",
+          position: ["Leader", "Lead Vocalist", "Lead Dancer"],
+        },
+        { name: "Yoshi", position: ["Lead Rapper", "Vocalist"] },
+        { name: "Junkyu", position: ["Lead Vocalist", "Visual"] },
+        {
+          name: "Mashiho",
+          position: ["Lead Dancer", "Lead Vocalist", "Visual"],
+        },
+        { name: "Yoon Jae-hyuk", position: ["Sub Vocalist"] },
+        { name: "Asahi", position: ["Lead Vocalist", "Visual"] },
+        { name: "Bang Yedam", position: ["Main Vocalist"] },
+        { name: "Doyoung", position: ["Main Dancer", "Vocalist"] },
+        { name: "Haruto", position: ["Main Rapper", "Visual"] },
+        { name: "Park Jeongwoo", position: ["Main Vocalist"] },
+        {
+          name: "So Junghwan",
+          position: ["Lead Dancer", "Sub Vocalist", "Maknae"],
+        },
+      ],
+    },
+    {
+      name: "CRAVITY",
+      agency: "Starship Entertainment",
+      members: [
+        { name: "Serim", position: ["Leader", "Main Rapper", "Visual"] },
+        { name: "Allen", position: ["Main Dancer", "Lead Rapper"] },
+        { name: "Jungmo", position: ["Lead Vocalist", "Visual"] },
+        { name: "Woobin", position: ["Main Vocalist"] },
+        { name: "Wonjin", position: ["Lead Vocalist", "Lead Dancer"] },
+        { name: "Minhee", position: ["Lead Vocalist", "Visual"] },
+        { name: "Hyeongjun", position: ["Main Dancer", "Vocalist"] },
+        { name: "Taeyoung", position: ["Lead Dancer", "Vocalist"] },
+        { name: "Seongmin", position: ["Lead Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "MCND",
+      agency: "TOP Media",
+      members: [
+        { name: "Castle J", position: ["Leader", "Main Rapper"] },
+        { name: "BIC", position: ["Main Dancer", "Lead Rapper"] },
+        { name: "Minjae", position: ["Main Vocalist"] },
+        { name: "Huijun", position: ["Main Vocalist"] },
+        { name: "Win", position: ["Lead Rapper", "Maknae"] },
+      ],
+    },
+    {
+      name: "cignature",
+      agency: "J9 Entertainment",
+      members: [
+        { name: "Chaesol", position: ["Leader", "Lead Dancer", "Vocalist"] },
+        { name: "Jeewon", position: ["Lead Vocalist", "Lead Rapper"] },
+        { name: "Seline", position: ["Lead Vocalist"] },
+        { name: "Chloe", position: ["Main Rapper", "Sub Vocalist"] },
+        { name: "Semi", position: ["Main Dancer", "Lead Vocalist"] },
+        { name: "Dohee", position: ["Lead Vocalist"] },
+        { name: "Belle", position: ["Main Vocalist"] },
+      ],
+    },
+    {
+      name: "STAYC",
+      agency: "High Up Entertainment",
+      members: [
+        {
+          name: "Sumin",
+          position: ["Leader", "Lead Vocalist", "Lead Dancer", "Rapper"],
+        },
+        { name: "Sieun", position: ["Main Vocalist"] },
+        { name: "Isa", position: ["Lead Vocalist"] },
+        { name: "Seeun", position: ["Sub Vocalist"] },
+        { name: "Yoon", position: ["Lead Vocalist", "Lead Dancer"] },
+        { name: "J", position: ["Main Rapper", "Lead Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "Weeekly",
+      agency: "IST Entertainment",
+      members: [
+        {
+          name: "Soojin",
+          position: ["Leader", "Main Dancer", "Lead Vocalist"],
+        },
+        { name: "Jiyoon", position: ["Main Rapper", "Lead Vocalist"] },
+        { name: "Monday", position: ["Main Vocalist", "Main Dancer"] },
+        { name: "Soeun", position: ["Main Dancer", "Lead Rapper", "Vocalist"] },
+        { name: "Jaehee", position: ["Lead Vocalist", "Sub Rapper"] },
+        {
+          name: "Jihan",
+          position: ["Lead Vocalist", "Visual", "Face of the Group"],
+        },
+        { name: "Zoa", position: ["Lead Rapper", "Sub Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "ENHYPEN",
+      agency: "Belift Lab (HYBE x CJ ENM)",
+      members: [
+        {
+          name: "Jungwon",
+          position: ["Leader", "Lead Dancer", "Lead Vocalist", "Rapper"],
+        },
+        { name: "Heeseung", position: ["Main Vocalist", "Center", "Dancer"] },
+        { name: "Jay", position: ["Main Rapper", "Lead Dancer", "Vocalist"] },
+        { name: "Jake", position: ["Lead Rapper", "Vocalist"] },
+        { name: "Sunghoon", position: ["Lead Dancer", "Vocalist", "Visual"] },
+        { name: "Sunoo", position: ["Lead Vocalist"] },
+        { name: "Ni-ki", position: ["Main Dancer", "Sub Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "E'LAST",
+      agency: "E Entertainment",
+      members: [
+        { name: "Rano", position: ["Leader", "Main Rapper", "Main Dancer"] },
+        { name: "Choi In", position: ["Main Vocalist"] },
+        { name: "Seungyeop", position: ["Lead Vocalist"] },
+        { name: "Baekgyeol", position: ["Vocalist", "Visual"] },
+        { name: "Romin", position: ["Lead Vocalist", "Visual"] },
+        { name: "Won Hyuk", position: ["Main Rapper", "Vocalist"] },
+        { name: "Wonjun", position: ["Lead Rapper", "Vocalist"] },
+        { name: "Yejun", position: ["Lead Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "DRIPPIN",
+      agency: "Woollim Entertainment",
+      members: [
+        { name: "Yunseong", position: ["Leader", "Main Dancer", "Vocalist"] },
+        { name: "Hyeop", position: ["Main Vocalist"] },
+        { name: "Changuk", position: ["Lead Vocalist"] },
+        { name: "Dongyun", position: ["Main Rapper", "Lead Dancer"] },
+        { name: "Minseo", position: ["Lead Vocalist", "Maknae"] },
+        { name: "Junho", position: ["Lead Dancer", "Vocalist", "Visual"] },
+        {
+          name: "Alex",
+          position: ["Rapper", "Vocalist", "Maknae (2019~2022 활동)"],
+        },
+      ],
+    },
+    {
+      name: "Secret Number",
+      agency: "Vine Entertainment",
+      members: [
+        { name: "Léa", position: ["Leader", "Lead Vocalist"] },
+        { name: "Dita", position: ["Main Dancer", "Sub Vocalist"] },
+        {
+          name: "Jinny",
+          position: ["Main Rapper", "Lead Dancer", "Sub Vocalist"],
+        },
+        { name: "Minji", position: ["Main Vocalist"] },
+        { name: "Soodam", position: ["Lead Dancer", "Sub Vocalist", "Visual"] },
+        { name: "Zuu", position: ["Sub Rapper", "Sub Vocalist"] },
+      ],
+    },
+    {
+      name: "BDC (Boys Da Capo)",
+      agency: "Brand New Music",
+      members: [
+        {
+          name: "Seongjun",
+          position: ["Leader", "Main Rapper", "Sub Vocalist"],
+        },
+        { name: "Sihoon", position: ["Main Dancer", "Lead Vocalist"] },
+        { name: "Jung Hwan", position: ["Main Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "BOTOPASS",
+      agency: "WKS ENE / JMG",
+      members: [
+        { name: "Mihee", position: ["Leader", "Main Vocalist"] },
+        { name: "Seoyoon", position: ["Lead Vocalist"] },
+        { name: "Ria", position: ["Lead Rapper", "Vocalist"] },
+        { name: "Shiyeon", position: ["Main Dancer", "Lead Vocalist"] },
+        { name: "Harin", position: ["Lead Dancer", "Vocalist"] },
+        { name: "Jiwon", position: ["Main Rapper", "Sub Vocalist"] },
+        { name: "Cyan", position: ["Main Vocalist"] },
+        { name: "Ahyoon", position: ["Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "LE SSERAFIM",
+      agency: "Source Music / HYBE",
+      members: [
+        { name: "Chaewon", position: ["Leader", "Vocalist", "Dancer"] },
+        { name: "Sakura", position: ["Sub Vocalist", "Sub Rapper", "Visual"] },
+        { name: "Yunjin", position: ["Main Vocalist"] },
+        {
+          name: "Kazuha",
+          position: ["Lead Rapper", "Lead Dancer", "Sub Vocalist"],
+        },
+        {
+          name: "Eunchae",
+          position: ["Lead Dancer", "Sub Vocalist", "Maknae"],
+        },
+      ],
+    },
+    {
+      name: "NewJeans",
+      agency: "ADOR (HYBE)",
+      members: [
+        { name: "Minji", position: ["Leader", "Lead Rapper", "Sub Vocalist"] },
+        { name: "Hanni", position: ["Main Vocalist"] },
+        { name: "Danielle", position: ["Lead Vocalist", "Lead Dancer"] },
+        { name: "Haerin", position: ["Main Vocalist", "Sub Rapper"] },
+        { name: "Hyein", position: ["Lead Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "Kep1er",
+      agency: "Wake One Entertainment / Swing Entertainment",
+      members: [
+        {
+          name: "Yujin",
+          position: ["Leader", "Lead Dancer", "Sub Vocalist", "Sub Rapper"],
+        },
+        {
+          name: "Mashiro",
+          position: ["Co-Leader", "Sub Vocalist", "Sub Rapper"],
+        },
+        { name: "Xiaoting", position: ["Main Dancer", "Sub Vocalist"] },
+        { name: "Chaehyun", position: ["Main Vocalist"] },
+        {
+          name: "Dayeon",
+          position: ["Main Dancer", "Sub Vocalist", "Sub Rapper"],
+        },
+        { name: "Hikaru", position: ["Main Rapper", "Lead Dancer"] },
+        { name: "Huening Bahiyyih", position: ["Sub Vocalist", "Sub Rapper"] },
+        {
+          name: "Youngeun",
+          position: ["Main Dancer", "Lead Rapper", "Sub Vocalist"],
+        },
+        { name: "Yeseo", position: ["Lead Dancer", "Lead Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "NMIXX",
+      agency: "JYP Entertainment",
+      members: [
+        { name: "Haewon", position: ["Leader", "Main Vocalist"] },
+        { name: "Lily", position: ["Main Vocalist"] },
+        { name: "Sullyoon", position: ["Vocalist", "Visual"] },
+        { name: "Bae", position: ["Lead Dancer", "Sub Vocalist"] },
+        {
+          name: "Jiwoo",
+          position: ["Main Rapper", "Main Dancer", "Sub Vocalist"],
+        },
+        { name: "Kyujin", position: ["Main Dancer", "Lead Rapper", "Maknae"] },
+      ],
+    },
+    {
+      name: "XG",
+      agency: "XGALX",
+      members: [
+        { name: "Jurin", position: ["Leader", "Main Rapper", "Lead Dancer"] },
+        { name: "Chisa", position: ["Main Vocalist"] },
+        { name: "Harvey", position: ["Lead Rapper", "Lead Dancer"] },
+        { name: "Hinata", position: ["Lead Dancer", "Sub Vocalist"] },
+        { name: "Juria", position: ["Main Vocalist"] },
+        { name: "Maya", position: ["Main Rapper", "Lead Vocalist"] },
+        { name: "Cocona", position: ["Main Rapper", "Maknae"] },
+      ],
+    },
+    {
+      name: "TNX",
+      agency: "PNation",
+      members: [
+        { name: "Taehun", position: ["Leader", "Main Vocalist"] },
+        { name: "Kyungjun", position: ["Lead Rapper"] },
+        { name: "Hyunsoo", position: ["Lead Dancer", "Sub Vocalist"] },
+        { name: "Junhyeok", position: ["Main Rapper", "Lead Dancer"] },
+        { name: "Hwi", position: ["Main Vocalist", "Sub Rapper"] },
+        { name: "Sungjun", position: ["Lead Rapper", "Maknae"] },
+      ],
+    },
+    {
+      name: "BAE173",
+      agency: "PocketDol Studio",
+      members: [
+        { name: "J-Min", position: ["Leader", "Main Rapper"] },
+        { name: "Hangyul", position: ["Main Dancer", "Lead Vocalist"] },
+        { name: "Yoojun", position: ["Lead Rapper", "Vocalist"] },
+        { name: "Muzin", position: ["Main Dancer", "Sub Rapper"] },
+        { name: "Junseo", position: ["Lead Dancer", "Sub Vocalist"] },
+        { name: "Youngseo", position: ["Main Vocalist"] },
+        { name: "Doha", position: ["Main Rapper", "Sub Vocalist"] },
+        { name: "Bit", position: ["Sub Rapper", "Vocalist"] },
+        { name: "Dohyon", position: ["Main Rapper", "Maknae"] },
+      ],
+    },
+    {
+      name: "BOYNEXTDOOR",
+      agency: "KOZ Entertainment (HYBE)",
+      members: [
+        { name: "Jaehyun", position: ["Leader", "Vocalist", "Rapper"] },
+        { name: "Sungho", position: ["Main Vocalist"] },
+        { name: "Riwoo", position: ["Main Dancer", "Vocalist"] },
+        { name: "Taesan", position: ["Main Rapper", "Vocalist"] },
+        { name: "Leehan", position: ["Sub Vocalist", "Visual"] },
+        { name: "Woonhak", position: ["Lead Rapper", "Maknae"] },
+      ],
+    },
+    {
+      name: "ZEROBASEONE (ZB1)",
+      agency: "WakeOne Entertainment",
+      members: [
+        {
+          name: "Sung Hanbin",
+          position: ["Leader", "Main Dancer", "Lead Vocalist"],
+        },
+        { name: "Kim Jiwoong", position: ["Lead Vocalist", "Visual"] },
+        { name: "Zhang Hao", position: ["Center", "Main Vocalist"] },
+        { name: "Seok Matthew", position: ["Lead Vocalist"] },
+        { name: "Kim Taerae", position: ["Main Vocalist"] },
+        { name: "Ricky", position: ["Lead Dancer", "Sub Vocalist"] },
+        {
+          name: "Kim Gyuvin",
+          position: ["Main Dancer", "Sub Vocalist", "Visual"],
+        },
+        { name: "Park Gunwook", position: ["Main Rapper", "Lead Dancer"] },
+        {
+          name: "Han Yujin",
+          position: ["Lead Dancer", "Sub Vocalist", "Maknae"],
+        },
+      ],
+    },
+    {
+      name: "RIIZE",
+      agency: "SM Entertainment",
+      members: [
+        { name: "Shotaro", position: ["Main Dancer", "Lead Rapper"] },
+        { name: "Eunseok", position: ["Lead Rapper", "Visual"] },
+        { name: "Sungchan", position: ["Main Rapper", "Lead Dancer"] },
+        { name: "Wonbin", position: ["Lead Rapper", "Lead Vocalist"] },
+        { name: "Sohee", position: ["Main Vocalist"] },
+        { name: "Anton", position: ["Lead Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "KISS OF LIFE",
+      agency: "S2 Entertainment",
+      members: [
+        { name: "Julie", position: ["Leader", "Main Rapper"] },
+        { name: "Natty", position: ["Main Dancer", "Lead Vocalist"] },
+        { name: "Belle", position: ["Main Vocalist"] },
+        { name: "Haneul", position: ["Lead Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "PLAVE",
+      agency: "Vlast",
+      members: [
+        { name: "Yejun", position: ["Leader", "Main Vocalist"] },
+        { name: "Noah", position: ["Main Rapper", "Sub Vocalist"] },
+        { name: "Bamby", position: ["Main Dancer", "Vocalist"] },
+        { name: "Eunho", position: ["Lead Rapper", "Vocalist"] },
+        { name: "Hamin", position: ["Lead Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "BABYMONSTER",
+      agency: "YG Entertainment",
+      members: [
+        { name: "Ruka", position: ["Main Rapper", "Lead Dancer"] },
+        { name: "Pharita", position: ["Main Vocalist"] },
+        { name: "Asa", position: ["Main Rapper", "Lead Dancer"] },
+        { name: "Ahyeon", position: ["Main Vocalist", "Lead Rapper"] },
+        { name: "Rami (Haram)", position: ["Main Vocalist"] },
+        { name: "Chiquita", position: ["Lead Vocalist", "Maknae"] },
+        { name: "Rora", position: ["Lead Vocalist"] },
+      ],
+    },
+    {
+      name: "ILLIT",
+      agency: "Belift Lab (HYBE)",
+      members: [
+        { name: "Yunah", position: ["Leader", "Main Vocalist"] },
+        { name: "Minju", position: ["Main Rapper", "Lead Dancer"] },
+        { name: "Moka", position: ["Lead Vocalist"] },
+        { name: "Wonhee", position: ["Main Vocalist", "Center"] },
+        { name: "Iroha", position: ["Lead Dancer", "Sub Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "UNIS",
+      agency: "F&F Entertainment / Kakao Entertainment",
+      members: [
+        { name: "Jin Hyeonju", position: ["Leader", "Main Vocalist"] },
+        { name: "Im Yoonseo", position: ["Lead Vocalist"] },
+        { name: "Nanami", position: ["Lead Dancer", "Vocalist"] },
+        { name: "Kotone", position: ["Lead Rapper", "Vocalist"] },
+        { name: "Elisia", position: ["Main Vocalist"] },
+        { name: "Oh Yewon", position: ["Lead Rapper", "Sub Vocalist"] },
+        { name: "Camila", position: ["Main Dancer", "Vocalist"] },
+        { name: "Lim Seowon", position: ["Sub Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "TWS",
+      agency: "Pledis Entertainment (HYBE)",
+      members: [
+        { name: "Shinyu", position: ["Leader", "Lead Rapper", "Sub Vocalist"] },
+        { name: "Dohoon", position: ["Main Vocalist"] },
+        { name: "Youngjae", position: ["Lead Vocalist"] },
+        { name: "Kyungmin", position: ["Main Rapper"] },
+        { name: "Hanjin", position: ["Main Dancer", "Vocalist"] },
+        { name: "Jihoon", position: ["Lead Dancer", "Sub Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "KATSEYE",
+      agency: "HYBE x Geffen Records",
+      members: [
+        { name: "Lara Rajagopal", position: ["Leader", "Main Vocalist"] },
+        { name: "Sophia Laforteza", position: ["Main Rapper", "Lead Dancer"] },
+        {
+          name: "Daniela Avanzini",
+          position: ["Main Dancer", "Lead Vocalist"],
+        },
+        { name: "Manon Bannerman", position: ["Lead Rapper", "Vocalist"] },
+        { name: "Megan Skiendziel", position: ["Lead Vocalist"] },
+        { name: "Yoonchae Jeong", position: ["Sub Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "RESCENE",
+      agency: "Great M Entertainment",
+      members: [
+        { name: "Woni", position: ["Leader", "Main Dancer", "Vocalist"] },
+        { name: "Liv", position: ["Main Vocalist"] },
+        { name: "Minami", position: ["Lead Dancer", "Sub Vocalist"] },
+        { name: "Mayu", position: ["Main Rapper", "Sub Vocalist"] },
+        { name: "Yuzu", position: ["Lead Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "ALL(H)OURS",
+      agency: "EDEN Entertainment",
+      members: [
+        { name: "Mingyu", position: ["Leader", "Main Vocalist"] },
+        { name: "Jungmin", position: ["Main Dancer", "Lead Rapper"] },
+        { name: "Hyunwoo", position: ["Main Rapper", "Vocalist"] },
+        { name: "Yoonmin", position: ["Lead Vocalist", "Sub Rapper"] },
+        { name: "Jinsung", position: ["Main Dancer", "Sub Vocalist"] },
+        { name: "Sion", position: ["Lead Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "AMPERS&ONE",
+      agency: "FNC Entertainment",
+      members: [
+        { name: "Kamden", position: ["Leader", "Main Rapper"] },
+        { name: "Brian", position: ["Main Vocalist"] },
+        { name: "Jiho", position: ["Lead Vocalist"] },
+        { name: "Seungmo", position: ["Main Dancer", "Vocalist"] },
+        { name: "Kyrell", position: ["Lead Rapper"] },
+        { name: "Sangmin", position: ["Main Vocalist"] },
+        { name: "Kyungmin", position: ["Lead Rapper", "Maknae"] },
+      ],
+    },
+    {
+      name: "NOWADAYS",
+      agency: "Cube Entertainment",
+      members: [
+        { name: "Jinhyuk", position: ["Leader", "Main Vocalist"] },
+        { name: "Woohyuk", position: ["Main Rapper", "Lead Dancer"] },
+        { name: "Seokmin", position: ["Lead Vocalist"] },
+        { name: "Yujin", position: ["Main Dancer", "Vocalist"] },
+        { name: "Hyunseo", position: ["Lead Rapper", "Maknae"] },
+      ],
+    },
+    {
+      name: "EXO",
+      agency: "SM Entertainment",
+      members: [
+        { name: "Suho", position: ["Leader", "Lead Vocalist"] },
+        { name: "Xiumin", position: ["Lead Vocalist", "Lead Dancer"] },
+        { name: "Lay", position: ["Main Dancer", "Vocalist"] },
+        { name: "Baekhyun", position: ["Main Vocalist"] },
+        { name: "Chen", position: ["Main Vocalist"] },
+        { name: "Chanyeol", position: ["Main Rapper", "Vocalist"] },
+        { name: "D.O.", position: ["Main Vocalist"] },
+        {
+          name: "Kai",
+          position: ["Main Dancer", "Sub Rapper", "Visual", "Center"],
+        },
+        {
+          name: "Sehun",
+          position: ["Lead Dancer", "Sub Rapper", "Visual", "Maknae"],
+        },
+      ],
+    },
+    {
+      name: "Red Velvet",
+      agency: "SM Entertainment",
+      members: [
+        {
+          name: "Irene",
+          position: ["Leader", "Main Rapper", "Lead Dancer", "Visual"],
+        },
+        { name: "Seulgi", position: ["Main Dancer", "Lead Vocalist"] },
+        { name: "Wendy", position: ["Main Vocalist"] },
+        { name: "Joy", position: ["Lead Rapper", "Sub Vocalist"] },
+        { name: "Yeri", position: ["Sub Vocalist", "Sub Rapper", "Maknae"] },
+      ],
+    },
+    {
+      name: "SEVENTEEN",
+      agency: "Pledis Entertainment (HYBE)",
+      members: [
+        {
+          name: "S.Coups",
+          position: ["Leader", "Hip-Hop Team Leader", "Main Rapper"],
+        },
+        { name: "Jeonghan", position: ["Lead Vocalist"] },
+        { name: "Joshua", position: ["Lead Vocalist"] },
+        { name: "Jun", position: ["Lead Dancer", "Sub Vocalist"] },
+        {
+          name: "Hoshi",
+          position: ["Performance Team Leader", "Main Dancer", "Lead Vocalist"],
+        },
+        { name: "Wonwoo", position: ["Lead Rapper"] },
+        {
+          name: "Woozi",
+          position: ["Vocal Team Leader", "Lead Vocalist", "Producer"],
+        },
+        { name: "DK", position: ["Main Vocalist"] },
+        { name: "Mingyu", position: ["Lead Rapper", "Visual"] },
+        { name: "The8", position: ["Lead Dancer", "Sub Vocalist"] },
+        { name: "Seungkwan", position: ["Main Vocalist"] },
+        { name: "Vernon", position: ["Main Rapper"] },
+        { name: "Dino", position: ["Main Dancer", "Sub Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "TWICE",
+      agency: "JYP Entertainment",
+      members: [
+        { name: "Nayeon", position: ["Lead Vocalist", "Center"] },
+        { name: "Jeongyeon", position: ["Lead Vocalist"] },
+        {
+          name: "Momo",
+          position: ["Main Dancer", "Sub Vocalist", "Sub Rapper"],
+        },
+        { name: "Sana", position: ["Sub Vocalist"] },
+        { name: "Jihyo", position: ["Leader", "Main Vocalist"] },
+        { name: "Mina", position: ["Main Dancer", "Sub Vocalist"] },
+        { name: "Dahyun", position: ["Lead Rapper", "Sub Vocalist"] },
+        { name: "Chaeyoung", position: ["Main Rapper", "Sub Vocalist"] },
+        {
+          name: "Tzuyu",
+          position: ["Lead Dancer", "Sub Vocalist", "Visual", "Maknae"],
+        },
+      ],
+    },
+    {
+      name: "GFRIEND",
+      agency: "Source Music",
+      members: [
+        { name: "Sowon", position: ["Leader", "Sub Vocalist", "Visual"] },
+        { name: "Yerin", position: ["Lead Dancer", "Sub Vocalist"] },
+        { name: "Eunha", position: ["Lead Vocalist"] },
+        { name: "Yuju", position: ["Main Vocalist"] },
+        { name: "SinB", position: ["Main Dancer", "Sub Vocalist"] },
+        { name: "Umji", position: ["Sub Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "MAMAMOO",
+      agency: "RBW Entertainment",
+      members: [
+        { name: "Solar", position: ["Leader", "Main Vocalist"] },
+        { name: "Moonbyul", position: ["Main Rapper", "Main Dancer"] },
+        { name: "Wheein", position: ["Lead Vocalist", "Lead Dancer"] },
+        { name: "Hwasa", position: ["Lead Rapper", "Sub Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "iKON",
+      agency: "YG Entertainment",
+      members: [
+        { name: "B.I", position: ["Leader", "Main Rapper"] },
+        { name: "Bobby", position: ["Main Rapper", "Vocalist"] },
+        { name: "Jinhwan", position: ["Main Vocalist", "Lead Dancer"] },
+        { name: "Yunhyeong", position: ["Lead Vocalist"] },
+        { name: "Donghyuk", position: ["Main Dancer", "Vocalist"] },
+        { name: "Junhoe", position: ["Main Vocalist"] },
+        { name: "Chanwoo", position: ["Sub Vocalist", "Maknae"] },
+      ],
+    },
+    {
+      name: "WINNER",
+      agency: "YG Entertainment",
+      members: [
+        { name: "Jinu", position: ["Lead Vocalist", "Visual"] },
+        { name: "Hoony", position: ["Main Dancer", "Rapper"] },
+        { name: "Mino", position: ["Main Rapper", "Vocalist"] },
+        { name: "Seungyoon", position: ["Leader", "Main Vocalist", "Maknae"] },
+      ],
+    },
+  ],
 };
 
-export type KpopGroup = typeof kpopGroupsData.groups[0];
-export type KpopMember = KpopGroup['members'][0];
+export type KpopGroup = (typeof kpopGroupsData.groups)[0];
+export type KpopMember = KpopGroup["members"][0];
