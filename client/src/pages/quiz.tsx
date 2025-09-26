@@ -109,8 +109,10 @@ export default function QuizPage() {
   const [, setLocation] = useLocation();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Partial<QuizAnswers>>(() => {
-    // 퀴즈 시작 시 이전 답변 초기화
+    // 퀴즈 시작 시 모든 저장된 데이터 초기화
     sessionStorage.removeItem('quizAnswers');
+    sessionStorage.removeItem('selectedAnswers');
+    localStorage.removeItem('quizState');
     return {};
   });
 

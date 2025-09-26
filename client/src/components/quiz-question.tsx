@@ -32,14 +32,14 @@ export default function QuizQuestion({ question, onAnswer, selectedValue }: Quiz
   const isGridLayout = question.id === 2; // Music genre question uses grid layout
 
   return (
-    <div className={`${isGridLayout ? 'grid grid-cols-2 gap-4' : 'grid gap-4'}`}>
+    <div className={`${isGridLayout ? 'grid grid-cols-2 gap-4' : 'grid gap-4'}`} key={question.id}>
       {question.options.map((option) => {
         const Icon = option.icon;
-        const isSelected = selectedValue === option.value;
+        const isSelected = selectedValue === option.value && selectedValue !== undefined;
         
         return (
           <Button
-            key={option.value}
+            key={`${question.id}-${option.value}`}
             variant="outline"
             className={`
               p-4 h-auto border-2 text-left transition-all hover:scale-105
@@ -52,6 +52,7 @@ export default function QuizQuestion({ question, onAnswer, selectedValue }: Quiz
             onClick={() => handleOptionClick(option.value)}
             type="button"
             autoFocus={false}
+            tabIndex={-1}
           >
             <Icon 
               className={`${option.color} ${isGridLayout ? 'mb-2' : 'mr-4'}`}

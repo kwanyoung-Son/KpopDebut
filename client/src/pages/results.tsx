@@ -187,8 +187,17 @@ export default function ResultsPage({ params }: ResultsPageProps) {
           </CardContent>
         </Card>
 
-        {/* Share Card Preview */}
-        <ResultCard result={result} />
+        {/* Photo Display */}
+        {result.photoData && (
+          <Card className="bg-white rounded-3xl card-shadow overflow-hidden mb-8">
+            <CardContent className="p-8 text-center">
+              <h3 className="text-xl font-bold text-gray-800 mb-4">업로드한 사진</h3>
+              <div className="w-48 h-48 mx-auto rounded-2xl overflow-hidden border-4 border-gray-100">
+                <img src={result.photoData} alt="Uploaded photo" className="w-full h-full object-cover" />
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -210,14 +219,6 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               다시 테스트하기
             </Button>
           </Link>
-          <Button
-            onClick={handleSaveImage}
-            size="lg"
-            className="bg-[hsl(var(--primary-teal))] hover:bg-[hsl(var(--primary-teal))]/90 text-white px-8 py-4 rounded-full font-bold"
-          >
-            <Download className="mr-2" size={20} />
-            이미지 저장
-          </Button>
         </div>
       </div>
     </div>
