@@ -64,13 +64,24 @@ export class MemStorage implements IStorage {
 function createStorage(): IStorage {
   const isProduction = process.env.NODE_ENV === 'production';
   const isCloudflareWorkers = typeof globalThis !== 'undefined' && 'DB' in globalThis;
+  const useD1InDev = process.env.USE_D1_IN_DEV === 'true';
   
-  console.log(`Environment: ${process.env.NODE_ENV}, Cloudflare Workers: ${isCloudflareWorkers}`);
+  console.log(`Environment: ${process.env.NODE_ENV}, Cloudflare Workers: ${isCloudflareWorkers}, Use D1 in Dev: ${useD1InDev}`);
   
-  // Cloudflare Workers 환경에서는 D1 사용 (운영/개발 모두)
-  if (isCloudflareWorkers) {
+  // D1 사용 조건: Cloudflare Workers 환경 OR 개발에서 강제 D1 사용
+  if (isCloudflareWorkers || useD1InDev) {
     const { D1Storage } = require('./d1-storage');
-    const d1Storage = new D1Storage((globalThis as any).DB);
+    
+    let d1Database;
+    if (isCloudflareWorkers) {
+      // Cloudflare Workers 환경
+      d1Database = (globalThis as any).DB;
+    } else {
+      // 개발 환경에서 Neon PostgreSQL 사용
+      d1Database = null; // D1Storage에서 Neon 연결 사용
+    }
+    
+    const d1Storage = new D1Storage(d1Database);
     // 데이터베이스 초기화
     d1Storage.initializeDatabase().catch(console.error);
     console.log('Using D1Storage for Cloudflare Workers');

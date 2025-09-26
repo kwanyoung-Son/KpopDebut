@@ -1,5 +1,4 @@
 name = "kpopdebut"
-main = "server/index.ts"   # 또는 index.js (엔트리 파일 경로에 맞게 수정)
 compatibility_date = "2024-09-23"
 
 # 운영 환경 D1 Database bindings
