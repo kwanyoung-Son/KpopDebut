@@ -82,36 +82,100 @@ const kpopGroupsData = {
   ]
 };
 
-// Analysis algorithm
+// Analysis algorithm - 점수 기반 정교한 분석 시스템
 function generateAnalysisResult(quizAnswers: QuizAnswers) {
-  let positionType = 'Main Vocalist';
+  // 5개 포지션별 점수 초기화
+  let leaderScore = 0;
+  let vocalScore = 0; 
+  let danceScore = 0;
+  let rapScore = 0;
+  let visualScore = 0;
+
+  // 1. 무대 존재감 분석 (stagePresence)
+  switch (quizAnswers.stagePresence) {
+    case 'center': visualScore += 3; break;
+    case 'leader': leaderScore += 3; break;
+    case 'performer': danceScore += 3; break;
+    case 'charisma': rapScore += 3; break;
+  }
+
+  // 2. 성격 분석 (friendsDescribe)
+  switch (quizAnswers.friendsDescribe) {
+    case 'mood_maker': danceScore += 2; break;
+    case 'serious': leaderScore += 2; break;
+    case 'creative': vocalScore += 2; break;
+    case 'responsible': leaderScore += 2; break;
+  }
+
+  // 3. 프로젝트 스타일 분석 (newProject)
+  switch (quizAnswers.newProject) {
+    case 'execute': danceScore += 2; break;
+    case 'plan': leaderScore += 2; break;
+    case 'discuss': vocalScore += 2; break;
+    case 'think': visualScore += 2; break;
+  }
+
+  // 4. 무대 중요도 분석 (stageImportant)
+  switch (quizAnswers.stageImportant) {
+    case 'expression': visualScore += 3; break;
+    case 'accuracy': danceScore += 3; break;
+    case 'vocal': vocalScore += 3; break;
+    case 'teamwork': leaderScore += 3; break;
+  }
+
+  // 5. 연습 스타일 분석 (practiceStyle)
+  switch (quizAnswers.practiceStyle) {
+    case 'vocal': vocalScore += 3; break;
+    case 'dance': danceScore += 3; break;
+    case 'direction': leaderScore += 3; break;
+    case 'care': leaderScore += 2; visualScore += 1; break;
+  }
+
+  // 6. 춤 스타일 분석 (danceStyle)
+  switch (quizAnswers.danceStyle) {
+    case 'hiphop': rapScore += 3; break;
+    case 'contemporary': vocalScore += 2; break;
+    case 'powerful': danceScore += 3; break;
+    case 'cute': visualScore += 3; break;
+  }
+
+  // 7. 패션 스타일 보너스 (fashionStyle)
+  switch (quizAnswers.fashionStyle) {
+    case 'street': rapScore += 1; break;
+    case 'chic': leaderScore += 1; break;
+    case 'lovely': visualScore += 1; break;
+    case 'trendy': danceScore += 1; break;
+  }
+
+  // 8. 메이크업 스타일 보너스 (makeupStyle)
+  switch (quizAnswers.makeupStyle) {
+    case 'bold': rapScore += 1; break;
+    case 'elegant': leaderScore += 1; break;
+    case 'natural': visualScore += 1; break;
+    case 'retro': vocalScore += 1; break;
+  }
+
+  // 최고 점수 포지션 결정
+  const scores = { leaderScore, vocalScore, danceScore, rapScore, visualScore };
+  const maxScore = Math.max(...Object.values(scores));
+  
+  let positionType = '';
   let matchedMember: { name: string; position: string[] } | null = null;
   let matchedGroup = '';
 
-  // Position determination logic based on quiz answers
-  if (quizAnswers.stagePresence === 'leader' && quizAnswers.friendsDescribe === 'responsible') {
+  // 최고 점수에 해당하는 포지션의 멤버들 중에서 랜덤 선택
+  if (scores.leaderScore === maxScore) {
     positionType = 'Leader';
     const leaderMembers = [
       { member: kpopGroupsData.groups[0].members[0], group: 'BTS' }, // RM
-      { member: kpopGroupsData.groups[2].members[0], group: 'IVE' }, // Yujin
+      { member: kpopGroupsData.groups[2].members[0], group: 'IVE' }, // Yujin (실제로는 없음, 수정 필요)
       { member: kpopGroupsData.groups[3].members[0], group: 'aespa' }, // Karina
       { member: kpopGroupsData.groups[4].members[2], group: '(G)I-DLE' }, // Soyeon
     ];
     const selected = leaderMembers[Math.floor(Math.random() * leaderMembers.length)];
     matchedMember = selected.member;
     matchedGroup = selected.group;
-  } else if (quizAnswers.practiceStyle === 'dance' && quizAnswers.danceStyle === 'powerful') {
-    positionType = 'Main Dancer';
-    const dancerMembers = [
-      { member: kpopGroupsData.groups[0].members[3], group: 'BTS' }, // j-hope
-      { member: kpopGroupsData.groups[0].members[4], group: 'BTS' }, // Jimin
-      { member: kpopGroupsData.groups[1].members[3], group: 'BLACKPINK' }, // Lisa
-      { member: kpopGroupsData.groups[3].members[0], group: 'aespa' }, // Karina
-    ];
-    const selected = dancerMembers[Math.floor(Math.random() * dancerMembers.length)];
-    matchedMember = selected.member;
-    matchedGroup = selected.group;
-  } else if (quizAnswers.practiceStyle === 'vocal' && quizAnswers.stageImportant === 'vocal') {
+  } else if (scores.vocalScore === maxScore) {
     positionType = 'Main Vocalist';
     const vocalistMembers = [
       { member: kpopGroupsData.groups[0].members[6], group: 'BTS' }, // Jungkook
@@ -123,7 +187,18 @@ function generateAnalysisResult(quizAnswers: QuizAnswers) {
     const selected = vocalistMembers[Math.floor(Math.random() * vocalistMembers.length)];
     matchedMember = selected.member;
     matchedGroup = selected.group;
-  } else if (quizAnswers.friendsDescribe === 'creative' && quizAnswers.newProject === 'think') {
+  } else if (scores.danceScore === maxScore) {
+    positionType = 'Main Dancer';
+    const dancerMembers = [
+      { member: kpopGroupsData.groups[0].members[3], group: 'BTS' }, // j-hope
+      { member: kpopGroupsData.groups[0].members[4], group: 'BTS' }, // Jimin
+      { member: kpopGroupsData.groups[1].members[3], group: 'BLACKPINK' }, // Lisa
+      { member: kpopGroupsData.groups[3].members[0], group: 'aespa' }, // Karina
+    ];
+    const selected = dancerMembers[Math.floor(Math.random() * dancerMembers.length)];
+    matchedMember = selected.member;
+    matchedGroup = selected.group;
+  } else if (scores.rapScore === maxScore) {
     positionType = 'Main Rapper';
     const rapperMembers = [
       { member: kpopGroupsData.groups[0].members[0], group: 'BTS' }, // RM
@@ -135,7 +210,7 @@ function generateAnalysisResult(quizAnswers: QuizAnswers) {
     matchedMember = selected.member;
     matchedGroup = selected.group;
   } else {
-    // Visual members for other combinations
+    positionType = 'Visual';
     const visualMembers = [
       { member: kpopGroupsData.groups[0].members[1], group: 'BTS' }, // Jin
       { member: kpopGroupsData.groups[0].members[5], group: 'BTS' }, // V

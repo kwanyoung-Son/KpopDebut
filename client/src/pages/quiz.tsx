@@ -108,7 +108,11 @@ const questions = [
 export default function QuizPage() {
   const [, setLocation] = useLocation();
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState<Partial<QuizAnswers>>({});
+  const [answers, setAnswers] = useState<Partial<QuizAnswers>>(() => {
+    // 퀴즈 시작 시 이전 답변 초기화
+    sessionStorage.removeItem('quizAnswers');
+    return {};
+  });
 
   const handleAnswer = (field: keyof QuizAnswers, value: string) => {
     const newAnswers = { ...answers, [field]: value };
