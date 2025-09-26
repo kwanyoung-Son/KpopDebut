@@ -5,7 +5,7 @@ compatibility_date = "2024-09-23"
 [[d1_databases]]
 binding = "DB"
 database_name = "kpopdebut"
-database_id = "512310fc-a085-480c-83e2-baa483dd3929"  # 운영 DB ID
+database_id = "b4178698-da8f-42a2-864f-1d40202bc498"  # 운영 DB ID
 
 # 환경 변수
 [vars]
@@ -19,7 +19,7 @@ NODE_ENV = "development"
 [[env.preview.d1_databases]]
 binding = "DB"
 database_name = "kpopdebut"
-database_id = "512310fc-a085-480c-83e2-baa483dd3929"  # 프로덕션 DB 사용
+database_id = "b4178698-da8f-42a2-864f-1d40202bc498"  # 프로덕션 DB 사용
 
 # Cloudflare Pages 빌드 설정 (프론트엔드만)
 [build]
