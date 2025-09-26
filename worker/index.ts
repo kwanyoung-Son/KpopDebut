@@ -1,6 +1,7 @@
 // Cloudflare Worker for KPOP Debut Analyzer
 /// <reference types="@cloudflare/workers-types" />
 import { z } from "zod";
+import { kpopGroupsData } from '../server/kpop-data';
 
 interface Env {
   DB: D1Database;
@@ -20,99 +21,7 @@ const quizAnswersSchema = z.object({
 
 type QuizAnswers = z.infer<typeof quizAnswersSchema>;
 
-// KPOP Groups Data - full dataset for better analysis results  
-const kpopGroups = {
-  groups: [
-    // BTS
-    { name: "BTS", agency: "BigHit Music", members: [
-      { name: "RM", position: ["Leader", "Main Rapper"] },
-      { name: "Jin", position: ["Sub Vocalist", "Visual"] },
-      { name: "SUGA", position: ["Lead Rapper"] },
-      { name: "j-hope", position: ["Main Dancer", "Sub Rapper", "Sub Vocalist"] },
-      { name: "Jimin", position: ["Main Dancer", "Lead Vocalist"] },
-      { name: "V", position: ["Lead Dancer", "Sub Vocalist", "Visual"] },
-      { name: "Jungkook", position: ["Main Vocalist", "Lead Dancer", "Sub Rapper", "Center", "Maknae"] }
-    ]},
-    // BLACKPINK
-    { name: "BLACKPINK", agency: "YG Entertainment", members: [
-      { name: "Jisoo", position: ["Lead Vocalist", "Visual"] },
-      { name: "Jennie", position: ["Main Rapper", "Lead Vocalist"] },
-      { name: "Rosé", position: ["Main Vocalist", "Lead Dancer"] },
-      { name: "Lisa", position: ["Main Dancer", "Lead Rapper", "Sub Vocalist", "Maknae"] }
-    ]},
-    // IVE
-    { name: "IVE", agency: "Starship Entertainment", members: [
-      { name: "Yujin", position: ["Leader", "Lead Vocalist"] },
-      { name: "Gaeul", position: ["Main Rapper", "Sub Vocalist"] },
-      { name: "Rei", position: ["Rapper", "Sub Vocalist"] },
-      { name: "Wonyoung", position: ["Lead Dancer", "Sub Vocalist", "Visual", "Center"] },
-      { name: "Liz", position: ["Main Vocalist"] },
-      { name: "Leeseo", position: ["Sub Vocalist", "Maknae"] }
-    ]},
-    // aespa  
-    { name: "aespa", agency: "SM Entertainment", members: [
-      { name: "Karina", position: ["Leader", "Main Dancer", "Lead Rapper", "Sub Vocalist", "Visual", "Center"] },
-      { name: "Giselle", position: ["Main Rapper", "Sub Vocalist"] },
-      { name: "Winter", position: ["Lead Vocalist", "Lead Dancer", "Visual"] },
-      { name: "Ningning", position: ["Main Vocalist", "Maknae"] }
-    ]},
-    // (G)I-DLE
-    { name: "(G)I-DLE", agency: "CUBE Entertainment", members: [
-      { name: "Soyeon", position: ["Leader", "Main Rapper", "Center", "Sub Vocalist"] },
-      { name: "Minnie", position: ["Main Vocalist"] },
-      { name: "Yuqi", position: ["Lead Dancer", "Sub Vocalist", "Sub Rapper"] },
-      { name: "Shuhua", position: ["Sub Vocalist", "Visual", "Maknae"] },
-      { name: "Miyeon", position: ["Main Vocalist", "Visual"] }
-    ]},
-    // NewJeans
-    { name: "NewJeans", agency: "ADOR", members: [
-      { name: "Minji", position: ["Leader", "Lead Vocalist"] },
-      { name: "Hanni", position: ["Main Vocalist", "Lead Dancer"] },
-      { name: "Danielle", position: ["Main Vocalist", "Lead Dancer"] },
-      { name: "Haerin", position: ["Main Dancer", "Sub Vocalist", "Visual"] },
-      { name: "Hyein", position: ["Lead Dancer", "Sub Vocalist", "Maknae"] }
-    ]},
-    // TWICE
-    { name: "TWICE", agency: "JYP Entertainment", members: [
-      { name: "Nayeon", position: ["Lead Vocalist", "Lead Dancer", "Center"] },
-      { name: "Jeongyeon", position: ["Lead Vocalist"] },
-      { name: "Momo", position: ["Main Dancer", "Sub Vocalist", "Sub Rapper"] },
-      { name: "Sana", position: ["Sub Vocalist"] },
-      { name: "Jihyo", position: ["Leader", "Main Vocalist"] },
-      { name: "Mina", position: ["Main Dancer", "Sub Vocalist"] },
-      { name: "Dahyun", position: ["Lead Rapper", "Sub Vocalist"] },
-      { name: "Chaeyoung", position: ["Main Rapper", "Sub Vocalist"] },
-      { name: "Tzuyu", position: ["Lead Dancer", "Sub Vocalist", "Visual", "Maknae"] }
-    ]},
-    // Red Velvet
-    { name: "Red Velvet", agency: "SM Entertainment", members: [
-      { name: "Irene", position: ["Leader", "Main Rapper", "Lead Dancer", "Visual", "Center"] },
-      { name: "Seulgi", position: ["Main Dancer", "Lead Vocalist"] },
-      { name: "Wendy", position: ["Main Vocalist"] },
-      { name: "Joy", position: ["Lead Rapper", "Sub Vocalist"] },
-      { name: "Yeri", position: ["Sub Vocalist", "Sub Rapper", "Maknae"] }
-    ]},
-    // STRAY KIDS  
-    { name: "STRAY KIDS", agency: "JYP Entertainment", members: [
-      { name: "Bang Chan", position: ["Leader", "Main Vocalist", "Lead Dancer", "Sub Rapper"] },
-      { name: "Lee Know", position: ["Main Dancer", "Sub Vocalist", "Sub Rapper"] },
-      { name: "Changbin", position: ["Main Rapper", "Sub Vocalist"] },
-      { name: "Hyunjin", position: ["Main Dancer", "Lead Rapper", "Visual"] },
-      { name: "Han", position: ["Main Rapper", "Lead Vocalist"] },
-      { name: "Felix", position: ["Lead Dancer", "Lead Rapper", "Sub Vocalist"] },
-      { name: "Seungmin", position: ["Main Vocalist"] },
-      { name: "I.N", position: ["Sub Vocalist", "Maknae"] }
-    ]},
-    // ITZY
-    { name: "ITZY", agency: "JYP Entertainment", members: [
-      { name: "Yeji", position: ["Leader", "Main Dancer", "Lead Vocalist", "Sub Rapper"] },
-      { name: "Lia", position: ["Main Vocalist", "Sub Rapper"] },
-      { name: "Ryujin", position: ["Main Rapper", "Lead Dancer", "Sub Vocalist", "Center"] },
-      { name: "Chaeryeong", position: ["Main Dancer", "Sub Vocalist", "Sub Rapper"] },
-      { name: "Yuna", position: ["Lead Dancer", "Sub Vocalist", "Sub Rapper", "Visual", "Maknae"] }
-    ]}
-  ]
-};
+// Using the comprehensive KPOP Groups Data (69 groups) from kpop-data.ts
 
 // Analysis algorithm - 점수 기반 정교한 분석 시스템
 function generateAnalysisResult(quizAnswers: QuizAnswers) {
@@ -199,7 +108,7 @@ function generateAnalysisResult(quizAnswers: QuizAnswers) {
   const getAllMembersWithPosition = (positionKeywords: string[]) => {
     const allMatches: Array<{member: any, group: string}> = [];
     
-    kpopGroups.groups.forEach(group => {
+    kpopGroupsData.groups.forEach(group => {
       group.members.forEach(member => {
         const hasPosition = member.position.some((pos: string) => 
           positionKeywords.some(keyword => pos.includes(keyword))
@@ -258,7 +167,7 @@ function generateAnalysisResult(quizAnswers: QuizAnswers) {
 
   // 매칭된 멤버가 없을 경우 기본값 설정
   if (!matchedMember || !matchedGroup) {
-    matchedMember = kpopGroups.groups[0].members[0]; // RM
+    matchedMember = kpopGroupsData.groups[0].members[0]; // RM
     matchedGroup = 'BTS';
     positionType = 'Leader';
   }
@@ -286,7 +195,7 @@ function generateAnalysisResult(quizAnswers: QuizAnswers) {
     characterDesc: characterDescriptions[positionType as keyof typeof characterDescriptions] || '',
     styleTags,
     memberName: matchedMember?.name,
-    agency: kpopGroups.groups.find(g => g.name === matchedGroup)?.agency || ''
+    agency: kpopGroupsData.groups.find(g => g.name === matchedGroup)?.agency || ''
   };
 }
 
