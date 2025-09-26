@@ -1,4 +1,5 @@
 name = "kpopdebut"
+main = "server/index.ts"   # 또는 index.js (엔트리 파일 경로에 맞게 수정)
 compatibility_date = "2024-09-23"
 
 # 운영 환경 D1 Database bindings
@@ -22,8 +23,8 @@ database_name = "kpopdebut"
 database_id = "b4178698-da8f-42a2-864f-1d40202bc498"  # 프로덕션 DB 사용
 
 # Cloudflare Pages 빌드 설정 (프론트엔드만)
-[build]
-command = "npx vite build"
-publish = "dist/public"
+# [build]
+# command = "npx vite build"
+# publish = "dist/public"
 
 # 로컬 개발 설정 (Node.js 환경 - 메모리 스토리지 사용)
