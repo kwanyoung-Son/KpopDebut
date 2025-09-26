@@ -50,6 +50,8 @@ export default function QuizQuestion({ question, onAnswer, selectedValue }: Quiz
               ${isGridLayout ? 'flex-col items-center text-center' : 'flex items-center'}
             `}
             onClick={() => handleOptionClick(option.value)}
+            type="button"
+            autoFocus={false}
           >
             <Icon 
               className={`${option.color} ${isGridLayout ? 'mb-2' : 'mr-4'}`}

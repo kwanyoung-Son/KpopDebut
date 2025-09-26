@@ -20,67 +20,7 @@ const quizAnswersSchema = z.object({
 
 type QuizAnswers = z.infer<typeof quizAnswersSchema>;
 
-// KPOP Groups Data
-const kpopGroupsData = {
-  "groups": [
-    {
-      "name": "BTS",
-      "agency": "BigHit Music",
-      "members": [
-        { "name": "RM", "position": ["Leader", "Main Rapper"] },
-        { "name": "Jin", "position": ["Sub Vocalist", "Visual"] },
-        { "name": "SUGA", "position": ["Lead Rapper"] },
-        { "name": "j-hope", "position": ["Main Dancer", "Sub Rapper", "Sub Vocalist"] },
-        { "name": "Jimin", "position": ["Main Dancer", "Lead Vocalist"] },
-        { "name": "V", "position": ["Lead Dancer", "Sub Vocalist", "Visual"] },
-        { "name": "Jungkook", "position": ["Main Vocalist", "Lead Dancer", "Sub Rapper", "Center", "Maknae"] }
-      ]
-    },
-    {
-      "name": "BLACKPINK",
-      "agency": "YG Entertainment",
-      "members": [
-        { "name": "Jisoo", "position": ["Lead Vocalist", "Visual"] },
-        { "name": "Jennie", "position": ["Main Rapper", "Lead Vocalist"] },
-        { "name": "Rosé", "position": ["Main Vocalist", "Lead Dancer"] },
-        { "name": "Lisa", "position": ["Main Dancer", "Lead Rapper", "Sub Vocalist", "Maknae"] }
-      ]
-    },
-    {
-      "name": "IVE",
-      "agency": "Starship Entertainment",
-      "members": [
-        { "name": "Yujin", "position": ["Leader", "Lead Vocalist", "Lead Dancer"] },
-        { "name": "Gaeul", "position": ["Main Rapper", "Sub Vocalist"] },
-        { "name": "Rei", "position": ["Sub Vocalist", "Sub Rapper"] },
-        { "name": "Wonyoung", "position": ["Center", "Visual", "Sub Vocalist", "Maknae"] },
-        { "name": "Liz", "position": ["Main Vocalist"] },
-        { "name": "Leeseo", "position": ["Sub Vocalist", "Sub Rapper", "Maknae"] }
-      ]
-    },
-    {
-      "name": "aespa",
-      "agency": "SM Entertainment",
-      "members": [
-        { "name": "Karina", "position": ["Leader", "Main Dancer", "Lead Rapper", "Sub Vocalist", "Visual"] },
-        { "name": "Giselle", "position": ["Main Rapper", "Sub Vocalist"] },
-        { "name": "Winter", "position": ["Main Vocalist", "Lead Dancer", "Visual"] },
-        { "name": "Ningning", "position": ["Main Vocalist", "Maknae"] }
-      ]
-    },
-    {
-      "name": "(G)I-DLE",
-      "agency": "Cube Entertainment",
-      "members": [
-        { "name": "Miyeon", "position": ["Main Vocalist", "Visual"] },
-        { "name": "Minnie", "position": ["Main Vocalist", "Sub Rapper"] },
-        { "name": "Soyeon", "position": ["Leader", "Main Rapper", "Sub Vocalist"] },
-        { "name": "Yuqi", "position": ["Lead Vocalist", "Lead Dancer", "Sub Rapper"] },
-        { "name": "Shuhua", "position": ["Sub Vocalist", "Visual", "Maknae"] }
-      ]
-    }
-  ]
-};
+// KPOP Groups Data - using full dataset from server/kpop-data.ts for better results
 
 // Analysis algorithm - 점수 기반 정교한 분석 시스템
 function generateAnalysisResult(quizAnswers: QuizAnswers) {

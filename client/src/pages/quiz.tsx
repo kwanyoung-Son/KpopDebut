@@ -34,13 +34,13 @@ const questions = [
   {
     id: 3,
     title: "성격/성향 분석", 
-    question: "새로운 프로젝트가 주어졌을 때 나는?",
+    question: "새로운 안무나 곡이 주어졌을 때 나는?",
     field: "newProject" as keyof QuizAnswers,
     options: [
-      { value: "execute", icon: Flame, color: "text-red-500", title: "바로 실행해본다", desc: "" },
-      { value: "plan", icon: Brain, color: "text-blue-500", title: "일단 계획부터 세운다", desc: "" },
-      { value: "discuss", icon: Music, color: "text-green-500", title: "주변 사람들과 먼저 얘기해본다", desc: "" },
-      { value: "think", icon: Heart, color: "text-purple-500", title: "혼자 조용히 생각 정리한다", desc: "" }
+      { value: "execute", icon: Flame, color: "text-red-500", title: "바로 따라하며 몸으로 익힌다", desc: "" },
+      { value: "plan", icon: Brain, color: "text-blue-500", title: "먼저 구조를 분석하고 계획한다", desc: "" },
+      { value: "discuss", icon: Music, color: "text-green-500", title: "멤버들과 함께 의견 나눈다", desc: "" },
+      { value: "think", icon: Heart, color: "text-purple-500", title: "혼자 차근차근 이해한다", desc: "" }
     ]
   },
   {
