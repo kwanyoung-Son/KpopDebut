@@ -65,7 +65,7 @@ export default function Home() {
             <span className="text-2xl font-bold">KPOP 데뷔 분석기</span>
           </div>
           <p className="text-gray-400 mb-6">AI 기술로 당신의 숨겨진 아이돌 매력을 발견하세요</p>
-          <p className="text-gray-500 text-sm">© 2024 KPOP 데뷔 분석기. 재미있게 즐겨주세요!</p>
+          <p className="text-gray-500 text-sm">© 2025 KPOP 데뷔 분석기. 재미있게 즐겨주세요!</p>
         </div>
       </footer>
     </div>
