@@ -4,7 +4,8 @@ import { storage } from "./storage";
 import { insertAnalysisResultSchema, quizAnswersSchema, type QuizAnswers } from "@shared/schema";
 import { z } from "zod";
 import multer from "multer";
-import { kpopGroupsData, type KpopMember } from "./kpop-data";
+import { kpopGroupsData as kpopGroupsDataKr, type KpopMember } from "./kpop-data-kr";
+import { kpopGroupsData as kpopGroupsDataEn } from "./kpop-data-en";
 
 interface MulterRequest extends Request {
   file?: Express.Multer.File;
