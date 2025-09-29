@@ -122,6 +122,10 @@ export default function QuizPage() {
 
     // Store current answers
     sessionStorage.setItem('quizAnswers', JSON.stringify(newAnswers));
+    
+    // Store language preference from localStorage
+    const language = localStorage.getItem('language') || 'kr';
+    sessionStorage.setItem('language', language);
 
     // Move to next question or complete quiz
     setTimeout(() => {

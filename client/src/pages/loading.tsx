@@ -4,26 +4,45 @@ import { Brain } from "lucide-react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 
-const loadingMessages = [
-  '얼굴 특징을 분석하고 있어요...',
-  '성격 유형을 매칭하고 있어요...',
-  '음악 취향을 분석하고 있어요...',
-  '패션 스타일을 평가하고 있어요...',
-  '완벽한 포지션을 찾고 있어요...',
-  '결과를 생성하고 있어요...'
-];
+const loadingMessages = {
+  kr: [
+    '얼굴 특징을 분석하고 있어요...',
+    '성격 유형을 매칭하고 있어요...',
+    '음악 취향을 분석하고 있어요...',
+    '패션 스타일을 평가하고 있어요...',
+    '완벽한 포지션을 찾고 있어요...',
+    '결과를 생성하고 있어요...'
+  ],
+  en: [
+    'Analyzing facial features...',
+    'Matching personality types...',
+    'Analyzing music preferences...',
+    'Evaluating fashion style...',
+    'Finding the perfect position...',
+    'Generating results...'
+  ]
+};
 
 export default function LoadingPage() {
   const [, setLocation] = useLocation();
   const [progress, setProgress] = useState(0);
   const [messageIndex, setMessageIndex] = useState(0);
+  const [language, setLanguage] = useState<'kr' | 'en'>('kr');
+
+  // Get language from localStorage on mount
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('language') as 'kr' | 'en' || 'kr';
+    setLanguage(savedLanguage);
+  }, []);
 
   const analysisMutation = useMutation({
     mutationFn: async () => {
       const quizAnswers = sessionStorage.getItem('quizAnswers');
       const photoData = sessionStorage.getItem('uploadedPhoto');
+      const language = sessionStorage.getItem('language') || localStorage.getItem('language') || 'kr';
       
       console.log('Sending quiz answers:', quizAnswers);
+      console.log('Language:', language);
       
       if (!quizAnswers) {
         throw new Error('Quiz answers not found');
@@ -45,6 +64,7 @@ export default function LoadingPage() {
       const formData = new FormData();
       formData.append('quizAnswers', quizAnswers);
       formData.append('sessionId', sessionId);
+      formData.append('language', language);
       
       if (photoData) {
         // Convert base64 to blob
@@ -94,7 +114,7 @@ export default function LoadingPage() {
       });
       
       setMessageIndex(prev => {
-        if (prev < loadingMessages.length - 1) {
+        if (prev < loadingMessages[language].length - 1) {
           return prev + 1;
         }
         return prev;
@@ -115,8 +135,8 @@ export default function LoadingPage() {
             <Brain className="animate-pulse" size={48} />
           </div>
         </div>
-        <h2 className="text-3xl font-bold mb-4">AI 분석 중...</h2>
-        <div className="text-xl font-light mb-8">{loadingMessages[messageIndex]}</div>
+        <h2 className="text-3xl font-bold mb-4">{language === 'kr' ? 'AI 분석 중...' : 'AI Analysis in Progress...'}</h2>
+        <div className="text-xl font-light mb-8">{loadingMessages[language][messageIndex]}</div>
         <div className="max-w-md mx-auto">
           <div className="bg-white/20 rounded-full h-2 mb-4">
             <div 
@@ -124,7 +144,7 @@ export default function LoadingPage() {
               style={{ width: `${progress}%` }}
             ></div>
           </div>
-          <p className="text-white/80">잠시만 기다려주세요...</p>
+          <p className="text-white/80">{language === 'kr' ? '잠시만 기다려주세요...' : 'Please wait...'}</p>
         </div>
       </div>
     </div>

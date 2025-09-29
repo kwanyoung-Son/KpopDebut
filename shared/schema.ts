@@ -14,6 +14,7 @@ export const analysisResults = pgTable("analysis_results", {
   sessionId: text("session_id").notNull(),
   photoData: text("photo_data"),
   quizAnswers: jsonb("quiz_answers").notNull(),
+  language: text("language").default("kr"),
   groupName: text("group_name").notNull(),
   position: text("position").notNull(),
   subPosition: text("sub_position"),

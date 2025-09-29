@@ -23,6 +23,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.post("/api/analyze", upload.fields([{ name: 'photo', maxCount: 1 }]), async (req: MulterRequest, res) => {
     try {
       const sessionId = req.body.sessionId || `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      const language = (req.body.language || 'kr') as 'kr' | 'en';
       
       // Validate quiz answers
       console.log('Raw quiz answers:', req.body.quizAnswers);
@@ -41,12 +42,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       // Generate analysis result based on quiz answers
-      const result = generateAnalysisResult(quizAnswers);
+      const result = generateAnalysisResult(quizAnswers, language);
       
       const analysisData = {
         sessionId,
         photoData,
         quizAnswers,
+        language,
         ...result
       };
 
@@ -89,7 +91,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 }
 
 // Generate analysis result based on quiz answers
-function generateAnalysisResult(answers: QuizAnswers) {
+function generateAnalysisResult(answers: QuizAnswers, language: 'kr' | 'en' = 'kr') {
+  const kpopGroupsData = language === 'en' ? kpopGroupsDataEn : kpopGroupsDataKr;
+  
   // 점수 기반 분석 시스템
   let leaderScore = 0;
   let vocalScore = 0; 
