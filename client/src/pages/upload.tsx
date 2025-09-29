@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "wouter";
-import { Camera, CheckCircle, Upload, ArrowRight, Loader2, AlertCircle } from "lucide-react";
+import { Camera, CheckCircle, Upload, ArrowRight, Loader2, AlertCircle, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
@@ -127,6 +127,25 @@ export default function UploadPage() {
     }
   };
 
+  const handleRetakePhoto = () => {
+    // 현재 상태 초기화
+    setSelectedPhoto(null);
+    setPreviewUrl(null);
+    setFaceDetected(null);
+    setIsProcessing(false);
+    
+    // 세션 스토리지에서 사진 데이터 삭제
+    sessionStorage.removeItem('uploadedPhoto');
+    
+    // 파일 input 초기화
+    const fileInput = document.getElementById('photoInput') as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = '';
+    }
+    
+    console.log('🔄 사진 업로드 상태 초기화');
+  };
+
   return (
     <div className="min-h-screen bg-white py-20 px-4">
       <div className="max-w-2xl mx-auto text-center">
@@ -192,6 +211,22 @@ export default function UploadPage() {
             </div>
           </label>
         </div>
+
+        {/* 사진 다시 올리기 버튼 - 사진이 업로드된 경우에만 표시 */}
+        {previewUrl && (
+          <div className="mb-6">
+            <Button
+              onClick={handleRetakePhoto}
+              variant="outline"
+              size="lg"
+              className="border-gray-300 text-gray-700 hover:bg-gray-50 px-6 py-3 rounded-full"
+              data-testid="button-retake-photo"
+            >
+              <RefreshCw className="mr-2" size={20} />
+              사진 다시 올리기
+            </Button>
+          </div>
+        )}
 
         {/* Tips */}
         <div className="grid md:grid-cols-3 gap-4 mb-8">
