@@ -262,8 +262,7 @@ async function callLLMAnalysis(prompt: string): Promise<any> {
           { role: 'system', content: 'You are a KPOP expert analyst who knows all idol groups and members. Always respond with valid JSON format only.' },
           { role: 'user', content: prompt }
         ]
-      }),
-      timeout: 10000 // 10 second timeout
+      })
     });
 
     console.log('LLM API response status:', response.status);
