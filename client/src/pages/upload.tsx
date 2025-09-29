@@ -17,8 +17,20 @@ export default function UploadPage() {
   const { toast } = useToast();
   const imageRef = useRef<HTMLImageElement>(null);
 
-  // Face-api.js 모델 로드
+  // localStorage 디버그 플래그 확인 및 Face-api.js 모델 로드
   useEffect(() => {
+    // localStorage에서 디버그 플래그 확인
+    const isLocalDebug = localStorage.getItem('debug_face_detection') === '1' || 
+                        localStorage.getItem('DEBUG_FACE_API') === 'true' ||
+                        localStorage.getItem('face_api_debug') === '1';
+    
+    if (isLocalDebug) {
+      console.log('🔧 localStorage 디버그 모드 감지됨');
+      setDebugMode(true);
+      setIsLoadingModels(false);
+      return;
+    }
+
     const loadModels = async () => {
       console.log('🔄 얼굴 인식 모델 로드 시작...');
       try {
@@ -134,6 +146,7 @@ export default function UploadPage() {
             accept="image/*"
             className="hidden"
             onChange={handlePhotoUpload}
+            data-testid="input-photo"
           />
           <label
             htmlFor="photoInput"
@@ -149,8 +162,8 @@ export default function UploadPage() {
                     className="w-full h-full object-cover"
                     data-testid="uploaded-photo-preview"
                   />
-                  {faceDetected === false && (
-                    <div className="absolute inset-0 bg-red-500 bg-opacity-20 flex items-center justify-center">
+                  {faceDetected === false && !debugMode && (
+                    <div className="absolute inset-0 bg-red-500 bg-opacity-20 flex items-center justify-center" data-testid="face-not-detected-overlay">
                       <div className="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center">
                         <AlertCircle className="mr-2" size={20} />
                         얼굴이 감지되지 않음
@@ -158,9 +171,14 @@ export default function UploadPage() {
                     </div>
                   )}
                   {faceDetected === true && (
-                    <div className="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full flex items-center text-sm">
+                    <div className="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full flex items-center text-sm" data-testid="face-detected-badge">
                       <CheckCircle className="mr-1" size={16} />
                       얼굴 감지됨
+                    </div>
+                  )}
+                  {debugMode && (
+                    <div className="absolute top-4 left-4 bg-yellow-600 text-white px-3 py-1 rounded-full flex items-center text-sm" data-testid="debug-mode-badge">
+                      🔧 디버그 모드
                     </div>
                   )}
                 </div>
@@ -198,9 +216,12 @@ export default function UploadPage() {
         </div>
 
         {debugMode && (
-          <div className="mb-4 p-3 bg-yellow-100 border border-yellow-400 rounded-lg">
-            <p className="text-yellow-800 text-sm">
-              🔧 디버그 모드: 얼굴 검증이 우회됩니다
+          <div className="mb-4 p-3 bg-yellow-100 border border-yellow-400 rounded-lg" data-testid="debug-mode-banner">
+            <p className="text-yellow-800 text-sm font-semibold">
+              🔧 디버그 모드 활성화: 얼굴 검증이 우회됩니다
+            </p>
+            <p className="text-yellow-700 text-xs mt-1">
+              localStorage 디버그 플래그 또는 모델 로드 실패로 인해 활성화됨
             </p>
           </div>
         )}
