@@ -13,21 +13,25 @@ export default function UploadPage() {
   const [isProcessing, setIsProcessing] = useState(false);
   const [isLoadingModels, setIsLoadingModels] = useState(true);
   const [faceDetected, setFaceDetected] = useState<boolean | null>(null);
+  const [debugMode, setDebugMode] = useState(false);
   const { toast } = useToast();
   const imageRef = useRef<HTMLImageElement>(null);
 
   // Face-api.js 모델 로드
   useEffect(() => {
     const loadModels = async () => {
+      console.log('🔄 얼굴 인식 모델 로드 시작...');
       try {
         // CDN에서 모델 로드
         await faceapi.nets.ssdMobilenetv1.loadFromUri('https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights');
         setIsLoadingModels(false);
-        console.log('얼굴 인식 모델 로드 완료');
+        console.log('✅ 얼굴 인식 모델 로드 완료');
       } catch (error) {
-        console.error('얼굴 인식 모델 로드 실패:', error);
-        // 모델 로드에 실패해도 앱은 계속 동작하도록 함
+        console.error('❌ 얼굴 인식 모델 로드 실패:', error);
+        // 모델 로드에 실패하면 디버그 모드 활성화
         setIsLoadingModels(false);
+        setDebugMode(true);
+        console.log('🔧 디버그 모드 활성화 - 얼굴 검증 우회');
       }
     };
     loadModels();
@@ -35,11 +39,20 @@ export default function UploadPage() {
 
   // 얼굴 감지 함수
   const detectFace = async (imageElement: HTMLImageElement) => {
+    console.log('🔍 얼굴 감지 시작...');
+    
+    // 디버그 모드에서는 항상 true 반환
+    if (debugMode) {
+      console.log('🔧 디버그 모드: 얼굴 검증 우회');
+      return true;
+    }
+    
     try {
       const detections = await faceapi.detectAllFaces(imageElement);
+      console.log(`👤 얼굴 감지 결과: ${detections.length}개 얼굴 발견`);
       return detections.length > 0;
     } catch (error) {
-      console.error('얼굴 감지 오류:', error);
+      console.error('❌ 얼굴 감지 오류:', error);
       return false;
     }
   };
@@ -55,11 +68,13 @@ export default function UploadPage() {
       // 이미지 로드 후 얼굴 감지
       const img = new Image();
       img.onload = async () => {
+        console.log('📷 이미지 로드 완료, 얼굴 감지 준비');
+        
         if (!isLoadingModels) {
           const hasFace = await detectFace(img);
           setFaceDetected(hasFace);
           
-          if (!hasFace) {
+          if (!hasFace && !debugMode) {
             toast({
               title: "얼굴이 감지되지 않았습니다",
               description: "정면을 바라보는 얼굴 사진을 업로드해주세요.",
@@ -72,8 +87,11 @@ export default function UploadPage() {
           const reader = new FileReader();
           reader.onload = () => {
             sessionStorage.setItem('uploadedPhoto', reader.result as string);
+            console.log('💾 사진이 세션 스토리지에 저장됨');
           };
           reader.readAsDataURL(file);
+        } else {
+          console.log('⏳ 모델 로딩 중... 잠시 기다려주세요');
         }
       };
       img.src = url;
@@ -81,13 +99,14 @@ export default function UploadPage() {
   };
 
   const handleNext = () => {
-    if (selectedPhoto && faceDetected === true) {
+    if (selectedPhoto && (faceDetected === true || debugMode)) {
+      console.log('✅ 다음 단계로 진행');
       setIsProcessing(true);
       // 짧은 딜레이로 처리 중임을 보여주고 다음 페이지로
       setTimeout(() => {
         setLocation("/quiz");
       }, 800);
-    } else if (faceDetected === false) {
+    } else if (faceDetected === false && !debugMode) {
       toast({
         title: "얼굴이 감지되지 않은 사진입니다",
         description: "얼굴이 포함된 사진을 다시 업로드해주세요.",
@@ -178,9 +197,17 @@ export default function UploadPage() {
           </Card>
         </div>
 
+        {debugMode && (
+          <div className="mb-4 p-3 bg-yellow-100 border border-yellow-400 rounded-lg">
+            <p className="text-yellow-800 text-sm">
+              🔧 디버그 모드: 얼굴 검증이 우회됩니다
+            </p>
+          </div>
+        )}
+
         <Button
           onClick={handleNext}
-          disabled={!selectedPhoto || isProcessing || faceDetected !== true || isLoadingModels}
+          disabled={!selectedPhoto || isProcessing || (!debugMode && faceDetected !== true) || isLoadingModels}
           size="lg"
           className="bg-pink-600 hover:bg-pink-700 text-white px-8 py-4 rounded-full text-lg font-bold disabled:opacity-50"
           data-testid="button-next"
