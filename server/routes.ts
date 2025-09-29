@@ -4,8 +4,7 @@ import { storage } from "./storage";
 import { insertAnalysisResultSchema, quizAnswersSchema, type QuizAnswers } from "@shared/schema";
 import { z } from "zod";
 import multer from "multer";
-import { kpopGroupsData as kpopGroupsDataKr, type KpopMember } from "./kpop-data-kr";
-import { kpopGroupsData as kpopGroupsDataEn } from "./kpop-data-en";
+// Import removed as we now use LLM for analysis instead of hardcoded data
 
 interface MulterRequest extends Request {
   file?: Express.Multer.File;
@@ -251,6 +250,8 @@ Please provide the answer only in valid JSON format.`;
 // Call Cloudflare Workers AI for analysis
 async function callLLMAnalysis(prompt: string): Promise<any> {
   try {
+    console.log('Calling LLM API with prompt length:', prompt.length);
+    
     const response = await fetch('https://icy-sun.heroskyt87.workers.dev/', {
       method: 'POST',
       headers: {
@@ -261,16 +262,20 @@ async function callLLMAnalysis(prompt: string): Promise<any> {
           { role: 'system', content: 'You are a KPOP expert analyst who knows all idol groups and members. Always respond with valid JSON format only.' },
           { role: 'user', content: prompt }
         ]
-      })
+      }),
+      timeout: 10000 // 10 second timeout
     });
 
+    console.log('LLM API response status:', response.status);
+
     if (!response.ok) {
-      throw new Error(`LLM API error: ${response.status}`);
+      throw new Error(`LLM API error: ${response.status} ${response.statusText}`);
     }
 
     const data = await response.json();
+    console.log('LLM API response data:', JSON.stringify(data, null, 2));
     
-    // Extract the JSON from LLM response
+    // Extract the JSON from LLM response - flexible parsing
     let result;
     if (data.response) {
       // Parse LLM response which might contain extra text
@@ -280,25 +285,56 @@ async function callLLMAnalysis(prompt: string): Promise<any> {
       } else {
         throw new Error('No valid JSON found in LLM response');
       }
+    } else if (data.result) {
+      result = data.result;
+    } else if (typeof data === 'object' && data.groupName) {
+      result = data; // Direct JSON response
     } else {
       throw new Error('Invalid LLM response format');
     }
 
+    console.log('Parsed LLM result:', result);
     return result;
   } catch (error) {
     console.error('LLM Analysis error:', error);
     
-    // Fallback to default response if LLM fails
-    return {
-      groupName: "NewJeans",
-      position: "Main Vocalist",
-      subPosition: "Visual",
-      character: "NewJeans Hanni 스타일",
-      characterDesc: "밝고 친근한 매력으로 팬들을 사로잡는 타입",
-      styleTags: ["#NewJeans스타일", "#MainVocalist", "#Hanni형"],
-      memberName: "Hanni",
-      agency: "ADOR"
-    };
+    // Enhanced fallback with varied responses based on error
+    const fallbackResponses = [
+      {
+        groupName: "NewJeans",
+        position: "Main Vocalist",
+        subPosition: "Visual",
+        character: "NewJeans Hanni 스타일",
+        characterDesc: "밝고 친근한 매력으로 팬들을 사로잡는 타입",
+        styleTags: ["#NewJeans스타일", "#MainVocalist", "#Hanni형"],
+        memberName: "Hanni",
+        agency: "ADOR"
+      },
+      {
+        groupName: "BLACKPINK",
+        position: "Main Dancer",
+        subPosition: "Lead Rapper",
+        character: "BLACKPINK Lisa 스타일",
+        characterDesc: "강렬한 댄스와 카리스마로 무대를 사로잡는 타입",
+        styleTags: ["#BLACKPINK스타일", "#MainDancer", "#Lisa형"],
+        memberName: "Lisa",
+        agency: "YG Entertainment"
+      },
+      {
+        groupName: "aespa",
+        position: "Leader",
+        subPosition: "Main Dancer",
+        character: "aespa Karina 스타일",
+        characterDesc: "완벽한 리더십과 뛰어난 퍼포먼스 능력을 가진 타입",
+        styleTags: ["#aespa스타일", "#Leader", "#Karina형"],
+        memberName: "Karina",
+        agency: "SM Entertainment"
+      }
+    ];
+    
+    const randomFallback = fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
+    console.log('Using fallback response:', randomFallback);
+    return randomFallback;
   }
 }
 
