@@ -1,0 +1,102 @@
+2025-10-13T04:37:34.723Z	Initializing build environment...
+2025-10-13T04:37:40.746Z	Success: Finished initializing build environment
+2025-10-13T04:37:41.781Z	Cloning repository...
+2025-10-13T04:37:43.344Z	Restoring from dependencies cache
+2025-10-13T04:37:43.346Z	Restoring from build output cache
+2025-10-13T04:37:43.349Z	Detected the following tools from environment: npm@10.9.2, nodejs@22.16.0
+2025-10-13T04:37:44.013Z	Installing project dependencies: npm clean-install --progress=false
+2025-10-13T04:37:51.743Z	npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+2025-10-13T04:37:51.756Z	npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+2025-10-13T04:37:56.550Z	
+2025-10-13T04:37:56.550Z	added 548 packages, and audited 549 packages in 11s
+2025-10-13T04:37:56.551Z	
+2025-10-13T04:37:56.551Z	76 packages are looking for funding
+2025-10-13T04:37:56.551Z	  run `npm fund` for details
+2025-10-13T04:37:56.573Z	
+2025-10-13T04:37:56.573Z	13 vulnerabilities (5 low, 7 moderate, 1 high)
+2025-10-13T04:37:56.573Z	
+2025-10-13T04:37:56.573Z	To address issues that do not require attention, run:
+2025-10-13T04:37:56.573Z	  npm audit fix
+2025-10-13T04:37:56.573Z	
+2025-10-13T04:37:56.574Z	To address all issues (including breaking changes), run:
+2025-10-13T04:37:56.574Z	  npm audit fix --force
+2025-10-13T04:37:56.574Z	
+2025-10-13T04:37:56.574Z	Run `npm audit` for details.
+2025-10-13T04:37:56.637Z	Executing user build command: npm ci && npm run build
+2025-10-13T04:38:03.384Z	npm warn deprecated @esbuild-kit/esm-loader@2.6.5: Merged into tsx: https://tsx.is
+2025-10-13T04:38:04.150Z	npm warn deprecated @esbuild-kit/core-utils@3.3.2: Merged into tsx: https://tsx.is
+2025-10-13T04:38:19.945Z	
+2025-10-13T04:38:19.946Z	added 548 packages, and audited 549 packages in 23s
+2025-10-13T04:38:19.947Z	
+2025-10-13T04:38:19.947Z	76 packages are looking for funding
+2025-10-13T04:38:19.947Z	  run `npm fund` for details
+2025-10-13T04:38:19.971Z	
+2025-10-13T04:38:19.971Z	13 vulnerabilities (5 low, 7 moderate, 1 high)
+2025-10-13T04:38:19.971Z	
+2025-10-13T04:38:19.971Z	To address issues that do not require attention, run:
+2025-10-13T04:38:19.971Z	  npm audit fix
+2025-10-13T04:38:19.971Z	
+2025-10-13T04:38:19.973Z	To address all issues (including breaking changes), run:
+2025-10-13T04:38:19.973Z	  npm audit fix --force
+2025-10-13T04:38:19.974Z	
+2025-10-13T04:38:19.974Z	Run `npm audit` for details.
+2025-10-13T04:38:30.724Z	
+2025-10-13T04:38:30.724Z	> rest-express@1.0.0 build
+2025-10-13T04:38:30.724Z	> vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist
+2025-10-13T04:38:30.724Z	
+2025-10-13T04:38:30.987Z	vite v5.4.19 building for production...
+2025-10-13T04:38:31.116Z	transforming...
+2025-10-13T04:38:31.555Z	Browserslist: browsers data (caniuse-lite) is 12 months old. Please run:
+2025-10-13T04:38:31.555Z	  npx update-browserslist-db@latest
+2025-10-13T04:38:31.556Z	  Why you should do it regularly: https://github.com/browserslist/update-db#readme
+2025-10-13T04:38:35.108Z	✓ 1844 modules transformed.
+2025-10-13T04:38:35.480Z	rendering chunks...
+2025-10-13T04:38:35.491Z	computing gzip size...
+2025-10-13T04:38:35.516Z	../dist/public/index.html                   0.63 kB │ gzip:   0.38 kB
+2025-10-13T04:38:35.516Z	../dist/public/assets/index-DgvErmQ4.css   66.66 kB │ gzip:  11.79 kB
+2025-10-13T04:38:35.516Z	../dist/public/assets/index-B1mL9apT.js   944.33 kB │ gzip: 255.60 kB
+2025-10-13T04:38:35.516Z	
+2025-10-13T04:38:35.517Z	(!) Some chunks are larger than 500 kB after minification. Consider:
+2025-10-13T04:38:35.517Z	- Using dynamic import() to code-split the application
+2025-10-13T04:38:35.517Z	- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+2025-10-13T04:38:35.517Z	- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+2025-10-13T04:38:35.517Z	✓ built in 4.46s
+2025-10-13T04:38:35.568Z	
+2025-10-13T04:38:35.569Z	  dist/index.js  29.0kb
+2025-10-13T04:38:35.569Z	
+2025-10-13T04:38:35.569Z	⚡ Done in 4ms
+2025-10-13T04:38:35.576Z	Success: Build command completed
+2025-10-13T04:38:35.576Z	Executing user deploy command: npx wrangler deploy --assets dist/public
+2025-10-13T04:38:36.624Z	
+2025-10-13T04:38:36.624Z	 ⛅️ wrangler 4.26.1 (update available 4.42.2)
+2025-10-13T04:38:36.624Z	─────────────────────────────────────────────
+2025-10-13T04:38:39.472Z	▲ [WARNING] The glob pattern require("../lightningcss.*.node") did not match any files [empty-glob]
+2025-10-13T04:38:39.472Z	
+2025-10-13T04:38:39.472Z	    node_modules/lightningcss/node/index.js:22:29:
+2025-10-13T04:38:39.472Z	      22 │ ...dule.exports = require(`../lightningcss.${parts.join('-')}.node`);
+2025-10-13T04:38:39.472Z	         ╵                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2025-10-13T04:38:39.472Z	
+2025-10-13T04:38:39.472Z	
+2025-10-13T04:38:39.472Z	
+2025-10-13T04:38:39.474Z	✘ [ERROR] Build failed with 1 error:
+2025-10-13T04:38:39.474Z	
+2025-10-13T04:38:39.475Z	  ✘ [ERROR] Could not resolve "../pkg"
+2025-10-13T04:38:39.475Z	  
+2025-10-13T04:38:39.475Z	      node_modules/lightningcss/node/index.js:17:27:
+2025-10-13T04:38:39.475Z	        17 │   module.exports = require(`../pkg`);
+2025-10-13T04:38:39.475Z	           ╵                            ~~~~~~~~
+2025-10-13T04:38:39.475Z	  
+2025-10-13T04:38:39.475Z	  
+2025-10-13T04:38:39.475Z	
+2025-10-13T04:38:39.475Z	
+2025-10-13T04:38:39.475Z	▲ [WARNING] The glob pattern require("../lightningcss.*.node") did not match any files [empty-glob]
+2025-10-13T04:38:39.476Z	
+2025-10-13T04:38:39.476Z	    node_modules/lightningcss/node/index.js:22:29:
+2025-10-13T04:38:39.476Z	      22 │ ...dule.exports = require(`../lightningcss.${parts.join('-')}.node`);
+2025-10-13T04:38:39.476Z	         ╵                           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2025-10-13T04:38:39.476Z	
+2025-10-13T04:38:39.476Z	
+2025-10-13T04:38:39.476Z	
+2025-10-13T04:38:39.476Z	Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
+2025-10-13T04:38:39.490Z	🪵  Logs were written to "/opt/buildhome/.config/.wrangler/logs/wrangler-2025-10-13_04-38-36_198.log"
+2025-10-13T04:38:39.532Z	Failed: error occurred while running deploy command
