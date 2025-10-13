@@ -1,20 +1,16 @@
 name = "kpopdebut"
-main = "dist/index.js" 
+main = "dist/index.js"
 compatibility_date = "2024-09-23"
-compatibility_flags = ["nodejs_compat"]
-node_compat = true
+compatibility_flags = ["nodejs_compat"] 
 
-# 운영 환경 D1 Database bindings
 [[d1_databases]]
 binding = "DB"
 database_name = "kpopdebut"
 database_id = "b4178698-da8f-42a2-864f-1d40202bc498"
 
-# 환경 변수
 [vars]
 NODE_ENV = "production"
 
-# Static Assets 설정
 [assets]
 directory = "dist/public"
 html_handling = "auto-trailing-slash"
