@@ -1,20 +1,19 @@
 name = "kpopdebut"
-main = "worker/index.ts"
+main = "dist/index.js" 
 compatibility_date = "2024-09-23"
 
 # 운영 환경 D1 Database bindings
 [[d1_databases]]
 binding = "DB"
 database_name = "kpopdebut"
-database_id = "b4178698-da8f-42a2-864f-1d40202bc498"  # 운영 DB ID
+database_id = "b4178698-da8f-42a2-864f-1d40202bc498"
 
 # 환경 변수
 [vars]
 NODE_ENV = "production"
 
-# Static Assets 설정 (2024년 Workers 신기능)
+# Static Assets 설정
 [assets]
 directory = "dist/public"
-# HTML fallback for SPA
 html_handling = "auto-trailing-slash"
 not_found_handling = "single-page-application"
