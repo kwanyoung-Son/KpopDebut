@@ -6,6 +6,7 @@ import { kpopGroupsData } from '../server/kpop-data-kr';
 interface Env {
   DB: D1Database;
   AI?: any; // Cloudflare Workers AI binding (optional)
+  LLM_ENDPOINT?: string; // External LLM API endpoint (optional)
 }
 
 // Quiz validation schema
@@ -180,31 +181,43 @@ Please provide the answer only in valid JSON format.`;
 }
 
 // Call external LLM API for analysis
-async function callLLMAnalysis(prompt: string): Promise<any> {
+async function callLLMAnalysis(prompt: string, env?: Env): Promise<any> {
   try {
+    // Use environment variable for LLM endpoint (with fallback)
+    const LLM_ENDPOINT = env?.LLM_ENDPOINT || 'https://icy-sun-4b5d.heroskyt87.workers.dev/';
+    
     console.log('\n=== LLM API 호출 ===');
+    console.log('📤 Endpoint:', LLM_ENDPOINT);
     console.log('📤 전송하는 프롬프트:');
     console.log(prompt);
     console.log('=====================\n');
     
-    const response = await fetch('https://icy-sun-4b5d.heroskyt87.workers.dev/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        messages: [
-          { role: 'system', content: 'You are a KPOP expert analyst who knows all idol groups and members. Always respond with valid JSON format only.' },
-          { role: 'user', content: prompt }
-        ]
-      })
-    });
+    // Add timeout to fetch
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+    
+    try {
+      const response = await fetch(LLM_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          messages: [
+            { role: 'system', content: 'You are a KPOP expert analyst who knows all idol groups and members. Always respond with valid JSON format only.' },
+            { role: 'user', content: prompt }
+          ]
+        }),
+        signal: controller.signal
+      });
 
-    console.log('📥 LLM API 응답 상태:', response.status);
+      clearTimeout(timeoutId);
 
-    if (!response.ok) {
-      throw new Error(`LLM API error: ${response.status} ${response.statusText}`);
-    }
+      console.log('📥 LLM API 응답 상태:', response.status);
+
+      if (!response.ok) {
+        throw new Error(`LLM API error: ${response.status} ${response.statusText}`);
+      }
 
     const data = await response.json() as any;
     console.log('📥 LLM API 응답 데이터:');
@@ -244,6 +257,10 @@ async function callLLMAnalysis(prompt: string): Promise<any> {
     console.log(JSON.stringify(result, null, 2));
     console.log('===================\n');
     return result;
+    } catch (fetchError) {
+      clearTimeout(timeoutId);
+      throw new Error(`Fetch failed: ${fetchError instanceof Error ? fetchError.message : String(fetchError)}`);
+    }
   } catch (error) {
     console.error('\n❌ LLM Analysis 오류:', error);
     console.log('🔄 Fallback 시스템 활성화 중...\n');
@@ -428,11 +445,11 @@ function generateAnalysisResultFallback(quizAnswers: QuizAnswers) {
 }
 
 // Main analysis function with LLM + Fallback
-async function generateAnalysisResult(quizAnswers: QuizAnswers, language: 'kr' | 'en' = 'kr') {
+async function generateAnalysisResult(quizAnswers: QuizAnswers, language: 'kr' | 'en' = 'kr', env?: Env) {
   try {
     // Try LLM first
     const prompt = createAnalysisPrompt(quizAnswers, language);
-    const llmResult = await callLLMAnalysis(prompt);
+    const llmResult = await callLLMAnalysis(prompt, env);
     
     return {
       groupName: llmResult.groupName || "NewJeans",
@@ -513,7 +530,7 @@ export default {
         }
         
         // Generate analysis result with LLM + Fallback
-        const result = await generateAnalysisResult(quizAnswers, language);
+        const result = await generateAnalysisResult(quizAnswers, language, env);
         
         // Prepare data for database
         const analysisData = {
