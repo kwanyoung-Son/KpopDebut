@@ -229,26 +229,16 @@ export default function UploadPage() {
         )}
 
         {/* Tips */}
-        <div className="grid md:grid-cols-3 gap-4 mb-8">
-          <Card className="bg-green-50 border-green-200">
-            <CardContent className="p-4 text-center">
-              <CheckCircle className="text-green-500 mb-2 mx-auto" size={20} />
-              <p className="text-sm text-green-700 font-medium">정면을 바라보는 사진</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-green-50 border-green-200">
-            <CardContent className="p-4 text-center">
-              <CheckCircle className="text-green-500 mb-2 mx-auto" size={20} />
-              <p className="text-sm text-green-700 font-medium">밝은 조명의 선명한 사진</p>
-            </CardContent>
-          </Card>
-          <Card className="bg-green-50 border-green-200">
-            <CardContent className="p-4 text-center">
-              <CheckCircle className="text-green-500 mb-2 mx-auto" size={20} />
-              <p className="text-sm text-green-700 font-medium">얼굴이 가려지지 않은 사진</p>
-            </CardContent>
-          </Card>
-        </div>
+        <Card className="bg-green-50 border-green-200 mb-8">
+          <CardContent className="p-4">
+            <div className="flex items-start gap-3">
+              <CheckCircle className="text-green-500 mt-0.5 flex-shrink-0" size={20} />
+              <p className="text-sm text-green-700 font-medium">
+                정면을 바라보는 사진 · 밝은 조명의 선명한 사진 · 얼굴이 가려지지 않은 사진
+              </p>
+            </div>
+          </CardContent>
+        </Card>
 
         {debugMode && (
           <div className="mb-4 p-3 bg-yellow-100 border border-yellow-400 rounded-lg" data-testid="debug-mode-banner">

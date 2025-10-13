@@ -228,7 +228,7 @@ function createAnalysisPrompt(
 7. 패션 스타일: ${questionMapping.fashionStyle[answers.fashionStyle]}
 8. 메이크업 스타일: ${questionMapping.makeupStyle[answers.makeupStyle]}
 
-이 답변을 바탕으로 다음 JSON 형식으로 KPOP 아이돌 분석 결과를 생성해주세요:
+이 답변을 바탕으로 다음 JSON 형식으로 KPOP 아이돌 분석 결과를 한국어로 생성해주세요:
 
 {
   "groupName": "실제 KPOP 그룹명",
@@ -253,7 +253,7 @@ function createAnalysisPrompt(
 7. Fashion style: ${questionMapping.fashionStyle[answers.fashionStyle]}
 8. Makeup style: ${questionMapping.makeupStyle[answers.makeupStyle]}
 
-Based on these answers, generate a KPOP idol analysis result in the following JSON format:
+Based on these answers, generate a KPOP idol analysis result in the following JSON format(In English):
 
 {
   "groupName": "Actual KPOP group name",
@@ -274,10 +274,10 @@ Please provide the answer only in valid JSON format.`;
 // Call Cloudflare Workers AI for analysis
 async function callLLMAnalysis(prompt: string): Promise<any> {
   try {
-    console.log('\n=== LLM API 호출 ===');
-    console.log('📤 전송하는 프롬프트:');
+    console.log("\n=== LLM API 호출 ===");
+    console.log("📤 전송하는 프롬프트:");
     console.log(prompt);
-    console.log('=====================\n');
+    console.log("=====================\n");
 
     const response = await fetch(
       "https://icy-sun-4b5d.heroskyt87.workers.dev/",
@@ -299,7 +299,7 @@ async function callLLMAnalysis(prompt: string): Promise<any> {
       },
     );
 
-    console.log('📥 LLM API 응답 상태:', response.status);
+    console.log("📥 LLM API 응답 상태:", response.status);
 
     if (!response.ok) {
       throw new Error(
@@ -308,22 +308,24 @@ async function callLLMAnalysis(prompt: string): Promise<any> {
     }
 
     const data = await response.json();
-    console.log('📥 LLM API 응답 데이터:');
+    console.log("📥 LLM API 응답 데이터:");
     console.log(JSON.stringify(data, null, 2));
 
     // Extract the JSON from LLM response - flexible parsing
     let result;
     let responseText;
-    
+
     // Handle Cloudflare Workers AI batch response format (array)
     if (Array.isArray(data)) {
       // Find the response that matches our request (usually the last one)
-      const ourResponse = data.find(item => 
-        item.inputs?.messages?.some((msg: any) => 
-          msg.content?.includes('KPOP') || msg.content?.includes('아이돌')
-        )
-      ) || data[data.length - 1];
-      
+      const ourResponse =
+        data.find((item) =>
+          item.inputs?.messages?.some(
+            (msg: any) =>
+              msg.content?.includes("KPOP") || msg.content?.includes("아이돌"),
+          ),
+        ) || data[data.length - 1];
+
       responseText = ourResponse?.response?.response || ourResponse?.response;
     } else if (data.response?.response) {
       responseText = data.response.response;
@@ -338,30 +340,31 @@ async function callLLMAnalysis(prompt: string): Promise<any> {
     // Parse responseText if we have it
     if (!result && responseText) {
       // Try to extract JSON from the response text
-      const jsonMatch = typeof responseText === 'string' 
-        ? responseText.match(/\{[\s\S]*\}/) 
-        : null;
-      
+      const jsonMatch =
+        typeof responseText === "string"
+          ? responseText.match(/\{[\s\S]*\}/)
+          : null;
+
       if (jsonMatch) {
         result = JSON.parse(jsonMatch[0]);
-      } else if (typeof responseText === 'object') {
+      } else if (typeof responseText === "object") {
         result = responseText;
       } else {
         throw new Error("No valid JSON found in LLM response");
       }
     }
-    
+
     if (!result) {
       throw new Error("Invalid LLM response format");
     }
 
-    console.log('✅ 파싱된 LLM 결과:');
+    console.log("✅ 파싱된 LLM 결과:");
     console.log(JSON.stringify(result, null, 2));
-    console.log('===================\n');
+    console.log("===================\n");
     return result;
   } catch (error) {
-    console.error('\n❌ LLM Analysis 오류:', error);
-    console.log('🔄 Fallback 시스템 활성화 중...\n');
+    console.error("\n❌ LLM Analysis 오류:", error);
+    console.log("🔄 Fallback 시스템 활성화 중...\n");
 
     // Enhanced fallback with varied responses based on error
     const fallbackResponses = [
@@ -399,9 +402,9 @@ async function callLLMAnalysis(prompt: string): Promise<any> {
 
     const randomFallback =
       fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
-    console.log('📋 사용할 Fallback 응답:');
+    console.log("📋 사용할 Fallback 응답:");
     console.log(JSON.stringify(randomFallback, null, 2));
-    console.log('===================\n');
+    console.log("===================\n");
     return randomFallback;
   }
 }
