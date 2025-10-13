@@ -217,7 +217,7 @@ function createAnalysisPrompt(
 
   const prompt =
     language === "kr"
-      ? `다음은 KPOP 아이돌 적성 분석을 위한 8개 질문에 대한 답변입니다:
+      ? `당신은 KPOP 아이돌 전문가 입니다. 사용자는 8가지 문항에 답변을 하고, 당신은 그 답변을 토대로 사용자가 실제 KPOP 그룹 중, 어느 그룹, 어떤 멤버의 포지션에 어울리는지 판단해야 합니다. 다음은 KPOP 아이돌 적성 분석을 위한 8개 질문에 대한 답변입니다:
 
 1. 무대 위에서의 모습: ${questionMapping.stagePresence[answers.stagePresence]}
 2. 친구들이 말하는 성격: ${questionMapping.friendsDescribe[answers.friendsDescribe]}  
@@ -242,7 +242,7 @@ function createAnalysisPrompt(
 }
 
 답변은 반드시 유효한 JSON 형식으로만 제공해주세요.`
-      : `Here are the answers to 8 KPOP idol aptitude analysis questions:
+      : `You are a K-Pop idol expert. The user answers 8 questions, and based on those responses, you must determine which real K-Pop group and which member’s position best matches the user. Here are the answers to 8 KPOP idol aptitude analysis questions:
 
 1. Stage presence: ${questionMapping.stagePresence[answers.stagePresence]}
 2. Personality described by friends: ${questionMapping.friendsDescribe[answers.friendsDescribe]}
