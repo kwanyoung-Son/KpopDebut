@@ -186,7 +186,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             size="lg"
             className="bg-[hsl(var(--primary-pink))] hover:bg-[hsl(var(--primary-pink))]/90 text-white px-8 py-4 rounded-full font-bold"
           >
-            <Share className="mr-2" size={20} />
+            <span className="mr-2 text-xl">📤</span>
             결과 공유하기
           </Button>
           <Link href="/">
@@ -195,7 +195,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               variant="outline"
               className="border-[hsl(var(--primary-pink))] text-[hsl(var(--primary-pink))] hover:bg-[hsl(var(--primary-pink))]/10 px-8 py-4 rounded-full font-bold"
             >
-              <RotateCcw className="mr-2" size={20} />
+              <span className="mr-2 text-xl">🔄</span>
               다시 테스트하기
             </Button>
           </Link>
