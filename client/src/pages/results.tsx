@@ -140,7 +140,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               {/* Character */}
               <div className="text-center">
                 <div className="w-14 h-14 bg-[hsl(var(--primary-teal))] rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Heart className="text-white fill-white" size={28} />
+                  <span className="text-3xl">✨</span>
                 </div>
                 <h3 className="text-lg font-bold text-gray-800 mb-2">캐릭터</h3>
                 <div className="text-base font-semibold text-gray-700">
