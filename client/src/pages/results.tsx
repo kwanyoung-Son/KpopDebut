@@ -1,12 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import {
-  Share,
-  RotateCcw,
-  Download,
-  Star,
-  Mic,
-  Heart,
-} from "lucide-react";
+import { Share, RotateCcw, Download, Star, Mic, Heart } from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -122,9 +115,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             {(result as any).memberName && (
               <div className="bg-white/20 rounded-full px-4 py-1.5 inline-block">
                 <span className="text-sm">당신은 </span>
-                <span className="font-bold">
-                  {(result as any).memberName}
-                </span>
+                <span className="font-bold">{(result as any).memberName}</span>
                 <span className="text-sm"> 스타일!</span>
               </div>
             )}
@@ -135,9 +126,6 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             <div className="grid md:grid-cols-2 gap-6">
               {/* Position */}
               <div className="text-center">
-                <div className="w-14 h-14 bg-[hsl(var(--primary-pink))] rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Mic className="text-white" size={28} />
-                </div>
                 <h3 className="text-lg font-bold text-gray-800 mb-2">포지션</h3>
                 <div className="text-xl font-bold text-[hsl(var(--primary-pink))]">
                   {result.position}
@@ -189,7 +177,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               </div>
             </div>
           </CardContent>
-        </Card>        
+        </Card>
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
