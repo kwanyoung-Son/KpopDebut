@@ -38,18 +38,18 @@ export const insertAnalysisResultSchema = createInsertSchema(analysisResults).om
 
 export const quizAnswersSchema = z.object({
   // 성격/성향 관련 질문
-  stagePresence: z.enum(["center", "leader", "performer", "charisma"]),
-  friendsDescribe: z.enum(["mood_maker", "serious", "creative", "responsible"]),
-  newProject: z.enum(["execute", "plan", "discuss", "think"]),
+  stagePresence: z.enum(["center", "leader", "performer", "charisma", "supporter", "allrounder"]),
+  friendsDescribe: z.enum(["mood_maker", "serious", "creative", "responsible", "energetic", "calm"]),
+  newProject: z.enum(["execute", "plan", "discuss", "think", "research", "experiment"]),
   
   // 무대/표현 스타일 관련 질문
-  stageImportant: z.enum(["expression", "accuracy", "vocal", "teamwork"]),
-  practiceStyle: z.enum(["vocal", "dance", "direction", "care"]),
-  danceStyle: z.enum(["hiphop", "contemporary", "powerful", "cute"]),
+  stageImportant: z.enum(["expression", "accuracy", "vocal", "teamwork", "energy", "connection"]),
+  practiceStyle: z.enum(["vocal", "dance", "direction", "care", "expression", "stamina"]),
+  danceStyle: z.enum(["hiphop", "contemporary", "powerful", "cute", "sensual", "energetic"]),
   
   // 스타일/패션 감각 관련 질문
-  fashionStyle: z.enum(["street", "chic", "lovely", "trendy"]),
-  makeupStyle: z.enum(["natural", "bold", "retro", "elegant"]),
+  fashionStyle: z.enum(["street", "chic", "lovely", "trendy", "vintage", "minimal"]),
+  makeupStyle: z.enum(["natural", "bold", "retro", "elegant", "glam", "soft"]),
 });
 
 export type InsertUser = z.infer<typeof insertUserSchema>;

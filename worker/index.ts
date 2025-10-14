@@ -11,14 +11,14 @@ interface Env {
 
 // Quiz validation schema
 const quizAnswersSchema = z.object({
-  stagePresence: z.enum(["center", "leader", "performer", "charisma"]),
-  friendsDescribe: z.enum(["mood_maker", "serious", "creative", "responsible"]),
-  newProject: z.enum(["execute", "plan", "discuss", "think"]),
-  stageImportant: z.enum(["expression", "accuracy", "vocal", "teamwork"]),
-  practiceStyle: z.enum(["vocal", "dance", "direction", "care"]),
-  danceStyle: z.enum(["hiphop", "contemporary", "powerful", "cute"]),
-  fashionStyle: z.enum(["street", "chic", "lovely", "trendy"]),
-  makeupStyle: z.enum(["natural", "bold", "retro", "elegant"]),
+  stagePresence: z.enum(["center", "leader", "performer", "charisma", "supporter", "allrounder"]),
+  friendsDescribe: z.enum(["mood_maker", "serious", "creative", "responsible", "energetic", "calm"]),
+  newProject: z.enum(["execute", "plan", "discuss", "think", "research", "experiment"]),
+  stageImportant: z.enum(["expression", "accuracy", "vocal", "teamwork", "energy", "connection"]),
+  practiceStyle: z.enum(["vocal", "dance", "direction", "care", "expression", "stamina"]),
+  danceStyle: z.enum(["hiphop", "contemporary", "powerful", "cute", "sensual", "energetic"]),
+  fashionStyle: z.enum(["street", "chic", "lovely", "trendy", "vintage", "minimal"]),
+  makeupStyle: z.enum(["natural", "bold", "retro", "elegant", "glam", "soft"]),
 });
 
 type QuizAnswers = z.infer<typeof quizAnswersSchema>;
@@ -30,98 +30,130 @@ function createAnalysisPrompt(answers: QuizAnswers, language: 'kr' | 'en' = 'kr'
       center: "중심에서 빛나는 타입",
       leader: "팀을 이끄는 리더형", 
       performer: "열정적인 퍼포머",
-      charisma: "조용한 카리스마"
+      charisma: "조용한 카리스마",
+      supporter: "든든한 서포터형",
+      allrounder: "만능 올라운더"
     },
     friendsDescribe: {
       mood_maker: "분위기 메이커",
       serious: "진지하고 신중함",
       creative: "창의적이고 예술적", 
-      responsible: "계획적이고 책임감"
+      responsible: "계획적이고 책임감",
+      energetic: "활기차고 밝음",
+      calm: "차분하고 온화함"
     },
     newProject: {
       execute: "바로 따라하며 몸으로 익힌다",
       plan: "먼저 구조를 분석하고 계획한다",
       discuss: "멤버들과 함께 의견 나눈다",
-      think: "혼자 차근차근 이해한다"
+      think: "혼자 차근차근 이해한다",
+      research: "레퍼런스 자료를 찾아본다",
+      experiment: "나만의 방식으로 실험한다"
     },
     stageImportant: {
       expression: "표정과 눈빛",
       accuracy: "안무 정확도", 
       vocal: "음정과 감정 전달",
-      teamwork: "전체적인 팀워크"
+      teamwork: "전체적인 팀워크",
+      energy: "에너지와 열정",
+      connection: "관객과의 교감"
     },
     practiceStyle: {
       vocal: "고음 처리나 감정 전달",
       dance: "칼군무와 동작 정리",
       direction: "무대 연출/구성 아이디어",
-      care: "멤버들 케어 및 소통"
+      care: "멤버들 케어 및 소통",
+      expression: "표현력과 감정 몰입",
+      stamina: "체력과 지구력 향상"
     },
     danceStyle: {
       hiphop: "리듬감 넘치는 힙합",
       contemporary: "부드러운 컨템포러리",
       powerful: "파워풀한 퍼포먼스", 
-      cute: "키치하고 귀여운 안무"
+      cute: "키치하고 귀여운 안무",
+      sensual: "세련되고 섹시한 댄스",
+      energetic: "역동적이고 활기찬 움직임"
     },
     fashionStyle: {
       street: "스트릿, 캐주얼",
       chic: "시크하고 모던",
       lovely: "러블리하고 컬러풀",
-      trendy: "트렌디하고 유니크"
+      trendy: "트렌디하고 유니크",
+      vintage: "빈티지와 레트로",
+      minimal: "미니멀과 심플"
     },
     makeupStyle: {
       natural: "자연스러운 내추럴",
       bold: "강렬한 포인트 컬러", 
       retro: "레트로 감성",
-      elegant: "깔끔하고 고급진 스타일"
+      elegant: "깔끔하고 고급진 스타일",
+      glam: "화려한 글램 메이크업",
+      soft: "부드러운 페미닌 룩"
     }
   } : {
     stagePresence: {
       center: "Shining at the center",
       leader: "Leading the team",
       performer: "Passionate performer", 
-      charisma: "Quiet charisma"
+      charisma: "Quiet charisma",
+      supporter: "Reliable supporter",
+      allrounder: "Versatile all-rounder"
     },
     friendsDescribe: {
       mood_maker: "Mood maker",
       serious: "Serious and careful",
       creative: "Creative and artistic",
-      responsible: "Planned and responsible"
+      responsible: "Planned and responsible",
+      energetic: "Energetic and bright",
+      calm: "Calm and gentle"
     },
     newProject: {
       execute: "Learn by doing immediately",
       plan: "Analyze structure and plan first", 
       discuss: "Share opinions with members",
-      think: "Understand step by step alone"
+      think: "Understand step by step alone",
+      research: "Look for reference materials",
+      experiment: "Try in my own way"
     },
     stageImportant: {
       expression: "Facial expressions and eyes",
       accuracy: "Choreography accuracy",
       vocal: "Pitch and emotion delivery", 
-      teamwork: "Overall teamwork"
+      teamwork: "Overall teamwork",
+      energy: "Energy and passion",
+      connection: "Connection with audience"
     },
     practiceStyle: {
       vocal: "High notes and emotion delivery",
       dance: "Synchronized choreography",
       direction: "Stage direction/composition ideas",
-      care: "Member care and communication"
+      care: "Member care and communication",
+      expression: "Expressiveness and emotional immersion",
+      stamina: "Stamina and endurance improvement"
     },
     danceStyle: {
       hiphop: "Rhythmic hip-hop",
       contemporary: "Smooth contemporary",
       powerful: "Powerful performance",
-      cute: "Cute and playful choreography"
+      cute: "Cute and playful choreography",
+      sensual: "Sophisticated and sensual dance",
+      energetic: "Dynamic and energetic movement"
     },
     fashionStyle: {
       street: "Street, casual",
       chic: "Chic and modern", 
       lovely: "Lovely and colorful",
-      trendy: "Trendy and unique"
+      trendy: "Trendy and unique",
+      vintage: "Vintage and retro",
+      minimal: "Minimal and simple"
     },
     makeupStyle: {
       natural: "Natural style",
       bold: "Bold point colors",
       retro: "Retro vibes", 
-      elegant: "Clean and sophisticated style"
+      elegant: "Clean and sophisticated style",
+      glam: "Glamorous makeup",
+      soft: "Soft feminine look"
     }
   };
 

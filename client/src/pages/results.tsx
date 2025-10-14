@@ -5,17 +5,66 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import ResultCard from "@/components/result-card";
 import { AnalysisResult } from "@shared/schema";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import html2canvas from "html2canvas";
 
 interface ResultsPageProps {
   params: { sessionId: string };
 }
 
+const texts = {
+  kr: {
+    loading: "결과를 불러오는 중...",
+    errorLoading: "결과를 불러올 수 없습니다.",
+    backHome: "홈으로 돌아가기",
+    debutProfile: "KPOP 데뷔 프로필",
+    youAre: "당신은",
+    style: "스타일!",
+    position: "포지션",
+    character: "캐릭터",
+    styleTags: "스타일 태그",
+    shareResult: "결과 공유하기",
+    saveImage: "이미지 저장",
+    retryTest: "다시 테스트하기",
+    shareTitle: "KPOP 데뷔 포지션 분析 결과",
+    shareText: (position: string) => `나의 KPOP 아이돌 포지션: ${position}!`,
+    imageCaptureFailed: "이미지 생성에 실패했습니다.",
+    shareCanceled: "공유 취소됨"
+  },
+  en: {
+    loading: "Loading results...",
+    errorLoading: "Failed to load results.",
+    backHome: "Back to Home",
+    debutProfile: "KPOP Debut Profile",
+    youAre: "You are",
+    style: "style!",
+    position: "Position",
+    character: "Character",
+    styleTags: "Style Tags",
+    shareResult: "Share Result",
+    saveImage: "Save Image",
+    retryTest: "Try Again",
+    shareTitle: "KPOP Debut Position Analysis Result",
+    shareText: (position: string) => `My KPOP Idol Position: ${position}!`,
+    imageCaptureFailed: "Failed to generate image.",
+    shareCanceled: "Share canceled"
+  }
+};
+
 export default function ResultsPage({ params }: ResultsPageProps) {
   const { sessionId } = params;
   const cardRef = useRef<HTMLDivElement>(null);
   const [isCapturing, setIsCapturing] = useState(false);
+  const [language, setLanguage] = useState<'kr' | 'en'>('kr');
+
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('language') as 'kr' | 'en';
+    if (savedLanguage) {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
+  const t = texts[language];
 
   const {
     data: result,
@@ -44,7 +93,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
         }, "image/png");
       });
     } catch (error) {
-      console.error("이미지 캡처 실패:", error);
+      console.error(t.imageCaptureFailed, error);
       setIsCapturing(false);
       return null;
     }
@@ -54,7 +103,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
     const imageBlob = await captureCardImage();
 
     if (!imageBlob) {
-      alert("이미지 생성에 실패했습니다.");
+      alert(t.imageCaptureFailed);
       return;
     }
 
@@ -65,12 +114,12 @@ export default function ResultsPage({ params }: ResultsPageProps) {
     if (navigator.share && navigator.canShare?.({ files: [file] })) {
       try {
         await navigator.share({
-          title: "KPOP 데뷔 포지션 분석 결과",
-          text: `나의 KPOP 아이돌 포지션: ${result?.position}!`,
+          title: t.shareTitle,
+          text: t.shareText(result?.position || ""),
           files: [file],
         });
       } catch (error) {
-        console.log("공유 취소됨");
+        console.log(t.shareCanceled);
       }
     } else {
       // 모바일에서 공유 불가능한 경우 다운로드
@@ -82,7 +131,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
     const imageBlob = await captureCardImage();
 
     if (!imageBlob) {
-      alert("이미지 생성에 실패했습니다.");
+      alert(t.imageCaptureFailed);
       return;
     }
 
@@ -101,7 +150,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
       <div className="min-h-screen gradient-bg flex items-center justify-center">
         <div className="text-white text-center">
           <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-white mb-4"></div>
-          <p className="text-xl">결과를 불러오는 중...</p>
+          <p className="text-xl">{t.loading}</p>
         </div>
       </div>
     );
@@ -112,9 +161,9 @@ export default function ResultsPage({ params }: ResultsPageProps) {
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <Card className="max-w-md mx-4">
           <CardContent className="p-6 text-center">
-            <p className="text-red-600 mb-4">결과를 불러올 수 없습니다.</p>
+            <p className="text-red-600 mb-4">{t.errorLoading}</p>
             <Link href="/">
-              <Button>홈으로 돌아가기</Button>
+              <Button>{t.backHome}</Button>
             </Link>
           </CardContent>
         </Card>
@@ -130,10 +179,9 @@ export default function ResultsPage({ params }: ResultsPageProps) {
           <div className="w-14 h-14 gradient-bg rounded-full flex items-center justify-center mx-auto mb-3">
             <Star className="text-white" size={32} />
           </div>
-          <h2 className="text-2xl font-bold text-gray-800 mb-2">분석 완료!</h2>
-          <p className="text-base text-gray-600">
-            당신의 KPOP 데뷔 프로필이 완성되었습니다
-          </p>
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">
+            {t.debutProfile}
+          </h2>
         </div>
 
         {/* Main Result Card */}
@@ -164,9 +212,9 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             </div>
             {(result as any).memberName && (
               <div className="bg-white/20 rounded-full px-4 py-1.5 inline-block">
-                <span className="text-sm">당신은 </span>
+                <span className="text-sm">{t.youAre} </span>
                 <span className="font-bold">{(result as any).memberName}</span>
-                <span className="text-sm"> 스타일!</span>
+                <span className="text-sm"> {t.style}</span>
               </div>
             )}
           </div>
@@ -181,7 +229,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
                     <Mic size={24} className="text-pink-600" />
                   </div>
                   <h3 className="text-lg font-bold text-gray-800 mb-1 tracking-tight">
-                    포지션
+                    {t.position}
                   </h3>
                   <div className="text-2xl font-extrabold text-[hsl(var(--primary-pink))] mb-1">
                     {result.position}
@@ -202,7 +250,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
                     <Heart size={24} className="text-teal-600" />
                   </div>
                   <h3 className="text-lg font-bold text-gray-800 mb-1 tracking-tight">
-                    캐릭터
+                    {t.character}
                   </h3>
                   <div className="text-base font-semibold text-gray-700 leading-snug">
                     {result.character}
@@ -253,7 +301,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             >
               <span className="inline-flex items-center justify-center">
                 <span className="mr-1 text-base">📤</span>
-                공유하기
+                {t.shareResult}
               </span>
             </Button>
 
@@ -267,7 +315,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               data-testid="button-download"
             >
               <span className="mr-1 text-base">💾</span>
-              저장
+              {t.saveImage}
             </Button>
 
             <Button
@@ -280,7 +328,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             >
               <Link href="/">
                 <span className="mr-1 text-base">🔄</span>
-                다시하기
+                {t.retryTest}
               </Link>
             </Button>
           </div>
