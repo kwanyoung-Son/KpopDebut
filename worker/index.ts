@@ -559,6 +559,19 @@ export default {
         const photoFile = formData.get('photo') as File;
         if (photoFile && photoFile.size > 0) {
           console.log(`Photo received: ${photoFile.name}, size: ${photoFile.size} bytes`);
+          const arrayBuffer = await photoFile.arrayBuffer();
+          
+          // Convert ArrayBuffer to base64 in chunks to avoid stack overflow
+          const bytes = new Uint8Array(arrayBuffer);
+          let binary = '';
+          const chunkSize = 0x8000; // 32KB chunks
+          for (let i = 0; i < bytes.length; i += chunkSize) {
+            const chunk = bytes.subarray(i, i + chunkSize);
+            binary += String.fromCharCode.apply(null, Array.from(chunk));
+          }
+          const base64 = btoa(binary);
+          photoData = `data:${photoFile.type};base64,${base64}`;
+          console.log(`Photo converted to base64, length: ${photoData.length}`);
         }
         
         // Generate analysis result with LLM + Fallback
