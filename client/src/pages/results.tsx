@@ -1,5 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { Share, RotateCcw, Download, Star, Mic, Heart, Users } from "lucide-react";
+import {
+  Share,
+  RotateCcw,
+  Download,
+  Star,
+  Mic,
+  Heart,
+  Users,
+} from "lucide-react";
 import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -13,35 +21,39 @@ interface ResultsPageProps {
 export default function ResultsPage({ params }: ResultsPageProps) {
   const { sessionId } = params;
 
-  const { data: result, isLoading, error } = useQuery<AnalysisResult>({
-    queryKey: ['/api/results', sessionId],
+  const {
+    data: result,
+    isLoading,
+    error,
+  } = useQuery<AnalysisResult>({
+    queryKey: ["/api/results", sessionId],
   });
 
   const handleShare = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'KPOP 데뷔 포지션 분석 결과',
+          title: "KPOP 데뷔 포지션 분석 결과",
           text: `나의 KPOP 아이돌 포지션: ${result?.position}!`,
-          url: window.location.href
+          url: window.location.href,
         });
       } catch (error) {
-        console.log('Share cancelled');
+        console.log("Share cancelled");
       }
     } else {
       // Fallback - copy to clipboard
       try {
         await navigator.clipboard.writeText(window.location.href);
-        alert('링크가 복사되었습니다!');
+        alert("링크가 복사되었습니다!");
       } catch (error) {
-        console.error('Copy failed:', error);
+        console.error("Copy failed:", error);
       }
     }
   };
 
   const handleSaveImage = () => {
     // This would generate and download the result card image
-    alert('이미지 저장 기능을 준비중입니다!');
+    alert("이미지 저장 기능을 준비중입니다!");
   };
 
   if (isLoading) {
@@ -79,7 +91,9 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             <Star className="text-white" size={48} />
           </div>
           <h2 className="text-4xl font-bold text-gray-800 mb-4">분석 완료!</h2>
-          <p className="text-xl text-gray-600">당신의 KPOP 데뷔 프로필이 완성되었습니다</p>
+          <p className="text-xl text-gray-600">
+            당신의 KPOP 데뷔 프로필이 완성되었습니다
+          </p>
         </div>
 
         {/* Main Result Card */}
@@ -89,21 +103,29 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             <div className="flex items-center justify-center mb-4">
               {result.photoData && (
                 <div className="w-24 h-24 rounded-full overflow-hidden mr-4 border-4 border-white/20">
-                  <img src={result.photoData} alt="User" className="w-full h-full object-cover" />
+                  <img
+                    src={result.photoData}
+                    alt="User"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               )}
               <div className="text-left">
                 <div className="text-sm opacity-80">실제 KPOP 그룹</div>
                 <div className="text-2xl font-bold">{result.groupName}</div>
                 {(result as any).agency && (
-                  <div className="text-sm opacity-90">{(result as any).agency}</div>
+                  <div className="text-sm opacity-90">
+                    {(result as any).agency}
+                  </div>
                 )}
               </div>
             </div>
             {(result as any).memberName && (
               <div className="bg-white/20 rounded-full px-4 py-2 inline-block">
                 <span className="text-sm">당신은 </span>
-                <span className="font-bold text-lg">{(result as any).memberName}</span>
+                <span className="font-bold text-lg">
+                  {(result as any).memberName}
+                </span>
                 <span className="text-sm"> 스타일!</span>
               </div>
             )}
@@ -118,9 +140,13 @@ export default function ResultsPage({ params }: ResultsPageProps) {
                   <Mic className="text-white" size={32} />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-2">포지션</h3>
-                <div className="text-2xl font-bold text-[hsl(var(--primary-pink))] mb-2">{result.position}</div>
+                <div className="text-2xl font-bold text-[hsl(var(--primary-pink))] mb-2">
+                  {result.position}
+                </div>
                 {result.subPosition && (
-                  <div className="text-[hsl(var(--primary-pink))] font-medium">{result.subPosition}</div>
+                  <div className="text-[hsl(var(--primary-pink))] font-medium">
+                    {result.subPosition}
+                  </div>
                 )}
               </div>
 
@@ -130,30 +156,37 @@ export default function ResultsPage({ params }: ResultsPageProps) {
                   <Heart className="text-white" size={32} />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-2">캐릭터</h3>
-                <div className="text-lg font-semibold text-gray-700">{result.character}</div>
-                <p className="text-sm text-gray-600 mt-2">{result.characterDesc}</p>
+                <div className="text-lg font-semibold text-gray-700">
+                  {result.character}
+                </div>
+                <p className="text-sm text-gray-600 mt-2">
+                  {result.characterDesc}
+                </p>
               </div>
             </div>
 
             {/* Style Tags */}
             <div className="mt-8">
-              <h4 className="text-lg font-semibold text-gray-800 mb-4 text-center">스타일 태그</h4>
+              <h4 className="text-lg font-semibold text-gray-800 mb-4 text-center">
+                스타일 태그
+              </h4>
               <div className="flex flex-wrap justify-center gap-2">
-                {Array.isArray(result.styleTags) && result.styleTags.map((tag, index) => {
-                  const gradients = [
-                    'from-pink-500 to-purple-500',
-                    'from-teal-500 to-blue-500',
-                    'from-yellow-500 to-orange-500'
-                  ];
-                  return (
-                    <span
-                      key={index}
-                      className={`bg-gradient-to-r ${gradients[index % gradients.length]} text-white px-4 py-2 rounded-full text-sm font-medium`}
-                    >
-                      {tag}
-                    </span>
-                  );
-                })}
+                {Array.isArray(result.styleTags) &&
+                  result.styleTags.map((tag, index) => {
+                    const gradients = [
+                      "from-pink-500 to-purple-500",
+                      "from-teal-500 to-blue-500",
+                      "from-yellow-500 to-orange-500",
+                    ];
+                    return (
+                      <span
+                        key={index}
+                        className={`bg-gradient-to-r ${gradients[index % gradients.length]} text-white px-4 py-2 rounded-full text-sm font-medium`}
+                      >
+                        {tag}
+                      </span>
+                    );
+                  })}
               </div>
             </div>
 
@@ -191,9 +224,15 @@ export default function ResultsPage({ params }: ResultsPageProps) {
         {result.photoData && (
           <Card className="bg-white rounded-3xl card-shadow overflow-hidden mb-8">
             <CardContent className="p-8 text-center">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">업로드한 사진</h3>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">
+                업로드한 사진
+              </h3>
               <div className="w-48 h-48 mx-auto rounded-2xl overflow-hidden border-4 border-gray-100">
-                <img src={result.photoData} alt="Uploaded photo" className="w-full h-full object-cover" />
+                <img
+                  src={result.photoData}
+                  alt="Uploaded photo"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </CardContent>
           </Card>
