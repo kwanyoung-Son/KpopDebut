@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import ResultCard from "@/components/result-card";
 import { AnalysisResult } from "@shared/schema";
+import { useRef, useState } from "react";
+import html2canvas from "html2canvas";
 
 interface ResultsPageProps {
   params: { sessionId: string };
@@ -12,6 +14,8 @@ interface ResultsPageProps {
 
 export default function ResultsPage({ params }: ResultsPageProps) {
   const { sessionId } = params;
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [isCapturing, setIsCapturing] = useState(false);
 
   const {
     data: result,
@@ -21,31 +25,73 @@ export default function ResultsPage({ params }: ResultsPageProps) {
     queryKey: ["/api/results", sessionId],
   });
 
+  const captureCardImage = async (): Promise<Blob | null> => {
+    if (!cardRef.current) return null;
+
+    try {
+      setIsCapturing(true);
+      const canvas = await html2canvas(cardRef.current, {
+        backgroundColor: "#ffffff",
+        scale: 2,
+        logging: false,
+        useCORS: true,
+      });
+
+      return new Promise((resolve) => {
+        canvas.toBlob((blob) => {
+          setIsCapturing(false);
+          resolve(blob);
+        }, "image/png");
+      });
+    } catch (error) {
+      console.error("이미지 캡처 실패:", error);
+      setIsCapturing(false);
+      return null;
+    }
+  };
+
   const handleShare = async () => {
-    if (navigator.share) {
+    const imageBlob = await captureCardImage();
+    
+    if (!imageBlob) {
+      alert("이미지 생성에 실패했습니다.");
+      return;
+    }
+
+    const file = new File([imageBlob], "kpop-result.png", { type: "image/png" });
+
+    if (navigator.share && navigator.canShare?.({ files: [file] })) {
       try {
         await navigator.share({
           title: "KPOP 데뷔 포지션 분석 결과",
           text: `나의 KPOP 아이돌 포지션: ${result?.position}!`,
-          url: window.location.href,
+          files: [file],
         });
       } catch (error) {
-        console.log("Share cancelled");
+        console.log("공유 취소됨");
       }
     } else {
-      // Fallback - copy to clipboard
-      try {
-        await navigator.clipboard.writeText(window.location.href);
-        alert("링크가 복사되었습니다!");
-      } catch (error) {
-        console.error("Copy failed:", error);
-      }
+      // 모바일에서 공유 불가능한 경우 다운로드
+      handleDownload();
     }
   };
 
-  const handleSaveImage = () => {
-    // This would generate and download the result card image
-    alert("이미지 저장 기능을 준비중입니다!");
+  const handleDownload = async () => {
+    const imageBlob = await captureCardImage();
+    
+    if (!imageBlob) {
+      alert("이미지 생성에 실패했습니다.");
+      return;
+    }
+
+    const url = URL.createObjectURL(imageBlob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `kpop-result-${Date.now()}.png`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
   };
 
   if (isLoading) {
@@ -89,7 +135,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
         </div>
 
         {/* Main Result Card */}
-        <Card className="bg-white rounded-3xl card-shadow overflow-hidden mb-6">
+        <Card ref={cardRef} className="bg-white rounded-3xl card-shadow overflow-hidden mb-6">
           {/* Card Header with Group Info */}
           <div className="gradient-bg p-6 text-white text-center">
             <div className="flex items-center justify-center gap-4 mb-3">
@@ -183,17 +229,31 @@ export default function ResultsPage({ params }: ResultsPageProps) {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Button
             onClick={handleShare}
+            disabled={isCapturing}
             size="lg"
-            className="bg-[hsl(var(--primary-pink))] hover:bg-[hsl(var(--primary-pink))]/90 text-white px-8 py-4 rounded-full font-bold"
+            className="bg-[hsl(var(--primary-pink))] hover:bg-[hsl(var(--primary-pink))]/90 text-white px-8 py-4 rounded-full font-bold disabled:opacity-50"
+            data-testid="button-share"
           >
             <span className="mr-2 text-xl">📤</span>
-            결과 공유하기
+            {isCapturing ? "이미지 생성 중..." : "결과 공유하기"}
+          </Button>
+          <Button
+            onClick={handleDownload}
+            disabled={isCapturing}
+            size="lg"
+            variant="outline"
+            className="border-[hsl(var(--primary-pink))] text-[hsl(var(--primary-pink))] hover:bg-[hsl(var(--primary-pink))]/10 px-8 py-4 rounded-full font-bold disabled:opacity-50"
+            data-testid="button-download"
+          >
+            <span className="mr-2 text-xl">💾</span>
+            {isCapturing ? "이미지 생성 중..." : "이미지 저장"}
           </Button>
           <Link href="/">
             <Button
               size="lg"
               variant="outline"
               className="border-[hsl(var(--primary-pink))] text-[hsl(var(--primary-pink))] hover:bg-[hsl(var(--primary-pink))]/10 px-8 py-4 rounded-full font-bold"
+              data-testid="button-restart"
             >
               <span className="mr-2 text-xl">🔄</span>
               다시 테스트하기
