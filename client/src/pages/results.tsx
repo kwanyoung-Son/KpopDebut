@@ -52,13 +52,15 @@ export default function ResultsPage({ params }: ResultsPageProps) {
 
   const handleShare = async () => {
     const imageBlob = await captureCardImage();
-    
+
     if (!imageBlob) {
       alert("이미지 생성에 실패했습니다.");
       return;
     }
 
-    const file = new File([imageBlob], "kpop-result.png", { type: "image/png" });
+    const file = new File([imageBlob], "kpop-result.png", {
+      type: "image/png",
+    });
 
     if (navigator.share && navigator.canShare?.({ files: [file] })) {
       try {
@@ -78,7 +80,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
 
   const handleDownload = async () => {
     const imageBlob = await captureCardImage();
-    
+
     if (!imageBlob) {
       alert("이미지 생성에 실패했습니다.");
       return;
@@ -135,7 +137,10 @@ export default function ResultsPage({ params }: ResultsPageProps) {
         </div>
 
         {/* Main Result Card */}
-        <Card ref={cardRef} className="bg-white rounded-3xl card-shadow overflow-hidden mb-6">
+        <Card
+          ref={cardRef}
+          className="bg-white rounded-3xl card-shadow overflow-hidden mb-6"
+        >
           {/* Card Header with Group Info */}
           <div className="gradient-bg p-6 text-white text-center">
             <div className="flex items-center justify-center gap-4 mb-3">
@@ -149,7 +154,6 @@ export default function ResultsPage({ params }: ResultsPageProps) {
                 </div>
               )}
               <div className="text-left">
-                <div className="text-xs opacity-80">실제 KPOP 그룹</div>
                 <div className="text-2xl font-bold">{result.groupName}</div>
                 {(result as any).agency && (
                   <div className="text-xs opacity-90">
@@ -170,39 +174,49 @@ export default function ResultsPage({ params }: ResultsPageProps) {
           {/* Position & Character */}
           <CardContent className="p-6">
             <div className="grid md:grid-cols-2 gap-6">
-              {/* Position */}
-              <div className="text-center">
-                <h3 className="text-lg font-bold text-gray-800 mb-2">포지션</h3>
-                <div className="text-xl font-bold text-[hsl(var(--primary-pink))]">
-                  {result.position}
-                </div>
-                {result.subPosition && (
-                  <div className="text-sm text-[hsl(var(--primary-pink))] font-medium mt-1">
-                    {result.subPosition}
+              {/* 🎤 Position Section */}
+              <div className="text-center bg-gradient-to-b from-pink-50 to-white rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+                <div className="flex flex-col items-center">
+                  <div className="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center mb-3 shadow-sm">
+                    <Mic size={24} className="text-pink-600" />
                   </div>
-                )}
+                  <h3 className="text-lg font-bold text-gray-800 mb-1 tracking-tight">
+                    포지션
+                  </h3>
+                  <div className="text-2xl font-extrabold text-[hsl(var(--primary-pink))] mb-1">
+                    {result.position}
+                  </div>
+                  {result.subPosition && (
+                    <div className="text-sm text-gray-500 italic">
+                      {result.subPosition}
+                    </div>
+                  )}
+                </div>
+                <div className="mt-4 w-16 h-[2px] bg-gradient-to-r from-pink-400 to-orange-300 mx-auto rounded-full"></div>
               </div>
 
-              {/* Character */}
-              <div className="text-center">
-                <div className="w-14 h-14 bg-[hsl(var(--primary-teal))] rounded-full flex items-center justify-center mx-auto mb-3">
-                  <span className="text-3xl">✨</span>
+              {/* ✨ Character Section */}
+              <div className="text-center bg-gradient-to-b from-teal-50 to-white rounded-2xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+                <div className="flex flex-col items-center">
+                  <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mb-3 shadow-sm">
+                    <Heart size={24} className="text-teal-600" />
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-800 mb-1 tracking-tight">
+                    캐릭터
+                  </h3>
+                  <div className="text-base font-semibold text-gray-700 leading-snug">
+                    {result.character}
+                  </div>
+                  <p className="text-sm text-gray-600 mt-2 leading-relaxed max-w-xs mx-auto">
+                    {result.characterDesc}
+                  </p>
                 </div>
-                <h3 className="text-lg font-bold text-gray-800 mb-2">캐릭터</h3>
-                <div className="text-base font-semibold text-gray-700">
-                  {result.character}
-                </div>
-                <p className="text-sm text-gray-600 mt-1">
-                  {result.characterDesc}
-                </p>
+                <div className="mt-4 w-16 h-[2px] bg-gradient-to-r from-teal-400 to-blue-400 mx-auto rounded-full"></div>
               </div>
             </div>
 
             {/* Style Tags */}
-            <div className="mt-6">
-              <h4 className="text-base font-semibold text-gray-800 mb-3 text-center">
-                스타일 태그
-              </h4>
+            <div className="mt-8">
               <div className="flex flex-wrap justify-center gap-2">
                 {Array.isArray(result.styleTags) &&
                   result.styleTags.map((tag, index) => {
@@ -214,7 +228,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
                     return (
                       <span
                         key={index}
-                        className={`bg-gradient-to-r ${gradients[index % gradients.length]} text-white px-3 py-1.5 rounded-full text-sm font-medium`}
+                        className={`bg-gradient-to-r ${gradients[index % gradients.length]} text-white px-3 py-1.5 rounded-full text-sm font-medium shadow-sm`}
                       >
                         {tag}
                       </span>
@@ -226,39 +240,50 @@ export default function ResultsPage({ params }: ResultsPageProps) {
         </Card>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button
-            onClick={handleShare}
-            disabled={isCapturing}
-            size="lg"
-            className="bg-[hsl(var(--primary-pink))] hover:bg-[hsl(var(--primary-pink))]/90 text-white px-8 py-4 rounded-full font-bold disabled:opacity-50"
-            data-testid="button-share"
-          >
-            <span className="mr-2 text-xl">📤</span>
-            {isCapturing ? "이미지 생성 중..." : "결과 공유하기"}
-          </Button>
-          <Button
-            onClick={handleDownload}
-            disabled={isCapturing}
-            size="lg"
-            variant="outline"
-            className="border-[hsl(var(--primary-pink))] text-[hsl(var(--primary-pink))] hover:bg-[hsl(var(--primary-pink))]/10 px-8 py-4 rounded-full font-bold disabled:opacity-50"
-            data-testid="button-download"
-          >
-            <span className="mr-2 text-xl">💾</span>
-            {isCapturing ? "이미지 생성 중..." : "이미지 저장"}
-          </Button>
-          <Link href="/">
+        <div className="w-full max-w-[540px] mx-auto px-2 overflow-x-hidden">
+          <div className="grid grid-cols-3 gap-2">
             <Button
-              size="lg"
+              onClick={handleShare}
+              disabled={isCapturing}
               variant="outline"
-              className="border-[hsl(var(--primary-pink))] text-[hsl(var(--primary-pink))] hover:bg-[hsl(var(--primary-pink))]/10 px-8 py-4 rounded-full font-bold"
+              className="w-full border-[hsl(var(--primary-pink))] text-[hsl(var(--primary-pink))] 
+                         hover:bg-[hsl(var(--primary-pink))]/10 px-3 py-2 rounded-full font-bold 
+                         disabled:opacity-50 text-sm whitespace-nowrap shrink-0"
+              data-testid="button-share"
+            >
+              <span className="inline-flex items-center justify-center">
+                <span className="mr-1 text-base">📤</span>
+                공유하기
+              </span>
+            </Button>
+
+            <Button
+              onClick={handleDownload}
+              disabled={isCapturing}
+              variant="outline"
+              className="w-full border-[hsl(var(--primary-pink))] text-[hsl(var(--primary-pink))] 
+                         hover:bg-[hsl(var(--primary-pink))]/10 px-3 py-2 rounded-full font-bold 
+                         disabled:opacity-50 text-sm whitespace-nowrap shrink-0"
+              data-testid="button-download"
+            >
+              <span className="mr-1 text-base">💾</span>
+              저장
+            </Button>
+
+            <Button
+              asChild
+              variant="outline"
+              className="w-full border-[hsl(var(--primary-pink))] text-[hsl(var(--primary-pink))] 
+               hover:bg-[hsl(var(--primary-pink))]/10 px-3 py-2 rounded-full font-bold 
+               disabled:opacity-50 text-sm whitespace-nowrap shrink-0"
               data-testid="button-restart"
             >
-              <span className="mr-2 text-xl">🔄</span>
-              다시 테스트하기
+              <Link href="/">
+                <span className="mr-1 text-base">🔄</span>
+                다시하기
+              </Link>
             </Button>
-          </Link>
+          </div>
         </div>
       </div>
     </div>

@@ -236,7 +236,7 @@ function createAnalysisPrompt(
   "subPosition": "서브 포지션 (선택사항)",
   "character": "그룹명 + 멤버명 + 스타일",
   "characterDesc": "해당 멤버의 특징을 반영한 성격 설명",
-  "styleTags": ["#그룹스타일", "#포지션태그", "#멤버형"],
+  "styleTags": ["#그룹스타일", "#포지션태그", "#멤버형", "#댄스스타일", "#패션스타일"],
   "memberName": "실제 멤버 이름",
   "agency": "소속사명"
 }
@@ -261,7 +261,7 @@ Based on these answers, generate a KPOP idol analysis result in the following JS
   "subPosition": "Sub position (optional)",
   "character": "Group name + Member name + Style",
   "characterDesc": "Personality description reflecting the member's characteristics",
-  "styleTags": ["#GroupStyle", "#PositionTag", "#MemberType"],
+  "styleTags": ["#GroupStyle", "#PositionTag", "#MemberType", "#DanceStyle", "#FashionStyle"],
   "memberName": "Actual member name",
   "agency": "Agency name"
 }
