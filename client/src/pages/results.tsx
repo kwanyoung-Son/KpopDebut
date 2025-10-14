@@ -82,15 +82,15 @@ export default function ResultsPage({ params }: ResultsPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-pink-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-pink-50 py-6 px-4">
       <div className="max-w-3xl mx-auto">
         {/* Results Header */}
-        <div className="text-center mb-8">
-          <div className="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
-            <Star className="text-white" size={36} />
+        <div className="text-center mb-6">
+          <div className="w-14 h-14 gradient-bg rounded-full flex items-center justify-center mx-auto mb-3">
+            <Star className="text-white" size={32} />
           </div>
-          <h2 className="text-3xl font-bold text-gray-800 mb-2">분석 완료!</h2>
-          <p className="text-lg text-gray-600">
+          <h2 className="text-2xl font-bold text-gray-800 mb-2">분석 완료!</h2>
+          <p className="text-base text-gray-600">
             당신의 KPOP 데뷔 프로필이 완성되었습니다
           </p>
         </div>
