@@ -8,6 +8,15 @@ This is a full-stack web application that analyzes users' personality traits and
 
 Preferred communication style: Simple, everyday language.
 
+## Recent Changes
+
+### 2025-10-14
+- **Quiz Expansion**: Extended quiz options from 4 to 6 per question (8 questions total, 48 options)
+- **Multilingual Support**: Added English language support for entire user flow (Home → Quiz → Results)
+  - Language selection persists via localStorage
+  - All UI text translated for Korean and English
+- **Cloudflare Workers Photo Fix**: Implemented chunked base64 conversion (32KB chunks) to prevent stack overflow for large photo files
+
 ## System Architecture
 
 The application follows a modern full-stack architecture with clear separation between client and server responsibilities:
@@ -47,10 +56,13 @@ The application follows a modern full-stack architecture with clear separation b
 ### Photo Processing
 - **Upload Handling**: Multer with memory storage and 5MB file size limit
 - **Format Support**: Base64 encoding for storage and display
+- **Cloudflare Workers**: Chunked conversion (32KB chunks) to prevent stack overflow on large files
 - **Validation**: File type and size validation
 
 ### Quiz System
-- **Multi-step Process**: Progressive quiz with personality, music genre, and fashion style questions
+- **Multi-step Process**: Progressive quiz with 8 questions covering personality, performance style, and fashion
+- **Options**: 6 options per question (48 total options)
+- **Multilingual**: Full Korean and English support
 - **Validation**: Zod schema validation for quiz answers
 - **Progress Tracking**: Client-side progress indicators
 
