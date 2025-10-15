@@ -29,7 +29,7 @@ const texts = {
     shareTitle: "KPOP 데뷔 포지션 분析 결과",
     shareText: (position: string) => `나의 KPOP 아이돌 포지션: ${position}!`,
     imageCaptureFailed: "이미지 생성에 실패했습니다.",
-    shareCanceled: "공유 취소됨"
+    shareCanceled: "공유 취소됨",
   },
   en: {
     loading: "Loading results...",
@@ -41,24 +41,24 @@ const texts = {
     position: "Position",
     character: "Character",
     styleTags: "Style Tags",
-    shareResult: "Share Result",
-    saveImage: "Save Image",
-    retryTest: "Try Again",
+    shareResult: "Share",
+    saveImage: "Save",
+    retryTest: "Retry",
     shareTitle: "KPOP Debut Position Analysis Result",
     shareText: (position: string) => `My KPOP Idol Position: ${position}!`,
     imageCaptureFailed: "Failed to generate image.",
-    shareCanceled: "Share canceled"
-  }
+    shareCanceled: "Share canceled",
+  },
 };
 
 export default function ResultsPage({ params }: ResultsPageProps) {
   const { sessionId } = params;
   const cardRef = useRef<HTMLDivElement>(null);
   const [isCapturing, setIsCapturing] = useState(false);
-  const [language, setLanguage] = useState<'kr' | 'en'>('kr');
+  const [language, setLanguage] = useState<"kr" | "en">("kr");
 
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('language') as 'kr' | 'en';
+    const savedLanguage = localStorage.getItem("language") as "kr" | "en";
     if (savedLanguage) {
       setLanguage(savedLanguage);
     }
