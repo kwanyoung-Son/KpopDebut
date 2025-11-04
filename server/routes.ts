@@ -33,9 +33,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
           req.body.sessionId ||
           `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
         const language = (req.body.language || "kr") as "kr" | "en";
+        const gender = (req.body.gender || "female") as "male" | "female";
 
         // Validate quiz answers
         console.log("Raw quiz answers:", req.body.quizAnswers);
+        console.log("Detected gender:", gender);
 
         if (!req.body.quizAnswers || req.body.quizAnswers === "undefined") {
           throw new Error("Quiz answers are missing or undefined");
@@ -57,8 +59,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
           photoData = `data:${file.mimetype};base64,${file.buffer.toString("base64")}`;
         }
 
-        // Generate analysis result using LLM
-        const result = await generateAnalysisResult(quizAnswers, language);
+        // Generate analysis result using LLM with gender information
+        const result = await generateAnalysisResult(quizAnswers, language, gender);
 
         const analysisData = {
           sessionId,
@@ -111,6 +113,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 function createAnalysisPrompt(
   answers: QuizAnswers,
   language: "kr" | "en" = "kr",
+  gender: "male" | "female" = "female",
 ) {
   const questionMapping =
     language === "kr"
@@ -247,9 +250,15 @@ function createAnalysisPrompt(
           },
         };
 
+  const genderHint = gender === "male" 
+    ? (language === "kr" ? "사용자는 남성이므로 남자 아이돌 그룹과 멤버를 매칭해주세요." : "The user is male, so please match with male idol groups and members.")
+    : (language === "kr" ? "사용자는 여성이므로 여자 아이돌 그룹과 멤버를 매칭해주세요." : "The user is female, so please match with female idol groups and members.");
+
   const prompt =
     language === "kr"
-      ? `당신은 KPOP 아이돌 전문가 입니다. 사용자는 8가지 문항에 답변을 하고, 당신은 그 답변을 토대로 사용자가 실제 KPOP 그룹 중, 어느 그룹, 어떤 멤버의 포지션에 어울리는지 판단해야 합니다. 다음은 KPOP 아이돌 적성 분석을 위한 8개 질문에 대한 답변입니다:
+      ? `당신은 KPOP 아이돌 전문가 입니다. 사용자는 8가지 문항에 답변을 하고, 당신은 그 답변을 토대로 사용자가 실제 KPOP 그룹 중, 어느 그룹, 어떤 멤버의 포지션에 어울리는지 판단해야 합니다. ${genderHint}
+
+다음은 KPOP 아이돌 적성 분석을 위한 8개 질문에 대한 답변입니다:
 
 1. 무대 위에서의 모습: ${questionMapping.stagePresence[answers.stagePresence]}
 2. 친구들이 말하는 성격: ${questionMapping.friendsDescribe[answers.friendsDescribe]}  
@@ -274,7 +283,10 @@ function createAnalysisPrompt(
 }
 
 답변은 반드시 유효한 JSON 형식으로만 제공해주세요.`
-      : `You are a K-Pop idol expert. The user answers 8 questions, and based on those responses, you must determine which real K-Pop group and which member’s position best matches the user. Here are the answers to 8 KPOP idol aptitude analysis questions:
+      : `You are a K-Pop idol expert. The user answers 8 questions, and based on those responses, you must determine which real K-Pop group and which member’s position best matches the user. ${genderHint}
+
+Here are the answers to 8 KPOP idol aptitude analysis questions:
+
 
 1. Stage presence: ${questionMapping.stagePresence[answers.stagePresence]}
 2. Personality described by friends: ${questionMapping.friendsDescribe[answers.friendsDescribe]}
@@ -445,8 +457,9 @@ async function callLLMAnalysis(prompt: string): Promise<any> {
 async function generateAnalysisResult(
   answers: QuizAnswers,
   language: "kr" | "en" = "kr",
+  gender: "male" | "female" = "female",
 ) {
-  const prompt = createAnalysisPrompt(answers, language);
+  const prompt = createAnalysisPrompt(answers, language, gender);
   const result = await callLLMAnalysis(prompt);
 
   return {

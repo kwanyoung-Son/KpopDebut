@@ -24,7 +24,7 @@ const quizAnswersSchema = z.object({
 type QuizAnswers = z.infer<typeof quizAnswersSchema>;
 
 // Convert quiz answers to LLM prompt
-function createAnalysisPrompt(answers: QuizAnswers, language: 'kr' | 'en' = 'kr') {
+function createAnalysisPrompt(answers: QuizAnswers, language: 'kr' | 'en' = 'kr', gender: 'male' | 'female' = 'female') {
   const questionMapping = language === 'kr' ? {
     stagePresence: {
       center: "중심에서 빛나는 타입",
@@ -157,8 +157,14 @@ function createAnalysisPrompt(answers: QuizAnswers, language: 'kr' | 'en' = 'kr'
     }
   };
 
+  const genderHint = gender === "male" 
+    ? (language === "kr" ? "사용자는 남성이므로 남자 아이돌 그룹과 멤버를 매칭해주세요." : "The user is male, so please match with male idol groups and members.")
+    : (language === "kr" ? "사용자는 여성이므로 여자 아이돌 그룹과 멤버를 매칭해주세요." : "The user is female, so please match with female idol groups and members.");
+
   const prompt = language === 'kr' ? 
-    `다음은 KPOP 아이돌 적성 분석을 위한 8개 질문에 대한 답변입니다:
+    `당신은 KPOP 아이돌 전문가 입니다. ${genderHint}
+
+다음은 KPOP 아이돌 적성 분석을 위한 8개 질문에 대한 답변입니다:
 
 1. 무대 위에서의 모습: ${questionMapping.stagePresence[answers.stagePresence]}
 2. 친구들이 말하는 성격: ${questionMapping.friendsDescribe[answers.friendsDescribe]}  
@@ -183,7 +189,9 @@ function createAnalysisPrompt(answers: QuizAnswers, language: 'kr' | 'en' = 'kr'
 }
 
 답변은 반드시 유효한 JSON 형식으로만 제공해주세요.` :
-    `Here are the answers to 8 KPOP idol aptitude analysis questions:
+    `You are a K-Pop idol expert. ${genderHint}
+
+Here are the answers to 8 KPOP idol aptitude analysis questions:
 
 1. Stage presence: ${questionMapping.stagePresence[answers.stagePresence]}
 2. Personality described by friends: ${questionMapping.friendsDescribe[answers.friendsDescribe]}
@@ -477,10 +485,10 @@ function generateAnalysisResultFallback(quizAnswers: QuizAnswers) {
 }
 
 // Main analysis function with LLM + Fallback
-async function generateAnalysisResult(quizAnswers: QuizAnswers, language: 'kr' | 'en' = 'kr', env?: Env) {
+async function generateAnalysisResult(quizAnswers: QuizAnswers, language: 'kr' | 'en' = 'kr', gender: 'male' | 'female' = 'female', env?: Env) {
   try {
     // Try LLM first
-    const prompt = createAnalysisPrompt(quizAnswers, language);
+    const prompt = createAnalysisPrompt(quizAnswers, language, gender);
     const llmResult = await callLLMAnalysis(prompt, env);
     
     return {
@@ -546,6 +554,9 @@ export default {
         const sessionId = (formData.get('sessionId') as string) || `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
         const quizAnswersRaw = formData.get('quizAnswers') as string;
         const language = (formData.get('language') as 'kr' | 'en') || 'kr';
+        const gender = (formData.get('gender') as 'male' | 'female') || 'female';
+        
+        console.log('Detected gender:', gender);
         
         if (!quizAnswersRaw || quizAnswersRaw === 'undefined') {
           throw new Error('Quiz answers are missing or undefined');
@@ -575,7 +586,7 @@ export default {
         }
         
         // Generate analysis result with LLM + Fallback
-        const result = await generateAnalysisResult(quizAnswers, language, env);
+        const result = await generateAnalysisResult(quizAnswers, language, gender, env);
         
         // Prepare data for database
         const analysisData = {

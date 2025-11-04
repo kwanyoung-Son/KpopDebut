@@ -40,9 +40,11 @@ export default function LoadingPage() {
       const quizAnswers = sessionStorage.getItem('quizAnswers');
       const photoData = sessionStorage.getItem('uploadedPhoto');
       const language = sessionStorage.getItem('language') || localStorage.getItem('language') || 'kr';
+      const gender = sessionStorage.getItem('detectedGender') || 'female'; // 기본값은 female
       
       console.log('Sending quiz answers:', quizAnswers);
       console.log('Language:', language);
+      console.log('Detected Gender:', gender);
       
       if (!quizAnswers) {
         throw new Error('Quiz answers not found');
@@ -65,6 +67,7 @@ export default function LoadingPage() {
       formData.append('quizAnswers', quizAnswers);
       formData.append('sessionId', sessionId);
       formData.append('language', language);
+      formData.append('gender', gender);
       
       if (photoData) {
         // Convert base64 to blob
@@ -127,7 +130,7 @@ export default function LoadingPage() {
   return (
     <div className="min-h-screen gradient-bg flex items-center justify-center px-4">
       <div className="text-center text-white">
-        <div className="relative mb-8">
+        <div className="relative mb-8 mx-auto w-32 h-32">
           <div className="w-32 h-32 border-4 border-white/30 rounded-full animate-spin">
             <div className="w-8 h-8 bg-white rounded-full absolute top-0 left-1/2 transform -translate-x-1/2"></div>
           </div>

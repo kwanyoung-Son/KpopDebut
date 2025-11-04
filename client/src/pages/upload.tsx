@@ -34,10 +34,14 @@ export default function UploadPage() {
     const loadModels = async () => {
       console.log('🔄 얼굴 인식 모델 로드 시작...');
       try {
-        // CDN에서 모델 로드
-        await faceapi.nets.ssdMobilenetv1.loadFromUri('https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights');
+        // CDN에서 모델 로드 (얼굴 감지 + 성별/나이 감지)
+        const modelUrl = 'https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights';
+        await Promise.all([
+          faceapi.nets.ssdMobilenetv1.loadFromUri(modelUrl),
+          faceapi.nets.ageGenderNet.loadFromUri(modelUrl)
+        ]);
         setIsLoadingModels(false);
-        console.log('✅ 얼굴 인식 모델 로드 완료');
+        console.log('✅ 얼굴 인식 모델 로드 완료 (얼굴 감지 + 성별/나이 감지)');
       } catch (error) {
         console.error('❌ 얼굴 인식 모델 로드 실패:', error);
         // 모델 로드에 실패하면 디버그 모드 활성화
@@ -49,20 +53,40 @@ export default function UploadPage() {
     loadModels();
   }, []);
 
-  // 얼굴 감지 함수
+  // 얼굴 감지 및 성별 분석 함수
   const detectFace = async (imageElement: HTMLImageElement) => {
     console.log('🔍 얼굴 감지 시작...');
     
     // 디버그 모드에서는 항상 true 반환
     if (debugMode) {
       console.log('🔧 디버그 모드: 얼굴 검증 우회');
+      // 디버그 모드에서는 기본 성별을 female로 설정
+      sessionStorage.setItem('detectedGender', 'female');
       return true;
     }
     
     try {
-      const detections = await faceapi.detectAllFaces(imageElement);
-      console.log(`👤 얼굴 감지 결과: ${detections.length}개 얼굴 발견`);
-      return detections.length > 0;
+      // 얼굴 감지 + 성별/나이 분석
+      const detection = await faceapi
+        .detectSingleFace(imageElement)
+        .withAgeAndGender();
+      
+      if (detection) {
+        const gender = detection.gender; // 'male' or 'female'
+        const genderProbability = detection.genderProbability;
+        
+        console.log(`👤 얼굴 감지 성공`);
+        console.log(`👥 성별: ${gender} (확률: ${(genderProbability * 100).toFixed(1)}%)`);
+        console.log(`🎂 예상 나이: ${Math.round(detection.age)}세`);
+        
+        // 성별 정보를 sessionStorage에 저장
+        sessionStorage.setItem('detectedGender', gender);
+        
+        return true;
+      } else {
+        console.log('❌ 얼굴을 찾을 수 없습니다');
+        return false;
+      }
     } catch (error) {
       console.error('❌ 얼굴 감지 오류:', error);
       return false;
