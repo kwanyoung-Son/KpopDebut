@@ -6,11 +6,11 @@ interface ProgressBarProps {
 }
 
 export default function ProgressBar({ current, total }: ProgressBarProps) {
-  const progress = (current / total) * 100;
+  const progress = ((current - 1) / total) * 100;
   const [language, setLanguage] = useState<"kr" | "en">("kr");
 
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('language') as 'kr' | 'en';
+    const savedLanguage = localStorage.getItem("language") as "kr" | "en";
     if (savedLanguage) {
       setLanguage(savedLanguage);
     }

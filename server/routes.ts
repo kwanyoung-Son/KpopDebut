@@ -254,12 +254,17 @@ function createAnalysisPrompt(
     ? (language === "kr" ? "사용자는 남성이므로 남자 아이돌 그룹과 멤버를 매칭해주세요." : "The user is male, so please match with male idol groups and members.")
     : (language === "kr" ? "사용자는 여성이므로 여자 아이돌 그룹과 멤버를 매칭해주세요." : "The user is female, so please match with female idol groups and members.");
 
+  const groupExamples = gender === "male"
+    ? "BTS (RM, Jin, Suga, J-Hope, Jimin, V, Jungkook), Seventeen (S.Coups, Jeonghan, Joshua, Jun, Hoshi, Wonwoo, Woozi, DK, Mingyu, The8, Seungkwan, Vernon, Dino), Stray Kids (Bang Chan, Lee Know, Changbin, Hyunjin, Han, Felix, Seungmin, I.N), TXT (Yeonjun, Soobin, Beomgyu, Taehyun, Huening Kai), ENHYPEN (Heeseung, Jay, Jake, Sunghoon, Sunoo, Jungwon, Ni-ki)"
+    : "NewJeans (Minji, Hanni, Danielle, Haerin, Hyein), BLACKPINK (Jisoo, Jennie, Rosé, Lisa), aespa (Karina, Giselle, Winter, Ningning), IVE (Yujin, Gaeul, Rei, Wonyoung, Liz, Leeseo), LE SSERAFIM (Sakura, Chaewon, Yunjin, Kazuha, Eunchae), TWICE (Nayeon, Jeongyeon, Momo, Sana, Jihyo, Mina, Dahyun, Chaeyoung, Tzuyu), Red Velvet (Irene, Seulgi, Wendy, Joy, Yeri)";
+
   const prompt =
     language === "kr"
-      ? `당신은 KPOP 아이돌 전문가 입니다. 사용자는 8가지 문항에 답변을 하고, 당신은 그 답변을 토대로 사용자가 실제 KPOP 그룹 중, 어느 그룹, 어떤 멤버의 포지션에 어울리는지 판단해야 합니다. ${genderHint}
+      ? `당신은 KPOP 아이돌 전문가입니다. 사용자의 8가지 답변을 분석하여 가장 잘 어울리는 실제 KPOP 그룹과 멤버를 매칭해주세요. ${genderHint}
 
-다음은 KPOP 아이돌 적성 분석을 위한 8개 질문에 대한 답변입니다:
+참고 가능한 그룹과 멤버: ${groupExamples}
 
+사용자의 답변:
 1. 무대 위에서의 모습: ${questionMapping.stagePresence[answers.stagePresence]}
 2. 친구들이 말하는 성격: ${questionMapping.friendsDescribe[answers.friendsDescribe]}  
 3. 새로운 프로젝트 접근법: ${questionMapping.newProject[answers.newProject]}
@@ -269,20 +274,21 @@ function createAnalysisPrompt(
 7. 패션 스타일: ${questionMapping.fashionStyle[answers.fashionStyle]}
 8. 메이크업 스타일: ${questionMapping.makeupStyle[answers.makeupStyle]}
 
-이 답변을 바탕으로 다음 JSON 형식으로 KPOP 아이돌 분석 결과를 한국어로 생성해주세요:
+중요: 위의 답변들을 세심하게 분석하여 가장 적합한 그룹과 멤버를 선택하세요. 각 답변의 특성을 고려하여 다양한 결과를 제공해야 합니다.
 
+다음 JSON 형식으로 응답하세요 (한국어):
 {
-  "groupName": "실제 KPOP 그룹명",
-  "position": "메인 포지션 (예: Leader, Main Vocalist, Main Dancer, Main Rapper, Visual)",
-  "subPosition": "서브 포지션 (선택사항)",
-  "character": "그룹명 + 멤버명 + 스타일",
-  "characterDesc": "해당 멤버의 특징을 반영한 성격 설명",
-  "styleTags": ["#그룹스타일", "#포지션태그", "#멤버형", "#댄스스타일", "#패션스타일"],
-  "memberName": "실제 멤버 이름",
-  "agency": "소속사명"
+  "groupName": "실제 그룹명",
+  "position": "Main Vocalist 또는 Main Dancer 또는 Main Rapper 또는 Leader 또는 Visual",
+  "subPosition": "서브 포지션 (선택)",
+  "character": "그룹명 멤버명 스타일",
+  "characterDesc": "해당 멤버의 특징을 반영한 성격 설명 (한국어)",
+  "styleTags": ["#그룹", "#포지션", "#멤버", "#스타일1", "#스타일2"],
+  "memberName": "멤버 이름",
+  "agency": "소속사"
 }
 
-답변은 반드시 유효한 JSON 형식으로만 제공해주세요.`
+반드시 유효한 JSON만 응답하세요.`
       : `You are a K-Pop idol expert. The user answers 8 questions, and based on those responses, you must determine which real K-Pop group and which member’s position best matches the user. ${genderHint}
 
 Here are the answers to 8 KPOP idol aptitude analysis questions:
@@ -335,7 +341,7 @@ async function callLLMAnalysis(prompt: string): Promise<any> {
             {
               role: "system",
               content:
-                "You are a KPOP expert analyst who knows all idol groups and members. Always respond with valid JSON format only.",
+                "You are a K-POP expert analyst who knows ALL idol groups and members from various agencies (HYBE, SM, YG, JYP, ADOR, etc.). You MUST provide diverse and varied results based on the user's personality. Consider groups like: BTS, Seventeen, Stray Kids, TXT, ENHYPEN (for males) and NewJeans, BLACKPINK, aespa, IVE, LE SSERAFIM, TWICE, Red Velvet (for females). NEVER repeat the same group/member for different users. Analyze the personality traits carefully and match with the MOST suitable member. Always respond with valid JSON format only.",
             },
             { role: "user", content: prompt },
           ],

@@ -51,6 +51,31 @@ const texts = {
   },
 };
 
+/**
+ * 이미지 경로/형식 방탄 처리
+ * - data:/blob:/http(s): 그대로 사용
+ * - base64 문자열(프리픽스 없음) → data:image/png;base64, 붙여줌
+ * - 상대경로/루트경로 → BASE_URL 기준 절대화
+ */
+const normalizePhoto = (s?: string) => {
+  if (!s) return "";
+  const str = s.trim();
+
+  // 이미 data/blob/http(s)면 그대로
+  if (/^(data:|blob:|https?:)/i.test(str)) return str;
+
+  // base64 추정(길이 있고, base64 charset만 포함)
+  if (/^[A-Za-z0-9+/=]+$/.test(str) && str.length > 100) {
+    return `data:image/png;base64,${str}`;
+  }
+
+  // 그 외: 경로 → BASE_URL 기준으로 절대화
+  const base = import.meta.env.BASE_URL || "/";
+  // 맨 앞 / 제거 후 조합
+  const path = str.replace(/^\//, "");
+  return new URL(path, base).toString();
+};
+
 export default function ResultsPage({ params }: ResultsPageProps) {
   const { sessionId } = params;
   const cardRef = useRef<HTMLDivElement>(null);
@@ -195,9 +220,16 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               {result.photoData && (
                 <div className="w-20 h-20 rounded-full overflow-hidden border-3 border-white/20 flex-shrink-0">
                   <img
-                    src={result.photoData}
+                    src={normalizePhoto(result.photoData)}
                     alt="User"
                     className="w-full h-full object-cover"
+                    crossOrigin="anonymous"
+                    referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      // 폴백 이미지
+                      (e.currentTarget as HTMLImageElement).src =
+                        `${import.meta.env.BASE_URL}fallback-avatar.png`;
+                    }}
                   />
                 </div>
               )}
