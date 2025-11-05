@@ -330,8 +330,13 @@ function scoreBasedMatching(
     "Stray Kids": "male",
   };
   
-  let bestMatch: any = null;
   let bestScore = -1;
+  const allCandidates: Array<{
+    member: any;
+    group: string;
+    agency: string;
+    score: number;
+  }> = [];
   
   for (const group of kpopData.groups) {
     const groupGender = genderGroupMap[group.name];
@@ -349,28 +354,46 @@ function scoreBasedMatching(
       totalScore += calculatePhotoScore(userAge, expression, memberAge, member.personality) * 0.3;
       totalScore += calculatePositionScore(answers, member.position) * 0.2;
       
+      allCandidates.push({
+        member,
+        group: group.name,
+        agency: group.agency,
+        score: totalScore,
+      });
+      
       if (totalScore > bestScore) {
         bestScore = totalScore;
-        bestMatch = {
-          member,
-          group: group.name,
-          agency: group.agency,
-        };
       }
     }
   }
   
-  if (!bestMatch) {
+  if (allCandidates.length === 0) {
     return null;
   }
   
+  // 최고 점수 ±1점 이내의 후보들만 필터링
+  const topCandidates = allCandidates.filter(
+    (candidate) => candidate.score >= bestScore - 1
+  );
+  
+  // 필터링된 후보들 중에서 랜덤 선택
+  const selectedCandidate =
+    topCandidates[Math.floor(Math.random() * topCandidates.length)];
+  
+  console.log(
+    `🎲 Top candidates (score >= ${(bestScore - 1).toFixed(1)}): ${topCandidates.length} members`
+  );
+  console.log(
+    `   Selected: ${selectedCandidate.member.name} from ${selectedCandidate.group} (score: ${selectedCandidate.score.toFixed(1)})`
+  );
+  
   return {
-    groupName: bestMatch.group,
-    memberName: bestMatch.member.name,
-    position: bestMatch.member.position[0],
-    subPosition: bestMatch.member.position[1] || "",
-    agency: bestMatch.agency,
-    score: bestScore,
+    groupName: selectedCandidate.group,
+    memberName: selectedCandidate.member.name,
+    position: selectedCandidate.member.position[0],
+    subPosition: selectedCandidate.member.position[1] || "",
+    agency: selectedCandidate.agency,
+    score: selectedCandidate.score,
   };
 }
 
