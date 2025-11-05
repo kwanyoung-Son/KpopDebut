@@ -4,17 +4,42 @@ export const kpopGroupsData = {
       name: "BTS",
       agency: "BigHit Music",
       members: [
-        { name: "RM", position: ["Leader", "Main Rapper"], birthYear: 1994, personality: ["leadership", "intelligent", "charismatic"] },
-        { name: "Jin", position: ["Sub Vocalist", "Visual"], birthYear: 1992, personality: ["funny", "confident", "caring"] },
-        { name: "SUGA", position: ["Lead Rapper"], birthYear: 1993, personality: ["calm", "passionate", "talented"] },
+        {
+          name: "RM",
+          position: ["Leader", "Main Rapper"],
+          birthYear: 1994,
+          personality: ["leadership", "intelligent", "charismatic"],
+        },
+        {
+          name: "Jin",
+          position: ["Sub Vocalist", "Visual"],
+          birthYear: 1992,
+          personality: ["funny", "confident", "caring"],
+        },
+        {
+          name: "SUGA",
+          position: ["Lead Rapper"],
+          birthYear: 1993,
+          personality: ["calm", "passionate", "talented"],
+        },
         {
           name: "j-hope",
           position: ["Main Dancer", "Sub Rapper", "Sub Vocalist"],
           birthYear: 1994,
-          personality: ["energetic", "positive", "cheerful"]
+          personality: ["energetic", "positive", "cheerful"],
         },
-        { name: "Jimin", position: ["Main Dancer", "Lead Vocalist"], birthYear: 1995, personality: ["charming", "hardworking", "kind"] },
-        { name: "V", position: ["Lead Dancer", "Sub Vocalist", "Visual"], birthYear: 1995, personality: ["artistic", "unique", "playful"] },
+        {
+          name: "Jimin",
+          position: ["Main Dancer", "Lead Vocalist"],
+          birthYear: 1995,
+          personality: ["charming", "hardworking", "kind"],
+        },
+        {
+          name: "V",
+          position: ["Lead Dancer", "Sub Vocalist", "Visual"],
+          birthYear: 1995,
+          personality: ["artistic", "unique", "playful"],
+        },
         {
           name: "Jungkook",
           position: [
@@ -25,7 +50,7 @@ export const kpopGroupsData = {
             "Maknae",
           ],
           birthYear: 1997,
-          personality: ["talented", "competitive", "cute"]
+          personality: ["talented", "competitive", "cute"],
         },
       ],
     },
@@ -33,14 +58,29 @@ export const kpopGroupsData = {
       name: "BLACKPINK",
       agency: "YG Entertainment",
       members: [
-        { name: "Jisoo", position: ["Lead Vocalist", "Visual"], birthYear: 1995, personality: ["elegant", "calm", "professional"] },
-        { name: "Jennie", position: ["Main Rapper", "Lead Vocalist"], birthYear: 1996, personality: ["charismatic", "confident", "fashionable"] },
-        { name: "Rosé", position: ["Main Vocalist", "Lead Dancer"], birthYear: 1997, personality: ["artistic", "sweet", "talented"] },
+        {
+          name: "Jisoo",
+          position: ["Lead Vocalist", "Visual"],
+          birthYear: 1995,
+          personality: ["elegant", "calm", "professional"],
+        },
+        {
+          name: "Jennie",
+          position: ["Main Rapper", "Lead Vocalist"],
+          birthYear: 1996,
+          personality: ["charismatic", "confident", "fashionable"],
+        },
+        {
+          name: "Rosé",
+          position: ["Main Vocalist", "Lead Dancer"],
+          birthYear: 1997,
+          personality: ["artistic", "sweet", "talented"],
+        },
         {
           name: "Lisa",
           position: ["Main Dancer", "Lead Rapper", "Sub Vocalist", "Maknae"],
           birthYear: 1997,
-          personality: ["energetic", "charismatic", "cheerful"]
+          personality: ["energetic", "charismatic", "cheerful"],
         },
       ],
     },
@@ -48,17 +88,42 @@ export const kpopGroupsData = {
       name: "IVE",
       agency: "Starship Entertainment",
       members: [
-        { name: "Yujin", position: ["Leader", "Lead Vocalist"], birthYear: 2003, personality: ["leadership", "reliable", "professional"] },
-        { name: "Gaeul", position: ["Main Rapper", "Sub Vocalist"], birthYear: 2002, personality: ["calm", "chic", "cool"] },
-        { name: "Rei", position: ["Rapper", "Sub Vocalist"], birthYear: 2004, personality: ["cute", "talented", "charming"] },
+        {
+          name: "Yujin",
+          position: ["Leader", "Lead Vocalist"],
+          birthYear: 2003,
+          personality: ["leadership", "reliable", "professional"],
+        },
+        {
+          name: "Gaeul",
+          position: ["Main Rapper", "Sub Vocalist"],
+          birthYear: 2002,
+          personality: ["calm", "chic", "cool"],
+        },
+        {
+          name: "Rei",
+          position: ["Rapper", "Sub Vocalist"],
+          birthYear: 2004,
+          personality: ["cute", "talented", "charming"],
+        },
         {
           name: "Wonyoung",
           position: ["Lead Dancer", "Sub Vocalist", "Visual", "Center"],
           birthYear: 2004,
-          personality: ["elegant", "confident", "graceful"]
+          personality: ["elegant", "confident", "graceful"],
         },
-        { name: "Liz", position: ["Main Vocalist"], birthYear: 2004, personality: ["sweet", "talented", "hardworking"] },
-        { name: "Leeseo", position: ["Sub Vocalist", "Maknae"], birthYear: 2007, personality: ["cute", "energetic", "cheerful"] },
+        {
+          name: "Liz",
+          position: ["Main Vocalist"],
+          birthYear: 2004,
+          personality: ["sweet", "talented", "hardworking"],
+        },
+        {
+          name: "Leeseo",
+          position: ["Sub Vocalist", "Maknae"],
+          birthYear: 2007,
+          personality: ["cute", "energetic", "cheerful"],
+        },
       ],
     },
     {
@@ -76,16 +141,26 @@ export const kpopGroupsData = {
             "Center",
           ],
           birthYear: 2000,
-          personality: ["leadership", "charismatic", "talented"]
+          personality: ["leadership", "charismatic", "talented"],
         },
-        { name: "Giselle", position: ["Main Rapper", "Sub Vocalist"], birthYear: 2000, personality: ["confident", "unique", "cool"] },
+        {
+          name: "Giselle",
+          position: ["Main Rapper", "Sub Vocalist"],
+          birthYear: 2000,
+          personality: ["confident", "unique", "cool"],
+        },
         {
           name: "Winter",
           position: ["Lead Vocalist", "Lead Dancer", "Visual"],
           birthYear: 2001,
-          personality: ["talented", "charming", "professional"]
+          personality: ["talented", "charming", "professional"],
         },
-        { name: "Ningning", position: ["Main Vocalist", "Maknae"], birthYear: 2002, personality: ["cute", "talented", "energetic"] },
+        {
+          name: "Ningning",
+          position: ["Main Vocalist", "Maknae"],
+          birthYear: 2002,
+          personality: ["cute", "talented", "energetic"],
+        },
       ],
     },
     {
@@ -95,14 +170,33 @@ export const kpopGroupsData = {
         {
           name: "Soyeon",
           position: ["Leader", "Main Rapper", "Center", "Sub Vocalist"],
+          birthYear: 1998,
+          personality: ["Leadership", "Creative (Producer)", "Charismatic"],
         },
-        { name: "Minnie", position: ["Main Vocalist"] },
+        {
+          name: "Minnie",
+          position: ["Main Vocalist"],
+          birthYear: 1997,
+          personality: ["Emotional", "Calm", "Warm-hearted"],
+        },
         {
           name: "Yuqi",
           position: ["Lead Dancer", "Sub Vocalist", "Sub Rapper"],
+          birthYear: 1999,
+          personality: ["Cheerful", "Energetic", "Friendly"],
         },
-        { name: "Shuhua", position: ["Sub Vocalist", "Visual", "Maknae"] },
-        { name: "Miyeon", position: ["Main Vocalist", "Visual"] },
+        {
+          name: "Shuhua",
+          position: ["Sub Vocalist", "Visual", "Maknae"],
+          birthYear: 2000,
+          personality: ["Honest", "Confident", "Playful"],
+        },
+        {
+          name: "Miyeon",
+          position: ["Main Vocalist", "Visual"],
+          birthYear: 1997,
+          personality: ["Elegant", "Composed", "Considerate"],
+        },
       ],
     },
     {
@@ -179,30 +273,50 @@ export const kpopGroupsData = {
             "Rapper",
           ],
           birthYear: 1997,
-          personality: ["leadership", "professional", "talented"]
+          personality: ["leadership", "professional", "talented"],
         },
         {
           name: "Lee Know",
           position: ["Main Dancer", "Vocalist", "Sub Rapper"],
           birthYear: 1998,
-          personality: ["calm", "chic", "charismatic"]
+          personality: ["calm", "chic", "charismatic"],
         },
-        { name: "Changbin", position: ["Main Rapper", "Producer", "Vocalist"], birthYear: 1999, personality: ["passionate", "intense", "confident"] },
+        {
+          name: "Changbin",
+          position: ["Main Rapper", "Producer", "Vocalist"],
+          birthYear: 1999,
+          personality: ["passionate", "intense", "confident"],
+        },
         {
           name: "Hyunjin",
           position: ["Main Dancer", "Lead Rapper", "Sub Vocalist", "Visual"],
           birthYear: 2000,
-          personality: ["artistic", "emotional", "graceful"]
+          personality: ["artistic", "emotional", "graceful"],
         },
-        { name: "Han", position: ["Main Rapper", "Lead Vocalist", "Producer"], birthYear: 2000, personality: ["talented", "positive", "energetic"] },
+        {
+          name: "Han",
+          position: ["Main Rapper", "Lead Vocalist", "Producer"],
+          birthYear: 2000,
+          personality: ["talented", "positive", "energetic"],
+        },
         {
           name: "Felix",
           position: ["Lead Dancer", "Lead Rapper", "Sub Vocalist"],
           birthYear: 2000,
-          personality: ["bright", "friendly", "charismatic"]
+          personality: ["bright", "friendly", "charismatic"],
         },
-        { name: "Seungmin", position: ["Main Vocalist"], birthYear: 2000, personality: ["calm", "delicate", "professional"] },
-        { name: "I.N", position: ["Vocalist", "Maknae"], birthYear: 2001, personality: ["cute", "energetic", "talented"] },
+        {
+          name: "Seungmin",
+          position: ["Main Vocalist"],
+          birthYear: 2000,
+          personality: ["calm", "delicate", "professional"],
+        },
+        {
+          name: "I.N",
+          position: ["Vocalist", "Maknae"],
+          birthYear: 2001,
+          personality: ["cute", "energetic", "talented"],
+        },
       ],
     },
     {
@@ -744,11 +858,36 @@ export const kpopGroupsData = {
       name: "NewJeans",
       agency: "ADOR (HYBE)",
       members: [
-        { name: "Minji", position: ["Leader", "Lead Rapper", "Sub Vocalist"], birthYear: 2004, personality: ["leadership", "calm", "reliable"] },
-        { name: "Hanni", position: ["Main Vocalist"], birthYear: 2004, personality: ["cheerful", "charming", "friendly"] },
-        { name: "Danielle", position: ["Lead Vocalist", "Lead Dancer"], birthYear: 2005, personality: ["bright", "energetic", "talented"] },
-        { name: "Haerin", position: ["Main Vocalist", "Sub Rapper"], birthYear: 2006, personality: ["cute", "calm", "cool"] },
-        { name: "Hyein", position: ["Lead Vocalist", "Maknae"], birthYear: 2008, personality: ["cute", "energetic", "talented"] },
+        {
+          name: "Minji",
+          position: ["Leader", "Lead Rapper", "Sub Vocalist"],
+          birthYear: 2004,
+          personality: ["leadership", "calm", "reliable"],
+        },
+        {
+          name: "Hanni",
+          position: ["Main Vocalist"],
+          birthYear: 2004,
+          personality: ["cheerful", "charming", "friendly"],
+        },
+        {
+          name: "Danielle",
+          position: ["Lead Vocalist", "Lead Dancer"],
+          birthYear: 2005,
+          personality: ["bright", "energetic", "talented"],
+        },
+        {
+          name: "Haerin",
+          position: ["Main Vocalist", "Sub Rapper"],
+          birthYear: 2006,
+          personality: ["cute", "calm", "cool"],
+        },
+        {
+          name: "Hyein",
+          position: ["Lead Vocalist", "Maknae"],
+          birthYear: 2008,
+          personality: ["cute", "energetic", "talented"],
+        },
       ],
     },
     {

@@ -664,7 +664,7 @@ async function generateAnalysisResult(quizAnswers: QuizAnswers, language: 'kr' |
 {
   "character": "${scoreMatch.groupName} ${scoreMatch.memberName} 스타일",
   "characterDesc": "이 멤버의 특징을 반영한 2-3문장 설명",
-  "styleTags": ["#${scoreMatch.groupName}스타일", "#${scoreMatch.position}", "#${scoreMatch.memberName}형"]
+  "styleTags": [이 멤버의 특성을 표현할 해쉬태그 여러개]
 }`
         : `You are a KPOP idol analysis expert. Create an engaging description based on:
 
@@ -683,7 +683,7 @@ Respond in JSON format:
 {
   "character": "${scoreMatch.groupName} ${scoreMatch.memberName} Style",
   "characterDesc": "2-3 sentence description reflecting this member's traits",
-  "styleTags": ["#${scoreMatch.groupName}Style", "#${scoreMatch.position}", "#${scoreMatch.memberName}Type"]
+  "styleTags": [Give me multiple hashtags that describe this member's traits.]
 }`;
 
       const llmResult = await callLLMAnalysis(prompt, env);

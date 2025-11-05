@@ -84,12 +84,34 @@ export const kpopGroupsData = {
         {
           name: "소연",
           position: ["리더", "메인 래퍼", "센터", "서브 보컬"],
+          birthYear: 1998,
+          personality: ["리더십", "창의적(프로듀싱)", "카리스마"]
         },
-        { name: "민니", position: ["메인 보컬"] },
-        { name: "우기", position: ["리드 댄서", "서브 보컬", "서브 래퍼"] },
-        { name: "슈화", position: ["서브 보컬", "비주얼", "막내"] },
-        { name: "미연", position: ["메인 보컬", "비주얼"] },
-      ],
+        {
+          name: "민니",
+          position: ["메인 보컬"],
+          birthYear: 1997,
+          personality: ["감성적", "차분함", "따뜻함"]
+        },
+        {
+          name: "우기",
+          position: ["리드 댄서", "서브 보컬", "서브 래퍼"],
+          birthYear: 1999,
+          personality: ["유쾌함", "에너지", "친근함"]
+        },
+        {
+          name: "슈화",
+          position: ["서브 보컬", "비주얼", "막내"],
+          birthYear: 2000,
+          personality: ["솔직함", "당찬", "장난기"]
+        },
+        {
+          name: "미연",
+          position: ["메인 보컬", "비주얼"],
+          birthYear: 1997,
+          personality: ["우아함", "차분함", "배려심"]
+        }
+      ]
     },
     {
       name: "KIIRAS",
