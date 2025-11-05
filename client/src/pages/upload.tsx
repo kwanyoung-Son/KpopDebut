@@ -61,10 +61,18 @@ export default function UploadPage() {
     // 디버그 모드에서는 항상 true 반환
     if (debugMode) {
       console.log('🔧 디버그 모드: 얼굴 검증 우회');
-      // 디버그 모드에서는 기본값 설정
-      sessionStorage.setItem('detectedGender', 'female');
-      sessionStorage.setItem('detectedAge', '21');
-      sessionStorage.setItem('detectedExpression', 'happy');
+      // 디버그 모드에서는 sessionStorage에 이미 값이 있으면 유지, 없으면 기본값 설정
+      if (!sessionStorage.getItem('detectedGender')) {
+        sessionStorage.setItem('detectedGender', 'female');
+      }
+      if (!sessionStorage.getItem('detectedAge')) {
+        sessionStorage.setItem('detectedAge', '21');
+      }
+      if (!sessionStorage.getItem('detectedExpression')) {
+        sessionStorage.setItem('detectedExpression', 'happy');
+      }
+      
+      console.log(`🔧 디버그 값 사용: gender=${sessionStorage.getItem('detectedGender')}, age=${sessionStorage.getItem('detectedAge')}, expression=${sessionStorage.getItem('detectedExpression')}`);
       return true;
     }
     

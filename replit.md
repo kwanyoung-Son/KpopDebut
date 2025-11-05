@@ -19,9 +19,11 @@ Preferred communication style: Simple, everyday language.
   - Quiz answers (50%): Position preference matching from 8-question personality assessment
   - Photo analysis (30%): Age similarity and expression-personality matching
   - Position alignment (20%): Role compatibility scoring
+  - **Gender filtering**: Prevents cross-gender matches using genderGroupMap (male users → BTS/Stray Kids, female users → BLACKPINK/IVE/aespa/NewJeans)
 - **KPOP Database Enhancement**: Added birthYear and personality metadata to 34 members across 6 major groups
   - BTS (7 members), BLACKPINK (4), IVE (6), aespa (4), NewJeans (5), Stray Kids (8)
   - Bilingual metadata support (Korean and English)
+  - Both datasets use English group names for consistent filtering
 - **Data Pipeline Completion**: End-to-end flow for photo analysis metadata
   - Frontend: face-api.js detection → sessionStorage
   - Backend: API validation → database persistence (age, expression, gender columns)
