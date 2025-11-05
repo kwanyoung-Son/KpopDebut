@@ -10,6 +10,23 @@ Preferred communication style: Simple, everyday language.
 
 ## Recent Changes
 
+### 2025-11-05
+- **Photo Analysis System**: Integrated face-api.js for comprehensive facial feature detection
+  - Age detection for age-based member matching
+  - Gender detection for group filtering
+  - Expression detection (7 emotions: neutral, happy, sad, angry, fearful, disgusted, surprised)
+- **Score-based Matching Engine**: Replaced LLM-only matching with hybrid scoring system
+  - Quiz answers (50%): Position preference matching from 8-question personality assessment
+  - Photo analysis (30%): Age similarity and expression-personality matching
+  - Position alignment (20%): Role compatibility scoring
+- **KPOP Database Enhancement**: Added birthYear and personality metadata to 34 members across 6 major groups
+  - BTS (7 members), BLACKPINK (4), IVE (6), aespa (4), NewJeans (5), Stray Kids (8)
+  - Bilingual metadata support (Korean and English)
+- **Data Pipeline Completion**: End-to-end flow for photo analysis metadata
+  - Frontend: face-api.js detection → sessionStorage
+  - Backend: API validation → database persistence (age, expression, gender columns)
+  - Schema updates: shared/schema.ts and D1 migration files
+
 ### 2025-10-14
 - **Quiz Expansion**: Extended quiz options from 4 to 6 per question (8 questions total, 48 options)
 - **Multilingual Support**: Added English language support for entire user flow (Home → Quiz → Results)
@@ -67,9 +84,17 @@ The application follows a modern full-stack architecture with clear separation b
 - **Progress Tracking**: Client-side progress indicators
 
 ### Analysis Engine
-- **Algorithm**: Rule-based analysis mapping quiz answers to KPOP positions
-- **Results Generation**: Dynamic group names, positions, and character descriptions
-- **Style Tags**: Personalized hashtags based on user preferences
+- **Hybrid Scoring System**: Multi-factor matching algorithm combining quiz, photo analysis, and position data
+  - **Quiz Score (50%)**: Analyzes 8 personality/performance questions to determine position preferences
+  - **Photo Score (30%)**: Age similarity (±2 years = 30 pts, ±5 years = 20 pts) + expression-personality matching
+  - **Position Score (20%)**: Alignment between user preferences and member roles
+- **LLM Integration**: Cloudflare Workers AI generates personalized descriptions for matched members
+  - Primary: Score-based matching determines the member
+  - Secondary: LLM creates engaging character descriptions and style tags
+  - Fallback: Template-based descriptions if LLM unavailable
+- **Member Database**: 34 enriched member profiles with birthYear and personality traits
+  - Supports both male and female KPOP groups
+  - Bilingual data (Korean/English) for international users
 
 ## Data Flow
 

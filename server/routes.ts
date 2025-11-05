@@ -8,7 +8,8 @@ import {
 } from "@shared/schema";
 import { z } from "zod";
 import multer from "multer";
-// Import removed as we now use LLM for analysis instead of hardcoded data
+import { kpopGroupsData as kpopGroupsDataKr } from "./kpop-data-kr";
+import { kpopGroupsData as kpopGroupsDataEn } from "./kpop-data-en";
 
 interface MulterRequest extends Request {
   file?: Express.Multer.File;
@@ -466,6 +467,159 @@ async function callLLMAnalysis(prompt: string): Promise<any> {
   }
 }
 
+// Score-based matching engine
+function scoreBasedMatching(
+  answers: QuizAnswers,
+  language: "kr" | "en",
+  gender: "male" | "female",
+  age: number,
+  expression: string
+) {
+  const kpopData = language === "kr" ? kpopGroupsDataKr : kpopGroupsDataEn;
+  const currentYear = new Date().getFullYear();
+  const userAge = age;
+  
+  const genderGroupMap: { [key: string]: "male" | "female" } = {
+    "BTS": "male",
+    "BLACKPINK": "female",
+    "IVE": "female",
+    "aespa": "female",
+    "NewJeans": "female",
+    "Stray Kids": "male",
+  };
+  
+  let bestMatch: any = null;
+  let bestScore = -1;
+  
+  for (const group of kpopData.groups) {
+    const groupGender = genderGroupMap[group.name];
+    if (groupGender && groupGender !== gender) continue;
+    
+    for (const member of group.members) {
+      if (!('birthYear' in member) || !('personality' in member)) continue;
+      if (!member.birthYear || !member.personality) continue;
+      
+      const memberAge = currentYear - member.birthYear;
+      
+      let totalScore = 0;
+      
+      totalScore += calculateQuizScore(answers, member) * 0.5;
+      totalScore += calculatePhotoScore(userAge, expression, memberAge, member.personality) * 0.3;
+      totalScore += calculatePositionScore(answers, member.position) * 0.2;
+      
+      if (totalScore > bestScore) {
+        bestScore = totalScore;
+        bestMatch = {
+          member,
+          group: group.name,
+          agency: group.agency,
+        };
+      }
+    }
+  }
+  
+  if (!bestMatch) {
+    return null;
+  }
+  
+  return {
+    groupName: bestMatch.group,
+    memberName: bestMatch.member.name,
+    position: bestMatch.member.position[0],
+    subPosition: bestMatch.member.position[1] || "",
+    agency: bestMatch.agency,
+    score: bestScore,
+  };
+}
+
+function calculateQuizScore(answers: QuizAnswers, member: any): number {
+  let score = 0;
+  const positions = member.position.map((p: string) => p.toLowerCase());
+  
+  if (answers.stagePresence === "center" || answers.stagePresence === "leader") {
+    if (positions.some((p: string) => p.includes("leader") || p.includes("center"))) score += 15;
+  }
+  
+  if (answers.stageImportant === "vocal" || answers.practiceStyle === "vocal") {
+    if (positions.some((p: string) => p.includes("vocal"))) score += 15;
+  }
+  
+  if (answers.practiceStyle === "dance" || answers.stageImportant === "energy") {
+    if (positions.some((p: string) => p.includes("dancer") || p.includes("dance"))) score += 15;
+  }
+  
+  if (answers.danceStyle === "hiphop" || answers.danceStyle === "powerful") {
+    if (positions.some((p: string) => p.includes("rapper") || p.includes("rap"))) score += 10;
+  }
+  
+  if (answers.danceStyle === "cute" || answers.fashionStyle === "lovely") {
+    if (positions.some((p: string) => p.includes("visual") || p.includes("maknae"))) score += 10;
+  }
+  
+  if (answers.friendsDescribe === "responsible" || answers.newProject === "plan") {
+    if (positions.some((p: string) => p.includes("leader"))) score += 10;
+  }
+  
+  return score;
+}
+
+function calculatePhotoScore(userAge: number, expression: string, memberAge: number, personality: string[]): number {
+  let score = 0;
+  
+  const ageDiff = Math.abs(userAge - memberAge);
+  if (ageDiff <= 2) score += 30;
+  else if (ageDiff <= 5) score += 20;
+  else if (ageDiff <= 10) score += 10;
+  else score += 5;
+  
+  const expressionMap: { [key: string]: string[] } = {
+    happy: ["cheerful", "energetic", "bright", "friendly", "positive", "밝음", "활발함", "긍정적", "친근함"],
+    sad: ["emotional", "artistic", "calm", "감성적", "예술적", "차분함"],
+    angry: ["passionate", "intense", "confident", "열정적", "강렬함", "자신감"],
+    fearful: ["cute", "kind", "caring", "귀여움", "친절함", "다정함"],
+    neutral: ["calm", "professional", "chic", "cool", "차분함", "프로페셔널", "시크함", "쿨함"],
+    surprised: ["energetic", "talented", "unique", "활발함", "재능있음", "독특함"],
+    disgusted: ["chic", "confident", "unique", "시크함", "자신감", "독특함"],
+  };
+  
+  const matchingTraits = expressionMap[expression] || [];
+  for (const trait of matchingTraits) {
+    if (personality.some((p: string) => p.toLowerCase().includes(trait.toLowerCase()))) {
+      score += 10;
+      break;
+    }
+  }
+  
+  return score;
+}
+
+function calculatePositionScore(answers: QuizAnswers, positions: string[]): number {
+  let score = 0;
+  const posStr = positions.join(" ").toLowerCase();
+  
+  if ((answers.stagePresence === "leader" || answers.friendsDescribe === "responsible") && 
+      posStr.includes("leader")) {
+    score += 20;
+  }
+  
+  if ((answers.stageImportant === "vocal" || answers.practiceStyle === "vocal") && 
+      posStr.includes("vocal")) {
+    score += 20;
+  }
+  
+  if ((answers.practiceStyle === "dance" || answers.stageImportant === "energy") && 
+      posStr.includes("danc")) {
+    score += 20;
+  }
+  
+  if ((answers.danceStyle === "hiphop" || answers.danceStyle === "powerful") && 
+      posStr.includes("rap")) {
+    score += 15;
+  }
+  
+  return score;
+}
+
 // Generate analysis result using LLM with photo analysis data
 async function generateAnalysisResult(
   answers: QuizAnswers,
@@ -474,6 +628,72 @@ async function generateAnalysisResult(
   age: number = 21,
   expression: string = "happy",
 ) {
+  const scoreMatch = scoreBasedMatching(answers, language, gender, age, expression);
+  
+  if (scoreMatch) {
+    console.log(`✅ Score-based match found: ${scoreMatch.memberName} from ${scoreMatch.groupName} (score: ${scoreMatch.score})`);
+    
+    const prompt = language === "kr" 
+      ? `당신은 KPOP 아이돌 분석 전문가입니다. 다음 정보를 바탕으로 매력적인 설명을 작성해주세요:
+
+그룹: ${scoreMatch.groupName}
+멤버: ${scoreMatch.memberName}
+포지션: ${scoreMatch.position}
+소속사: ${scoreMatch.agency}
+
+사용자 특징:
+- 무대 태도: ${answers.stagePresence}
+- 친구들이 보는 나: ${answers.friendsDescribe}
+- 무대에서 중요한 것: ${answers.stageImportant}
+- 댄스 스타일: ${answers.danceStyle}
+
+위 정보를 바탕으로 다음 형식의 JSON으로 응답해주세요:
+{
+  "character": "${scoreMatch.groupName} ${scoreMatch.memberName} 스타일",
+  "characterDesc": "이 멤버의 특징을 반영한 2-3문장 설명",
+  "styleTags": ["#${scoreMatch.groupName}스타일", "#${scoreMatch.position}", "#${scoreMatch.memberName}형"]
+}`
+      : `You are a KPOP idol analysis expert. Create an engaging description based on:
+
+Group: ${scoreMatch.groupName}
+Member: ${scoreMatch.memberName}
+Position: ${scoreMatch.position}
+Agency: ${scoreMatch.agency}
+
+User traits:
+- Stage presence: ${answers.stagePresence}
+- Friends describe as: ${answers.friendsDescribe}
+- Important on stage: ${answers.stageImportant}
+- Dance style: ${answers.danceStyle}
+
+Respond in JSON format:
+{
+  "character": "${scoreMatch.groupName} ${scoreMatch.memberName} Style",
+  "characterDesc": "2-3 sentence description reflecting this member's traits",
+  "styleTags": ["#${scoreMatch.groupName}Style", "#${scoreMatch.position}", "#${scoreMatch.memberName}Type"]
+}`;
+
+    const llmResult = await callLLMAnalysis(prompt);
+    
+    return {
+      groupName: scoreMatch.groupName,
+      position: scoreMatch.position,
+      subPosition: scoreMatch.subPosition,
+      character: llmResult.character || `${scoreMatch.groupName} ${scoreMatch.memberName} ${language === "kr" ? "스타일" : "Style"}`,
+      characterDesc: llmResult.characterDesc || (language === "kr" 
+        ? `${scoreMatch.memberName}과 비슷한 매력과 재능을 가진 타입` 
+        : `Similar charm and talent to ${scoreMatch.memberName}`),
+      styleTags: llmResult.styleTags || [
+        `#${scoreMatch.groupName}${language === "kr" ? "스타일" : "Style"}`,
+        `#${scoreMatch.position}`,
+        `#${scoreMatch.memberName}${language === "kr" ? "형" : "Type"}`,
+      ],
+      memberName: scoreMatch.memberName,
+      agency: scoreMatch.agency,
+    };
+  }
+  
+  console.log("❌ No score-based match found, using LLM fallback");
   const prompt = createAnalysisPrompt(answers, language, gender);
   const result = await callLLMAnalysis(prompt);
 
