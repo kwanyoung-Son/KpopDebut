@@ -500,13 +500,8 @@ function scoreBasedMatching(
     "Stray Kids": "male",
   };
 
+  let bestMatch: any = null;
   let bestScore = -1;
-  const allCandidates: Array<{
-    member: any;
-    group: string;
-    agency: string;
-    score: number;
-  }> = [];
 
   for (const group of kpopData.groups) {
     const groupGender = genderGroupMap[group.name];
@@ -530,46 +525,28 @@ function scoreBasedMatching(
         ) * 0.3;
       totalScore += calculatePositionScore(answers, member.position) * 0.2;
 
-      allCandidates.push({
-        member,
-        group: group.name,
-        agency: group.agency,
-        score: totalScore,
-      });
-
       if (totalScore > bestScore) {
         bestScore = totalScore;
+        bestMatch = {
+          member,
+          group: group.name,
+          agency: group.agency,
+        };
       }
     }
   }
 
-  if (allCandidates.length === 0) {
+  if (!bestMatch) {
     return null;
   }
 
-  // 최고 점수 ±1점 이내의 후보들만 필터링
-  const topCandidates = allCandidates.filter(
-    (candidate) => candidate.score >= bestScore - 1
-  );
-
-  // 필터링된 후보들 중에서 랜덤 선택
-  const selectedCandidate =
-    topCandidates[Math.floor(Math.random() * topCandidates.length)];
-
-  console.log(
-    `🎲 Top candidates (score >= ${(bestScore - 1).toFixed(1)}): ${topCandidates.length} members`
-  );
-  console.log(
-    `   Selected: ${selectedCandidate.member.name} from ${selectedCandidate.group} (score: ${selectedCandidate.score.toFixed(1)})`
-  );
-
   return {
-    groupName: selectedCandidate.group,
-    memberName: selectedCandidate.member.name,
-    position: selectedCandidate.member.position[0],
-    subPosition: selectedCandidate.member.position[1] || "",
-    agency: selectedCandidate.agency,
-    score: selectedCandidate.score,
+    groupName: bestMatch.group,
+    memberName: bestMatch.member.name,
+    position: bestMatch.member.position[0],
+    subPosition: bestMatch.member.position[1] || "",
+    agency: bestMatch.agency,
+    score: bestScore,
   };
 }
 
@@ -774,7 +751,7 @@ async function generateAnalysisResult(
 {
   "character": "${scoreMatch.groupName} ${scoreMatch.memberName} 스타일",
   "characterDesc": "이 멤버의 특징을 반영한 2-3문장 설명",
-  "styleTags": [이 멤버의 특성을 표현할 해쉬태그 여러개]
+  "styleTags": [이 멤버의 특성을 표현할 해쉬태그 여러개(각 해쉬태그 앞에 #을 붙여주세요)]
 }`
         : `You are a KPOP idol analysis expert. Create an engaging description based on:
 
@@ -793,7 +770,7 @@ Respond in JSON format:
 {
   "character": "${scoreMatch.groupName} ${scoreMatch.memberName} Style",
   "characterDesc": "2-3 sentence description reflecting this member's traits",
-  "styleTags": [Give me multiple hashtags that describe this member's traits.]
+  "styleTags": [Give me multiple hashtags that describe this member's traits.(Please add a # in front of each hashtag)]
 }`;
 
     const llmResult = await callLLMAnalysis(prompt);
