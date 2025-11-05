@@ -40,11 +40,15 @@ export default function LoadingPage() {
       const quizAnswers = sessionStorage.getItem('quizAnswers');
       const photoData = sessionStorage.getItem('uploadedPhoto');
       const language = sessionStorage.getItem('language') || localStorage.getItem('language') || 'kr';
-      const gender = sessionStorage.getItem('detectedGender') || 'female'; // 기본값은 female
+      const gender = sessionStorage.getItem('detectedGender') || 'female';
+      const age = sessionStorage.getItem('detectedAge') || '21';
+      const expression = sessionStorage.getItem('detectedExpression') || 'happy';
       
       console.log('Sending quiz answers:', quizAnswers);
       console.log('Language:', language);
       console.log('Detected Gender:', gender);
+      console.log('Detected Age:', age);
+      console.log('Detected Expression:', expression);
       
       if (!quizAnswers) {
         throw new Error('Quiz answers not found');
@@ -68,6 +72,8 @@ export default function LoadingPage() {
       formData.append('sessionId', sessionId);
       formData.append('language', language);
       formData.append('gender', gender);
+      formData.append('age', age);
+      formData.append('expression', expression);
       
       if (photoData) {
         // Convert base64 to blob

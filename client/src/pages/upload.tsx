@@ -34,14 +34,15 @@ export default function UploadPage() {
     const loadModels = async () => {
       console.log('🔄 얼굴 인식 모델 로드 시작...');
       try {
-        // CDN에서 모델 로드 (얼굴 감지 + 성별/나이 감지)
+        // CDN에서 모델 로드 (얼굴 감지 + 성별/나이 감지 + 표정 감지)
         const modelUrl = 'https://raw.githubusercontent.com/justadudewhohacks/face-api.js/master/weights';
         await Promise.all([
           faceapi.nets.ssdMobilenetv1.loadFromUri(modelUrl),
-          faceapi.nets.ageGenderNet.loadFromUri(modelUrl)
+          faceapi.nets.ageGenderNet.loadFromUri(modelUrl),
+          faceapi.nets.faceExpressionNet.loadFromUri(modelUrl)
         ]);
         setIsLoadingModels(false);
-        console.log('✅ 얼굴 인식 모델 로드 완료 (얼굴 감지 + 성별/나이 감지)');
+        console.log('✅ 얼굴 인식 모델 로드 완료 (얼굴 감지 + 성별/나이 감지 + 표정 감지)');
       } catch (error) {
         console.error('❌ 얼굴 인식 모델 로드 실패:', error);
         // 모델 로드에 실패하면 디버그 모드 활성화
@@ -53,34 +54,48 @@ export default function UploadPage() {
     loadModels();
   }, []);
 
-  // 얼굴 감지 및 성별 분석 함수
+  // 얼굴 감지 및 성별/나이/표정 분석 함수
   const detectFace = async (imageElement: HTMLImageElement) => {
     console.log('🔍 얼굴 감지 시작...');
     
     // 디버그 모드에서는 항상 true 반환
     if (debugMode) {
       console.log('🔧 디버그 모드: 얼굴 검증 우회');
-      // 디버그 모드에서는 기본 성별을 female로 설정
+      // 디버그 모드에서는 기본값 설정
       sessionStorage.setItem('detectedGender', 'female');
+      sessionStorage.setItem('detectedAge', '21');
+      sessionStorage.setItem('detectedExpression', 'happy');
       return true;
     }
     
     try {
-      // 얼굴 감지 + 성별/나이 분석
+      // 얼굴 감지 + 성별/나이 분석 + 표정 분석
       const detection = await faceapi
         .detectSingleFace(imageElement)
-        .withAgeAndGender();
+        .withAgeAndGender()
+        .withFaceExpressions();
       
       if (detection) {
         const gender = detection.gender; // 'male' or 'female'
         const genderProbability = detection.genderProbability;
+        const age = Math.round(detection.age);
+        
+        // 표정 분석 - 가장 높은 확률의 표정 찾기
+        const expressions = detection.expressions;
+        const expressionEntries = Object.entries(expressions) as [string, number][];
+        const dominantExpression = expressionEntries.reduce((max, current) => 
+          current[1] > max[1] ? current : max
+        );
         
         console.log(`👤 얼굴 감지 성공`);
         console.log(`👥 성별: ${gender} (확률: ${(genderProbability * 100).toFixed(1)}%)`);
-        console.log(`🎂 예상 나이: ${Math.round(detection.age)}세`);
+        console.log(`🎂 예상 나이: ${age}세`);
+        console.log(`😊 주요 표정: ${dominantExpression[0]} (확률: ${(dominantExpression[1] * 100).toFixed(1)}%)`);
         
-        // 성별 정보를 sessionStorage에 저장
+        // 분석 결과를 sessionStorage에 저장
         sessionStorage.setItem('detectedGender', gender);
+        sessionStorage.setItem('detectedAge', age.toString());
+        sessionStorage.setItem('detectedExpression', dominantExpression[0]);
         
         return true;
       } else {

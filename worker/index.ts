@@ -484,10 +484,10 @@ function generateAnalysisResultFallback(quizAnswers: QuizAnswers) {
   };
 }
 
-// Main analysis function with LLM + Fallback
-async function generateAnalysisResult(quizAnswers: QuizAnswers, language: 'kr' | 'en' = 'kr', gender: 'male' | 'female' = 'female', env?: Env) {
+// Main analysis function with LLM + Fallback with photo analysis data
+async function generateAnalysisResult(quizAnswers: QuizAnswers, language: 'kr' | 'en' = 'kr', gender: 'male' | 'female' = 'female', age: number = 21, expression: string = 'happy', env?: Env) {
   try {
-    // Try LLM first
+    // Try LLM first (age and expression will be used in future score-based matching)
     const prompt = createAnalysisPrompt(quizAnswers, language, gender);
     const llmResult = await callLLMAnalysis(prompt, env);
     
@@ -555,8 +555,12 @@ export default {
         const quizAnswersRaw = formData.get('quizAnswers') as string;
         const language = (formData.get('language') as 'kr' | 'en') || 'kr';
         const gender = (formData.get('gender') as 'male' | 'female') || 'female';
+        const age = parseInt((formData.get('age') as string) || '21', 10);
+        const expression = (formData.get('expression') as string) || 'happy';
         
         console.log('Detected gender:', gender);
+        console.log('Detected age:', age);
+        console.log('Detected expression:', expression);
         
         if (!quizAnswersRaw || quizAnswersRaw === 'undefined') {
           throw new Error('Quiz answers are missing or undefined');
@@ -585,15 +589,18 @@ export default {
           console.log(`Photo converted to base64, length: ${photoData.length}`);
         }
         
-        // Generate analysis result with LLM + Fallback
-        const result = await generateAnalysisResult(quizAnswers, language, gender, env);
+        // Generate analysis result with LLM + Fallback using photo analysis data
+        const result = await generateAnalysisResult(quizAnswers, language, gender, age, expression, env);
         
-        // Prepare data for database
+        // Prepare data for database with photo analysis metadata
         const analysisData = {
           sessionId,
           photoData,
           quizAnswers: JSON.stringify(quizAnswers),
           language,
+          age: age.toString(),
+          expression,
+          gender,
           groupName: result.groupName,
           position: result.position,
           subPosition: result.subPosition || null,
@@ -606,8 +613,8 @@ export default {
         
         // Save to D1 database
         const stmt = env.DB.prepare(`
-          INSERT INTO analysis_results (session_id, photo_data, quiz_answers, language, group_name, position, sub_position, character, character_desc, style_tags, member_name, agency, created_at)
-          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
+          INSERT INTO analysis_results (session_id, photo_data, quiz_answers, language, age, expression, gender, group_name, position, sub_position, character, character_desc, style_tags, member_name, agency, created_at)
+          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, datetime('now'))
         `);
         
         await stmt.bind(
@@ -615,6 +622,9 @@ export default {
           analysisData.photoData,
           analysisData.quizAnswers,
           analysisData.language,
+          analysisData.age,
+          analysisData.expression,
+          analysisData.gender,
           analysisData.groupName,
           analysisData.position,
           analysisData.subPosition,
@@ -625,9 +635,10 @@ export default {
           analysisData.agency
         ).run();
         
-        // Return the complete result
+        // Return the complete result with photoData
         const response = {
           sessionId: analysisData.sessionId,
+          photoData: analysisData.photoData,
           ...result
         };
         
@@ -668,11 +679,21 @@ export default {
           });
         }
         
-        // Parse JSON fields
+        // Parse JSON fields and convert to camelCase for frontend
         const parsedResult = {
-          ...result,
+          sessionId: result.session_id,
+          photoData: result.photo_data,
           quizAnswers: result.quiz_answers ? JSON.parse(result.quiz_answers as string) : null,
-          styleTags: result.style_tags ? JSON.parse(result.style_tags as string) : []
+          language: result.language,
+          groupName: result.group_name,
+          position: result.position,
+          subPosition: result.sub_position,
+          character: result.character,
+          characterDesc: result.character_desc,
+          styleTags: result.style_tags ? JSON.parse(result.style_tags as string) : [],
+          memberName: result.member_name,
+          agency: result.agency,
+          createdAt: result.created_at
         };
         
         return new Response(JSON.stringify(parsedResult), {

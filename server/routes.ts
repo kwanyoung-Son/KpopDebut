@@ -34,10 +34,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
           `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
         const language = (req.body.language || "kr") as "kr" | "en";
         const gender = (req.body.gender || "female") as "male" | "female";
+        const age = parseInt(req.body.age || "21", 10);
+        const expression = req.body.expression || "happy";
 
         // Validate quiz answers
         console.log("Raw quiz answers:", req.body.quizAnswers);
         console.log("Detected gender:", gender);
+        console.log("Detected age:", age);
+        console.log("Detected expression:", expression);
 
         if (!req.body.quizAnswers || req.body.quizAnswers === "undefined") {
           throw new Error("Quiz answers are missing or undefined");
@@ -59,14 +63,17 @@ export async function registerRoutes(app: Express): Promise<Server> {
           photoData = `data:${file.mimetype};base64,${file.buffer.toString("base64")}`;
         }
 
-        // Generate analysis result using LLM with gender information
-        const result = await generateAnalysisResult(quizAnswers, language, gender);
+        // Generate analysis result using LLM with photo analysis information
+        const result = await generateAnalysisResult(quizAnswers, language, gender, age, expression);
 
         const analysisData = {
           sessionId,
           photoData,
           quizAnswers,
           language,
+          age: age.toString(),
+          expression,
+          gender,
           ...result,
         };
 
@@ -459,11 +466,13 @@ async function callLLMAnalysis(prompt: string): Promise<any> {
   }
 }
 
-// Generate analysis result using LLM
+// Generate analysis result using LLM with photo analysis data
 async function generateAnalysisResult(
   answers: QuizAnswers,
   language: "kr" | "en" = "kr",
   gender: "male" | "female" = "female",
+  age: number = 21,
+  expression: string = "happy",
 ) {
   const prompt = createAnalysisPrompt(answers, language, gender);
   const result = await callLLMAnalysis(prompt);

@@ -4,18 +4,22 @@ export const kpopGroupsData = {
       name: "BTS",
       agency: "빅히트 뮤직",
       members: [
-        { name: "RM", position: ["리더", "메인 래퍼"] },
-        { name: "진", position: ["서브 보컬", "비주얼"] },
-        { name: "슈가", position: ["리드 래퍼"] },
+        { name: "RM", position: ["리더", "메인 래퍼"], birthYear: 1994, personality: ["차분함", "지적", "리더십"] },
+        { name: "진", position: ["서브 보컬", "비주얼"], birthYear: 1992, personality: ["밝음", "유머러스", "친근함"] },
+        { name: "슈가", position: ["리드 래퍼"], birthYear: 1993, personality: ["차분함", "프로페셔널", "섬세함"] },
         {
           name: "제이홉",
           position: ["메인 댄서", "서브 래퍼", "서브 보컬"],
+          birthYear: 1994,
+          personality: ["밝음", "활발함", "긍정적"]
         },
-        { name: "지민", position: ["메인 댄서", "리드 보컬"] },
-        { name: "뷔", position: ["리드 댄서", "서브 보컬", "비주얼"] },
+        { name: "지민", position: ["메인 댄서", "리드 보컬"], birthYear: 1995, personality: ["친근함", "부드러움", "감성적"] },
+        { name: "뷔", position: ["리드 댄서", "서브 보컬", "비주얼"], birthYear: 1995, personality: ["차분함", "예술적", "신비로움"] },
         {
           name: "정국",
           position: ["메인 보컬", "리드 댄서", "서브 래퍼", "센터", "막내"],
+          birthYear: 1997,
+          personality: ["재능있음", "열정적", "올라운더"]
         },
       ],
     },
@@ -23,12 +27,14 @@ export const kpopGroupsData = {
       name: "BLACKPINK",
       agency: "YG 엔터테인먼트",
       members: [
-        { name: "지수", position: ["리드 보컬", "비주얼"] },
-        { name: "제니", position: ["메인 래퍼", "리드 보컬"] },
-        { name: "로제", position: ["메인 보컬", "리드 댄서"] },
+        { name: "지수", position: ["리드 보컬", "비주얼"], birthYear: 1995, personality: ["차분함", "우아함", "프로페셔널"] },
+        { name: "제니", position: ["메인 래퍼", "리드 보컬"], birthYear: 1996, personality: ["카리스마", "시크함", "트렌디"] },
+        { name: "로제", position: ["메인 보컬", "리드 댄서"], birthYear: 1997, personality: ["감성적", "섬세함", "예술적"] },
         {
           name: "리사",
           position: ["메인 댄서", "리드 래퍼", "서브 보컬", "막내"],
+          birthYear: 1997,
+          personality: ["활발함", "에너지 넘침", "친근함"]
         },
       ],
     },
@@ -36,15 +42,17 @@ export const kpopGroupsData = {
       name: "IVE",
       agency: "스타쉽 엔터테인먼트",
       members: [
-        { name: "안유진", position: ["리더", "리드 보컬"] },
-        { name: "가을", position: ["메인 래퍼", "서브 보컬"] },
-        { name: "레이", position: ["래퍼", "서브 보컬"] },
+        { name: "안유진", position: ["리더", "리드 보컬"], birthYear: 2003, personality: ["밝음", "리더십", "친근함"] },
+        { name: "가을", position: ["메인 래퍼", "서브 보컬"], birthYear: 2002, personality: ["차분함", "프로페셔널", "카리스마"] },
+        { name: "레이", position: ["래퍼", "서브 보컬"], birthYear: 2004, personality: ["활발함", "귀여움", "친근함"] },
         {
           name: "장원영",
           position: ["리드 댄서", "서브 보컬", "비주얼", "센터"],
+          birthYear: 2004,
+          personality: ["우아함", "시크함", "카리스마"]
         },
-        { name: "리즈", position: ["메인 보컬"] },
-        { name: "이서", position: ["서브 보컬", "막내"] },
+        { name: "리즈", position: ["메인 보컬"], birthYear: 2004, personality: ["밝음", "긍정적", "열정적"] },
+        { name: "이서", position: ["서브 보컬", "막내"], birthYear: 2007, personality: ["귀여움", "활발함", "에너지 넘침"] },
       ],
     },
     {
@@ -61,10 +69,12 @@ export const kpopGroupsData = {
             "비주얼",
             "센터",
           ],
+          birthYear: 2000,
+          personality: ["카리스마", "리더십", "프로페셔널"]
         },
-        { name: "지젤", position: ["메인 래퍼", "서브 보컬"] },
-        { name: "윈터", position: ["리드 보컬", "리드 댄서", "비주얼"] },
-        { name: "닝닝", position: ["메인 보컬", "막내"] },
+        { name: "지젤", position: ["메인 래퍼", "서브 보컬"], birthYear: 2000, personality: ["시크함", "트렌디", "자신감"] },
+        { name: "윈터", position: ["리드 보컬", "리드 댄서", "비주얼"], birthYear: 2001, personality: ["차분함", "우아함", "감성적"] },
+        { name: "닝닝", position: ["메인 보컬", "막내"], birthYear: 2002, personality: ["밝음", "친근함", "재능있음"] },
       ],
     },
     {
@@ -142,17 +152,21 @@ export const kpopGroupsData = {
         {
           name: "방찬",
           position: ["리더", "프로듀서", "리드 보컬", "리드 댄서", "래퍼"],
+          birthYear: 1997,
+          personality: ["리더십", "프로페셔널", "재능있음"]
         },
-        { name: "리노", position: ["메인 댄서", "보컬", "서브 래퍼"] },
-        { name: "창빈", position: ["메인 래퍼", "프로듀서", "보컬"] },
+        { name: "리노", position: ["메인 댄서", "보컬", "서브 래퍼"], birthYear: 1998, personality: ["차분함", "시크함", "카리스마"] },
+        { name: "창빈", position: ["메인 래퍼", "프로듀서", "보컬"], birthYear: 1999, personality: ["열정적", "강렬함", "자신감"] },
         {
           name: "현진",
           position: ["메인 댄서", "리드 래퍼", "서브 보컬", "비주얼"],
+          birthYear: 2000,
+          personality: ["예술적", "감성적", "우아함"]
         },
-        { name: "한", position: ["메인 래퍼", "리드 보컬", "프로듀서"] },
-        { name: "필릭스", position: ["리드 댄서", "리드 래퍼", "서브 보컬"] },
-        { name: "승민", position: ["메인 보컬"] },
-        { name: "아이엔", position: ["보컬", "막내"] },
+        { name: "한", position: ["메인 래퍼", "리드 보컬", "프로듀서"], birthYear: 2000, personality: ["재능있음", "긍정적", "활발함"] },
+        { name: "필릭스", position: ["리드 댄서", "리드 래퍼", "서브 보컬"], birthYear: 2000, personality: ["밝음", "친근함", "카리스마"] },
+        { name: "승민", position: ["메인 보컬"], birthYear: 2000, personality: ["차분함", "섬세함", "프로페셔널"] },
+        { name: "아이엔", position: ["보컬", "막내"], birthYear: 2001, personality: ["귀여움", "활발함", "재능있음"] },
       ],
     },
     {
@@ -607,11 +621,11 @@ export const kpopGroupsData = {
       name: "NewJeans",
       agency: "어도어 (하이브)",
       members: [
-        { name: "민지", position: ["리더", "리드 래퍼", "서브 보컬"] },
-        { name: "하니", position: ["메인 보컬"] },
-        { name: "다니엘", position: ["리드 보컬", "리드 댄서"] },
-        { name: "해린", position: ["메인 보컬", "서브 래퍼"] },
-        { name: "혜인", position: ["리드 보컬", "막내"] },
+        { name: "민지", position: ["리더", "리드 래퍼", "서브 보컬"], birthYear: 2004, personality: ["리더십", "차분함", "프로페셔널"] },
+        { name: "하니", position: ["메인 보컬"], birthYear: 2004, personality: ["밝음", "친근함", "활발함"] },
+        { name: "다니엘", position: ["리드 보컬", "리드 댄서"], birthYear: 2005, personality: ["밝음", "긍정적", "에너지 넘침"] },
+        { name: "해린", position: ["메인 보컬", "서브 래퍼"], birthYear: 2006, personality: ["차분함", "우아함", "고양이상"] },
+        { name: "혜인", position: ["리드 보컬", "막내"], birthYear: 2008, personality: ["귀여움", "활발함", "재능있음"] },
       ],
     },
     {
