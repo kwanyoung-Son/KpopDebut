@@ -11,11 +11,11 @@ app.use((req, res, next) => {
   const path = req.path;
   let capturedJsonResponse: Record<string, any> | undefined = undefined;
 
-  const originalResJson = res.json;
-  res.json = function (bodyJson, ...args) {
+  const originalResJson: any = res.json.bind(res);
+  res.json = ((bodyJson: any) => {
     capturedJsonResponse = bodyJson;
-    return originalResJson.apply(res, [bodyJson, ...args]);
-  };
+    return originalResJson(bodyJson);
+  }) as any;
 
   res.on("finish", () => {
     const duration = Date.now() - start;
@@ -26,6 +26,7 @@ app.use((req, res, next) => {
       }
 
       if (logLine.length > 80) {
+        // Truncate long log lines and append ellipsis
         logLine = logLine.slice(0, 79) + "…";
       }
 
@@ -47,51 +48,42 @@ async function initializeApp() {
     throw err;
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
+  // only setup Vite in development after routes
   if (app.get("env") === "development") {
     await setupVite(app, server);
   } else {
     serveStatic(app);
   }
 
-  // For Cloudflare Workers, we don't need to listen on a port
-  if (typeof globalThis !== 'undefined' && 'DB' in globalThis) {
-    // Cloudflare Workers environment
+  // For Cloudflare Workers, do not listen on a port
+  if (typeof (globalThis as any) !== "undefined" && "DB" in (globalThis as any)) {
     return app;
   } else {
-    // Local development environment
-    const port = parseInt(process.env.PORT || '5000', 10);
-    server.listen({
-      port,
-      host: "0.0.0.0",
-      reusePort: true,
-    }, () => {
-      log(`serving on port ${port}`);
-    });
+    const port = parseInt(process.env.PORT || "5000", 10);
+    server.listen(
+      {
+        port,
+        host: "0.0.0.0",
+        reusePort: true,
+      },
+      () => {
+        log(`serving on port ${port}`);
+      },
+    );
     return app;
   }
 }
 
-// Cloudflare Workers export
+// Cloudflare Workers export (minimal)
 export default {
-  async fetch(request: Request, env: any, ctx: any): Promise<Response> {
-    const app = await initializeApp();
-    
-    // Convert Cloudflare Workers Request to Express-compatible request
-    const url = new URL(request.url);
-    const pathname = url.pathname;
-    const search = url.search;
-    
-    // Simple fetch handler for now
-    return new Response('KPOP Debut Analyzer is running!', {
-      headers: { 'Content-Type': 'text/plain' },
+  async fetch(_request: Request): Promise<Response> {
+    return new Response("KPOP Debut Analyzer is running!", {
+      headers: { "Content-Type": "text/plain" },
     });
   },
 };
 
-// For local development
-if (typeof globalThis === 'undefined' || !('DB' in globalThis)) {
+// Local development bootstrap
+if (typeof (globalThis as any) === "undefined" || !("DB" in (globalThis as any))) {
   initializeApp();
 }

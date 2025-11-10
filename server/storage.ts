@@ -42,8 +42,12 @@ export class MemStorage implements IStorage {
       ...insertResult,
       id,
       createdAt: new Date().toISOString(),
+      language: (insertResult as any).language ?? null,
       photoData: insertResult.photoData || null,
       subPosition: insertResult.subPosition || null,
+      age: (insertResult as any).age ?? null,
+      expression: (insertResult as any).expression ?? null,
+      gender: (insertResult as any).gender ?? null,
       memberName: (insertResult as any).memberName || null,
       agency: (insertResult as any).agency || null,
     };

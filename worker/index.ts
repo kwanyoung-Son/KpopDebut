@@ -393,6 +393,7 @@ function scoreBasedMatching(
   const currentYear = new Date().getFullYear();
   const userAge = age;
 
+  // Map groups to gender to avoid mismatches
   const genderGroupMap: { [key: string]: "male" | "female" } = {
     BTS: "male",
     BLACKPINK: "female",
@@ -402,8 +403,257 @@ function scoreBasedMatching(
     "Stray Kids": "male",
   };
 
-  let bestMatch: any = null;
-  let bestScore = -1;
+  // Helpers: trait extraction and sampling for diversity
+  function toWords(s: string): string[] {
+    return s
+      .replace(/([a-z])([A-Z])/g, "$1 $2")
+      .replace(/[^a-z0-9]+/gi, " ")
+      .trim()
+      .toLowerCase()
+      .split(/\s+/)
+      .filter(Boolean);
+  }
+
+  function normalizeTokens(arr: string[]): string[] {
+    const out: string[] = [];
+    for (const val of arr) {
+      toWords(String(val)).forEach((w) => out.push(w));
+    }
+    return Array.from(new Set(out));
+  }
+
+  function extractTraitKeywords(a: QuizAnswers): string[] {
+    const traits: string[] = [];
+
+    // Stage presence
+    switch (a.stagePresence) {
+      case "center":
+        traits.push("center", "visual", "charming");
+        break;
+      case "leader":
+        traits.push("leader", "leadership", "reliable");
+        break;
+      case "performer":
+        traits.push("performer", "dancer", "stage");
+        break;
+      case "charisma":
+        traits.push("charisma", "charismatic");
+        break;
+      case "supporter":
+        traits.push("supporter", "caring", "kind");
+        break;
+      case "allrounder":
+        traits.push("allrounder", "versatile");
+        break;
+    }
+
+    // Friends describe
+    switch (a.friendsDescribe) {
+      case "mood_maker":
+        traits.push("funny", "cheerful", "bright");
+        break;
+      case "serious":
+        traits.push("serious", "calm", "focused");
+        break;
+      case "creative":
+        traits.push("creative", "artistic");
+        break;
+      case "responsible":
+        traits.push("responsible", "planned", "reliable", "leader");
+        break;
+      case "energetic":
+        traits.push("energetic", "dynamic");
+        break;
+      case "calm":
+        traits.push("calm", "gentle");
+        break;
+    }
+
+    // New project
+    switch (a.newProject) {
+      case "execute":
+        traits.push("decisive", "action-oriented");
+        break;
+      case "plan":
+        traits.push("planner", "organized", "leader");
+        break;
+      case "discuss":
+        traits.push("communicator", "friendly");
+        break;
+      case "think":
+        traits.push("thoughtful");
+        break;
+      case "research":
+        traits.push("studious", "precise");
+        break;
+      case "experiment":
+        traits.push("innovative", "unique");
+        break;
+    }
+
+    // Stage important
+    switch (a.stageImportant) {
+      case "expression":
+        traits.push("expressive", "visual");
+        break;
+      case "accuracy":
+        traits.push("precise", "synchronized");
+        break;
+      case "vocal":
+        traits.push("vocalist", "voice");
+        break;
+      case "teamwork":
+        traits.push("teamwork", "leader");
+        break;
+      case "energy":
+        traits.push("energetic", "powerful");
+        break;
+      case "connection":
+        traits.push("charisma", "communication");
+        break;
+    }
+
+    // Practice style
+    switch (a.practiceStyle) {
+      case "vocal":
+        traits.push("vocalist", "voice");
+        break;
+      case "dance":
+        traits.push("dancer", "choreography");
+        break;
+      case "direction":
+        traits.push("creative", "director", "leader");
+        break;
+      case "care":
+        traits.push("caring", "kind", "supporter");
+        break;
+      case "expression":
+        traits.push("expressive");
+        break;
+      case "stamina":
+        traits.push("stamina", "endurance");
+        break;
+    }
+
+    // Dance style
+    switch (a.danceStyle) {
+      case "hiphop":
+        traits.push("hiphop", "rap", "rhythm");
+        break;
+      case "contemporary":
+        traits.push("artistic", "graceful", "smooth");
+        break;
+      case "powerful":
+        traits.push("powerful", "strong");
+        break;
+      case "cute":
+        traits.push("cute", "bright", "maknae");
+        break;
+      case "sensual":
+        traits.push("chic", "elegant", "sexy");
+        break;
+      case "energetic":
+        traits.push("energetic", "dynamic");
+        break;
+    }
+
+    // Fashion style
+    switch (a.fashionStyle) {
+      case "street":
+        traits.push("street", "trendy", "casual");
+        break;
+      case "chic":
+        traits.push("chic", "cool", "professional");
+        break;
+      case "lovely":
+        traits.push("lovely", "cute", "bright");
+        break;
+      case "trendy":
+        traits.push("trendy", "fashionable");
+        break;
+      case "vintage":
+        traits.push("retro", "vintage");
+        break;
+      case "minimal":
+        traits.push("minimal", "clean");
+        break;
+    }
+
+    // Makeup style
+    switch (a.makeupStyle) {
+      case "natural":
+        traits.push("natural", "soft");
+        break;
+      case "bold":
+        traits.push("bold", "strong");
+        break;
+      case "retro":
+        traits.push("retro", "vintage");
+        break;
+      case "elegant":
+        traits.push("elegant", "sophisticated");
+        break;
+      case "glam":
+        traits.push("glamorous", "fashionable");
+        break;
+      case "soft":
+        traits.push("soft", "gentle");
+        break;
+    }
+
+    return Array.from(new Set(normalizeTokens(traits)));
+  }
+
+  function computeTraitOverlapScore(
+    a: QuizAnswers,
+    memberPersonality: string[],
+    memberPositions: string[],
+  ): number {
+    const desired = extractTraitKeywords(a);
+    const memberTokens = normalizeTokens([
+      ...memberPersonality,
+      ...memberPositions,
+    ]);
+    if (desired.length === 0 || memberTokens.length === 0) return 0;
+    const desiredSet = new Set(desired);
+    let overlap = 0;
+    for (const t of memberTokens) {
+      if (desiredSet.has(t)) overlap += 1;
+    }
+    // Normalize by the number of desired traits to measure "how much of user we cover"
+    const score = overlap / desired.length; // 0..1
+    return Math.max(0, Math.min(1, score));
+  }
+
+  function softmaxSample<T extends { score: number }>(
+    items: T[],
+    temperature = 0.7,
+  ): T | null {
+    if (items.length === 0) return null;
+    const maxScore = Math.max(...items.map((i) => i.score));
+    // Center scores to avoid overflow and keep top-biased
+    const weights = items.map((i) => Math.exp((i.score - maxScore) / Math.max(0.1, temperature)));
+    const sum = weights.reduce((a, b) => a + b, 0);
+    let r = Math.random() * sum;
+    for (let i = 0; i < items.length; i++) {
+      r -= weights[i];
+      if (r <= 0) return items[i];
+    }
+    return items[items.length - 1];
+  }
+
+  // Maxima for normalization
+  const QUIZ_MAX = 75; // see calculateQuizScore
+  const PHOTO_MAX = 40; // see calculatePhotoScore (30 age + 10 trait)
+  const POS_MAX = 75; // see calculatePositionScore
+
+  const candidates: Array<{
+    member: any;
+    group: string;
+    agency: string;
+    score: number; // normalized 0..1 total
+    comps: { quiz: number; photo: number; pos: number; trait: number };
+  }> = [];
 
   for (const group of kpopData.groups) {
     const groupGender = genderGroupMap[group.name];
@@ -415,40 +665,54 @@ function scoreBasedMatching(
 
       const memberAge = currentYear - member.birthYear;
 
-      let totalScore = 0;
+      const quizRaw = calculateQuizScore(answers, member);
+      const photoRaw = calculatePhotoScore(
+        userAge,
+        expression,
+        memberAge,
+        member.personality,
+      );
+      const posRaw = calculatePositionScore(answers, member.position);
+      const trait = computeTraitOverlapScore(
+        answers,
+        member.personality,
+        member.position,
+      );
 
-      totalScore += calculateQuizScore(answers, member) * 0.5;
-      totalScore +=
-        calculatePhotoScore(
-          userAge,
-          expression,
-          memberAge,
-          member.personality,
-        ) * 0.3;
-      totalScore += calculatePositionScore(answers, member.position) * 0.2;
+      const quiz = Math.max(0, Math.min(1, quizRaw / QUIZ_MAX));
+      const photo = Math.max(0, Math.min(1, photoRaw / PHOTO_MAX));
+      const pos = Math.max(0, Math.min(1, posRaw / POS_MAX));
 
-      if (totalScore > bestScore) {
-        bestScore = totalScore;
-        bestMatch = {
-          member,
-          group: group.name,
-          agency: group.agency,
-        };
-      }
+      // Weighted sum (must sum to 1.0)
+      const total = 0.30 * quiz + 0.20 * photo + 0.25 * pos + 0.25 * trait;
+
+      candidates.push({
+        member,
+        group: group.name,
+        agency: group.agency,
+        score: total,
+        comps: { quiz, photo, pos, trait },
+      });
     }
   }
 
-  if (!bestMatch) {
-    return null;
-  }
+  if (candidates.length === 0) return null;
+
+  // Sort by score desc and sample among top candidates within margin
+  candidates.sort((a, b) => b.score - a.score);
+  const best = candidates[0];
+  const relativeThreshold = 0.9; // within 90% of best
+  const eligible = candidates.filter((c) => c.score >= best.score * relativeThreshold);
+  const topK = eligible.slice(0, Math.max(3, Math.min(7, eligible.length)));
+  const picked = softmaxSample(topK, 0.7) || best;
 
   return {
-    groupName: bestMatch.group,
-    memberName: bestMatch.member.name,
-    position: bestMatch.member.position[0],
-    subPosition: bestMatch.member.position[1] || "",
-    agency: bestMatch.agency,
-    score: bestScore,
+    groupName: picked.group,
+    memberName: picked.member.name,
+    position: picked.member.position[0],
+    subPosition: picked.member.position[1] || "",
+    agency: picked.agency,
+    score: picked.score,
   };
 }
 
@@ -909,7 +1173,7 @@ async function generateAnalysisResult(
     try {
       const prompt =
         language === "kr"
-          ? `당신은 KPOP 아이돌 분석 전문가입니다. 다음 정보를 바탕으로 매력적인 설명을 작성해주세요:
+          ? `당신은 KPOP 아이돌 분석 전문가입니다. 다음 정보를 바탕으로 이 멤버의 매력을 설명해주세요. 한국어로만 작성해주세요.:
 
 그룹: ${scoreMatch.groupName}
 멤버: ${scoreMatch.memberName}
@@ -926,9 +1190,9 @@ async function generateAnalysisResult(
 {
   "character": "${scoreMatch.groupName} ${scoreMatch.memberName} 스타일",
   "characterDesc": "이 멤버의 특징을 반영한 2-3문장 설명",
-  "styleTags": [이 멤버의 특성을 표현할 해쉬태그 여러개(각 해쉬태그 앞에 #을 붙여주세요)]
+  "styleTags": [이 멤버의 특성을 표현할 해쉬태그 여러개]
 }`
-          : `You are a KPOP idol analysis expert. Create an engaging description based on:
+          : `You are a KPOP idol analysis expert. Create an engaging description based on. please respond only in English.:
 
 Group: ${scoreMatch.groupName}
 Member: ${scoreMatch.memberName}
@@ -945,7 +1209,7 @@ Respond in JSON format:
 {
   "character": "${scoreMatch.groupName} ${scoreMatch.memberName} Style",
   "characterDesc": "2-3 sentence description reflecting this member's traits",
-  "styleTags": [Give me multiple hashtags that describe this member's traits.(Please add a # in front of each hashtag.)]
+  "styleTags": [Give me multiple hashtags that describe this member's traits.]
 }`;
 
       const llmResult = await callLLMAnalysis(prompt, env);

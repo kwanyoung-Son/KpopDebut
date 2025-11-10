@@ -104,11 +104,60 @@ export default function ResultsPage({ params }: ResultsPageProps) {
 
     try {
       setIsCapturing(true);
+      // Ensure web fonts are loaded to avoid layout drift in canvas
+      try {
+        // @ts-ignore
+        await (document as any).fonts?.ready;
+      } catch {}
+
+      // Freeze current size to prevent aspect-ratio distortion
+      const rect = cardRef.current.getBoundingClientRect();
+
       const canvas = await html2canvas(cardRef.current, {
         backgroundColor: "#ffffff",
+        // Use fixed scale for consistency across devices
         scale: 2,
         logging: false,
         useCORS: true,
+        imageTimeout: 0,
+        removeContainer: true,
+        scrollY: -window.scrollY,
+        onclone: (doc) => {
+          // Normalize chip/tag layout in cloned DOM for consistent vertical centering
+          const chips = doc.querySelectorAll('[data-chip="tag"]');
+          chips.forEach((el) => {
+            const style = (el as HTMLElement).getAttribute("style") || "";
+            (el as HTMLElement).setAttribute(
+              "style",
+              `${style};display:inline-flex;align-items:center;justify-content:center;line-height:1;`
+            );
+          });
+
+          // Disable animations/transforms during capture
+          const root = doc.querySelector('[data-capture-root="1"]') as HTMLElement | null;
+          if (root) {
+            root.style.animation = "none";
+            root.style.transform = "none";
+          }
+
+          // Enforce circular avatar with explicit dimension
+          let avatar = doc.querySelector('[data-capture-avatar="1"]') as HTMLElement | null;
+          if (!avatar) {
+            // fallback: parent of the <img alt="User">
+            const img = doc.querySelector('img[alt="User"]') as HTMLElement | null;
+            if (img && img.parentElement) avatar = img.parentElement as HTMLElement;
+          }
+          if (avatar) {
+            // Use the clone's current width to keep a perfect circle
+            const size = Math.min(avatar.clientWidth || 80, avatar.clientHeight || 80);
+            avatar.style.width = `${size}px`;
+            avatar.style.height = `${size}px`;
+            avatar.style.borderRadius = "50%";
+            avatar.style.overflow = "hidden";
+          }
+        },
+        width: Math.round(rect.width),
+        height: Math.round(rect.height),
       });
 
       return new Promise((resolve) => {
@@ -212,13 +261,14 @@ export default function ResultsPage({ params }: ResultsPageProps) {
         {/* Main Result Card */}
         <Card
           ref={cardRef}
+          data-capture-root="1"
           className="bg-white rounded-3xl card-shadow overflow-hidden mb-6"
         >
           {/* Card Header with Group Info */}
           <div className="gradient-bg p-6 text-white text-center">
             <div className="flex items-center justify-center gap-4 mb-3">
               {result.photoData && (
-                <div className="w-20 h-20 rounded-full overflow-hidden border-3 border-white/20 flex-shrink-0">
+                <div data-capture-avatar="1" className="w-20 h-20 rounded-full overflow-hidden border-3 border-white/20 flex-shrink-0" style={{ aspectRatio: "1 / 1" }}>
                   <img
                     src={normalizePhoto(result.photoData)}
                     alt="User"
@@ -243,7 +293,7 @@ export default function ResultsPage({ params }: ResultsPageProps) {
               </div>
             </div>
             {(result as any).memberName && (
-              <div className="bg-white/20 rounded-full px-4 py-1.5 inline-block">
+              <div className="bg-white/20 rounded-full px-4 h-9 inline-flex items-center justify-center align-middle" style={{ lineHeight: 1 }}>
                 <span className="text-sm">{t.youAre} </span>
                 <span className="font-bold">{(result as any).memberName}</span>
                 <span className="text-sm"> {t.style}</span>
@@ -308,7 +358,9 @@ export default function ResultsPage({ params }: ResultsPageProps) {
                     return (
                       <span
                         key={index}
-                        className={`bg-gradient-to-r ${gradients[index % gradients.length]} text-white px-3 py-1.5 rounded-full text-sm font-medium shadow-sm`}
+                        data-chip="tag"
+                        className={`bg-gradient-to-r ${gradients[index % gradients.length]} text-white px-3 h-8 rounded-full text-sm font-medium shadow-sm inline-flex items-center justify-center leading-none align-middle`}
+                        style={{ lineHeight: 1 }}
                       >
                         {tag}
                       </span>
@@ -320,7 +372,11 @@ export default function ResultsPage({ params }: ResultsPageProps) {
         </Card>
 
         {/* Action Buttons */}
-        <div className="w-full max-w-[540px] mx-auto px-2 overflow-x-hidden">
+        <div
+          className="w-full max-w-[540px] mx-auto px-2 overflow-x-hidden"
+          data-html2canvas-ignore="true"
+          style={{ visibility: isCapturing ? "hidden" : undefined }}
+        >
           <div className="grid grid-cols-3 gap-2">
             <Button
               onClick={handleShare}
