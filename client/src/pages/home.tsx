@@ -96,6 +96,17 @@ export default function Home() {
         </div>
       </nav>
 
+      {/* Advertisement Banner */}
+      <a 
+        href="https://otieu.com/4/10217099" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-4 text-center font-semibold hover:from-blue-700 hover:to-purple-700 transition-all"
+        data-testid="ad-banner"
+      >
+        ✨ 광고 · Advertisement
+      </a>
+
       {/* Hero Section */}
       <section className="min-h-screen gradient-bg flex items-center justify-center px-4 pt-20">
         <div className="max-w-4xl mx-auto text-center text-white">
