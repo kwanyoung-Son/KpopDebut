@@ -320,13 +320,13 @@ export const kpopGroupsData = {
           personality: ["BrightVoice", "Friendly", "Charismatic"],
         },
         {
-          name: "준",
+          name: "주은",
           position: ["메인 댄서", "메인 래퍼", "서브 보컬"],
           birthYear: 2005,
           personality: ["DanceRapHybrid", "Dynamic", "Cool"],
         },
         {
-          name: "아나",
+          name: "에이나",
           position: ["리드 보컬", "비주얼"],
           birthYear: 2008,
           personality: ["Visual", "GentleVoice", "AllRounder"],
