@@ -56,8 +56,19 @@ export default function Home() {
   const t = texts[language];
   return (
     <div className="min-h-screen">
+      {/* Advertisement Banner */}
+      <a 
+        href="https://otieu.com/4/10217099" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-4 text-center font-semibold hover:from-blue-700 hover:to-purple-700 transition-all sticky top-0 z-40"
+        data-testid="ad-banner"
+      >
+        ✨ 광고 · Advertisement
+      </a>
+
       {/* Navigation */}
-      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
+      <nav className="sticky top-12 w-full bg-white/90 backdrop-blur-md z-50 border-b border-gray-100">
         <div className="max-w-6xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -95,17 +106,6 @@ export default function Home() {
           </div>
         </div>
       </nav>
-
-      {/* Advertisement Banner */}
-      <a 
-        href="https://otieu.com/4/10217099" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-4 text-center font-semibold hover:from-blue-700 hover:to-purple-700 transition-all"
-        data-testid="ad-banner"
-      >
-        ✨ 광고 · Advertisement
-      </a>
 
       {/* Hero Section */}
       <section className="min-h-screen gradient-bg flex items-center justify-center px-4 pt-20">
