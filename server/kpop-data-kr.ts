@@ -2,6 +2,7 @@ export const kpopGroupsData = {
   groups: [
     {
       name: "BTS",
+      gender: "male",
       agency: "빅히트 뮤직",
       members: [
         {
@@ -50,6 +51,7 @@ export const kpopGroupsData = {
     },
     {
       name: "BLACKPINK",
+      gender: "female",
       agency: "YG 엔터테인먼트",
       members: [
         {
@@ -80,6 +82,7 @@ export const kpopGroupsData = {
     },
     {
       name: "IVE",
+      gender: "female",
       agency: "스타쉽 엔터테인먼트",
       members: [
         {
@@ -122,6 +125,7 @@ export const kpopGroupsData = {
     },
     {
       name: "aespa",
+      gender: "female",
       agency: "SM 엔터테인먼트",
       members: [
         {
@@ -159,6 +163,7 @@ export const kpopGroupsData = {
     },
     {
       name: "(G)I-DLE",
+      gender: "female",
       agency: "큐브 엔터테인먼트",
       members: [
         {
@@ -195,6 +200,7 @@ export const kpopGroupsData = {
     },
     {
       name: "KIIRAS",
+      gender: "female",
       agency: "LeanBranding",
       members: [
         {
@@ -237,6 +243,7 @@ export const kpopGroupsData = {
     },
     {
       name: "KickFlip",
+      gender: "male",
       agency: "JYP 엔터테인먼트",
       members: [
         {
@@ -285,6 +292,7 @@ export const kpopGroupsData = {
     },
     {
       name: "Hearts2Hearts",
+      gender: "female",
       agency: "SM 엔터테인먼트",
       members: [
         {
@@ -339,6 +347,7 @@ export const kpopGroupsData = {
     },
     {
       name: "ifeye",
+      gender: "female",
       agency: "하이햇 엔터테인먼트",
       members: [
         {
@@ -381,6 +390,7 @@ export const kpopGroupsData = {
     },
     {
       name: "Stray Kids",
+      gender: "male",
       agency: "JYP 엔터테인먼트",
       members: [
         {
@@ -435,6 +445,7 @@ export const kpopGroupsData = {
     },
     {
       name: "ATEEZ",
+      gender: "male",
       agency: "KQ 엔터테인먼트",
       members: [
         {
@@ -489,6 +500,7 @@ export const kpopGroupsData = {
     },
     {
       name: "LOONA",
+      gender: "female",
       agency: "블록베리 크리에이티브",
       members: [
         {
@@ -567,6 +579,7 @@ export const kpopGroupsData = {
     },
     {
       name: "THE BOYZ",
+      gender: "male",
       agency: "IST 엔터테인먼트",
       members: [
         {
@@ -645,6 +658,7 @@ export const kpopGroupsData = {
     },
     {
       name: "Golden Child",
+      gender: "male",
       agency: "울림 엔터테인먼트",
       members: [
         {
@@ -711,6 +725,7 @@ export const kpopGroupsData = {
     },
     {
       name: "Weki Meki",
+      gender: "female",
       agency: "판타지오",
       members: [
         {
@@ -765,6 +780,7 @@ export const kpopGroupsData = {
     },
     {
       name: "ONF",
+      gender: "male",
       agency: "WM 엔터테인먼트",
       members: [
         {
@@ -813,6 +829,7 @@ export const kpopGroupsData = {
     },
     {
       name: "Dreamcatcher",
+      gender: "female",
       agency: "드림캐쳐 컴퍼니",
       members: [
         {
@@ -861,6 +878,7 @@ export const kpopGroupsData = {
     },
     {
       name: "fromis_9",
+      gender: "female",
       agency: "오프더레코드 엔터테인먼트",
       members: [
         {
@@ -921,6 +939,7 @@ export const kpopGroupsData = {
     },
     {
       name: "NATURE",
+      gender: "female",
       agency: "n.CH 엔터테인먼트",
       members: [
         {
@@ -981,6 +1000,7 @@ export const kpopGroupsData = {
     },
     {
       name: "D-CRUNCH",
+      gender: "male",
       agency: "올에스 컴퍼니",
       members: [
         {
@@ -1041,6 +1061,7 @@ export const kpopGroupsData = {
     },
     {
       name: "DreamNote",
+      gender: "female",
       agency: "아이미 코리아",
       members: [
         {
@@ -1095,6 +1116,7 @@ export const kpopGroupsData = {
     },
     {
       name: "IZ*ONE",
+      gender: "female",
       agency: "오프더레코드 엔터테인먼트",
       members: [
         {
@@ -1173,6 +1195,7 @@ export const kpopGroupsData = {
     },
     {
       name: "PRISTIN",
+      gender: "female",
       agency: "플레디스 엔터테인먼트",
       members: [
         {
@@ -1239,6 +1262,7 @@ export const kpopGroupsData = {
     },
     {
       name: "ELRIS",
+      gender: "female",
       agency: "휴니스 엔터테인먼트",
       members: [
         {
@@ -1275,6 +1299,7 @@ export const kpopGroupsData = {
     },
     {
       name: "IN2IT",
+      gender: "male",
       agency: "MMO 엔터테인먼트",
       members: [
         {
@@ -1329,6 +1354,7 @@ export const kpopGroupsData = {
     },
     {
       name: "The Rose",
+      gender: "male",
       agency: "J&Star 컴퍼니",
       members: [
         {
@@ -1359,6 +1385,7 @@ export const kpopGroupsData = {
     },
     {
       name: "ITZY",
+      gender: "female",
       agency: "JYP 엔터테인먼트",
       members: [
         {
@@ -1395,6 +1422,7 @@ export const kpopGroupsData = {
     },
     {
       name: "TXT (Tomorrow X Together)",
+      gender: "male",
       agency: "빅히트 뮤직",
       members: [
         {
@@ -1431,6 +1459,7 @@ export const kpopGroupsData = {
     },
     {
       name: "TREASURE",
+      gender: "male",
       agency: "YG 엔터테인먼트",
       members: [
         {
@@ -1509,6 +1538,7 @@ export const kpopGroupsData = {
     },
     {
       name: "CRAVITY",
+      gender: "male",
       agency: "스타쉽 엔터테인먼트",
       members: [
         {
@@ -1569,6 +1599,7 @@ export const kpopGroupsData = {
     },
     {
       name: "MCND",
+      gender: "male",
       agency: "티오피미디어",
       members: [
         {
@@ -1605,6 +1636,7 @@ export const kpopGroupsData = {
     },
     {
       name: "cignature",
+      gender: "female",
       agency: "J9 엔터테인먼트",
       members: [
         {
@@ -1653,6 +1685,7 @@ export const kpopGroupsData = {
     },
     {
       name: "STAYC",
+      gender: "female",
       agency: "하이업 엔터테인먼트",
       members: [
         {
@@ -1695,6 +1728,7 @@ export const kpopGroupsData = {
     },
     {
       name: "Weeekly",
+      gender: "female",
       agency: "IST 엔터테인먼트",
       members: [
         {
@@ -1743,6 +1777,7 @@ export const kpopGroupsData = {
     },
     {
       name: "ENHYPEN",
+      gender: "male",
       agency: "빌리프랩 (하이브 × CJ ENM)",
       members: [
         {
@@ -1791,6 +1826,7 @@ export const kpopGroupsData = {
     },
     {
       name: "E'LAST",
+      gender: "male",
       agency: "이 엔터테인먼트",
       members: [
         {
@@ -1845,6 +1881,7 @@ export const kpopGroupsData = {
     },
     {
       name: "DRIPPIN",
+      gender: "male",
       agency: "울림 엔터테인먼트",
       members: [
         {
@@ -1893,6 +1930,7 @@ export const kpopGroupsData = {
     },
     {
       name: "Secret Number",
+      gender: "female",
       agency: "바인 엔터테인먼트",
       members: [
         {
@@ -1935,6 +1973,7 @@ export const kpopGroupsData = {
     },
     {
       name: "BDC (Boys Da Capo)",
+      gender: "male",
       agency: "브랜뉴뮤직",
       members: [
         {
@@ -1959,6 +1998,7 @@ export const kpopGroupsData = {
     },
     {
       name: "BOTOPASS",
+      gender: "female",
       agency: "WKS ENE / JMG",
       members: [
         {
@@ -2013,6 +2053,7 @@ export const kpopGroupsData = {
     },
     {
       name: "LE SSERAFIM",
+      gender: "female",
       agency: "쏘스뮤직 / 하이브",
       members: [
         {
@@ -2049,6 +2090,7 @@ export const kpopGroupsData = {
     },
     {
       name: "NewJeans",
+      gender: "female",
       agency: "어도어 (하이브)",
       members: [
         {
@@ -2085,6 +2127,7 @@ export const kpopGroupsData = {
     },
     {
       name: "Kep1er",
+      gender: "female",
       agency: "웨이크원 엔터테인먼트 / 스윙 엔터테인먼트",
       members: [
         {
@@ -2145,6 +2188,7 @@ export const kpopGroupsData = {
     },
     {
       name: "NMIXX",
+      gender: "female",
       agency: "JYP 엔터테인먼트",
       members: [
         {
@@ -2187,6 +2231,7 @@ export const kpopGroupsData = {
     },
     {
       name: "XG",
+      gender: "female",
       agency: "XGALX",
       members: [
         {
@@ -2235,6 +2280,7 @@ export const kpopGroupsData = {
     },
     {
       name: "TNX",
+      gender: "male",
       agency: "피네이션",
       members: [
         {
@@ -2277,6 +2323,7 @@ export const kpopGroupsData = {
     },
     {
       name: "BAE173",
+      gender: "male",
       agency: "포켓돌 스튜디오",
       members: [
         {
@@ -2337,6 +2384,7 @@ export const kpopGroupsData = {
     },
     {
       name: "BOYNEXTDOOR",
+      gender: "male",
       agency: "코즈 엔터테인먼트 (하이브)",
       members: [
         {
@@ -2379,6 +2427,7 @@ export const kpopGroupsData = {
     },
     {
       name: "ZEROBASEONE (ZB1)",
+      gender: "male",
       agency: "웨이크원 엔터테인먼트",
       members: [
         {
@@ -2439,6 +2488,7 @@ export const kpopGroupsData = {
     },
     {
       name: "RIIZE",
+      gender: "male",
       agency: "SM 엔터테인먼트",
       members: [
         {
@@ -2481,6 +2531,7 @@ export const kpopGroupsData = {
     },
     {
       name: "KISS OF LIFE",
+      gender: "female",
       agency: "에스투 엔터테인먼트",
       members: [
         {
@@ -2511,6 +2562,7 @@ export const kpopGroupsData = {
     },
     {
       name: "PLAVE",
+      gender: "male",
       agency: "브이래스트",
       members: [
         {
@@ -2547,6 +2599,7 @@ export const kpopGroupsData = {
     },
     {
       name: "BABYMONSTER",
+      gender: "female",
       agency: "YG 엔터테인먼트",
       members: [
         {
@@ -2595,6 +2648,7 @@ export const kpopGroupsData = {
     },
     {
       name: "ILLIT",
+      gender: "female",
       agency: "빌리프랩 (하이브)",
       members: [
         {
@@ -2631,6 +2685,7 @@ export const kpopGroupsData = {
     },
     {
       name: "UNIS",
+      gender: "female",
       agency: "F&F 엔터테인먼트 / 카카오 엔터테인먼트",
       members: [
         {
@@ -2685,6 +2740,7 @@ export const kpopGroupsData = {
     },
     {
       name: "TWS",
+      gender: "male",
       agency: "플레디스 엔터테인먼트 (하이브)",
       members: [
         {
@@ -2727,6 +2783,7 @@ export const kpopGroupsData = {
     },
     {
       name: "KATSEYE",
+      gender: "female",
       agency: "하이브 × 게펜 레코즈",
       members: [
         {
@@ -2769,6 +2826,7 @@ export const kpopGroupsData = {
     },
     {
       name: "RESCENE",
+      gender: "female",
       agency: "그레이트엠 엔터테인먼트",
       members: [
         {
@@ -2805,6 +2863,7 @@ export const kpopGroupsData = {
     },
     {
       name: "ALL(H)OURS",
+      gender: "male",
       agency: "이든 엔터테인먼트",
       members: [
         {
@@ -2847,6 +2906,7 @@ export const kpopGroupsData = {
     },
     {
       name: "AMPERS&ONE",
+      gender: "male",
       agency: "FNC 엔터테인먼트",
       members: [
         {
@@ -2895,6 +2955,7 @@ export const kpopGroupsData = {
     },
     {
       name: "NOWADAYS",
+      gender: "male",
       agency: "큐브 엔터테인먼트",
       members: [
         {
@@ -2931,6 +2992,7 @@ export const kpopGroupsData = {
     },
     {
       name: "EXO",
+      gender: "male",
       agency: "SM 엔터테인먼트",
       members: [
         {
@@ -2991,6 +3053,7 @@ export const kpopGroupsData = {
     },
     {
       name: "Red Velvet",
+      gender: "female",
       agency: "SM 엔터테인먼트",
       members: [
         {
@@ -3027,6 +3090,7 @@ export const kpopGroupsData = {
     },
     {
       name: "SEVENTEEN",
+      gender: "male",
       agency: "플레디스 엔터테인먼트 (하이브)",
       members: [
         {
@@ -3111,6 +3175,7 @@ export const kpopGroupsData = {
     },
     {
       name: "TWICE",
+      gender: "female",
       agency: "JYP 엔터테인먼트",
       members: [
         {
@@ -3171,6 +3236,7 @@ export const kpopGroupsData = {
     },
     {
       name: "GFRIEND",
+      gender: "female",
       agency: "쏘스뮤직",
       members: [
         {
@@ -3213,6 +3279,7 @@ export const kpopGroupsData = {
     },
     {
       name: "MAMAMOO",
+      gender: "female",
       agency: "RBW 엔터테인먼트",
       members: [
         {
@@ -3243,6 +3310,7 @@ export const kpopGroupsData = {
     },
     {
       name: "iKON",
+      gender: "male",
       agency: "YG 엔터테인먼트",
       members: [
         {
@@ -3291,6 +3359,7 @@ export const kpopGroupsData = {
     },
     {
       name: "WINNER",
+      gender: "male",
       agency: "YG 엔터테인먼트",
       members: [
         {
@@ -3300,7 +3369,7 @@ export const kpopGroupsData = {
           personality: ["Visual", "Gentle", "Charming"],
         },
         {
-          name: "후니",
+          name: "승훈",
           position: ["메인 댄서", "래퍼"],
           birthYear: 1992,
           personality: ["Energetic", "Funny", "Creative"],

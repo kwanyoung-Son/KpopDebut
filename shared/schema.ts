@@ -40,6 +40,8 @@ export const insertAnalysisResultSchema = createInsertSchema(analysisResults).om
 });
 
 export const quizAnswersSchema = z.object({
+  // 성별 선택 (남/여)
+  gender: z.enum(["male", "female"]),
   // 성격/성향 관련 질문
   stagePresence: z.enum(["center", "leader", "performer", "charisma", "supporter", "allrounder"]),
   friendsDescribe: z.enum(["mood_maker", "serious", "creative", "responsible", "energetic", "calm"]),

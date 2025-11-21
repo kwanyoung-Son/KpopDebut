@@ -12,6 +12,7 @@ interface Env {
 
 // Quiz validation schema
 const quizAnswersSchema = z.object({
+  gender: z.enum(["male", "female"]),
   stagePresence: z.enum([
     "center",
     "leader",
@@ -254,7 +255,7 @@ function createAnalysisPrompt(
 답변은 반드시 유효한 JSON 형식으로만 제공해주세요.`
       : `You are a K-Pop idol expert. ${genderHint}
 
-Here are the answers to 8 KPOP idol aptitude analysis questions:
+Here are the answers to 9 KPOP idol aptitude analysis questions:
 
 1. Stage presence: ${questionMapping.stagePresence[answers.stagePresence]}
 2. Personality described by friends: ${questionMapping.friendsDescribe[answers.friendsDescribe]}
@@ -264,6 +265,7 @@ Here are the answers to 8 KPOP idol aptitude analysis questions:
 6. Preferred dance style: ${questionMapping.danceStyle[answers.danceStyle]}
 7. Fashion style: ${questionMapping.fashionStyle[answers.fashionStyle]}
 8. Makeup style: ${questionMapping.makeupStyle[answers.makeupStyle]}
+9. Gender: ${gender}
 
 Based on these answers, generate a KPOP idol analysis result in the following JSON format:
 
@@ -656,7 +658,7 @@ function scoreBasedMatching(
   }> = [];
 
   for (const group of kpopData.groups) {
-    const groupGender = genderGroupMap[group.name];
+    const groupGender = (group as any).gender || genderGroupMap[group.name];
     if (groupGender && groupGender !== gender) continue;
 
     for (const member of group.members) {
