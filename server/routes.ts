@@ -129,190 +129,28 @@ function createAnalysisPrompt(
   language: "kr" | "en" = "kr",
   gender: "male" | "female" = "female",
 ) {
-  const questionMapping =
-    language === "kr"
-      ? {
-          stagePresence: {
-            center: "중심에서 빛나는 타입",
-            leader: "팀을 이끄는 리더형",
-            performer: "열정적인 퍼포머",
-            charisma: "조용한 카리스마",
-            supporter: "든든한 서포터형",
-            allrounder: "만능 올라운더",
-          },
-          friendsDescribe: {
-            mood_maker: "분위기 메이커",
-            serious: "진지하고 신중함",
-            creative: "창의적이고 예술적",
-            responsible: "계획적이고 책임감",
-            energetic: "활기차고 밝음",
-            calm: "차분하고 온화함",
-          },
-          newProject: {
-            execute: "바로 따라하며 몸으로 익힌다",
-            plan: "먼저 구조를 분석하고 계획한다",
-            discuss: "멤버들과 함께 의견 나눈다",
-            think: "혼자 차근차근 이해한다",
-            research: "레퍼런스 자료를 찾아본다",
-            experiment: "나만의 방식으로 실험한다",
-          },
-          stageImportant: {
-            expression: "표정과 눈빛",
-            accuracy: "안무 정확도",
-            vocal: "음정과 감정 전달",
-            teamwork: "전체적인 팀워크",
-            energy: "에너지와 열정",
-            connection: "관객과의 교감",
-          },
-          practiceStyle: {
-            vocal: "고음 처리나 감정 전달",
-            dance: "칼군무와 동작 정리",
-            direction: "무대 연출/구성 아이디어",
-            care: "멤버들 케어 및 소통",
-            expression: "표현력과 감정 몰입",
-            stamina: "체력과 지구력 향상",
-          },
-          danceStyle: {
-            hiphop: "리듬감 넘치는 힙합",
-            contemporary: "부드러운 컨템포러리",
-            powerful: "파워풀한 퍼포먼스",
-            cute: "키치하고 귀여운 안무",
-            sensual: "세련되고 섹시한 댄스",
-            energetic: "역동적이고 활기찬 움직임",
-          },
-          fashionStyle: {
-            street: "스트릿, 캐주얼",
-            chic: "시크하고 모던",
-            lovely: "러블리하고 컬러풀",
-            trendy: "트렌디하고 유니크",
-            vintage: "빈티지와 레트로",
-            minimal: "미니멀과 심플",
-          },
-          makeupStyle: {
-            natural: "자연스러운 내추럴",
-            bold: "강렬한 포인트 컬러",
-            retro: "레트로 감성",
-            elegant: "깔끔하고 고급진 스타일",
-            glam: "화려한 글램 메이크업",
-            soft: "부드러운 페미닌 룩",
-          },
-        }
-      : {
-          stagePresence: {
-            center: "Shining at the center",
-            leader: "Leading the team",
-            performer: "Passionate performer",
-            charisma: "Quiet charisma",
-            supporter: "Reliable supporter",
-            allrounder: "Versatile all-rounder",
-          },
-          friendsDescribe: {
-            mood_maker: "Mood maker",
-            serious: "Serious and careful",
-            creative: "Creative and artistic",
-            responsible: "Planned and responsible",
-            energetic: "Energetic and bright",
-            calm: "Calm and gentle",
-          },
-          newProject: {
-            execute: "Learn by doing immediately",
-            plan: "Analyze structure and plan first",
-            discuss: "Share opinions with members",
-            think: "Understand step by step alone",
-            research: "Look for reference materials",
-            experiment: "Try in my own way",
-          },
-          stageImportant: {
-            expression: "Facial expressions and eyes",
-            accuracy: "Choreography accuracy",
-            vocal: "Pitch and emotion delivery",
-            teamwork: "Overall teamwork",
-            energy: "Energy and passion",
-            connection: "Connection with audience",
-          },
-          practiceStyle: {
-            vocal: "High notes and emotion delivery",
-            dance: "Synchronized choreography",
-            direction: "Stage direction/composition ideas",
-            care: "Member care and communication",
-            expression: "Expressiveness and emotional immersion",
-            stamina: "Stamina and endurance improvement",
-          },
-          danceStyle: {
-            hiphop: "Rhythmic hip-hop",
-            contemporary: "Smooth contemporary",
-            powerful: "Powerful performance",
-            cute: "Cute and playful choreography",
-            sensual: "Sophisticated and sensual dance",
-            energetic: "Dynamic and energetic movement",
-          },
-          fashionStyle: {
-            street: "Street, casual",
-            chic: "Chic and modern",
-            lovely: "Lovely and colorful",
-            trendy: "Trendy and unique",
-            vintage: "Vintage and retro",
-            minimal: "Minimal and simple",
-          },
-          makeupStyle: {
-            natural: "Natural style",
-            bold: "Bold point colors",
-            retro: "Retro vibes",
-            elegant: "Clean and sophisticated style",
-            glam: "Glamorous makeup",
-            soft: "Soft feminine look",
-          },
-        };
+  const questionMapping = {
+    stagePresence: { center: "Center", leader: "Leader", performer: "Performer", charisma: "Charisma", supporter: "Supporter", allrounder: "All-rounder" },
+    friendsDescribe: { mood_maker: "Mood maker", serious: "Serious", creative: "Creative", responsible: "Responsible", energetic: "Energetic", calm: "Calm" },
+    newProject: { execute: "Execute", plan: "Plan", discuss: "Discuss", think: "Think", research: "Research", experiment: "Experiment" },
+    stageImportant: { expression: "Expression", accuracy: "Accuracy", vocal: "Vocal", teamwork: "Teamwork", energy: "Energy", connection: "Connection" },
+    practiceStyle: { vocal: "Vocal", dance: "Dance", direction: "Direction", care: "Care", expression: "Expression", stamina: "Stamina" },
+    danceStyle: { hiphop: "Hip-hop", contemporary: "Contemporary", powerful: "Powerful", cute: "Cute", sensual: "Sensual", energetic: "Energetic" },
+    fashionStyle: { street: "Street", chic: "Chic", lovely: "Lovely", trendy: "Trendy", vintage: "Vintage", minimal: "Minimal" },
+    makeupStyle: { natural: "Natural", bold: "Bold", retro: "Retro", elegant: "Elegant", glam: "Glam", soft: "Soft" },
+  };
 
-  const genderHint =
-    gender === "male"
-      ? language === "kr"
-        ? "사용자는 남성이므로 남자 아이돌 그룹과 멤버를 매칭해주세요."
-        : "The user is male, so please match with male idol groups and members."
-      : language === "kr"
-        ? "사용자는 여성이므로 여자 아이돌 그룹과 멤버를 매칭해주세요."
-        : "The user is female, so please match with female idol groups and members.";
+  const genderHint = gender === "male"
+    ? "Match with male idol groups and members."
+    : "Match with female idol groups and members.";
 
-  const groupExamples =
-    gender === "male"
-      ? "BTS (RM, Jin, Suga, J-Hope, Jimin, V, Jungkook), Seventeen (S.Coups, Jeonghan, Joshua, Jun, Hoshi, Wonwoo, Woozi, DK, Mingyu, The8, Seungkwan, Vernon, Dino), Stray Kids (Bang Chan, Lee Know, Changbin, Hyunjin, Han, Felix, Seungmin, I.N), TXT (Yeonjun, Soobin, Beomgyu, Taehyun, Huening Kai), ENHYPEN (Heeseung, Jay, Jake, Sunghoon, Sunoo, Jungwon, Ni-ki)"
-      : "NewJeans (Minji, Hanni, Danielle, Haerin, Hyein), BLACKPINK (Jisoo, Jennie, Rosé, Lisa), aespa (Karina, Giselle, Winter, Ningning), IVE (Yujin, Gaeul, Rei, Wonyoung, Liz, Leeseo), LE SSERAFIM (Sakura, Chaewon, Yunjin, Kazuha, Eunchae), TWICE (Nayeon, Jeongyeon, Momo, Sana, Jihyo, Mina, Dahyun, Chaeyoung, Tzuyu), Red Velvet (Irene, Seulgi, Wendy, Joy, Yeri)";
+  const groupExamples = gender === "male"
+    ? "BTS, SEVENTEEN, Stray Kids, TXT, ENHYPEN"
+    : "NewJeans, BLACKPINK, aespa, IVE, LE SSERAFIM, TWICE, Red Velvet";
 
-  const prompt =
-    language === "kr"
-      ? `당신은 KPOP 아이돌 전문가입니다. 사용자의 8가지 답변을 분석하여 가장 잘 어울리는 실제 KPOP 그룹과 멤버를 매칭해주세요. ${genderHint}
+  const prompt = `You are a K-Pop idol expert. ${genderHint}
 
-참고 가능한 그룹과 멤버: ${groupExamples}
-
-사용자의 답변:
-1. 무대 위에서의 모습: ${questionMapping.stagePresence[answers.stagePresence]}
-2. 친구들이 말하는 성격: ${questionMapping.friendsDescribe[answers.friendsDescribe]}  
-3. 새로운 프로젝트 접근법: ${questionMapping.newProject[answers.newProject]}
-4. 무대에서 중요하게 생각하는 것: ${questionMapping.stageImportant[answers.stageImportant]}
-5. 연습 중 집중하는 부분: ${questionMapping.practiceStyle[answers.practiceStyle]}
-6. 선호하는 춤 스타일: ${questionMapping.danceStyle[answers.danceStyle]}
-7. 패션 스타일: ${questionMapping.fashionStyle[answers.fashionStyle]}
-8. 메이크업 스타일: ${questionMapping.makeupStyle[answers.makeupStyle]}
-
-중요: 위의 답변들을 세심하게 분석하여 가장 적합한 그룹과 멤버를 선택하세요. 각 답변의 특성을 고려하여 다양한 결과를 제공해야 합니다.
-
-다음 JSON 형식으로 응답하세요 (한국어):
-{
-  "groupName": "실제 그룹명",
-  "position": "Main Vocalist 또는 Main Dancer 또는 Main Rapper 또는 Leader 또는 Visual",
-  "subPosition": "서브 포지션 (선택)",
-  "character": "그룹명 멤버명 스타일",
-  "characterDesc": "해당 멤버의 특징을 반영한 성격 설명 (한국어)",
-  "styleTags": ["#그룹", "#포지션", "#멤버", "#스타일1", "#스타일2"],
-  "memberName": "멤버 이름",
-  "agency": "소속사"
-}
-
-반드시 유효한 JSON만 응답하세요.`
-      : `You are a K-Pop idol expert. The user answers 8 questions, and based on those responses, you must determine which real K-Pop group and which member’s position best matches the user. ${genderHint}
-
-Here are the answers to 8 KPOP idol aptitude analysis questions:
-
+Here are the answers to 9 KPOP idol aptitude analysis questions:
 
 1. Stage presence: ${questionMapping.stagePresence[answers.stagePresence]}
 2. Personality described by friends: ${questionMapping.friendsDescribe[answers.friendsDescribe]}
@@ -322,21 +160,9 @@ Here are the answers to 8 KPOP idol aptitude analysis questions:
 6. Preferred dance style: ${questionMapping.danceStyle[answers.danceStyle]}
 7. Fashion style: ${questionMapping.fashionStyle[answers.fashionStyle]}
 8. Makeup style: ${questionMapping.makeupStyle[answers.makeupStyle]}
+9. Gender: ${gender}
 
-Based on these answers, generate a KPOP idol analysis result in the following JSON format(In English):
-
-{
-  "groupName": "Actual KPOP group name",
-  "position": "Main position (e.g., Leader, Main Vocalist, Main Dancer, Main Rapper, Visual)",
-  "subPosition": "Sub position (optional)",
-  "character": "Group name + Member name + Style",
-  "characterDesc": "Personality description reflecting the member's characteristics",
-  "styleTags": ["#GroupStyle", "#PositionTag", "#MemberType", "#DanceStyle", "#FashionStyle"],
-  "memberName": "Actual member name",
-  "agency": "Agency name"
-}
-
-Please provide the answer only in valid JSON format.`;
+Provide the result as JSON with fields: groupName, position, subPosition, character, characterDesc, styleTags, memberName, agency.`;
 
   return prompt;
 }
@@ -752,7 +578,7 @@ function scoreBasedMatching(
   }> = [];
 
   for (const group of kpopData.groups) {
-    const groupGender = genderGroupMap[group.name];
+    const groupGender = (group as any).gender || genderGroupMap[group.name];
     if (groupGender && groupGender !== gender) continue;
 
     for (const member of group.members) {
@@ -990,92 +816,31 @@ async function generateAnalysisResult(
   );
 
   if (scoreMatch) {
-    console.log(
-      `✅ Score-based match found: ${scoreMatch.memberName} from ${scoreMatch.groupName} (score: ${scoreMatch.score})`,
-    );
-
-    const prompt =
-      language === "kr"
-        ? `당신은 KPOP 아이돌 분석 전문가입니다. 다음 정보를 바탕으로 이 멤버의 매력을 설명해주세요. 한국어로만 작성해주세요.:
-
-그룹: ${scoreMatch.groupName}
-멤버: ${scoreMatch.memberName}
-포지션: ${scoreMatch.position}
-소속사: ${scoreMatch.agency}
-
-사용자 특징:
-- 무대 태도: ${answers.stagePresence}
-- 친구들이 보는 나: ${answers.friendsDescribe}
-- 무대에서 중요한 것: ${answers.stageImportant}
-- 댄스 스타일: ${answers.danceStyle}
-
-위 정보를 바탕으로 다음 형식의 JSON으로 응답해주세요:
-{
-  "character": "${scoreMatch.groupName} ${scoreMatch.memberName} 스타일",
-  "characterDesc": "이 멤버의 특징을 반영한 2-3문장 설명",
-  "styleTags": [이 멤버의 특성을 표현할 해쉬태그 여러개]
-}`
-        : `You are a KPOP idol analysis expert. Create an engaging description based on. please respond only in English.:
-
-Group: ${scoreMatch.groupName}
-Member: ${scoreMatch.memberName}
-Position: ${scoreMatch.position}
-Agency: ${scoreMatch.agency}
-
-User traits:
-- Stage presence: ${answers.stagePresence}
-- Friends describe as: ${answers.friendsDescribe}
-- Important on stage: ${answers.stageImportant}
-- Dance style: ${answers.danceStyle}
-
-Respond in JSON format:
-{
-  "character": "${scoreMatch.groupName} ${scoreMatch.memberName} Style",
-  "characterDesc": "2-3 sentence description reflecting this member's traits",
-  "styleTags": [Give me multiple hashtags that describe this member's traits.]
-}`;
-
-    const llmResult = await callLLMAnalysis(prompt);
-
     return {
       groupName: scoreMatch.groupName,
       position: scoreMatch.position,
       subPosition: scoreMatch.subPosition,
-      character:
-        llmResult.character ||
-        `${scoreMatch.groupName} ${scoreMatch.memberName} ${language === "kr" ? "스타일" : "Style"}`,
-      characterDesc:
-        llmResult.characterDesc ||
-        (language === "kr"
-          ? `${scoreMatch.memberName}과 비슷한 매력과 재능을 가진 타입`
-          : `Similar charm and talent to ${scoreMatch.memberName}`),
-      styleTags: llmResult.styleTags || [
-        `#${scoreMatch.groupName}${language === "kr" ? "스타일" : "Style"}`,
+      character: `${scoreMatch.groupName} ${scoreMatch.memberName} Style`,
+      characterDesc: `Similar charm and talent to ${scoreMatch.memberName}`,
+      styleTags: [
+        `#${scoreMatch.groupName}Style`,
         `#${scoreMatch.position}`,
-        `#${scoreMatch.memberName}${language === "kr" ? "형" : "Type"}`,
+        `#${scoreMatch.memberName}Type`,
       ],
       memberName: scoreMatch.memberName,
       agency: scoreMatch.agency,
     };
   }
 
-  console.log("❌ No score-based match found, using LLM fallback");
-  const prompt = createAnalysisPrompt(answers, language, gender);
-  const result = await callLLMAnalysis(prompt);
-
+  // Basic fallback when no score-based match found
   return {
-    groupName: result.groupName || "NewJeans",
-    position: result.position || "Main Vocalist",
-    subPosition: result.subPosition || "",
-    character: result.character || "NewJeans Hanni 스타일",
-    characterDesc:
-      result.characterDesc || "밝고 친근한 매력으로 팬들을 사로잡는 타입",
-    styleTags: result.styleTags || [
-      "#NewJeans스타일",
-      "#MainVocalist",
-      "#Hanni형",
-    ],
-    memberName: result.memberName || "Hanni",
-    agency: result.agency || "ADOR",
+    groupName: gender === "male" ? "SEVENTEEN" : "NewJeans",
+    position: "Main Vocalist",
+    subPosition: "",
+    character: gender === "male" ? "SEVENTEEN Style" : "NewJeans Style",
+    characterDesc: "A balanced performer with solid potential.",
+    styleTags: ["#IdolStyle", "#Balanced", "#Potential"],
+    memberName: gender === "male" ? "DK" : "Hanni",
+    agency: gender === "male" ? "Pledis" : "ADOR",
   };
 }

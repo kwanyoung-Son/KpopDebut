@@ -8,6 +8,16 @@ import { QuizAnswers } from "@shared/schema";
 
 const getQuestions = (language: 'kr' | 'en') => (language === 'kr' ? [
   {
+    id: 0,
+    title: "성별 선택",
+    question: "남/여를 선택하세요",
+    field: "gender" as keyof QuizAnswers,
+    options: [
+      { value: "male", icon: Users, color: "text-blue-600", title: "남자", desc: "" },
+      { value: "female", icon: Users, color: "text-pink-500", title: "여자", desc: "" }
+    ]
+  },
+  {
     id: 1,
     title: "성격/성향 분석",
     question: "무대 위에서의 나는?",
@@ -120,6 +130,16 @@ const getQuestions = (language: 'kr' | 'en') => (language === 'kr' ? [
     ]
   }
 ] : [
+  {
+    id: 0,
+    title: "Gender",
+    question: "Select your gender",
+    field: "gender" as keyof QuizAnswers,
+    options: [
+      { value: "male", icon: Users, color: "text-blue-600", title: "Male", desc: "" },
+      { value: "female", icon: Users, color: "text-pink-500", title: "Female", desc: "" }
+    ]
+  },
   {
     id: 1,
     title: "Personality Analysis",
@@ -261,7 +281,12 @@ export default function QuizPage() {
 
     // Store current answers
     sessionStorage.setItem('quizAnswers', JSON.stringify(newAnswers));
-    
+
+    // If gender chosen here, override detectedGender for analysis
+    if (field === 'gender') {
+      sessionStorage.setItem('detectedGender', value);
+    }
+
     // Store language preference from localStorage
     const language = localStorage.getItem('language') || 'kr';
     sessionStorage.setItem('language', language);
