@@ -14,8 +14,61 @@ export default function UploadPage() {
   const [isLoadingModels, setIsLoadingModels] = useState(true);
   const [faceDetected, setFaceDetected] = useState<boolean | null>(null);
   const [debugMode, setDebugMode] = useState(false);
+  const [language, setLanguage] = useState<'kr' | 'en'>('kr');
   const { toast } = useToast();
   const imageRef = useRef<HTMLImageElement>(null);
+
+  // Load language from localStorage
+  useEffect(() => {
+    const savedLanguage = localStorage.getItem('language') as 'kr' | 'en';
+    if (savedLanguage) {
+      setLanguage(savedLanguage);
+    }
+  }, []);
+
+  // Translations
+  const texts = {
+    kr: {
+      title: '얼굴 사진 업로드',
+      subtitle: '정면을 바라보는 셀카를 업로드해주세요',
+      uploadPlaceholder: '클릭해서 사진 업로드',
+      fileSupport: 'JPG, PNG 파일만 지원',
+      retakePhoto: '사진 다시 올리기',
+      tips: '정면을 바라보는 사진 · 밝은 조명의 선명한 사진 · 얼굴이 가려지지 않은 사진',
+      faceDetected: '얼굴 감지됨',
+      faceNotDetected: '얼굴이 감지되지 않음',
+      debugMode: '디버그 모드',
+      debugModeDescription: '디버그 모드 활성화: 얼굴 검증이 우회됩니다',
+      debugModeDetails: 'localStorage 디버그 플래그 또는 모델 로드 실패로 인해 활성화됨',
+      nextButton: '다음 단계로',
+      processing: '처리 중...',
+      toastFaceNotDetectedTitle: '얼굴이 감지되지 않았습니다',
+      toastFaceNotDetectedDesc: '정면을 바라보는 얼굴 사진을 업로드해주세요.',
+      toastNoFaceTitle: '얼굴이 감지되지 않은 사진입니다',
+      toastNoFaceDesc: '얼굴이 포함된 사진을 다시 업로드해주세요.',
+    },
+    en: {
+      title: 'Upload Face Photo',
+      subtitle: 'Please upload a selfie facing forward',
+      uploadPlaceholder: 'Click to Upload Photo',
+      fileSupport: 'Only JPG, PNG files supported',
+      retakePhoto: 'Retake Photo',
+      tips: 'Face forward · Bright, clear lighting · Face not covered',
+      faceDetected: 'Face Detected',
+      faceNotDetected: 'Face Not Detected',
+      debugMode: 'Debug Mode',
+      debugModeDescription: 'Debug mode active: Face verification bypassed',
+      debugModeDetails: 'Activated by localStorage debug flag or model load failure',
+      nextButton: 'Next Step',
+      processing: 'Processing...',
+      toastFaceNotDetectedTitle: 'Face Not Detected',
+      toastFaceNotDetectedDesc: 'Please upload a photo with your face facing forward.',
+      toastNoFaceTitle: 'No Face Detected in Photo',
+      toastNoFaceDesc: 'Please upload a photo with a face.',
+    }
+  };
+
+  const t = texts[language];
 
   // localStorage 디버그 플래그 확인 및 Face-api.js 모델 로드
   useEffect(() => {
@@ -135,8 +188,8 @@ export default function UploadPage() {
           
           if (!hasFace && !debugMode) {
             toast({
-              title: "얼굴이 감지되지 않았습니다",
-              description: "정면을 바라보는 얼굴 사진을 업로드해주세요.",
+              title: t.toastFaceNotDetectedTitle,
+              description: t.toastFaceNotDetectedDesc,
               variant: "destructive",
             });
             return;
@@ -167,8 +220,8 @@ export default function UploadPage() {
       }, 800);
     } else if (faceDetected === false && !debugMode) {
       toast({
-        title: "얼굴이 감지되지 않은 사진입니다",
-        description: "얼굴이 포함된 사진을 다시 업로드해주세요.",
+        title: t.toastNoFaceTitle,
+        description: t.toastNoFaceDesc,
         variant: "destructive",
       });
     }
@@ -200,8 +253,8 @@ export default function UploadPage() {
           <div className="w-16 h-16 gradient-bg rounded-full flex items-center justify-center mx-auto mb-4">
             <Camera className="text-white" size={32} />
           </div>
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">얼굴 사진 업로드</h2>
-          <p className="text-gray-600 text-lg">정면을 바라보는 셀카를 업로드해주세요</p>
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">{t.title}</h2>
+          <p className="text-gray-600 text-lg">{t.subtitle}</p>
         </div>
 
         {/* Upload Area */}
@@ -232,27 +285,27 @@ export default function UploadPage() {
                     <div className="absolute inset-0 bg-red-500 bg-opacity-20 flex items-center justify-center" data-testid="face-not-detected-overlay">
                       <div className="bg-red-600 text-white px-4 py-2 rounded-lg flex items-center">
                         <AlertCircle className="mr-2" size={20} />
-                        얼굴이 감지되지 않음
+                        {t.faceNotDetected}
                       </div>
                     </div>
                   )}
                   {faceDetected === true && (
                     <div className="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full flex items-center text-sm" data-testid="face-detected-badge">
                       <CheckCircle className="mr-1" size={16} />
-                      얼굴 감지됨
+                      {t.faceDetected}
                     </div>
                   )}
                   {debugMode && (
                     <div className="absolute top-4 left-4 bg-yellow-600 text-white px-3 py-1 rounded-full flex items-center text-sm" data-testid="debug-mode-badge">
-                      🔧 디버그 모드
+                      🔧 {t.debugMode}
                     </div>
                   )}
                 </div>
               ) : (
                 <div className="text-center">
                   <Upload className="text-6xl text-[hsl(var(--primary-teal))] mb-4 mx-auto" size={96} />
-                  <p className="text-xl font-semibold text-gray-700 mb-2">클릭해서 사진 업로드</p>
-                  <p className="text-gray-500">JPG, PNG 파일만 지원</p>
+                  <p className="text-xl font-semibold text-gray-700 mb-2">{t.uploadPlaceholder}</p>
+                  <p className="text-gray-500">{t.fileSupport}</p>
                 </div>
               )}
             </div>
@@ -270,7 +323,7 @@ export default function UploadPage() {
               data-testid="button-retake-photo"
             >
               <RefreshCw className="mr-2" size={20} />
-              사진 다시 올리기
+              {t.retakePhoto}
             </Button>
           </div>
         )}
@@ -281,7 +334,7 @@ export default function UploadPage() {
             <div className="flex items-start gap-3">
               <CheckCircle className="text-green-500 mt-0.5 flex-shrink-0" size={20} />
               <p className="text-sm text-green-700 font-medium">
-                정면을 바라보는 사진 · 밝은 조명의 선명한 사진 · 얼굴이 가려지지 않은 사진
+                {t.tips}
               </p>
             </div>
           </CardContent>
@@ -290,10 +343,10 @@ export default function UploadPage() {
         {debugMode && (
           <div className="mb-4 p-3 bg-yellow-100 border border-yellow-400 rounded-lg" data-testid="debug-mode-banner">
             <p className="text-yellow-800 text-sm font-semibold">
-              🔧 디버그 모드 활성화: 얼굴 검증이 우회됩니다
+              🔧 {t.debugModeDescription}
             </p>
             <p className="text-yellow-700 text-xs mt-1">
-              localStorage 디버그 플래그 또는 모델 로드 실패로 인해 활성화됨
+              {t.debugModeDetails}
             </p>
           </div>
         )}
