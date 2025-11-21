@@ -5,66 +5,66 @@ import { useQuery } from "@tanstack/react-query";
 import { useState, useEffect } from "react";
 
 export default function Home() {
-  const [language, setLanguage] = useState<'kr' | 'en'>('kr');
-  
+  const [language, setLanguage] = useState<"kr" | "en">("kr");
+
   // Load language from localStorage on mount
   useEffect(() => {
-    const savedLanguage = localStorage.getItem('language') as 'kr' | 'en';
+    const savedLanguage = localStorage.getItem("language") as "kr" | "en";
     if (savedLanguage) {
       setLanguage(savedLanguage);
     }
   }, []);
 
   // Save language to localStorage when changed
-  const handleLanguageChange = (lang: 'kr' | 'en') => {
+  const handleLanguageChange = (lang: "kr" | "en") => {
     setLanguage(lang);
-    localStorage.setItem('language', lang);
+    localStorage.setItem("language", lang);
   };
 
   const { data: stats } = useQuery({
-    queryKey: ['/api/stats'],
-    queryFn: () => fetch('/api/stats').then(res => res.json()),
+    queryKey: ["/api/stats"],
+    queryFn: () => fetch("/api/stats").then((res) => res.json()),
   });
 
   const texts = {
     kr: {
-      title: 'KPOP 분석기',
-      heroTitle1: '나는 어떤',
-      heroTitle2: 'KPOP 아이돌',
-      heroTitle3: '일까?',
-      subtitle: 'AI로 알아보는 나의 KPOP 포지션',
-      startButton: '지금 시작하기',
-      analysisComplete: '분석 완료',
-      footerTitle: 'KPOP 데뷔 분석기',
-      footerDesc: 'AI 기술로 당신의 숨겨진 아이돌 매력을 발견하세요',
-      footerCopy: '© 2025 KPOP 데뷔 분석기. 재미있게 즐겨주세요!'
+      title: "KPOP 분석기",
+      heroTitle1: "나는 어떤",
+      heroTitle2: "KPOP 아이돌",
+      heroTitle3: "일까?",
+      subtitle: "AI로 알아보는 나의 KPOP 포지션",
+      startButton: "지금 시작하기",
+      analysisComplete: "분석 완료",
+      footerTitle: "KPOP 데뷔 분석기",
+      footerDesc: "AI 기술로 당신의 숨겨진 아이돌 매력을 발견하세요",
+      footerCopy: "© 2025 KPOP 데뷔 분석기. 재미있게 즐겨주세요!",
     },
     en: {
-      title: 'KPOP Analyzer',
-      heroTitle1: 'Which',
-      heroTitle2: 'KPOP Idol',
-      heroTitle3: 'am I?',
-      subtitle: 'Discover your KPOP position with AI',
-      startButton: 'Start Now',
-      analysisComplete: 'Analyses Complete',
-      footerTitle: 'KPOP Debut Analyzer',
-      footerDesc: 'Discover your hidden idol charm with AI technology',
-      footerCopy: '© 2025 KPOP Debut Analyzer. Enjoy!'
-    }
+      title: "KPOP Analyzer",
+      heroTitle1: "Which",
+      heroTitle2: "KPOP Idol",
+      heroTitle3: "am I?",
+      subtitle: "Discover your KPOP position with AI",
+      startButton: "Start Now",
+      analysisComplete: "Analyses Complete",
+      footerTitle: "KPOP Debut Analyzer",
+      footerDesc: "Discover your hidden idol charm with AI technology",
+      footerCopy: "© 2025 KPOP Debut Analyzer. Enjoy!",
+    },
   };
 
   const t = texts[language];
   return (
     <div className="min-h-screen">
       {/* Advertisement Banner */}
-      <a 
-        href="https://otieu.com/4/10217099" 
-        target="_blank" 
+      <a
+        href="https://otieu.com/4/10217099"
+        target="_blank"
         rel="noopener noreferrer"
         className="block w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-4 text-center font-semibold hover:from-blue-700 hover:to-purple-700 transition-all sticky top-0 z-40"
         data-testid="ad-banner"
       >
-        ✨ 광고 · Advertisement
+        ✨ 지금 핫한 상품 트렌드 → 보러가기
       </a>
 
       {/* Navigation */}
@@ -77,26 +77,26 @@ export default function Home() {
               </div>
               <span className="font-bold text-xl text-gray-800">{t.title}</span>
             </div>
-            
+
             {/* Language Toggle */}
             <div className="flex items-center space-x-2 bg-gray-100 rounded-full p-1">
               <button
-                onClick={() => handleLanguageChange('kr')}
+                onClick={() => handleLanguageChange("kr")}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
-                  language === 'kr'
-                    ? 'bg-white text-gray-800 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-800'
+                  language === "kr"
+                    ? "bg-white text-gray-800 shadow-sm"
+                    : "text-gray-600 hover:text-gray-800"
                 }`}
                 data-testid="language-kr-button"
               >
                 한국어
               </button>
               <button
-                onClick={() => handleLanguageChange('en')}
+                onClick={() => handleLanguageChange("en")}
                 className={`px-3 py-1.5 rounded-full text-sm font-medium transition-all ${
-                  language === 'en'
-                    ? 'bg-white text-gray-800 shadow-sm'
-                    : 'text-gray-600 hover:text-gray-800'
+                  language === "en"
+                    ? "bg-white text-gray-800 shadow-sm"
+                    : "text-gray-600 hover:text-gray-800"
                 }`}
                 data-testid="language-en-button"
               >
@@ -116,23 +116,33 @@ export default function Home() {
             </div>
           </div>
           <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
-            {t.heroTitle1}<br />
-            <span className="bg-white text-transparent bg-clip-text">{t.heroTitle2}</span><br />
+            {t.heroTitle1}
+            <br />
+            <span className="bg-white text-transparent bg-clip-text">
+              {t.heroTitle2}
+            </span>
+            <br />
             {t.heroTitle3}
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-white/90 font-light">
             {t.subtitle}
           </p>
           <Link href="/upload">
-            <Button size="lg" className="bg-white text-pink-600 hover:bg-gray-100 text-lg font-bold px-8 py-4 rounded-full transform hover:scale-105 transition-all shadow-lg" data-testid="button-start">
+            <Button
+              size="lg"
+              className="bg-white text-pink-600 hover:bg-gray-100 text-lg font-bold px-8 py-4 rounded-full transform hover:scale-105 transition-all shadow-lg"
+              data-testid="button-start"
+            >
               <Camera className="mr-2" size={20} />
               {t.startButton}
             </Button>
           </Link>
-          
+
           {/* Stats */}
           <div className="mt-16 text-center">
-            <div className="text-4xl font-bold">{stats?.totalAnalyses || 0}</div>
+            <div className="text-4xl font-bold">
+              {stats?.totalAnalyses || 0}
+            </div>
             <div className="text-white/80 text-lg">{t.analysisComplete}</div>
           </div>
         </div>
