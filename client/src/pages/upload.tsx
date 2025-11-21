@@ -361,11 +361,11 @@ export default function UploadPage() {
           {isProcessing ? (
             <>
               <Loader2 className="mr-2 animate-spin" size={20} />
-              처리 중...
+              {t.processing}
             </>
           ) : (
             <>
-              다음 단계로
+              {t.nextButton}
               <ArrowRight className="ml-2" size={20} />
             </>
           )}
