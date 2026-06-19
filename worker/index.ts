@@ -74,215 +74,55 @@ const quizAnswersSchema = z.object({
 
 type QuizAnswers = z.infer<typeof quizAnswersSchema>;
 
-// Convert quiz answers to LLM prompt
-function createAnalysisPrompt(
-  answers: QuizAnswers,
-  language: "kr" | "en" = "kr",
-  gender: "male" | "female" = "female",
-) {
-  const questionMapping =
-    language === "kr"
-      ? {
-          stagePresence: {
-            center: "중심에서 빛나는 타입",
-            leader: "팀을 이끄는 리더형",
-            performer: "열정적인 퍼포머",
-            charisma: "조용한 카리스마",
-            supporter: "든든한 서포터형",
-            allrounder: "만능 올라운더",
-          },
-          friendsDescribe: {
-            mood_maker: "분위기 메이커",
-            serious: "진지하고 신중함",
-            creative: "창의적이고 예술적",
-            responsible: "계획적이고 책임감",
-            energetic: "활기차고 밝음",
-            calm: "차분하고 온화함",
-          },
-          newProject: {
-            execute: "바로 따라하며 몸으로 익힌다",
-            plan: "먼저 구조를 분석하고 계획한다",
-            discuss: "멤버들과 함께 의견 나눈다",
-            think: "혼자 차근차근 이해한다",
-            research: "레퍼런스 자료를 찾아본다",
-            experiment: "나만의 방식으로 실험한다",
-          },
-          stageImportant: {
-            expression: "표정과 눈빛",
-            accuracy: "안무 정확도",
-            vocal: "음정과 감정 전달",
-            teamwork: "전체적인 팀워크",
-            energy: "에너지와 열정",
-            connection: "관객과의 교감",
-          },
-          practiceStyle: {
-            vocal: "고음 처리나 감정 전달",
-            dance: "칼군무와 동작 정리",
-            direction: "무대 연출/구성 아이디어",
-            care: "멤버들 케어 및 소통",
-            expression: "표현력과 감정 몰입",
-            stamina: "체력과 지구력 향상",
-          },
-          danceStyle: {
-            hiphop: "리듬감 넘치는 힙합",
-            contemporary: "부드러운 컨템포러리",
-            powerful: "파워풀한 퍼포먼스",
-            cute: "키치하고 귀여운 안무",
-            sensual: "세련되고 섹시한 댄스",
-            energetic: "역동적이고 활기찬 움직임",
-          },
-          fashionStyle: {
-            street: "스트릿, 캐주얼",
-            chic: "시크하고 모던",
-            lovely: "러블리하고 컬러풀",
-            trendy: "트렌디하고 유니크",
-            vintage: "빈티지와 레트로",
-            minimal: "미니멀과 심플",
-          },
-          makeupStyle: {
-            natural: "자연스러운 내추럴",
-            bold: "강렬한 포인트 컬러",
-            retro: "레트로 감성",
-            elegant: "깔끔하고 고급진 스타일",
-            glam: "화려한 글램 메이크업",
-            soft: "부드러운 페미닌 룩",
-          },
+// Expected shape of the LLM "flavor text" response.
+// Structural fields (group / member / position) come from the deterministic
+// score engine and are NEVER taken from the LLM, so they are intentionally
+// absent here. Every field is optional: missing/invalid values fall back to
+// engine-generated defaults at the call site.
+const llmFlavorSchema = z.object({
+  character: z.string().min(1).optional(),
+  characterDesc: z.string().min(1).optional(),
+  styleTags: z.array(z.string().min(1)).min(1).optional(),
+});
+type LlmFlavor = z.infer<typeof llmFlavorSchema>;
+
+// Robustly pull a JSON object out of a free-text LLM response.
+// Strips markdown code fences, then scans for the first *balanced* {...} block
+// (brace-aware, string-aware) instead of a greedy first-{-to-last-} regex that
+// over-captures when the model adds prose around the JSON.
+function extractJsonObject(text: unknown): any | null {
+  if (typeof text !== "string") return null;
+  const cleaned = text.replace(/```(?:json)?/gi, "").trim();
+
+  const start = cleaned.indexOf("{");
+  if (start === -1) return null;
+
+  let depth = 0;
+  let inString = false;
+  let escaped = false;
+
+  for (let i = start; i < cleaned.length; i++) {
+    const ch = cleaned[i];
+    if (inString) {
+      if (escaped) escaped = false;
+      else if (ch === "\\") escaped = true;
+      else if (ch === '"') inString = false;
+      continue;
+    }
+    if (ch === '"') inString = true;
+    else if (ch === "{") depth++;
+    else if (ch === "}") {
+      depth--;
+      if (depth === 0) {
+        try {
+          return JSON.parse(cleaned.slice(start, i + 1));
+        } catch {
+          return null;
         }
-      : {
-          stagePresence: {
-            center: "Shining at the center",
-            leader: "Leading the team",
-            performer: "Passionate performer",
-            charisma: "Quiet charisma",
-            supporter: "Reliable supporter",
-            allrounder: "Versatile all-rounder",
-          },
-          friendsDescribe: {
-            mood_maker: "Mood maker",
-            serious: "Serious and careful",
-            creative: "Creative and artistic",
-            responsible: "Planned and responsible",
-            energetic: "Energetic and bright",
-            calm: "Calm and gentle",
-          },
-          newProject: {
-            execute: "Learn by doing immediately",
-            plan: "Analyze structure and plan first",
-            discuss: "Share opinions with members",
-            think: "Understand step by step alone",
-            research: "Look for reference materials",
-            experiment: "Try in my own way",
-          },
-          stageImportant: {
-            expression: "Facial expressions and eyes",
-            accuracy: "Choreography accuracy",
-            vocal: "Pitch and emotion delivery",
-            teamwork: "Overall teamwork",
-            energy: "Energy and passion",
-            connection: "Connection with audience",
-          },
-          practiceStyle: {
-            vocal: "High notes and emotion delivery",
-            dance: "Synchronized choreography",
-            direction: "Stage direction/composition ideas",
-            care: "Member care and communication",
-            expression: "Expressiveness and emotional immersion",
-            stamina: "Stamina and endurance improvement",
-          },
-          danceStyle: {
-            hiphop: "Rhythmic hip-hop",
-            contemporary: "Smooth contemporary",
-            powerful: "Powerful performance",
-            cute: "Cute and playful choreography",
-            sensual: "Sophisticated and sensual dance",
-            energetic: "Dynamic and energetic movement",
-          },
-          fashionStyle: {
-            street: "Street, casual",
-            chic: "Chic and modern",
-            lovely: "Lovely and colorful",
-            trendy: "Trendy and unique",
-            vintage: "Vintage and retro",
-            minimal: "Minimal and simple",
-          },
-          makeupStyle: {
-            natural: "Natural style",
-            bold: "Bold point colors",
-            retro: "Retro vibes",
-            elegant: "Clean and sophisticated style",
-            glam: "Glamorous makeup",
-            soft: "Soft feminine look",
-          },
-        };
-
-  const genderHint =
-    gender === "male"
-      ? language === "kr"
-        ? "사용자는 남성이므로 남자 아이돌 그룹과 멤버를 매칭해주세요."
-        : "The user is male, so please match with male idol groups and members."
-      : language === "kr"
-        ? "사용자는 여성이므로 여자 아이돌 그룹과 멤버를 매칭해주세요."
-        : "The user is female, so please match with female idol groups and members.";
-
-  const prompt =
-    language === "kr"
-      ? `당신은 KPOP 아이돌 전문가 입니다. ${genderHint}
-
-다음은 KPOP 아이돌 적성 분석을 위한 8개 질문에 대한 답변입니다:
-
-1. 무대 위에서의 모습: ${questionMapping.stagePresence[answers.stagePresence]}
-2. 친구들이 말하는 성격: ${questionMapping.friendsDescribe[answers.friendsDescribe]}  
-3. 새로운 프로젝트 접근법: ${questionMapping.newProject[answers.newProject]}
-4. 무대에서 중요하게 생각하는 것: ${questionMapping.stageImportant[answers.stageImportant]}
-5. 연습 중 집중하는 부분: ${questionMapping.practiceStyle[answers.practiceStyle]}
-6. 선호하는 춤 스타일: ${questionMapping.danceStyle[answers.danceStyle]}
-7. 패션 스타일: ${questionMapping.fashionStyle[answers.fashionStyle]}
-8. 메이크업 스타일: ${questionMapping.makeupStyle[answers.makeupStyle]}
-
-이 답변을 바탕으로 다음 JSON 형식으로 KPOP 아이돌 분석 결과를 생성해주세요:
-
-{
-  "groupName": "실제 KPOP 그룹명",
-  "position": "메인 포지션 (예: Leader, Main Vocalist, Main Dancer, Main Rapper, Visual)",
-  "subPosition": "서브 포지션 (선택사항)",
-  "character": "그룹명 + 멤버명 + 스타일",
-  "characterDesc": "해당 멤버의 특징을 반영한 성격 설명",
-  "styleTags": ["#그룹스타일", "#포지션태그", "#멤버형"],
-  "memberName": "실제 멤버 이름",
-  "agency": "소속사명"
-}
-
-답변은 반드시 유효한 JSON 형식으로만 제공해주세요.`
-      : `You are a K-Pop idol expert. ${genderHint}
-
-Here are the answers to 9 KPOP idol aptitude analysis questions:
-
-1. Stage presence: ${questionMapping.stagePresence[answers.stagePresence]}
-2. Personality described by friends: ${questionMapping.friendsDescribe[answers.friendsDescribe]}
-3. Approach to new projects: ${questionMapping.newProject[answers.newProject]}
-4. What's important on stage: ${questionMapping.stageImportant[answers.stageImportant]}
-5. Focus during practice: ${questionMapping.practiceStyle[answers.practiceStyle]}
-6. Preferred dance style: ${questionMapping.danceStyle[answers.danceStyle]}
-7. Fashion style: ${questionMapping.fashionStyle[answers.fashionStyle]}
-8. Makeup style: ${questionMapping.makeupStyle[answers.makeupStyle]}
-9. Gender: ${gender}
-
-Based on these answers, generate a KPOP idol analysis result in the following JSON format:
-
-{
-  "groupName": "Actual KPOP group name",
-  "position": "Main position (e.g., Leader, Main Vocalist, Main Dancer, Main Rapper, Visual)",
-  "subPosition": "Sub position (optional)",
-  "character": "Group name + Member name + Style",
-  "characterDesc": "Personality description reflecting the member's characteristics",
-  "styleTags": ["#GroupStyle", "#PositionTag", "#MemberType"],
-  "memberName": "Actual member name",
-  "agency": "Agency name"
-}
-
-Please provide the answer only in valid JSON format.`;
-
-  return prompt;
+      }
+    }
+  }
+  return null;
 }
 
 // Call external LLM API for analysis
@@ -317,6 +157,9 @@ async function callLLMAnalysis(prompt: string, env?: Env): Promise<any> {
             },
             { role: "user", content: prompt },
           ],
+          // Request guaranteed JSON output. Harmless if the endpoint ignores
+          // it — extractJsonObject() still parses the text robustly downstream.
+          response_format: { type: "json_object" },
         }),
         signal: controller.signal,
       });
@@ -335,35 +178,22 @@ async function callLLMAnalysis(prompt: string, env?: Env): Promise<any> {
       console.log("📥 LLM API 응답 데이터:");
       console.log(JSON.stringify(data, null, 2));
 
-      // Extract the JSON from LLM response
-      let result: any;
-      let responseText: any;
+      // Extract a JSON object from the response. The endpoint may return the
+      // payload as { response: "<text>" }, { response: {...} }, or a raw object.
+      let result: any = null;
+      const responseText = data?.response;
 
-      if (data?.response) {
-        responseText = data.response;
-      } else if (typeof data === "object" && data !== null && data.groupName) {
+      if (typeof responseText === "string") {
+        result = extractJsonObject(responseText);
+      } else if (responseText && typeof responseText === "object") {
+        result = responseText;
+      } else if (data && typeof data === "object") {
+        // Endpoint returned the object directly, without a wrapper.
         result = data;
-      } else {
-        throw new Error("Invalid LLM response format");
       }
 
-      if (!result && responseText) {
-        const jsonMatch =
-          typeof responseText === "string"
-            ? responseText.match(/\{[\s\S]*\}/)
-            : null;
-
-        if (jsonMatch) {
-          result = JSON.parse(jsonMatch[0]);
-        } else if (typeof responseText === "object") {
-          result = responseText;
-        } else {
-          throw new Error("No valid JSON found in LLM response");
-        }
-      }
-
-      if (!result) {
-        throw new Error("Invalid LLM response format");
+      if (!result || typeof result !== "object") {
+        throw new Error("No valid JSON object found in LLM response");
       }
 
       console.log("✅ 파싱된 LLM 결과:");
@@ -1214,7 +1044,19 @@ Respond in JSON format:
   "styleTags": [Give me multiple hashtags that describe this member's traits.]
 }`;
 
-      const llmResult = await callLLMAnalysis(prompt, env);
+      const rawLlm = await callLLMAnalysis(prompt, env);
+
+      // Validate the LLM payload against the expected flavor-text shape.
+      // Anything malformed is dropped here, so the fields below fall back to
+      // deterministic engine defaults instead of leaking bad data into the UI.
+      const parsedLlm = llmFlavorSchema.safeParse(rawLlm);
+      if (!parsedLlm.success) {
+        console.log(
+          "⚠️ LLM 응답이 예상 스키마와 달라 폴백 기본값을 사용합니다:",
+          parsedLlm.error.issues.map((i) => i.path.join(".")).join(", "),
+        );
+      }
+      const llmResult: LlmFlavor = parsedLlm.success ? parsedLlm.data : {};
 
       return {
         groupName: scoreMatch.groupName,
