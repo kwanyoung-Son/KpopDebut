@@ -6,7 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import ResultCard from "@/components/result-card";
 import { AnalysisResult } from "@shared/schema";
 import { useRef, useState, useEffect } from "react";
-import html2canvas from "html2canvas";
+import { toBlob } from "html-to-image";
 
 interface ResultsPageProps {
   params: { sessionId: string };
@@ -104,68 +104,29 @@ export default function ResultsPage({ params }: ResultsPageProps) {
 
     try {
       setIsCapturing(true);
-      // Ensure web fonts are loaded to avoid layout drift in canvas
+      // Ensure web fonts are loaded so text metrics match the on-screen layout
       try {
         // @ts-ignore
         await (document as any).fonts?.ready;
       } catch {}
 
-      // Freeze current size to prevent aspect-ratio distortion
-      const rect = cardRef.current.getBoundingClientRect();
+      // html-to-image renders the node through the browser's own layout engine
+      // (SVG <foreignObject>), so the result is pixel-identical to the live DOM —
+      // no aspect-ratio distortion, no flexbox-centering drift like html2canvas.
+      const node = cardRef.current;
+      const rect = node.getBoundingClientRect();
 
-      const canvas = await html2canvas(cardRef.current, {
+      const blob = await toBlob(node, {
         backgroundColor: "#ffffff",
-        // Use fixed scale for consistency across devices
-        scale: 2,
-        logging: false,
-        useCORS: true,
-        imageTimeout: 0,
-        removeContainer: true,
-        scrollY: -window.scrollY,
-        onclone: (doc) => {
-          // Normalize chip/tag layout in cloned DOM for consistent vertical centering
-          const chips = doc.querySelectorAll('[data-chip="tag"]');
-          chips.forEach((el) => {
-            const style = (el as HTMLElement).getAttribute("style") || "";
-            (el as HTMLElement).setAttribute(
-              "style",
-              `${style};display:inline-flex;align-items:center;justify-content:center;line-height:1;`
-            );
-          });
-
-          // Disable animations/transforms during capture
-          const root = doc.querySelector('[data-capture-root="1"]') as HTMLElement | null;
-          if (root) {
-            root.style.animation = "none";
-            root.style.transform = "none";
-          }
-
-          // Enforce circular avatar with explicit dimension
-          let avatar = doc.querySelector('[data-capture-avatar="1"]') as HTMLElement | null;
-          if (!avatar) {
-            // fallback: parent of the <img alt="User">
-            const img = doc.querySelector('img[alt="User"]') as HTMLElement | null;
-            if (img && img.parentElement) avatar = img.parentElement as HTMLElement;
-          }
-          if (avatar) {
-            // Use the clone's current width to keep a perfect circle
-            const size = Math.min(avatar.clientWidth || 80, avatar.clientHeight || 80);
-            avatar.style.width = `${size}px`;
-            avatar.style.height = `${size}px`;
-            avatar.style.borderRadius = "50%";
-            avatar.style.overflow = "hidden";
-          }
-        },
+        // Crisp output on high-DPI screens, while keeping the true aspect ratio.
+        pixelRatio: 2,
+        cacheBust: true,
         width: Math.round(rect.width),
         height: Math.round(rect.height),
       });
 
-      return new Promise((resolve) => {
-        canvas.toBlob((blob) => {
-          setIsCapturing(false);
-          resolve(blob);
-        }, "image/png");
-      });
+      setIsCapturing(false);
+      return blob;
     } catch (error) {
       console.error(t.imageCaptureFailed, error);
       setIsCapturing(false);
@@ -294,9 +255,11 @@ export default function ResultsPage({ params }: ResultsPageProps) {
             </div>
             {(result as any).memberName && (
               <div className="bg-white/20 rounded-full px-4 h-9 inline-flex items-center justify-center align-middle" style={{ lineHeight: 1 }}>
-                <span className="text-sm">{t.youAre} </span>
+                <span className="text-sm">{t.youAre}</span>
+                {" "}
                 <span className="font-bold">{(result as any).memberName}</span>
-                <span className="text-sm"> {t.style}</span>
+                {" "}
+                <span className="text-sm">{t.style}</span>
               </div>
             )}
           </div>
@@ -374,7 +337,6 @@ export default function ResultsPage({ params }: ResultsPageProps) {
         {/* Action Buttons */}
         <div
           className="w-full max-w-[540px] mx-auto px-2 overflow-x-hidden"
-          data-html2canvas-ignore="true"
           style={{ visibility: isCapturing ? "hidden" : undefined }}
         >
           <div className="grid grid-cols-3 gap-2">

@@ -37,7 +37,7 @@ export default function Home() {
       analysisComplete: "분석 완료",
       footerTitle: "KPOP 데뷔 분석기",
       footerDesc: "AI 기술로 당신의 숨겨진 아이돌 매력을 발견하세요",
-      footerCopy: "© 2025 KPOP 데뷔 분석기. 재미있게 즐겨주세요!",
+      footerCopy: "© 2026 KPOP 데뷔 분석기. 재미있게 즐겨주세요!",
     },
     en: {
       title: "KPOP Analyzer",
@@ -49,7 +49,7 @@ export default function Home() {
       analysisComplete: "Analyses Complete",
       footerTitle: "KPOP Debut Analyzer",
       footerDesc: "Discover your hidden idol charm with AI technology",
-      footerCopy: "© 2025 KPOP Debut Analyzer. Enjoy!",
+      footerCopy: "© 2026 KPOP Debut Analyzer. Enjoy!",
     },
   };
 
